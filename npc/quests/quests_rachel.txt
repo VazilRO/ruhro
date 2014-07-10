@@ -3872,28 +3872,37 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 			mes "like to donate? We can only";
 			mes "accept donations in increments";
 			mes "of 50,000 zeny, and we can only";
-			mes "accept up to 150,000 zeny at once. It's a bit complicated, I know...";
+			mes "accept up to 1,000,000 zeny at once. It's a bit complicated, I know...";
 			next;
-			switch(select("50,000z - 1 Lottery Ticket:100,000z - 2 Lottery Ticket:150,000z - 3 Lottery Ticket:Cancel")) {
-			case 1:
-				callsub S_Donate,1,"50,000";
-				break;
-			case 2:
-				callsub S_Donate,2,"100,000";
-				break;
-			case 3:
-				callsub S_Donate,3,"150,000";
-				break;
-			case 4:
-				cutin "ra_nemma02",2;
-				mes "[Priestess Nemma]";
-				mes "I understand that it takes";
-				mes "some thought to part with an";
-				mes "amount of money like 50,000";
-				mes "zeny. Even so, Freya is always";
-				mes "protecting you, wherever you go~";
-				break;
-			}
+							switch(select("50,000z - 1 Lottery Ticket:100,000z - 2 Lottery Tickets:150,000z - 3 Lottery Tickets:500,000z - 10 Lottery Tickets:1,000,000z - 20 Lottery Tickets:10,000,000z - 200 Lottery Tickets:Cancel")) {
+				case 1:
+					callsub S_Donate,1,"50,000";
+					break;
+				case 2:
+					callsub S_Donate,2,"100,000";
+					break;
+				case 3:
+					callsub S_Donate,3,"150,000";
+					break;
+				case 4:
+					callsub S_Donate,10,"500,000";
+					break;
+				case 5:
+					callsub S_Donate,20,"1,000,000";
+					break;
+				case 6:
+					callsub S_Donate,200,"10,000,000";
+					break;
+				case 7:
+					cutin "ra_nemma02",2;
+					mes "[Priestess Nemma]";
+					mes "I understand that it takes";
+					mes "some thought to part with an";
+					mes "amount of money like 50,000";
+					mes "zeny. Even so, Freya is always";
+					mes "protecting you, wherever you go~";
+					break;
+				}
 			goto L_End;
 		}
 		else {
@@ -3913,9 +3922,9 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 				mes "would you like to donate this";
 				mes "time? Remember that we can only";
 				mes "accept donations in increments of";
-				mes "50,000 zeny up to 150,000 zeny.";
+				mes "50,000 zeny up to 10,000,000 zeny.";
 				next;
-				switch(select("50,000z - 1 Lottery Ticket:100,000z - 2 Lottery Ticket:150,000z - 3 Lottery Ticket:Cancel")) {
+				switch(select("50,000z - 1 Lottery Ticket:100,000z - 2 Lottery Tickets:150,000z - 3 Lottery Tickets:500,000z - 10 Lottery Tickets:1,000,000z - 20 Lottery Tickets:10,000,000z - 200 Lottery Tickets:Cancel")) {
 				case 1:
 					callsub S_Donate,1,"50,000";
 					break;
@@ -3926,6 +3935,15 @@ ra_temple,116,174,3	script	Nemma#ra_temple	920,{
 					callsub S_Donate,3,"150,000";
 					break;
 				case 4:
+					callsub S_Donate,10,"500,000";
+					break;
+				case 5:
+					callsub S_Donate,20,"1,000,000";
+					break;
+				case 6:
+					callsub S_Donate,200,"10,000,000";
+					break;
+				case 7:
 					cutin "ra_nemma02",2;
 					mes "[Priestess Nemma]";
 					mes "I understand that it takes";
@@ -6694,11 +6712,11 @@ L_Lottery:
 		mes "upon you for your generosity...";
 		delitem 7570,1;
 		set .@bonus_donate,rand(100);
-		if (.@bonus_donate == 99) {
+		if (.@bonus_donate >= 80) {
 			set .@bonus_donate2,rand(100);
-			if (.@bonus_donate2 > 0 && .@bonus_donate2 < 11) getitem 616,1;		//Old Card Album 0.1%
-			else if (.@bonus_donate2 > 10 && .@bonus_donate2 < 31) getitem 617,1;	//Old Violet Box 0.2%
-			else if (.@bonus_donate2 > 30 && .@bonus_donate2 < 61) getitem 603,1;	//Old Blue Box 0.3%
+			if (.@bonus_donate2 > 0 && .@bonus_donate2 < 21) getitem 616,1;		//Old Card Album 0.1%
+			else if (.@bonus_donate2 > 20 && .@bonus_donate2 < 51) getitem 617,1;	//Old Violet Box 0.2%
+			else if (.@bonus_donate2 > 50 && .@bonus_donate2 < 81) getitem 603,1;	//Old Blue Box 0.3%
 			else getitem 607,1; //Yggdrasil Berry 0.4+%
 		}
 		else if (.@bonus_donate > 88 && .@bonus_donate < 96) getitem 644,1;	//Gift Box 7%
@@ -6706,9 +6724,9 @@ L_Lottery:
 		else if (.@bonus_donate > 65 && .@bonus_donate < 77) getitem 505,1;	//Blue Potion 11%
 		else if (.@bonus_donate > 57 && .@bonus_donate < 66) getitem 604,1;	//Dead Branch 8%
 		else if (.@bonus_donate > 45 && .@bonus_donate < 58) getitem 608,1;	//Yggdrasil Seed 12%
-		else if (.@bonus_donate > 5 && .@bonus_donate < 11) getitem 518,1;	//Honey 5%
-		else if (.@bonus_donate > 0 && .@bonus_donate < 6) getitem 526,1;	//Royal Jelly 5%
-		else getitem 547,1; //Condensed White Potion 39%
+		else if (.@bonus_donate > 5 && .@bonus_donate < 11) getitem 518,2;	//Honey 5%
+		else if (.@bonus_donate > 0 && .@bonus_donate < 6) getitem 526,2;	//Royal Jelly 5%
+		else getitem 547,3; //Condensed White Potion 39%
 		goto L_End;
 	}
 	mes "[Priestess Panno]";

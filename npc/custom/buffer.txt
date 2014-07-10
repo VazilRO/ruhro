@@ -1,0 +1,61 @@
+
+//===== eAthena Script =======================================
+prontera,147,177,5	script	Shifty Priest::shiftyPriest	60,{
+//===============================
+//Configuration
+//===============================
+set $@zeny,1500;
+set $@zeny,BaseLevel*250;
+
+mes "[Shifty Priest]";
+mes "Hey buddy, you look like you could use some help.";
+mes "Tell you what, I'll help you out for a small 'donation'";
+mes "to my 'church'. Let's say...";
+mes "^FF0000"+$@zeny+" zeny.^000000";
+mes "Whadda ya say?";
+next;
+menu "Yeah, alright.",L_B,"No thanks",CANCEL;
+
+L_B:
+if (Zeny < $@zeny) goto NeedZenys;
+Set Zeny,zeny-$@zeny;
+specialeffect2 42;
+sc_start SC_BLESSING,600000,10;
+specialeffect2 43;
+sc_start SC_INCREASEAGI,600000,10;
+specialeffect2 76;
+sc_start SC_MAGNIFICAT,600000,5;
+specialeffect2 41;
+sc_start SC_ANGELUS,600000,10;
+mes "[Shifty Priest]";
+mes "Yeah, Yeah, that's real nice.";
+mes "Heh heh...";
+close;
+
+NeedZenys:
+mes "[Shifty Priest]";
+mes "C'mon man, I JUST told you "+$@zeny+"!";
+mes "It's totally worth it, TRUST ME.";
+close;
+
+CANCEL:
+mes "[Shifty Priest]";
+mes "Yeah, whatever.";
+close;
+}
+
+morocc,169,86,5	duplicate(shiftyPriest)	Shifty Priest#2	60
+ayothaya,155,111,5	duplicate(shiftyPriest)	Shifty Priest#3	60
+geffen,127,63,5	duplicate(shiftyPriest)	Shifty Priest#4	60
+umbala,108,162,5	duplicate(shiftyPriest)	Shifty Priest#5	60
+payon,164,105,5	duplicate(shiftyPriest)	Shifty Priest#6	60
+alberta,127,50,5	duplicate(shiftyPriest)	Shifty Priest#7	60
+aldebaran,134,123,5	duplicate(shiftyPriest)	Shifty Priest#8	60
+izlude,123,123,5	duplicate(shiftyPriest)	Shifty Priest#9	60
+xmas,149,136,5	duplicate(shiftyPriest)	Shifty Priest#10	60
+//comodo,501,156,5	duplicate(shiftyPriest)	Shifty Priest#11	60
+amatsu,191,95,5	duplicate(shiftyPriest)	Shifty Priest#12	60
+gonryun,162,127,5	duplicate(shiftyPriest)	Shifty Priest#13	60
+yuno,170,186,5	duplicate(shiftyPriest)	Shifty Priest#14	60
+niflheim,205,180,5	duplicate(shiftyPriest)	Shifty Priest#15	60
+louyang,230,100,5	duplicate(shiftyPriest)	Shifty Priest#16	60

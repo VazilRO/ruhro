@@ -2178,7 +2178,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 			mes "Don't be scared, its just an eensy weensy favor. Tee hee~";
 			next;
 			mes "[Aebecee George]";
-			mes "Please bring me ^3355FF30 Stone^000000, that's all.";
+			mes "Please bring me ^3355FF15 Stone^000000, that's all.";
 			mes "It's not so hard, isn't it?";
 			next;
 			set SAGE_Q2,1;
@@ -2189,7 +2189,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 			close;
 		}
 		else if (SAGE_Q2 == 1) {
-			if (countitem(7049) > 29) {
+			if (countitem(7049) > 14) {
 				mes "Oh~ how sweet! You brought them all~ thank you~";
 				mes "Oh, can you wait a little bit? I need to do something before we start. Tee hee~";
 				next;
@@ -2222,9 +2222,9 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				next;
 				mes "[Aebecee George]";
 				mes "Please make arrows using these items and bring them to me, pretty please~";
-				mes "50 ^3355FFCrystal Arrow^000000,";
-				mes "50 ^3355FFStone Arrow^000000,";
-				mes "50 ^3355FFWind Arrow^000000.";
+				mes "25 ^3355FFCrystal Arrow^000000,";
+				mes "25 ^3355FFStone Arrow^000000,";
+				mes "25 ^3355FFWind Arrow^000000.";
 				next;
 				mes "[Aebecee George]";
 				mes "Ask any of your Archer friends if you know any.";
@@ -2236,13 +2236,13 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "Go on, sweetheart, and hurry baaack~";
 				next;
 				mes "[Aebecee George]";
-				mes "I asked you to bring ^3355FF30 Stone^000000.";
+				mes "I asked you to bring ^3355FF15 Stone^000000.";
 				mes "There are many out there, so you won't have too hard a time getting them~ tee hee.";
 				close;
 			}
 		}
 		else if (SAGE_Q2 == 2) {
-			if (countitem(1754) > 49 && countitem(1756) > 49 && countitem(1755) > 49) {
+			if (countitem(1754) > 24 && countitem(1756) > 24 && countitem(1755) > 24) {
 				mes "Oh~ how sweet! You brought them all~ Oh thank you~";
 				mes "Well now, let's get down to business. Tee hee~";
 				next;
@@ -2270,9 +2270,9 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "...Oh my gosh! Time flies sooo fast!";
 				mes "Let's call it a day, dear, tee hee~";
 				next;
-				delitem 1754,50; //Crystal_Arrow
-				delitem 1756,50; //Stone_Arrow
-				delitem 1755,50; //Arrow_Of_Wind
+				delitem 1754,25; //Crystal_Arrow
+				delitem 1756,25; //Stone_Arrow
+				delitem 1755,25; //Arrow_Of_Wind
 				mes "[Aebecee George]";
 				mes "When you come to the next class, bring ^3355FF1 Holy Water^000000~";
 				mes "I hope you have at least one Priest friend. Oh, you don't? Well, it couldn't hurt to get friendly with one.";
@@ -2285,9 +2285,9 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 				mes "I hope you didn't sell the elemental ores I gave you? Naughty naughty~ Don't you know diamonds are a girl's best friend? Tee hee~";
 				next;
 				mes "[Aebecee George]";
-				mes "50 ^3355FFCrystal Arrow^000000,";
-				mes "50 ^3355FFStone Arrow^000000,";
-				mes "50 ^3355FFWind Arrow^000000.";
+				mes "25 ^3355FFCrystal Arrow^000000,";
+				mes "25 ^3355FFStone Arrow^000000,";
+				mes "25 ^3355FFWind Arrow^000000.";
 				mes "Ask your Archer friend if you have one~ tee hee.";
 				close;
 			}

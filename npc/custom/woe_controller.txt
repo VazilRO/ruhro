@@ -19,16 +19,20 @@
 
 // Information NPC
 //============================================================
-prontera,149,193,4	script	WOE Information	835,{
+prontera,149,193,4	script	WoE Information	835,{
 	doevent "WOE_CONTROL::OnMenu";
 	end;
 OnAgitStart:
 	while(agitcheck()) {
-		specialeffect EF_BEGINSPELL6;
-		sleep 425;
+		specialeffect 800;
+		sleep 1000;
 	}
 	end;
 }
+
+geffen,129,68,4	duplicate(WoE Information)	WoE Information#gef	835
+payon,165,96,4	duplicate(WoE Information)	WoE Information#pay	835
+aldebaran,145,115,4	duplicate(WoE Information)	WoE Information#ald	835
 
 // Script Core
 //============================================================
@@ -64,7 +68,7 @@ OnInit:
 // -----------------------------------------------------------
 
 	// Combine values as needed (e.g. 1|8 = 1+8 = 9).
-	set .Options, 1|8;
+	set .Options, 2|8;
 
 	// Rewards per castle.
 	// -- when given directly: <itemID>,<amount>{,<itemID>,<amount>,...}

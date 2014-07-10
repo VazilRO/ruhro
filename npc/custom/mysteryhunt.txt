@@ -1,0 +1,161 @@
+//======RedditRO Mystery Quests ======================================
+//====================================================================
+//==== Credits =======================================================
+//= Author: /u/samkxu (IGN:Strawberry) 
+//= 
+//==== Description ===================================================
+//= Mystery Mob Hunts, twice a week.
+//= Bonus rewards for those that finish first
+//====================================================================
+
+prontera,206,240,5	script	MysteryMob Hunt	850,{
+//prontera,163,191,5	script	MysteryMob Hunt	850,{
+	mes "[Weekly Mystery Mob Hunt]";
+	mes "Twice a week there is a mystery mob";
+	mes "described by a haiku.";
+	mes "Hunt the mystery mob and get a reward!";
+	mes "The first " + .@maxBonus + " players to hunt the mystery mob";
+	mes "receive a mystery bonus reward!";
+	next;
+	mes "What would you like to do?";
+	switch(select("View the hint", "Get my reward", "View reset times", "Leave"))
+	{
+	case 1: //view haiku
+		next;
+		if ((#playerEventID != .@eventID) && (#huntedMystery == 1) && (#questCompleted != 1)) {
+			mes "Please get your reward first";
+			mes "before viewing the new haiku";
+		} else {
+			mes "[Mystery Haiku]";
+			mes .@MysteryLineOne;
+			mes .@MysteryLineTwo;
+			mes .@MysteryLineThree;
+			if (#playerEventID != .@eventID) { //reset quest state if new mystery mob
+				set #questCompleted, 0;
+				set #playerEventID, .@eventID;
+			}
+		}
+		close;
+
+	case 2: //get reward, 8 different subcases
+		next;
+		if((#huntedMystery == 1) && (#playerEventID == .@eventID) && (#questCompleted != 1)) { //normally completed this weeks mobhunt
+			mes "[Reward]";
+			if (.@currentCompleted < .@maxBonus) { //one of first players to finish
+				mes "Congratulations!";
+				mes "You were one of the first " + .@maxBonus + " players";
+				mes "to complete the quest!";
+				mes "Here's your prize & bonus prize";
+				mes "Please don't spoil the answer for others";
+				getitem .@reward, 1;
+				getitem .@bonusReward, 1;
+			} else {
+				mes "Good job! Here's your reward";
+				mes "Please don't spoil the answer for others";
+				set #huntedMystery, 0;
+				getitem .@reward, 1;
+			}
+			set #huntedMystery, 0;
+			set #questCompleted, 1;
+			set .@currentCompleted, .@currentCompleted + 1;
+			close;
+		} else if ((#huntedMystery == 1) && (#playerEventID != .@eventID) && (#questCompleted != 1)) { //completed a mobhunt from before but didn't get reward yet
+			mes "[Reward]";
+			mes "Good job! Here's your reward";
+			mes "Please don't spoil the answer for others";
+			mes "P.S.";
+			mes "There is a new mystery mob hunt available";
+			getitem .@reward, 1;
+			set #huntedMystery, 0;
+			close;
+		} else if ((#huntedMystery == 1) && (#playerEventID == .@eventID) && (#questCompleted == 1)) { //already got reward/completed
+			mes "You already got the reward!";
+			close;
+		} else if ((#huntedMystery == 1) && (#playerEventID != .@eventID) && (#questCompleted == 1)) { //already did previous quest/reward but hasn't looked at current quest
+			mes "You haven't killed the mystery mob yet!";
+			set #playerEventID, .@eventID;
+			close;
+		} else if ((#huntedMystery != 1) && (#playerEventID != .@eventID) && (#questCompleted != 1)) { //haven't killed the mob yet
+			mes "You haven't killed the mystery mob yet!";
+			set #playerEventID, .@eventID;
+			close;
+		} else if ((#huntedMystery != 1) && (#playerEventID == .@eventID) && (#questCompleted == 1)) { //already got reward;
+			mes "You already got the reward!";
+			close;
+		} else if ((#huntedMystery != 1) && (#playerEventID != .@eventID) && (#questCompleted == 1)) { //did previous quest, but not yet looked at this quest
+			mes "You haven't killed the mystery mob yet!";
+			set #playerEventID, .@eventID;
+			set #questCompleted, 0;
+
+		} else {                                                                                         //on this quest, but not done
+			mes "You haven't killed the mystery mob yet!";
+			close;
+		}
+	case 3: //view reset times
+		next;
+		mes "[Reset Times]";
+		mes "Currently the reset times are";
+		mes "Sunday midnight (UTC-8 aka Pacific)";
+		mes "Wednesday noon (UTC-8 aka Pacific)";
+		close;
+	case 4: //leave
+		next;
+		mes "Bye~";
+		close;
+		
+	}
+
+function	set_Mystery	{
+	switch(rand(3)) {
+		case 0: //Chimera - lion head + snake back
+			set .@MysteryMob, 1283;
+			set .@MysteryLineOne$, "Lion from the front";
+			set .@MysteryLineTwo$, "With snakes coming from the back";
+			set .@MysteryLineThree$, "It haunts the castle";
+			break;
+
+		case 1: //Mastering - drops pearl
+			set .@MysteryMob, 1090;
+			set .@MysteryLineOne$, "Hey, did you know that";
+			set .@MysteryLineTwo$, "Some mobs will turn jellopy";
+			set .@MysteryLineThree$, "Into big white pearls?";
+			break;
+
+		case 2: //Baphomet Jr. - at labyrinth maze 3
+			set .@MysteryMob, 1101;
+			set .@MysteryLineOne$, "I follow my boss";
+			set .@MysteryLineTwo$, "But this place is confusing";
+			set .@MysteryLineThree$, "I get lost a lot";
+			break;
+	}
+}
+OnClock2400: //change mystery mob every sunday midnight
+	if(gettime(4)!=0) end; //not a sunday, don't do anything
+	set .@eventID, .@eventID + 1;
+	set .@currentCompleted, 0;
+	callfunc "set_Mystery";
+	end;
+
+OnClock1200: //change mystery mob every wed noon
+	if(gettime(4)!=4) end; //not a wed
+	set .@eventID, .@eventID + 1;
+	set .@currentCompleted, 0;
+	callfunc "set_Mystery";
+	end;
+
+OnNPCKillEvent: //track killing the mystery mob
+	if ((killedrid == .@MysteryMob) && (!#huntedMystery) && (#playerEventID == .@eventID) && (#questCompleted != 1)) { //killed mystery mob
+		set #huntedMystery, 1;
+		dispbottom "You killed the mystery mob! Talk to NPC for reward";
+	}
+	end;
+
+OnInit:
+	callfunc "set_Mystery";
+	set .@eventID, 4;          //increases by 1 each week, #'s 0-3 reserved for now
+	set .@reward, 617;         //old violet box for standard reward
+	set .@bonusReward, 616;    //old card album for BONUS reward
+	set .@maxBonus, 4;         //The # of players that receive the bonus reward (first players to complete the quest)
+	set .@currentCompleted, 0; //The # of players that have completed the current quest
+	end;
+}

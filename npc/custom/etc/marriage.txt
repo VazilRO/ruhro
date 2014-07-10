@@ -17,7 +17,7 @@
 // Configuration Variables: 
 -	script	marriage_init	-1,{
 OnInit:
-	set $@wed_allow, 0;	//If 1, allows same sex marriages.
+	set $@wed_allow, 1;	//If 1, allows same sex marriages.
 	set $@wed_veil, 0;	//Set to 0 to disable veil check on the bride
 
 //Id of the item that is traded for the wedding ring (use 0 to disable):
@@ -394,13 +394,13 @@ OnTimer55000:
 
 //Subfunction: Checks that the groom/bride is still wearing their stuff.
 function SF_equip_check {
-	if (Sex && getequipid(2) != 7170) {
+	if (Sex && countitem(7170) == 0) {
 		mes "["+@name$+"]";
 		mes "Child, what did you do with your "+getitemname(7170)+"?";
 		emotion e_dots;
 		return 0;
 	}
-	if (Sex == 0 && getequipid(2) != 2338) {
+	if (Sex == 0 && countitem(2338) == 0) {
 		mes "["+@name$+"]";
 		mes "Child, you are supposed to wear a "+getitemname(2338)+" at all times during the ceremony...";
 		emotion e_dots;
@@ -692,9 +692,9 @@ function SF_TryRegister {
 	else
 		set @item, 2338;
 	
-	if (getequipid(2) != @item) {
+	if (countitem(@item) == 0) {
 		mes "["+@name$+"]";
-		mes "You should be wearing a "+getitemname(@item)+" if you want to get married.";
+		mes "You need a "+getitemname(@item)+" if you want to get married.";
 		close;
 	}
 	if (Sex == 0 && $@wed_veil && getequipid(1) != 2206) {
@@ -719,7 +719,7 @@ function SF_TryRegister {
 		close;
 	}
 	set Zeny,Zeny-@cost;
-	sc_start SC_Wedding,3600000,1; //Start Wedding Effect (SC_WEDDING)
+	sc_start SC_Wedding,1188000,1; //Start Wedding Effect (SC_WEDDING)
 	if (@bride) {
 		set $wed_bride_progress,1;
 		set $wed_bride$,strcharinfo(0);
@@ -777,13 +777,13 @@ function SF_Procedure {
 	} else {
 		mes "["+@name$+"]";
 		mes "The registration requirements for the groom are:";
-		mes "- To be wearing a "+getitemname(7170)+".";
+		mes "- To be have a "+getitemname(7170)+".";
 		if ($@wed_ring) mes "- To own a "+getitemname($@wed_ring)+".";
 		if ($@wed_groom_reg > 0) mes "- Pay a Registration fee of "+$@wed_groom_reg+"z.";
 		next;
 		mes "["+@name$+"]";
 		mes "The registration requirements for the bride are:";
-		mes "- To be wearing a "+getitemname(2338)+".";
+		mes "- To have a "+getitemname(2338)+".";
 		if ($@wed_veil) mes "- To be wearing a "+getitemname(2206)+".";
 		if ($@wed_ring) mes "- To own a "+getitemname($@wed_ring)+".";
 		if ($@wed_bride_reg > 0) mes "- Pay a Registration fee of "+$@wed_bride_reg+"z.";

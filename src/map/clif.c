@@ -9725,8 +9725,8 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd)
 
 	if( sd->state.changemap ) {// restore information that gets lost on map-change
 #if PACKETVER >= 20070918
-		clif_partyinvitationstate(sd);
-		clif_equipcheckbox(sd);
+		//clif_partyinvitationstate(sd);
+		//clif_equipcheckbox(sd);
 #endif
 #ifdef VIP_ENABLE
 		if (!sd->disableshowrate) {

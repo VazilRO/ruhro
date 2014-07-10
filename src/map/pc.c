@@ -11074,15 +11074,16 @@ short pc_get_itemgroup_bonus_group(struct map_session_data* sd, uint16 group_id)
 }
 
 /**
-* Check if player's equip index in same specified position, like for 2-Handed weapon & Heagdear (inc. costume)
+* Check if player's equip index in same specified position, like for 2-Handed weapon & Headgear (inc. costume)
 * @param eqi Item EQI of enum equip_index
 * @param *equip_index Player's equip_index[]
 * @param index Known index item in inventory from sd->equip_index[] to compare with specified EQI in *equip_index
 * @return True if item in same inventory index, False if doesn't
 */
 bool pc_is_same_equip_index(enum equip_index eqi, int *equip_index, int8 index) {
-	if (index < 0 || index >= ARRAYLENGTH(equip_index))
-		return false;
+	/// Remove this check to eliminate stat doubling on Two-handed and slotted weapons. 
+	//if (index < 0 || index >= ARRAYLENGTH(equip_index))
+	//	return false;
 	// Dual weapon checks
 	if (eqi == EQI_HAND_R && equip_index[EQI_HAND_L] == index)
 		return true;

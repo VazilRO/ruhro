@@ -1,0 +1,317 @@
+-	script	::mgm	-1,{
+	
+	mes "[Mado Salesman]";
+	if(Class == Job_Mechanic || Class == Job_Mechanic_T) {
+		if(checkmadogear() == 0) {
+			mes "Well, hey there!";
+			mes "You look like you could use a brand new Mado!";
+			next;
+			mes "[Mado Salesman]";
+			mes "Whadda ya say? I'll cut you a deal, say...";
+			mes "^FF0000 100,000 zeny ^000000?";
+			mes "How does that sound?";
+			mes "I'll evel throw in some fuel!";
+			next;
+			switch(select("Sounds great!:Not right now, thanks.")) {
+				case 1:
+					
+					if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+					else if (checkmadogear()) {
+						mes "[Mado Salesman]";
+						mes "I'm sorry, but you're already";
+						mes "riding a Magic Gear.";
+					close;
+						}
+					else if (!getskilllv("NC_MADOLICENCE")) {
+						mes "[Mado Salesman]";
+						mes "Please learn the skill to get the Magic Gear License first.";
+					close;
+					}
+					else if(ismounting()) {
+						mes "[Mado Salesman]";
+						mes "Please remove your cash mount.";
+						close;
+					}
+					mes "[Mado Salesman]";
+					mes "Ahh, EXCELLENT!";
+					set Zeny,Zeny-100000;
+					setmadogear;
+					getitem 6146,50; //Fuel
+					next;
+					mes "[Mado Salesman]";
+					mes "Lookin' SHARP!";
+					mes "Oh; I may have forgotten to mention that your Mado will be totaled if you die... you'll need to get a new one.";
+					mes "But check out my parts!";
+					close;
+			
+				case 2:
+					mes "[Mado Salesman]";
+					mes "And here I thought you were ready to take your game to a whole new level.";
+					mes "Whatever, man.";
+					close;
+			}
+		}
+		mes "Ahh, I see you've got yourself a fine machine there!";
+		mes "Maybe I can interest you in some parts for it?";
+		next;
+		switch(select("Fuel and Ammo:Parts:No thanks.")) {
+			case 1:
+				switch(select("Mado Fuel - 300z:Vulcan Round - 10z:Liquid Coolant Round - 100z:Never mind.")) {
+					case 1:
+						mes "[Mado Salesman]";
+							mes "Ahh, Mado Fuel. You'll be needing this. How many can I get you? If you want to quit, just type the number '0.'";
+							next;
+							while(1) {
+								input .@input;
+								if (.@input == 0) {
+									mes "[Mado Salesman]";
+									mes "Well, all right then.";
+									close;
+								}
+								else if ((.@input < 0) || (.@input > 500)) {
+									mes "[Mado Salesman]";
+									mes "er... I can only fill orders for 500 or less right now...";
+									next;
+								}
+								else {
+									break;
+								}
+							}
+							set .@sell,.@input * 300;
+							if (Zeny < .@sell) {
+								mes "[Mado Salesman]";
+								mes "No offence, but I'm pretty sure you can't afford that.";
+								close;
+							}
+							if (checkweight(6146,.@input) == 0) {
+								mes "[Mado Salesman]";
+								mes "You want me to load you up and hurt your back? No way, man. No lawsuits here.";
+								close;
+							}
+							getitem 6146,.@input; // Magic Gear Fuel
+							set Zeny,Zeny-.@sell;
+							mes "[Mado Salesman]";
+							mes "There you go! Have fun now.";
+							close;
+					case 2:
+						mes "[Mado Salesman]";
+							mes "Ahh, Vulcan Rounds. You'll be needing these. How many can I get you? If you want to quit, just type the number '0.'";
+							next;
+							while(1) {
+								input .@input;
+								if (.@input == 0) {
+									mes "[Mado Salesman]";
+									mes "Well, all right then.";
+									close;
+								}
+								else if ((.@input < 0) || (.@input > 1000)) {
+									mes "[Mado Salesman]";
+									mes "er... I can only fill orders for 1000 or less right now...";
+									next;
+								}
+								else {
+									break;
+								}
+							}
+							set .@sell,.@input * 10;
+							if (Zeny < .@sell) {
+								mes "[Mado Salesman]";
+								mes "No offence, but I'm pretty sure you can't afford that.";
+								close;
+							}
+							if (checkweight(6145,.@input) == 0) {
+								mes "[Mado Salesman]";
+								mes "You want me to load you up and hurt your back? No way, man. No lawsuits here.";
+								close;
+							}
+							getitem 6145,.@input; // Vulcan Round
+							set Zeny,Zeny-.@sell;
+							mes "[Mado Salesman]";
+							mes "There you go! Have fun now.";
+							close;
+					case 3:
+						mes "[Mado Salesman]";
+							mes "Liquid Coolant Rounds? Yeah, I can get those for you. How many do you need? If you want to quit, just type the number '0.'";
+							next;
+							while(1) {
+								input .@input;
+								if (.@input == 0) {
+									mes "[Mado Salesman]";
+									mes "Well, all right then.";
+									close;
+								}
+								else if ((.@input < 0) || (.@input > 500)) {
+									mes "[Mado Salesman]";
+									mes "er... I can only fill orders for 500 or less right now...";
+									next;
+								}
+								else {
+									break;
+								}
+							}
+							set .@sell,.@input * 100;
+							if (Zeny < .@sell) {
+								mes "[Mado Salesman]";
+								mes "No offence, but I'm pretty sure you can't afford that.";
+								close;
+							}
+							if (checkweight(6147,.@input) == 0) {
+								mes "[Mado Salesman]";
+								mes "You want me to load you up and hurt your back? No way, man. No lawsuits here.";
+								close;
+							}
+							getitem 6147,.@input; // Magic Gear Fuel
+							set Zeny,Zeny-.@sell;
+							mes "[Mado Salesman]";
+							mes "There you go! Have fun now.";
+							close;
+					case 4:
+						mes "[Mado Salesman]";
+						mes "Okay then. Let me know if you need anything.";
+						close;
+				}
+			case 2:
+				mes "[Mado Salesman]";
+				mes "Yeah, I've got a few parts I could sell you. Not cheap though!";
+				next;
+				switch(select("Accelerator - 100,000z:Cooling System - 100,000z:Hover Jets - 100,000z:Flamethrower - 50,000z:Barrier System - 100,000z:Repair Kit - 100,000z:Camoflauge Generator - 100,000z:Shape Shifter - 100,000z:Self Destruct Module - 500,000z:Oh, never mind.")) {
+					case 1:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2800,1; // Accelerator
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Acceleration Mode on your Mado.";
+						close;
+						
+					case 2:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2804,1; // Cooling System
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Emergency Cooldown system on your Mado.";
+						close;
+						
+					case 3:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2801,1; // Hover Booster
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Hover Mode on your Mado.";
+						close;
+						
+					case 4:
+						if (Zeny < 50000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2139,1; // Flamethrower
+						set Zeny,Zeny-50000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Flare Launcher skill with your Mado.";
+						close;
+						
+					case 5:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2806,1; // Barrier generator
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Barrier system on your Mado.";
+						close;
+						
+					case 6:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2807,1; // Repair Kit
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Repair Skill on your Mado.";
+						close;
+						
+					case 7:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2808,1; // Camo
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Active Camoflauge system on your Mado.";
+						close;
+						
+					case 8:
+						if (Zeny < 100000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2803,1; // Shape Shifter
+						set Zeny,Zeny-100000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Shape Shifter system on your Mado.";
+						close;
+						
+					case 9:
+						if (Zeny < 500000) {
+							mes "[Mado Salesman]";
+							mes "No offence, but I'm pretty sure you can't afford that.";
+							close;
+						}
+						getitem 2802,1; // Self Destruct
+						set Zeny,Zeny-500000;
+						mes "[Mado Salesman]";
+						mes "Ahh, very nice. With this equipped, you'll be able to use the Self Destruct system on your Mado.";
+						close;
+						
+					case 10:
+						mes "[Mado Salesman]";
+						mes "Okay then. Let me know if you need anything.";
+						close;
+				}
+		
+		
+			case 3:
+				mes "[Mado Salesman]";
+				mes "Okay then. Let me know if you need anything.";
+				close;
+			}
+	} else {
+		mes "...where are all the Mechanics in this town...?";
+		close;
+	}
+}
+
+prontera,140,224,3	duplicate(mgm)	Mado Salesman#prt	63
+geffen,103,55,5	duplicate(mgm)	Mado Salesman#gef	63
+payon,166,106,5	duplicate(mgm)	Mado Salesman#pay	63
+aldebaran,133,112,5	duplicate(mgm)	Mado Salesman#alde	63
+yuno,167,187,3	duplicate(mgm)	Mado Salesman#yuno	63
+rachel,106,134,5	duplicate(mgm)	Mado Salesman#ra	63
+dicastes01,187,207,3	duplicate(mgm)	Mado Salesman#dic	63
+manuk,273,212,5	duplicate(mgm)	Mado Salesman#man	63
+splendide,180,174,5	duplicate(mgm)	Mado Salesman#spl	63
+mid_camp,242,243,3	duplicate(mgm)	Mado Salesman#mid	63

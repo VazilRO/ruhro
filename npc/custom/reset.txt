@@ -1,0 +1,144 @@
+//===== eAthena Script =======================================
+//= Reset NPC for Athena by Script & DB Team
+//===== By: ================================================== 
+//= eAthena Team
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= Any eAthena Version
+//===== Description: ========================================= 
+//= Resets skills, stats, or both.
+//===== Additional Comments: ================================= 
+//= 1.0 First Version
+//= 1.1 Optimized for the greater good. [Kisuka]
+//============================================================ 
+prontera,98,230,4	script	Reset Girl::resetGirl	124,{
+	set .@stzeny,BaseLevel*10000;
+	set .@skzeny,JobLevel*10000;
+	set .@bzeny,((.@stzeny*9)+(.@skzeny*9))/10;
+	mes "[Reset Girl]";
+	mes "I am a Reset Girl.";
+	mes "Reset Stats: "+.@stzeny+"z";
+	mes "Reset Skills: "+.@skzeny+"z";
+	mes "Reset Both: "+.@bzeny+"z";
+	mes "Please select the service you want:";
+	next;
+	// With Premium Ticket
+	// switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:Premium Ticket?:Quit")) {
+	// Without
+	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:Quit")) {
+		case 1:
+			mes "[Reset Girl]";
+			if (Zeny < .@skzeny) {
+				mes "Sorry, you don't have enough Zeny.";
+				close;
+			}
+			mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+			set Zeny,zeny-.@skzeny;
+			ResetSkill;
+			close;
+		case 2:
+			mes "[Reset Girl]";
+			if (Zeny < .@stzeny) {
+				mes "Sorry, you don't have enough Zeny.";
+				close;
+			}
+			mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+			set Zeny,zeny-.@stzeny;
+			ResetStatus;
+			close;
+		case 3:
+			mes "[Reset Girl]";
+			if (Zeny < .@bzeny) {
+				mes "Sorry, you don't have enough Zeny.";
+				close;
+			}
+			mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+			set Zeny,zeny-.@bzeny;
+			ResetSkill;
+			ResetStatus;
+			close;
+		case 4:
+			mes "[Reset Girl]";
+			mes "Oh dear! Were you part of that deal?";
+			mes "Just let me check my paperwork here...";
+			mes "...";
+			next;
+			if (redro_reset == 1) {
+				mes "[Reset Girl]";
+				mes "I'm sorry, but my records indicate";
+				mes "that you've already used your reset!";
+				close;
+			}
+				mes "[Reset Girl]";
+				mes "Oh! There you are!";
+				mes "We can get started right away!";
+				next;
+				
+				mes "[Reset Girl]";
+				mes "Which service can I interest you in?";
+			switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")){
+			case 1:
+				mes "[Reset Girl]";
+				mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+				ResetSkill;
+				set redro_reset,1;
+				close;
+			case 2:
+				mes "[Reset Girl]";
+				mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+				ResetStatus;
+				set redro_reset,1;
+				close;
+			case 3:
+				mes "[Reset Girl]";
+				mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+				ResetSkill;
+				ResetStatus;
+				set redro_reset,1;
+				close;
+			case 4:
+				close;
+				}
+		
+		// Premium Ticket
+		// case 5:
+		// 	if (countitem(7608) > 0) {
+		// 	mes "[Reset Girl]";
+		// 	mes "Ahh! Of Course!";
+		// 	mes "I can perform any of my regular services for no charge in exchange for that ticket!";
+		// 	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")){
+		// 	case 1:
+		// 		mes "[Reset Girl]";
+		// 		mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+		// 		delitem 7608,1;
+		// 		atcommand "@skreset";
+		// 		close;
+		// 	case 2:
+		// 		mes "[Reset Girl]";
+		// 		mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+		// 		delitem 7608,1;
+		// 		ResetStatus;
+		// 		close;
+		// 	case 3:
+		// 		mes "[Reset Girl]";
+		// 		mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+		// 		delitem 7608,1;
+		// 		atcommand "@skreset";
+		// 		ResetStatus;
+		// 		close;
+		// 	case 4:
+		// 		close;
+		// 	}
+		// 	} else {
+		// 	
+		// 	mes "[Reset Girl]";
+		// 	mes "I'd need to see your ticket before I can accept it...";
+		// 	close;
+		// 	}
+		// Premium Ticket
+		// case 6:
+		case 5:
+			close;
+	}
+}

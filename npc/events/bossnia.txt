@@ -66,41 +66,6 @@ prontera,132,125,4	script	Bossnia Staff#1	908,{
 
 	// If the VIP system is enabled, players pay a Reset Stone for 5 entrances (with a choice of warps).
 	// If it's disabled, players pay 5,000z per entrance.
-	if (VIP_SCRIPT) {
-		mes "a grudge against me. It'll cost you 1 Reset Stone for 5 access.";
-		next;
-		mes "[Riss]";
-		if (bossnia_event > 0) {
-			set .@type,1;
-			mes "Remaining access: "+bossnia_event;
-		} else if (countitem(6320)) {
-			set .@type,2;
-			mes "Do you want to go?";
-		} else {
-			mes "You don't have a ticket now.....";
-			mes "So come to me again with a Reset Stone later.";
-			close;
-		}
-		next;
-		if(select("Enter:Leave") == 2)
-			close;
-		set .@i, select("First:Second:Third:Fourth");
-		switch(select("Warp 1:Warp 2:Warp 3:Warp 4")) {
-			case 1: set .@x,31; set .@y,208; break;
-			case 2: set .@x,31; set .@y,31; break;
-			case 3: set .@x,208; set .@y,31; break;
-			case 4: set .@x,208; set .@y,208; break;
-		}
-		if (.@type == 1)
-			set bossnia_event, bossnia_event-1;
-		else {
-			delitem 6320,1; //Premium_Reset_Stone
-			set bossnia_event,4;
-		}
-		specialeffect2 EF_MAXPOWER;
-		warp "bossnia_0"+.@i,.@x,.@y;
-		close;
-	} else {
 		mes "a grudge against me. Also it costs 5,000 zeny.";
 		next;
 		if (Zeny > 4999) {

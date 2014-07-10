@@ -2055,9 +2055,8 @@ OnTouch:
 			mes "I believe you stand out amongst them...";
 			next;
 		}
-		if (ASSIN_Q3 == 1 && BaseJob == Job_Thief && ASSIN_Q > 6 && ASSIN_Q < 17) {
+		if (ASSIN_Q < 17) {
 			set ASSIN_Q,17;
-			set ASSIN_Q3,2;
 			mes "[Guildmaster]";
 			mes "Well, I've said too much. Please choose a weapon as a present.";
 			next;
@@ -2125,7 +2124,7 @@ OnTouch:
 		mes "[Guildmaster]";
 		mes "You, " + strcharinfo(0) + ", have chosen to live as an Assassin. May you learn our ways and be an honorable example to others.";
 		savepoint "morocc",100,100;
-		getitem 1008,1; //Frozen_Heart
+		getitem 1008,1; //Necklace of Oblivion
 		changequest 8006,8007;
 		next;
 		mes "[Guildmaster]";

@@ -1,0 +1,98 @@
+prontera,154,212,4	script	Redemption NPC::donationDude	406,{
+	// ----------------- NPC Settings -----------------
+	// --- SET THESE BEFORE LOADING THE SCRIPT! ---
+
+	// Server Name
+	set serverName$,"RedditRO";
+
+	// NPC Name to display during chat.
+	// Default: "[Donor Rewards Redeemer]"
+	set npcName$,"[Server Rewards Redeemer]";
+
+	// DO NOT CHANGE THIS!
+	// Default: "cp_redeemlog"
+	set redeemTable$,"cp_redeemlog";
+
+	// Max number of unique items to redeem at a time.
+	// DO NOT RAISE THIS VALUE ABOVE 128 WITHOUT
+	// MAKING THE NECESSARY SCRIPT ENGINE MODS
+	// FOR SCRIPT ARRAY SIZING! DANGEROUS!
+	// Default: 128
+	set numRedemptionsSimul$,128; 
+	// --------------- End NPC Settings ---------------
+
+	// ----------------- Begin Script -----------------
+	mes .npcName$;
+	mes "Well hello there " + (Sex ? "good sir!" : "young madam!");
+	mes "How may I be of assistance to you on this fine day?";
+	next;
+	prompt("I'm here for my loot!:Who are you? :I'm just looking around...");
+	mes .npcName$;
+	switch(@menu) {
+		case 1:
+			query_sql ("SELECT `id`, `nameid`, `quantity` FROM `cp_redeemlog` WHERE `account_id` = "+getcharid(3)+" AND `redeemed` = 0 LIMIT "+numRedemptionsSimul$,.@id,.@nameid,.@quantity);
+			if (getarraysize(.@id) > 0) {
+				mes "Items Pending Redemption: " + getarraysize(.@id);
+				for (set .@i,0; .@i < getarraysize(.@id); set .@i,.@i+1)
+					if (checkweight(.@nameid[.@i],.@quantity[.@i]) == 0) {
+						mes "I'm terribly sorry, but you are carrying too much to accept " + (.@i ? "any more of " : " ") + "your rewards at this time.";
+						mes "Please come back with fewer items.";
+					} else {
+						query_sql ("UPDATE `cp_redeemlog` SET `char_id` = " + getcharid(0) + ", `redeemed` = 1, `redemption_date` = NOW() WHERE `id` = " + .@id[.@i]);
+						getitem .@nameid[.@i],.@quantity[.@i];
+						mes .@quantity[.@i] + "x " + getitemname(.@nameid[.@i]);
+					}
+				if (.@i == getarraysize(.@id)) {
+					mes "Thank you for your patronage " + (Sex ? "fine sir." : "ma'am.");
+					mes "Please enjoy your stay on " + serverName$ + "!";
+				}
+				if (.showCredits)
+					callfunc "F_FluxCredits";
+			} else {
+				mes "My records indicate that there are no rewards awaiting to be redeemed.";
+				mes "My deepest apologies for the misunderstanding.";
+			}
+		break;
+		case 2:
+			query_sql ("SELECT `balance` FROM `cp_credits` WHERE `account_id` = "+getcharid(3),.@balance);
+			mes .npcName$;
+			mes "Ah, yes; " + (Sex ? "sir." : "ma'am.");
+			mes "Our records indicate your account currently has a balance of";
+			mes "^FF3355" + .@balance + "^000000";
+			next;
+			
+			prompt("I'd like to turn in Tickets:Okay, Thanks!");
+			switch(@menu) {
+				case 1:
+					mes .npcName$;
+					mes "Very good.";
+					mes "I will credit your account with 1 credit per ticket.";
+					mes "How many should I take?";
+					next;
+					input(@tickets);
+					if (countitem(7608) >= @tickets) {
+						query_sql ("UPDATE `cp_credits` SET `balance` = "+(.@balance+(@tickets*1))+" WHERE `account_id` = "+getcharid(3));
+						query_sql ("SELECT `balance` FROM `cp_credits` WHERE `account_id` = "+getcharid(3),.@balance);
+						mes .npcName$;
+						mes "Alright; your new balance is:";
+						mes "^FF3355" + .@balance;
+						break;
+					}
+					mes .npcName$;
+					mes "Hey, uh, you don't have that many tickets...";
+					break;
+				case 2:
+				break;
+			}
+		break;
+		case 3:
+			mes "I am here to allow for the redemption of rewards from the Control Panel." ;
+			mes "I  can also exchange Premium Tickets for Server Credits!";
+		break;
+		default:
+			mes "Very well then.";
+			mes "Good day to you.";
+		break;
+	}
+	close;
+}
