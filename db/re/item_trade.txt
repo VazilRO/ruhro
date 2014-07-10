@@ -2530,3 +2530,6 @@
 20018,475,100	//C_Holo_ear
 20019,475,100	//C_Beret_Of_Artist
 20038,475,100	//C_Alphonse_Helmet
+
+// RedditRO Custom Eden
+6549,495,100 // Courtesy Ticket
