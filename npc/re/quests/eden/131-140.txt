@@ -12,7 +12,7 @@
 //= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [100-110]" v1.3 [Poutine]
 //============================================================
 
-moc_para01,48,185,3	script	131-140 Mission Board	857,{
+moc_para01,37,184,5	script	131-140 Mission Board	857,{
 	if (countitem(6219) < 1) {
 		mes "Wait a minute!";
 		mes "-You need to have an-";

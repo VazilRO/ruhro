@@ -12,7 +12,7 @@
 //= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [90-99]" v1.3 [Poutine]
 //============================================================
 
-moc_para01,45,185,5	script	141-150 Mission Board	857,{
+moc_para01,34,184,5	script	141-150 Mission Board	857,{
 	if (countitem(6219) < 1) {
 		mes "Wait a minute!";
 		mes "-You need to have an-";
@@ -61,8 +61,8 @@ moc_para01,45,185,5	script	141-150 Mission Board	857,{
 		}
 	}
 	if (BaseLevel < 141) {
-		// Quest IDs: 55400-55408
-		// Quest cooldown IDs: 55450-55458
+		// Quest IDs: 55400-55411
+		// Quest cooldown IDs: 55450-55461
 		setarray .@names$[0],
 			"Angra Mantis","Pom Spider","Little Fatum",
 			"Blue Lichtern","Red Lichtern","Yellow Lichtern","Antique Book","Cenere",
@@ -100,34 +100,44 @@ moc_para01,45,185,5	script	141-150 Mission Board	857,{
 	mes "[141-150 Mission Board]";
 	mes "There are several requests on this board.";
 	next;
-	switch(select("^8B4513Bifrost Forest^000000:^8B4513Bifrost Dungeon^000000:^8B4513The Hazy Forest^000000")) {
+	switch(select("^8B4513Hunting Mission^000000:^8B4513Gathering Mission^000000")) {
 	case 1:
-		mes "^8B4513Bifrost Forest^000000.";
-		mes "Which monster will you hunt or have you finished hunting?";
-		next;
-		switch(select("^0000FFAngra Mantis^000000:^0000FFPom Spider^000000:^0000FFLittle Fatum^000000")) {
-			case 1: callsub L_Quest,55400,2133,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
-			case 2: callsub L_Quest,55401,2132,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
-			case 3: callsub L_Quest,55402,2136,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+		switch(select("^8B4513Bifrost Forest^000000:^8B4513Bifrost Dungeon^000000:^8B4513The Hazy Forest^000000")) {
+		case 1:
+			mes "^8B4513Bifrost Forest^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFAngra Mantis^000000:^0000FFPom Spider^000000:^0000FFLittle Fatum^000000")) {
+				case 1: callsub L_Quest,55400,2133,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+				case 2: callsub L_Quest,55401,2132,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+				case 3: callsub L_Quest,55402,2136,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+			}
+		case 2:
+			mes "^8B4513Bifrost Dungeon^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFBlue Lichtern^000000:^0000FFRed Lichtern^000000:^0000FFYellow Lichtern^000000:^0000FFAntique Book^000000:^0000FFCenere^000000")) {
+				case 1: callsub L_Quest,55403,2367,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+				case 2: callsub L_Quest,55404,2369,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+				case 3: callsub L_Quest,55405,2368,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+				case 4: callsub L_Quest,55406,2366,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+				case 5: callsub L_Quest,55407,2365,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+			}
+		case 3:
+			mes "^8B4513The Hazy Forest^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFParus^000000")) {
+				case 1: callsub L_Quest,55408,2134,20,0,1000000,200000,"There is a monster only found in ^8B4513The Hazy Forest^000000.";
+			}		
 		}
 	case 2:
-		mes "^8B4513Bifrost Dungeon^000000.";
-		mes "Which monster will you hunt or have you finished hunting?";
-		next;
-		switch(select("^0000FFBlue Lichtern^000000:^0000FFRed Lichtern^000000:^0000FFYellow Lichtern^000000:^0000FFAntique Book^000000:^0000FFCenere^000000")) {
-			case 1: callsub L_Quest,55403,2367,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
-			case 2: callsub L_Quest,55404,2369,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
-			case 3: callsub L_Quest,55405,2368,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
-			case 4: callsub L_Quest,55406,2366,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
-			case 5: callsub L_Quest,55407,2365,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+		switch(select("^0000FFSnow Flip^000000:^0000FFPeony Mamy^000000:^0000FFYggdrasil Dust^000000:^0000FFAngel Magic Powder^000000")) {
+			case 1: callsub L_Quest,55409,12812,5,1,2000000,300000,"This is dropped by ^8B4513Blue Lichtern^000000.";
+			case 2: callsub L_Quest,55410,12813,5,1,2000000,300000,"This is dropped by ^8B4513Red Lichtern^000000.";
+			case 3: callsub L_Quest,55411,12815,5,1,2000000,300000,"This is dropped by ^8B4513Yellow Lichtern^000000.";
+			case 4: callsub L_Quest,55412,6395,20,1,900000,200000,"This is dropped by ^8B4513Little Fatum^000000.";
 		}
-	case 3:
-		mes "^8B4513The Hazy Forest^000000.";
-		mes "Which monster will you hunt or have you finished hunting?";
-		next;
-		switch(select("^0000FFParus^000000")) {
-			case 1: callsub L_Quest,55408,2134,20,0,1000000,200000,"There is a monster only found in ^8B4513The Hazy Forest^000000.";
-		}		
 	}
 	end;
 
