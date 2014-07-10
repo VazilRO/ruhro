@@ -36,10 +36,6 @@
 // Warper
 -	script	PvP Warper::rropvp	-1,{
 	mes "[PvP Warper]";
-	if (getcharid(1)) { // check for party
-		mes "Please leave your party.";
-		close;
-	}
 	mes "Welcome " + strcharinfo(0) + "!";
 	mes "I will warp you into the PVP arena!";
 	next;
