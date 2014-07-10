@@ -1,0 +1,83 @@
+//===== rAthena Script =======================================
+//= PvP Warper
+//===== By: ==================================================
+//= Poutine
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Custom PvP Warper for RedditRO
+//===== Additional Comments: =================================
+//= 1.0 First Version. [Poutine]
+//============================================================
+
+
+// RedditRO PvP
+06guild_01	mapflag	pvp
+06guild_02	mapflag	pvp
+06guild_01	mapflag	pvp_noparty
+06guild_02	mapflag	pvp_noparty
+06guild_01	mapflag	pvp_noguild
+06guild_02	mapflag	pvp_noguild
+06guild_01	mapflag	nomemo
+06guild_02	mapflag	nomemo
+06guild_01	mapflag	noteleport
+06guild_02	mapflag	noteleport
+06guild_01	mapflag	nopenalty
+06guild_02	mapflag	nopenalty
+06guild_01	mapflag	noreturn
+06guild_02	mapflag	noreturn
+06guild_01	mapflag	nowarp
+06guild_02	mapflag	nowarp
+06guild_01	mapflag	nosave
+06guild_02	mapflag	nosave
+
+// Warper
+-	script	PvP Warper::rropvp	-1,{
+	mes "[PvP Warper]";
+	mes "Welcome " + strcharinfo(0) + "!";
+	mes "I will warp you into the PVP arena!";
+	next;
+	switch(select("^FF5533All Levels ["+getmapusers("06guild_01")+"]^000000:^3355FFTranscendent & Below ["+getmapusers("06guild_02")+"]^000000:Cancel")) {
+		case 1:
+			switch(rand(1,4)) {
+				case 1: warp "06guild_01",49,7;		break;
+				case 2: warp "06guild_01",7,49; 	break;
+				case 3: warp "06guild_01",49,92;	break;
+				case 4: warp "06guild_01",92,49;	break;
+			}
+			break;
+		case 2:
+			if(Class >= 4054) {
+				mes "[PvP Warper]";
+				mes "You are unsuited for this arena.";
+				close;
+			}
+			switch(rand(1,4)) {
+				case 1: warp "06guild_02",49,7;		break;
+				case 2: warp "06guild_02",7,49; 	break;
+				case 3: warp "06guild_02",49,92;	break;
+				case 4: warp "06guild_02",92,49;	break;
+			}			
+			break;
+		case 3:
+			close;
+	}
+	close;	
+}
+prontera,161,193,5	duplicate(rropvp)	PvP Warper#rropvp1	83
+morocc,151,97,5	duplicate(rropvp)	PvP Warper#rropvp2	83
+geffen,129,69,3	duplicate(rropvp)	PvP Warper#rropvp3	83
+payon,175,222,3	duplicate(rropvp)	PvP Warper#rropvp4	83
+alberta,179,140,5	duplicate(rropvp)	PvP Warper#rropvp5	83
+aldebaran,146,113,3	duplicate(rropvp)	PvP Warper#rropvp6	83
+xmas,141,127,5	duplicate(rropvp)	PvP Warper#rropvp7	83
+comodo,204,153,3	duplicate(rropvp)	PvP Warper#rropvp8	83
+yuno,142,178,5	duplicate(rropvp)	PvP Warper#rropvp9	83
+amatsu,202,86,3	duplicate(rropvp)	PvP Warper#rropvp10	83
+gonryun,166,117,3	duplicate(rropvp)	PvP Warper#rropvp11	83
+umbala,79,158,5	duplicate(rropvp)	PvP Warper#rropvp12	83
+niflheim,205,179,3	duplicate(rropvp)	PvP Warper#rropvp13	83
+louyang,210,107,5	duplicate(rropvp)	PvP Warper#rropvp14	83
+izlude,125,148,5	duplicate(rropvp)	PvP Warper#rropvp15	83
