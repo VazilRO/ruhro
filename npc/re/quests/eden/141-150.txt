@@ -1,0 +1,207 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [141 - 150]
+//===== By: ==================================================
+//= Chilly
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repeatable Quests for Players between Base level 141 - 150.
+//===== Additional Comments: =================================
+//= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [90-99]" v1.3 [Poutine]
+//============================================================
+
+moc_para01,45,185,5	script	141-150 Mission Board	857,{
+	if (countitem(6219) < 1) {
+		mes "Wait a minute!";
+		mes "-You need to have an-";
+		mes "-^4d4dff'Eden Group Mark'^000000-";
+		mes "-to receive these missions.-";
+		next;
+		switch(select("Just walk away.:^0000FFEden Group^000000 missions?:How can I be a member of the ^0000FFEden Group^000000?")) {
+		case 1:
+			close;
+		case 2:
+			mes "::The Eden Group Missions";
+			mes "::are basically missions";
+			mes "::requested by";
+			mes "::people from all around the kingdom.";
+			mes "::We just categorize them.";
+			next;
+			mes "::In the Eden Group,";
+			mes "::we sorted out the missions";
+			mes "::according to the level of difficulty.";
+			mes "::According to this level,";
+			mes "::you can find";
+			mes "::missions that";
+			mes "::suit you.";
+			next;
+			mes "::When you are done,";
+			mes "::you can come back";
+			mes "::to the mission board.";
+			next;
+			mes "::Then you will be";
+			mes "::rewarded!!";
+			mes "::Simple, isn't it!!";
+			mes "::No commission required!!";
+			close;
+		case 3:
+			mes "::You can become a member";
+			mes "::of the Eden Group";
+			mes "::to ^0000FFLaime Evenor^000000,";
+			mes "::who is waiting on the 1st floor.";
+			next;
+			mes "::If you become a member,";
+			mes "::you will get an";
+			mes "::\"^006400Eden Group Mark^000000\".";
+			mes "::Then you will be able";
+			mes "::to see the mission board.";
+			close;
+		}
+	}
+	if (BaseLevel < 141) {
+		// Quest IDs: 55400-55408
+		// Quest cooldown IDs: 55450-55458
+		setarray .@names$[0],
+			"Angra Mantis","Pom Spider","Little Fatum",
+			"Blue Lichtern","Red Lichtern","Yellow Lichtern","Antique Book","Cenere",
+			"Parus";
+		setarray .@exp[0],
+			1000000,1000000,1000000,
+			1100000,1100000,1100000,1100000,1100000,
+			1000000;
+		mes "You must be within level 141-150 to accept these missions.";
+		for(set .@quest,55400; .@quest<=55458; set .@quest,.@quest+1) {
+			set .@hunting, checkquest(.@quest,HUNTING);
+			if (.@hunting == 0 || .@hunting == 1) {
+				next;
+				mes ":: You cannot proceed in";
+				mes ":: ^0000FF"+.@names$[.@quest-55400]+" Hunting^000000.";
+				mes ":: The registration to the mission";
+				mes ":: is cancelled.";
+				erasequest .@quest;
+				close;
+			} else if (.@hunting == 2) {
+				next;
+				mes ":: You added information";
+				mes ":: about the mission";
+				mes ":: ^0000FF"+.@names$[.@quest-55400]+" Hunting^000000";
+				mes ":: on the mission board.";
+				mes ":: You've got a";
+				mes ":: salutary experience.";
+				erasequest .@quest;
+				getexp .@exp[.@quest-55400],0;
+				close;
+			}
+		}
+		close;
+	}
+	mes "[141-150 Mission Board]";
+	mes "There are several requests on this board.";
+	next;
+	switch(select("^8B4513Bifrost Forest^000000:^8B4513Bifrost Dungeon^000000:^8B4513The Hazy Forest^000000")) {
+	case 1:
+		mes "^8B4513Bifrost Forest^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFAngra Mantis^000000:^0000FFPom Spider^000000:^0000FFLittle Fatum^000000")) {
+			case 1: callsub L_Quest,55400,2133,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+			case 2: callsub L_Quest,55401,2132,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+			case 3: callsub L_Quest,55402,2136,20,0,1000000,200000,"There is a monster only found in ^8B4513Bifrost Forest^000000.";
+		}
+	case 2:
+		mes "^8B4513Bifrost Dungeon^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFBlue Lichtern^000000:^0000FFRed Lichtern^000000:^0000FFYellow Lichtern^000000:^0000FFAntique Book^000000:^0000FFCenere^000000")) {
+			case 1: callsub L_Quest,55403,2367,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+			case 2: callsub L_Quest,55404,2369,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+			case 3: callsub L_Quest,55405,2368,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+			case 4: callsub L_Quest,55406,2366,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+			case 5: callsub L_Quest,55407,2365,20,0,1100000,250000,"There is a monster that can be found on ^8B4513Bifrost Dungeon^000000.";
+		}
+	case 3:
+		mes "^8B4513The Hazy Forest^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFParus^000000")) {
+			case 1: callsub L_Quest,55408,2134,20,0,1000000,200000,"There is a monster only found in ^8B4513The Hazy Forest^000000.";
+		}		
+	}
+	end;
+
+//callsub L_Quest,<quest ID>,"<monster ID | item ID>",<amount>,<quest type>,<reward Base EXP>,"<reward Job EXP>","<description>"{,"s"};
+L_Quest:
+	set .@quest1, getarg(0);
+	set .@quest2, .@quest1+50;
+	set .@playtime, checkquest(.@quest2,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "[141-150 Mission Board]";
+		mes "You need to wait 1 hour before you can take this mission again.";
+		close;
+	}
+	if(getarg(3) == 0) { // Hunting
+		set .@hunting, checkquest(.@quest1,HUNTING);
+		if (.@hunting == 0 || .@hunting == 1) {
+			mes "[141-150 Mission Board]";
+			mes "Have you finished hunting all "+getarg(2)+" "+getmonsterinfo(getarg(1),MOB_NAME)+" yet?";
+			close;
+		} else if (.@hunting == 2) {
+			mes "[141-150 Mission Board]";
+			mes "You have completed the hunting.";
+			mes "Please accept this reward as a compensation.";
+			erasequest .@quest1;
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest2;
+
+			getexp getarg(4),getarg(5);
+			close;
+		} else {
+			mes "[141-150 Mission Board]";
+			mes getarg(6);
+			next;
+			mes "[141-150 Mission Board]";
+			mes "Hunt "+getarg(2)+" "+getmonsterinfo(getarg(1),MOB_NAME)+" monsters there and post your success on this board.";
+			next;
+			if(select("I'll hunt them.:No thanks.") == 1) {
+				mes "[141-150 Mission Board]";
+				mes "When you have completed the mission, post it on this board and collect your reward.";
+				if (.@playtime > -1) erasequest .@quest2;
+				setquest .@quest1;
+			}
+			close;
+		}
+	} else { // Gathering
+		set .@gathering, checkquest(.@quest1);
+		if (.@gathering == 0 || .@gathering == 1) {
+			if(countitem(getarg(1)) < getarg(2)) {
+				mes "[141-150 Mission Board]";
+				mes "Have you finished gathering all the items yet?";
+				close;
+			} else {
+				mes "[141-150 Mission Board]";
+				mes "You have completed the gathering.";
+				mes "Please accept this reward as a compensation.";
+				delitem getarg(1),getarg(2);
+				erasequest .@quest1;				
+				if (.@playtime > -1) erasequest .@quest2;
+				setquest .@quest2;
+			
+				getexp getarg(4),getarg(5);
+				close;
+			}
+		} else {
+			mes "[141-150 Mission Board]";
+			mes getarg(6);
+			next;
+			if(select("I'll hunt them.:No thanks.") == 1) {
+				mes "[141-150 Mission Board]";
+				mes "When you have completed the mission, post it on this board and collect your reward.";
+				if (.@playtime > -1) erasequest .@quest2;
+				setquest .@quest1;
+			}
+			close;	
+		}
+	}
+}

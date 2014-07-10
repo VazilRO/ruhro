@@ -1,0 +1,188 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [121 - 130]
+//===== By: ==================================================
+//= Chilly
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repeatable Quests for Players between Base level 121 - 130.
+//===== Additional Comments: =================================
+//= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [100-110]" v1.3 [Poutine]
+//============================================================
+
+moc_para01,48,183,3	script	121-130 Mission Board	857,{
+	if (countitem(6219) < 1) {
+		mes "Wait a minute!";
+		mes "-You need to have an-";
+		mes "-^4d4dff'Eden Group Mark'^000000-";
+		mes "-to receive these missions.-";
+		next;
+		switch(select("Just walk away.:^0000FFEden Group^000000 missions?:How can I be a member of the ^0000FFEden Group^000000?")) {
+		case 1:
+			close;
+		case 2:
+			mes "::The Eden Group Missions";
+			mes "::are basically missions";
+			mes "::requested by";
+			mes "::people from all around the kingdom.";
+			mes "::We just categorize them.";
+			next;
+			mes "::In the Eden Group,";
+			mes "::we sorted out the missions";
+			mes "::according to the level of difficulty.";
+			mes "::According to this level,";
+			mes "::you can find";
+			mes "::missions that";
+			mes "::suit you.";
+			next;
+			mes "::When you are done,";
+			mes "::you can come back";
+			mes "::to the mission board.";
+			next;
+			mes "::Then you will be";
+			mes "::rewarded!!";
+			mes "::Simple, isn't it!!";
+			mes "::No commission required!!";
+			close;
+		case 3:
+			mes "::You can become a member";
+			mes "::of the Eden Group";
+			mes "::to ^0000FFLaime Evenor^000000,";
+			mes "::who is waiting on the 1st floor.";
+			next;
+			mes "::If you become a member,";
+			mes "::you will get an";
+			mes "::\"^006400Eden Group Mark^000000\".";
+			mes "::Then you will be able";
+			mes "::to see the mission board.";
+			close;
+		}
+	}
+	if (BaseLevel < 121 || BaseLevel > 130) {
+		// Quest IDs: 55200-55214
+		// Quest cooldown IDs: 55215-55229
+		setarray .@names$[0],
+			"Baroness of Retribution","Lady Solace","Mistress of Shelter","Dame of Sentinel",
+			"Vanberk","Isilla","Hodremlin","Agav","Echio",
+			"Ragged Zombie", "Banshee",
+			"Ferus","Green Ferus","Blue Acidus","Gold Acidus";
+		setarray .@exp[0],
+			500000,500000,500000,500000,
+			500000,500000,500000,500000,500000,
+			500000,500000,
+			500000,500000,500000,500000;
+		mes "You must be within level 121-130 to accept these missions.";
+		for(set .@quest,55200; .@quest<=55229; set .@quest,.@quest+1) {
+			set .@hunting, checkquest(.@quest,HUNTING);
+			if (.@hunting == 0 || .@hunting == 1) {
+				next;
+				mes ":: You cannot proceed in";
+				mes ":: ^0000FF"+.@names$[.@quest-55200]+" Hunting^000000.";
+				mes ":: The registration to the mission";
+				mes ":: is cancelled.";
+				erasequest .@quest;
+				close;
+			} else if (.@hunting == 2) {
+				next;
+				mes ":: You added information";
+				mes ":: about the mission";
+				mes ":: ^0000FF"+.@names$[.@quest-55200]+" Hunting^000000";
+				mes ":: on the mission board.";
+				mes ":: You've got a";
+				mes ":: salutary experience.";
+				erasequest .@quest;
+				getexp .@exp[.@quest-55200],0;
+				close;
+			}
+		}
+		close;
+	}
+	mes "[121-130 Mission Board]";
+	mes "There are several requests on this board.";
+	next;
+	switch(select("^8B4513Thanatos Tower^000000:^8B4513Rachel Shrine^000000:^8B4513Nameless Island^000000:^8B4513Abyss Lake Dungeon^000000")) {
+	case 1:
+		mes "^8B4513Thanatos Tower^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFBaroness of Retribution^000000:^0000FFLady Solace^000000:^0000FFMistress of Shelter^000000:^0000FFDame of Sentinel^000000")) {
+			case 1: callsub L_Quest,55200,"Baroness of Retribution",500000,200000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+			case 2: callsub L_Quest,55201,"Lady Solace",500000,200000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+			case 3: callsub L_Quest,55202,"Mistress of Shelter",500000,200000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+			case 4: callsub L_Quest,55203,"Dame of Sentinel",500000,200000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+		}
+	case 2:
+		mes "^8B4513Rachel Shrine^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFVanberk^000000:^0000FFIsilla^000000:^0000FFHodremlin^000000:^0000FFAgav^000000:^0000FFEchio^000000")) {
+			case 1: callsub L_Quest,55204,"Vanberk",500000,200000,"There is a monster that can be found on ^8B4513Rachel Shrine^000000.";
+			case 2: callsub L_Quest,55205,"Isilla",500000,200000,"There is a monster that can be found on ^8B4513Rachel Shrine^000000.";
+			case 3: callsub L_Quest,55206,"Hodremlin",500000,200000,"There is a monster that can be found on ^8B4513Rachel Shrine^000000.";
+			case 4: callsub L_Quest,55207,"Agav",500000,200000,"There is a monster that can be found on ^8B4513Rachel Shrine^000000.";
+			case 5: callsub L_Quest,55208,"Echio",500000,200000,"There is a monster that can be found on ^8B4513Rachel Shrine^000000.";
+		}		
+	case 3:
+		mes "^8B4513Nameless Island^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFRagged Zombie^000000:^0000FFBanshee^000000")) {
+			case 1: callsub L_Quest,55209,"Ragged Zombie",500000,200000,"There is a monster only found in ^8B4513Nameless Island^000000.";
+			case 2: callsub L_Quest,55210,"Banshee",500000,200000,"There is a monster only found in ^8B4513Nameless Island^000000.";
+		}
+	case 4:
+		mes "^8B4513Abyss Lake Dungeon^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFFerus^000000:^0000FFGreen Ferus^000000:^0000FFBlue Acidus^000000:^0000FFGold Acidus^000000")) {
+			case 1: callsub L_Quest,55211,"Ferus",500000,200000,"There is a monster only found in ^8B4513Abyss Lake Dungeon^000000.";
+			case 2: callsub L_Quest,55212,"Green Ferus",500000,200000,"There is a monster only found in ^8B4513Abyss Lake Dungeon^000000.";
+			case 3: callsub L_Quest,55213,"Blue Acidus",500000,200000,"There is a monster only found in ^8B4513Abyss Lake Dungeon^000000.";
+			case 4: callsub L_Quest,55214,"Gold Acidus",500000,200000,"There is a monster only found in ^8B4513Abyss Lake Dungeon^000000.";
+		}		
+	}
+	end;
+
+//callsub L_Quest,<quest ID>,"<monster name>",<reward Base EXP>,"<reward Job EXP>","<description>"{,"s"};
+L_Quest:
+	set .@quest1, getarg(0);
+	set .@quest2, .@quest1+15;
+	set .@playtime, checkquest(.@quest2,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "[121-130 Mission Board]";
+		mes "You need to wait 1 hour before you can take this mission again.";
+		close;
+	}
+	set .@hunting, checkquest(.@quest1,HUNTING);
+	if (.@hunting == 0 || .@hunting == 1) {
+		mes "[121-130 Mission Board]";
+		mes "Have you finished hunting all 30 "+getarg(1)+getarg(5,"")+" yet?";
+		close;
+	} else if (.@hunting == 2) {
+		mes "[121-130 Mission Board]";
+		mes "You have completed the hunting.";
+		mes "Please accept this reward as a compensation.";
+		erasequest .@quest1;
+		if (.@playtime > -1) erasequest .@quest2;
+		setquest .@quest2;
+
+		getexp getarg(2),getarg(3);
+		close;
+	} else {
+		mes "[121-130 Mission Board]";
+		mes getarg(4);
+		next;
+		mes "[121-130 Mission Board]";
+		mes "Hunt 30 "+getarg(1)+" monsters there and post your success on this board.";
+		next;
+		if(select("I'll hunt them.:No thanks.") == 1) {
+			mes "[121-130 Mission Board]";
+			mes "When you have completed the mission, post it on this board and collect your reward.";
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest1;
+		}
+		close;
+	}
+}

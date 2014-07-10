@@ -1,0 +1,256 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [111 - 120]
+//===== By: ==================================================
+//= Chilly
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repeatable Quests for Players between Base level 111 - 120.
+//===== Additional Comments: =================================
+//= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [90-99]" v1.3 [Poutine]
+//= 1.1 Revamped the script to add a bit of flexibility in mob counts and quest type. [Poutine]
+//= 1.2 Added Bloody Page and Mystic Horn Gathering quests [Poutine]
+//============================================================
+
+moc_para01,48,181,3	script	111-120 Mission Board	857,{
+	if (countitem(6219) < 1) {
+		mes "Wait a minute!";
+		mes "-You need to have an-";
+		mes "-^4d4dff'Eden Group Mark'^000000-";
+		mes "-to receive these missions.-";
+		next;
+		switch(select("Just walk away.:^0000FFEden Group^000000 missions?:How can I be a member of the ^0000FFEden Group^000000?")) {
+		case 1:
+			close;
+		case 2:
+			mes "::The Eden Group Missions";
+			mes "::are basically missions";
+			mes "::requested by";
+			mes "::people from all around the kingdom.";
+			mes "::We just categorize them.";
+			next;
+			mes "::In the Eden Group,";
+			mes "::we sorted out the missions";
+			mes "::according to the level of difficulty.";
+			mes "::According to this level,";
+			mes "::you can find";
+			mes "::missions that";
+			mes "::suit you.";
+			next;
+			mes "::When you are done,";
+			mes "::you can come back";
+			mes "::to the mission board.";
+			next;
+			mes "::Then you will be";
+			mes "::rewarded!!";
+			mes "::Simple, isn't it!!";
+			mes "::No commission required!!";
+			close;
+		case 3:
+			mes "::You can become a member";
+			mes "::of the Eden Group";
+			mes "::to ^0000FFLaime Evenor^000000,";
+			mes "::who is waiting on the 1st floor.";
+			next;
+			mes "::If you become a member,";
+			mes "::you will get an";
+			mes "::\"^006400Eden Group Mark^000000\".";
+			mes "::Then you will be able";
+			mes "::to see the mission board.";
+			close;
+		}
+	}
+	if (BaseLevel < 111 || BaseLevel > 120) {
+		// Quest IDs: 55100-55119
+		// Quest cooldown IDs: 55150-55169
+		setarray .@names$[0],
+			"Raydric","Kahlitzburg","Wanderer",
+			"Ancient Mimic","Death Word","Owl Baron",
+			"Dark Pinguicula","Nepenthes","Naga","Centipede Larva","Cornus",
+			"Ancient Mummy",
+			"Incubus","Succubus","Violy",
+			"Venatu (Green)","Venatu (Orange)","Venatu (Blue)",
+			"Fragment", "Rusty Screw";
+		setarray .@exp[0],
+			300000,300000,300000,
+			400000,400000,400000,
+			280000,280000,280000,280000,280000,
+			300000,
+			300000,300000,300000,
+			300000,300000,300000,
+			300000,300000,400000,280000;
+		mes "You must be within level 111-120 to accept these missions.";
+		for(set .@quest,55100; .@quest<=55169; set .@quest,.@quest+1) {
+			set .@hunting, checkquest(.@quest,HUNTING);
+			if (.@hunting == 0 || .@hunting == 1) {
+				next;
+				mes ":: You cannot proceed in";
+				mes ":: ^0000FF"+.@names$[.@quest-55100]+" Hunting^000000.";
+				mes ":: The registration to the mission";
+				mes ":: is cancelled.";
+				erasequest .@quest;
+				close;
+			} else if (.@hunting == 2) {
+				next;
+				mes ":: You added information";
+				mes ":: about the mission";
+				mes ":: ^0000FF"+.@names$[.@quest-55100]+" Hunting^000000";
+				mes ":: on the mission board.";
+				mes ":: You've got a";
+				mes ":: salutary experience.";
+				erasequest .@quest;
+				getexp .@exp[.@quest-55100],0;
+				close;
+			}
+		}
+		close;
+	}
+	mes "[111-120 Mission Board]";
+	mes "There are several requests on this board.";
+	next;
+	switch(select("^8B4513Hunting Mission^000000:^8B4513Gathering Mission^000000")) {
+	case 1:
+		switch(select("^8B4513Glast Heim^000000:^8B4513Thanatos Tower^000000:^8B4513Ash Vacuum^000000:^8B4513Pyramid^000000:^8B4513Geffenia^000000:^8B4513Juperos^000000")) {
+		case 1:
+			mes "^8B4513Glast Heim^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFRaydric^000000:^0000FFKhalitzburg^000000:^0000FFWanderer^000000")) {
+				case 1: callsub L_Quest,55100,1163,30,0,300000,200000,"There is a monster that can be found on ^8B4513Glast Heim^000000.";
+				case 2: callsub L_Quest,55101,1132,30,0,300000,200000,"There is a monster that can be found on ^8B4513Glast Heim^000000.";
+				case 3: callsub L_Quest,55102,1208,30,0,300000,200000,"There is a monster that can be found on ^8B4513Glast Heim^000000.";
+			}
+		case 2:
+			mes "^8B4513Thanatos Tower^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFAncient Mimic^000000:^0000FFDeath Word^000000:^0000FFOwl Baron^000000")) {
+				case 1: callsub L_Quest,55103,1699,30,0,400000,300000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+				case 2: callsub L_Quest,55104,1698,30,0,400000,300000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+				case 3: callsub L_Quest,55105,1295,20,0,400000,300000,"There is a monster only found in ^8B4513Thanatos Tower^000000.";
+			}		
+		case 3:
+			mes "^8B4513Ash Vacuum^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFDark Pinguicula^000000:^0000FFNepenthes^000000:^0000FFNaga^000000:^0000FFCentipede larva^000000:^0000FFCornus^000000")) {
+				case 1: callsub L_Quest,55106,2015,30,0,280000,180000,"There is a monster only found in ^8B4513Ash Vacuum^000000.";
+				case 2: callsub L_Quest,55107,1988,30,0,280000,180000,"There is a monster only found in ^8B4513Ash Vacuum^000000.";
+				case 3: callsub L_Quest,55108,1993,30,0,280000,180000,"There is a monster only found in ^8B4513Ash Vacuum^000000.";
+				case 4: callsub L_Quest,55109,1999,20,0,280000,180000,"There is a monster only found in ^8B4513Ash Vacuum^000000.";
+				case 5: callsub L_Quest,55110,1992,30,0,280000,180000,"There is a monster only found in ^8B4513Ash Vacuum^000000.";
+			}
+		case 4:
+			mes "^8B4513Pyramid^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFAncient Mummy^000000")) {
+				case 1: callsub L_Quest,55111,1297,30,0,300000,200000,"There is a monster only found in ^8B4513Pyramid^000000.";
+			}
+		case 5:
+			mes "^8B4513Geffenia^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFIncubus^000000:^0000FFSuccubus^000000:^0000FFVioly^000000")) {
+				case 1: callsub L_Quest,55112,1374,10,0,300000,200000,"There is a monster only found in ^8B4513Geffenia^000000.";
+				case 2: callsub L_Quest,55113,1370,10,0,300000,200000,"There is a monster only found in ^8B4513Geffenia^000000.";
+				case 3: callsub L_Quest,55114,1390,10,0,300000,200000,"There is a monster only found in ^8B4513Geffenia^000000.";
+			}
+		case 6:
+			mes "^8B4513Juperos^000000.";
+			mes "Which monster will you hunt or have you finished hunting?";
+			next;
+			switch(select("^0000FFVenatu (Green)^000000:^0000FFVenatu (Orange)^000000:^0000FFVenatu (Blue)^000000")) {
+				case 1: callsub L_Quest,55115,1677,30,0,300000,200000,"There is a monster only found in ^8B4513Juperos^000000. Wind type.";
+				case 2: callsub L_Quest,55116,1678,30,0,300000,200000,"There is a monster only found in ^8B4513Juperos^000000. Earth type.";
+				case 3: callsub L_Quest,55117,1679,30,0,300000,200000,"There is a monster only found in ^8B4513Juperos^000000. Water type.";
+			}		
+		}
+	case 2:
+		mes "Which item will you gather or have you finished gathering?";
+		next;
+		switch(select("^8B4513Fragment^000000:^8B4513Rusty Screw^000000:^8B4513Bloody Page^000000:^8B4513Mystic Horn^000000")) {
+			case 1: callsub L_Quest,55118,7094,10,1,300000,200000,"Gather 10 ^8B4513Fragments^000000.";
+			case 2: callsub L_Quest,55119,7317,20,1,300000,200000,"Gather 20 ^8B4513Rusty Screw^000000.";
+			case 3: callsub L_Quest,55120,7449,20,1,400000,300000,"Gather 20 ^8B4513Bloody Page^000000.";
+			case 4: callsub L_Quest,55121,6023,20,1,280000,180000,"Gather 20 ^8B4513Mystic Horn^000000.";
+		}
+	}
+	end;
+
+//callsub L_Quest,<quest ID>,"<monster ID | item ID>",<amount>,<quest type>,<reward Base EXP>,"<reward Job EXP>","<description>"{,"s"};
+L_Quest:
+	set .@quest1, getarg(0);
+	set .@quest2, .@quest1+50;
+	set .@playtime, checkquest(.@quest2,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "[111-120 Mission Board]";
+		mes "You need to wait 1 hour before you can take this mission again.";
+		close;
+	}
+	if(getarg(3) == 0) { // Hunting
+		set .@hunting, checkquest(.@quest1,HUNTING);
+		if (.@hunting == 0 || .@hunting == 1) {
+			mes "[111-120 Mission Board]";
+			mes "Have you finished hunting all "+getarg(2)+" "+getmonsterinfo(getarg(1),MOB_NAME)+" yet?";
+			close;
+		} else if (.@hunting == 2) {
+			mes "[111-120 Mission Board]";
+			mes "You have completed the hunting.";
+			mes "Please accept this reward as a compensation.";
+			erasequest .@quest1;
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest2;
+
+			getexp getarg(4),getarg(5);
+			close;
+		} else {
+			mes "[111-120 Mission Board]";
+			mes getarg(6);
+			next;
+			mes "[111-120 Mission Board]";
+			mes "Hunt "+getarg(2)+" "+getmonsterinfo(getarg(1),MOB_NAME)+" monsters there and post your success on this board.";
+			next;
+			if(select("I'll hunt them.:No thanks.") == 1) {
+				mes "[111-120 Mission Board]";
+				mes "When you have completed the mission, post it on this board and collect your reward.";
+				if (.@playtime > -1) erasequest .@quest2;
+				setquest .@quest1;
+			}
+			close;
+		}
+	} else { // Gathering
+		set .@gathering, checkquest(.@quest1);
+		if (.@gathering == 0 || .@gathering == 1) {
+			if(countitem(getarg(1)) < getarg(2)) {
+				mes "[111-120 Mission Board]";
+				mes "Have you finished gathering all the items yet?";
+				close;
+			} else {
+				mes "[111-120 Mission Board]";
+				mes "You have completed the gathering.";
+				mes "Please accept this reward as a compensation.";
+				delitem getarg(1),getarg(2);
+				erasequest .@quest1;				
+				if (.@playtime > -1) erasequest .@quest2;
+				setquest .@quest2;
+			
+				getexp getarg(4),getarg(5);
+				close;
+			}
+		} else {
+			mes "[111-120 Mission Board]";
+			mes getarg(6);
+			next;
+			if(select("I'll hunt them.:No thanks.") == 1) {
+				mes "[111-120 Mission Board]";
+				mes "When you have completed the mission, post it on this board and collect your reward.";
+				if (.@playtime > -1) erasequest .@quest2;
+				setquest .@quest1;
+			}
+			close;	
+		}
+	}
+}

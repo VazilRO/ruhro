@@ -1,0 +1,164 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [131 - 140]
+//===== By: ==================================================
+//= Chilly
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repeatable Quests for Players between Base level 131 - 140.
+//===== Additional Comments: =================================
+//= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [100-110]" v1.3 [Poutine]
+//============================================================
+
+moc_para01,48,185,3	script	131-140 Mission Board	857,{
+	if (countitem(6219) < 1) {
+		mes "Wait a minute!";
+		mes "-You need to have an-";
+		mes "-^4d4dff'Eden Group Mark'^000000-";
+		mes "-to receive these missions.-";
+		next;
+		switch(select("Just walk away.:^0000FFEden Group^000000 missions?:How can I be a member of the ^0000FFEden Group^000000?")) {
+		case 1:
+			close;
+		case 2:
+			mes "::The Eden Group Missions";
+			mes "::are basically missions";
+			mes "::requested by";
+			mes "::people from all around the kingdom.";
+			mes "::We just categorize them.";
+			next;
+			mes "::In the Eden Group,";
+			mes "::we sorted out the missions";
+			mes "::according to the level of difficulty.";
+			mes "::According to this level,";
+			mes "::you can find";
+			mes "::missions that";
+			mes "::suit you.";
+			next;
+			mes "::When you are done,";
+			mes "::you can come back";
+			mes "::to the mission board.";
+			next;
+			mes "::Then you will be";
+			mes "::rewarded!!";
+			mes "::Simple, isn't it!!";
+			mes "::No commission required!!";
+			close;
+		case 3:
+			mes "::You can become a member";
+			mes "::of the Eden Group";
+			mes "::to ^0000FFLaime Evenor^000000,";
+			mes "::who is waiting on the 1st floor.";
+			next;
+			mes "::If you become a member,";
+			mes "::you will get an";
+			mes "::\"^006400Eden Group Mark^000000\".";
+			mes "::Then you will be able";
+			mes "::to see the mission board.";
+			close;
+		}
+	}
+	if (BaseLevel < 131 || BaseLevel > 140) {
+		// Quest IDs: 55300-55306
+		// Quest cooldown IDs: 55307-55313
+		setarray .@names$[0],
+			"Incarnation of Morroc - Shadow","Incarnation of Morroc - Angel","Incarnation of Morroc - Ghost",
+			"One-Horned Scaraba","Two-Horned Scaraba","Antler Scaraba","Rake Scaraba";
+		setarray .@exp[0],
+			800000,800000,800000,
+			800000,800000,800000,800000;
+		mes "You must be within level 131-140 to accept these missions.";
+		for(set .@quest,55300; .@quest<=55313; set .@quest,.@quest+1) {
+			set .@hunting, checkquest(.@quest,HUNTING);
+			if (.@hunting == 0 || .@hunting == 1) {
+				next;
+				mes ":: You cannot proceed in";
+				mes ":: ^0000FF"+.@names$[.@quest-55300]+" Hunting^000000.";
+				mes ":: The registration to the mission";
+				mes ":: is cancelled.";
+				erasequest .@quest;
+				close;
+			} else if (.@hunting == 2) {
+				next;
+				mes ":: You added information";
+				mes ":: about the mission";
+				mes ":: ^0000FF"+.@names$[.@quest-55300]+" Hunting^000000";
+				mes ":: on the mission board.";
+				mes ":: You've got a";
+				mes ":: salutary experience.";
+				erasequest .@quest;
+				getexp .@exp[.@quest-55300],0;
+				close;
+			}
+		}
+		close;
+	}
+	mes "[131-140 Mission Board]";
+	mes "There are several requests on this board.";
+	next;
+	switch(select("^8B4513Dimensional Gorge^000000:^8B4513Skaraba Hall^000000")) {
+	case 1:
+		mes "^8B4513Thanatos Tower^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFIncarnation of Morroc - Shadow^000000:^0000FFIncarnation of Morroc - Angel^000000:^0000FFIncarnation of Morroc - Ghost^000000")) {
+			case 1: callsub L_Quest,55300,"Incarnation of Morroc - Shadow",800000,200000,"There is a monster only found in ^8B4513Dimensional Gorge^000000.";
+			case 2: callsub L_Quest,55301,"Incarnation of Morroc - Angel",800000,200000,"There is a monster only found in ^8B4513Dimensional Gorge^000000.";
+			case 3: callsub L_Quest,55302,"Incarnation of Morroc - Ghost",800000,200000,"There is a monster only found in ^8B4513Dimensional Gorge^000000.";
+		}
+	case 2:
+		mes "^8B4513Scaraba Hall^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFOne-Horned Scaraba^000000:^0000FFTwo-Horned Scaraba^000000:^0000FFAntler Scaraba^000000:^0000FFRake Scaraba^000000")) {
+			case 1: callsub L_Quest,55303,"One-Horned Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
+			case 2: callsub L_Quest,55304,"Two-Horned Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
+			case 3: callsub L_Quest,55305,"Antler Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
+			case 4: callsub L_Quest,55306,"Rake Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
+		}			
+	}
+	end;
+
+//callsub L_Quest,<quest ID>,"<monster name>",<reward Base EXP>,"<reward Job EXP>","<description>"{,"s"};
+L_Quest:
+	set .@quest1, getarg(0);
+	set .@quest2, .@quest1+50;
+	set .@playtime, checkquest(.@quest2,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "[131-140 Mission Board]";
+		mes "You need to wait 1 hour before you can take this mission again.";
+		close;
+	}
+	set .@hunting, checkquest(.@quest1,HUNTING);
+	if (.@hunting == 0 || .@hunting == 1) {
+		mes "[131-140 Mission Board]";
+		mes "Have you finished hunting all 30 "+getarg(1)+getarg(5,"")+" yet?";
+		close;
+	} else if (.@hunting == 2) {
+		mes "[131-140 Mission Board]";
+		mes "You have completed the hunting.";
+		mes "Please accept this reward as a compensation.";
+		erasequest .@quest1;
+		if (.@playtime > -1) erasequest .@quest2;
+		setquest .@quest2;
+
+		getexp getarg(2),getarg(3);
+		close;
+	} else {
+		mes "[131-140 Mission Board]";
+		mes getarg(4);
+		next;
+		mes "[131-140 Mission Board]";
+		mes "Hunt 30 "+getarg(1)+" monsters there and post your success on this board.";
+		next;
+		if(select("I'll hunt them.:No thanks.") == 1) {
+			mes "[131-140 Mission Board]";
+			mes "When you have completed the mission, post it on this board and collect your reward.";
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest1;
+		}
+		close;
+	}
+}
