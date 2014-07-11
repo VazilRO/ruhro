@@ -138,6 +138,11 @@ OnReadyCheck:
 	else if( .@Guillaume < 10 || .@Croix < 10 )
 		end;
 	set $@TierraBG2,1;
+	if($@happy_hour) 
+		set $@bg_PrizeMultipT2, 2;
+	else 
+		set $@bg_PrizeMultipT2, 1;
+		
 	donpcevent "Lieutenant Rundel::OnEnterBG";
 	donpcevent "Lieutenant Guerrit::OnEnterBG";
 	donpcevent "start#bat_a02::OnEnable";
@@ -685,15 +690,15 @@ bat_a02,348,74,3	script	Croix Camp#flag19	974,{ end; }
 bat_a02,53,377,3	script	Guillaume Vintenar#a02_a	419,{
 	if (getcharid(4) == $@TierraBG2_id1) {
 		if ($@TierraBG2_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","Tierra";
+			callfunc "F_BG_Badge",1,"Guillaume","Tierra",$@bg_PrizeMultipT2;
 		else
-			callfunc "F_BG_Badge",0,"Guillaume","Tierra";
+			callfunc "F_BG_Badge",0,"Guillaume","Tierra",$@bg_PrizeMultipT2;
 	}
 	else {
 		if ($@TierraBG2_Victory == 2)
-			callfunc "F_BG_Badge",0,"Guillaume","Tierra";
+			callfunc "F_BG_Badge",0,"Guillaume","Tierra",$@bg_PrizeMultipT2;
 		else
-			callfunc "F_BG_Badge",1,"Guillaume","Tierra";
+			callfunc "F_BG_Badge",1,"Guillaume","Tierra",$@bg_PrizeMultipT2;
 	}
 	bg_leave;
 	warp "bat_room",154,150;
@@ -707,15 +712,15 @@ OnInit:
 bat_a02,45,19,3	script	Croix Vintenar#a02_b	415,{
 	if (getcharid(4) == $@TierraBG2_id2) {
 		if ($@TierraBG2_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","Tierra";
+			callfunc "F_BG_Badge",1,"Croix","Tierra",$@bg_PrizeMultipT2;
 		else
-			callfunc "F_BG_Badge",0,"Croix","Tierra";
+			callfunc "F_BG_Badge",0,"Croix","Tierra",$@bg_PrizeMultipT2;
 	}
 	else {
 		if ($@TierraBG2_Victory == 1)
-			callfunc "F_BG_Badge",0,"Croix","Tierra";
+			callfunc "F_BG_Badge",0,"Croix","Tierra",$@bg_PrizeMultipT2;
 		else
-			callfunc "F_BG_Badge",1,"Croix","Tierra";
+			callfunc "F_BG_Badge",1,"Croix","Tierra",$@bg_PrizeMultipT2;
 	}
 	bg_leave;
 	warp "bat_room",154,150;

@@ -94,6 +94,11 @@ OnReadyCheck:
 	set $@FlaviusBG1_Victory, 0;
 	set $@Croix_ScoreBG1, 0;
 	set $@Guill_ScoreBG1, 0;
+	if($@happy_hour) 
+		set $@bg_PrizeMultip1, 2;
+	else 
+		set $@bg_PrizeMultip1, 1;
+		
 	bg_updatescore "bat_b01",$@Guill_ScoreBG1,$@Croix_ScoreBG1;
 
 	donpcevent "Lieutenant Ator::OnEnterBG";
@@ -395,9 +400,9 @@ OnTouch:
 bat_b01,10,294,3	script	Guillaume Vintenar#b01_a	934,{
 	if ($@FlaviusBG1_id1 == getcharid(4)) {
 		if ($@FlaviusBG1_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","Flavius";
+			callfunc "F_BG_Badge",1,"Guillaume","Flavius",$@bg_PrizeMultip1;
 		else
-			callfunc "F_BG_Badge",0,"Guillaume","Flavius";
+			callfunc "F_BG_Badge",0,"Guillaume","Flavius",$@bg_PrizeMultip1;
 	}
 	bg_leave;
 	warp "bat_room",154,150;
@@ -411,9 +416,9 @@ OnInit:
 bat_b01,389,14,3	script	Croix Vintenar#b01_b	934,{
 	if ($@FlaviusBG1_id2 == getcharid(4)) {
 		if ($@FlaviusBG1_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","Flavius";
+			callfunc "F_BG_Badge",1,"Croix","Flavius",$@bg_PrizeMultip1;
 		else
-			callfunc "F_BG_Badge",0,"Croix","Flavius";
+			callfunc "F_BG_Badge",0,"Croix","Flavius",$@bg_PrizeMultip1;
 	}
 	bg_leave;
 	warp "bat_room",154,150;
@@ -508,11 +513,11 @@ bat_b01,10,294,3	script	Vintenar#bat_b01_aover	419,{
 	set .@A_B_gap,$@Guill_ScoreBG1 - $@Croix_ScoreBG1;
 	if ($@FlaviusBG1_id1 == getcharid(4)) {
 		if (.@A_B_gap > 0)
-			callfunc "F_BG_Badge",1,"Guillaume","Flavius";
+			callfunc "F_BG_Badge",1,"Guillaume","Flavius",$@bg_PrizeMultip1;
 		else if (.@A_B_gap == 0)
-			callfunc "F_BG_Badge",0,"Guillaume","Flavius";
+			callfunc "F_BG_Badge",0,"Guillaume","Flavius",$@bg_PrizeMultip1;
 		else
-			callfunc "F_BG_Badge",0,"Guillaume","Flavius";
+			callfunc "F_BG_Badge",0,"Guillaume","Flavius",$@bg_PrizeMultip1;
 	}
 	else {
 		mes "[Axl Rose]";
@@ -532,11 +537,11 @@ bat_b01,389,14,3	script	Vintenar#bat_b01_bover	415,{
 	set .@A_B_gap,$@Guill_ScoreBG1 - $@Croix_ScoreBG1;
 	if ($@FlaviusBG1_id2 == getcharid(4)) {
 		if (.@A_B_gap > 0)
-			callfunc "F_BG_Badge",1,"Croix","Flavius";
+			callfunc "F_BG_Badge",1,"Croix","Flavius",$@bg_PrizeMultip1;
 		else if (.@A_B_gap == 0)
-			callfunc "F_BG_Badge",0,"Croix","Flavius";
+			callfunc "F_BG_Badge",0,"Croix","Flavius",$@bg_PrizeMultip1;
 		else
-			callfunc "F_BG_Badge",1,"Croix","Flavius";
+			callfunc "F_BG_Badge",1,"Croix","Flavius",$@bg_PrizeMultip1;
 	}
 	else {
 		mes "[Swandery]";
