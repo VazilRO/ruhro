@@ -13,14 +13,14 @@
 //===== By ===================================================
 //= llchrisll
 //===== Version ==============================================
-//= 1.0
+//= 1.1
 //===== Compatible With ======================================
 //= Every eAthena Version
 //===== Description ==========================================
 //= This script will be executing AtCommands on Login,
 //= depending on what you have put.
 //===== Comments =============================================
-//= None yet.....
+//= [1.1] Fixed Main Chat command, added @showexp to options. [Kyo]
 //============================================================
 sec_in01,136,95,5	script	Login Settings	57,{
 set .@n$,"[Login Settings]";
@@ -30,10 +30,10 @@ mes "Hello, "+strcharinfo(0);
 mes "What setting do you want to change?";
 menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",auto_loot,
 	 "Main Chat ["+( (login_main)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",main_chat,
+	 "Show EXP ["+( (login_showexp)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",auto_showexp,
 	 "@NoAsk ["+( (login_noask)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",no_ask;
 
 	auto_loot:
-	next;
 	mes .@n$;
 	mes "Status: "+( (login_loot) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_loot) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
@@ -53,7 +53,6 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	close;
 	
 	main_chat:
-	next;
 	mes .@n$;
 	mes "Status: "+( (login_main) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_main) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
@@ -62,18 +61,37 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	mes .@n$;
 	if(login_main == 0) {
 		mes "Main Chat is now ^00BB22On^000000.";
+		mes "You'll still need to use #main to chat in global chat, however.";
 		set login_main,1;
-		atcommand "@main";
+		atcommand "@main join #main";
 		
 	} else if(login_main == 1) {
 		mes "Main Chat is now ^FF2200Off^000000.";
 		set login_main,0;
-		atcommand "@main off";
+		atcommand "@main leave #main";
+	}
+	close;
+	
+	main_chat:
+	mes .@n$;
+	mes "Status: "+( (login_showexp) ? "^00BB22On^000000" : "^FF2200Off^000000");
+	menu "I want to "+((!login_showexp) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
+
+	next;
+	mes .@n$;
+	if(login_showexp == 0) {
+		mes "Main Chat is now ^00BB22On^000000.";
+		set login_showexp,1;
+		atcommand "@showexp";
+		
+	} else if(login_showexp == 1) {
+		mes "Main Chat is now ^FF2200Off^000000.";
+		set login_showexp,0;
+		atcommand "@showexp";
 	}
 	close;
 	
 	no_ask:
-	next;
 	mes .@n$;
 	mes "Status: "+( (login_noask) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_noask) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
@@ -104,8 +122,12 @@ if(login_loot == 1)	{
 	dispbottom "Autoloot is now On.";
 }
 if(login_main == 1) {
-	atcommand "@main";
+	atcommand "@main join #main";
 	dispbottom "Main Chat is now On.";
+}
+if(login_showexp == 1) {
+	atcommand "@showexp";
+	dispbottom "Gained EXP is now shown.";
 }
 if(login_noask == 1) {
 	atcommand "@noask";
