@@ -6354,7 +6354,7 @@ ACMD_FUNC(mobsearch)
 		if( md->spawn_timer == INVALID_TIMER )
 			snprintf(atcmd_output, sizeof(atcmd_output), "%2d[%3d:%3d] %s", number, md->bl.x, md->bl.y, md->name);
 		else
-			snprintf(atcmd_output, sizeof(atcmd_output), "%2d[%s] %s", number, "dead", md->name);
+			snprintf(atcmd_output, sizeof(atcmd_output), "%2d[%s] %s - Re-spawn in %d seconds", number, "dead", md->name, (get_timer(md->spawn_timer)->tick - gettick()) / 1000); // Display the delay in seconds [clydelion]
 		clif_displaymessage(fd, atcmd_output);
 	}
 	mapit_free(it);

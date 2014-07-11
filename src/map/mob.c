@@ -905,6 +905,7 @@ int mob_spawn (struct mob_data *md)
 {
 	int i=0;
 	unsigned int tick = gettick();
+	unsigned int mode;
 	int c =0;
 
 	md->last_thinktime = tick;
@@ -923,6 +924,13 @@ int mob_spawn (struct mob_data *md)
 		md->bl.m = md->spawn->m;
 		md->bl.x = md->spawn->x;
 		md->bl.y = md->spawn->y;
+
+		mode = mob_db(md->spawn->id)->status.mode;
+		if (md->spawn->spawn_status == 0 && (mode & MD_BOSS) && (md->spawn->delay1 > 1000 * 60 * 30)) { // only mobs with Boss Protocol and spawn time greater than 30 mins
+			md->spawn->spawn_status = 1;
+			md->spawn_timer = add_timer(tick + 1000 * 60 * 30 + (rand() % (md->spawn->delay1/1000)) * 1000, mob_delayspawn, md->bl.id, 0); // 30 mins - Base Spawn Time
+			return 1;
+		}
 
 		if( (md->bl.x == 0 && md->bl.y == 0) || md->spawn->xs || md->spawn->ys )
 		{	//Monster can be spawned on an area.
