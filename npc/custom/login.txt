@@ -72,7 +72,7 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	}
 	close;
 	
-	main_chat:
+	auto_showexp:
 	mes .@n$;
 	mes "Status: "+( (login_showexp) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_showexp) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
