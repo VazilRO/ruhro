@@ -25,7 +25,15 @@
 prontera,151,189,1	script	Stylist#custom_stylist	122,{
 	mes "[^FF8000Stylist^000000]";
 	mes "I'm the greatest stylist in all of Rune-Midgard~~!";
-	mes "I can change your hair style or color!";
+	next;
+	mes "[^FF8000Stylist^000000]";
+	mes "Ugh...ewww..ummm...";
+	mes "...your ^0000FFHair Style: " + getlook(1) + "^000000";
+	mes "...that ^0000FFHair Color: " + getlook(6) + "^000000";
+	mes "...and your ^0000FFCloth Color: " + getlook(7) + "^000000";
+	next;
+	mes "[^FF8000Stylist^000000]";	
+	mes "But...But... Don't worry! I can change your hair style or color!";
 	mes "Do you have an appointment?";
 	next;
 	mes "[^FF8000Stylist^000000]";
