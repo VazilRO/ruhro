@@ -22,7 +22,7 @@
 //===== Comments =============================================
 //= [1.1] Fixed Main Chat command, added @showexp to options. [Kyo]
 //============================================================
-sec_in01,136,95,5	script	Login Settings	57,{
+prontera,140,181,5	script	Login Settings	57,{
 set .@n$,"[Login Settings]";
 
 mes .@n$;
@@ -38,7 +38,7 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	mes "Status: "+( (login_loot) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_loot) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
 
-	next;
+	
 	mes .@n$;
 	if(login_loot == 0) {
 		mes "Autoloot is now ^00BB22On^000000.";
@@ -57,7 +57,7 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	mes "Status: "+( (login_main) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_main) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
 
-	next;
+	
 	mes .@n$;
 	if(login_main == 0) {
 		mes "Main Chat is now ^00BB22On^000000.";
@@ -77,7 +77,7 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	mes "Status: "+( (login_showexp) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_showexp) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
 
-	next;
+	
 	mes .@n$;
 	if(login_showexp == 0) {
 		mes "Main Chat is now ^00BB22On^000000.";
@@ -96,7 +96,7 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	mes "Status: "+( (login_noask) ? "^00BB22On^000000" : "^FF2200Off^000000");
 	menu "I want to "+((!login_noask) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
 
-	next;
+	
 	mes .@n$;
 	if(login_noask == 0) {
 		mes "@noask is now ^00BB22On^000000.";
@@ -119,19 +119,15 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 OnPCLoginEvent:
 if(login_loot == 1)	{
 	atcommand "@autoloot";
-	dispbottom "Autoloot is now On.";
 }
 if(login_main == 1) {
 	atcommand "@main join #main";
-	dispbottom "Main Chat is now On.";
 }
 if(login_showexp == 1) {
 	atcommand "@showexp";
-	dispbottom "Gained EXP is now shown.";
 }
 if(login_noask == 1) {
 	atcommand "@noask";
-	dispbottom "@noask is now On.";
 }
 end;
 }
