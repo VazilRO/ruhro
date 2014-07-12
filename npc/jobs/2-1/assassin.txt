@@ -2056,7 +2056,6 @@ OnTouch:
 			next;
 		}
 		if (ASSIN_Q < 17) {
-			set ASSIN_Q,17;
 			mes "[Guildmaster]";
 			mes "Well, I've said too much. Please choose a weapon as a present.";
 			next;
@@ -2069,6 +2068,7 @@ OnTouch:
 				mes "A Jur...";
 				mes "Good choice. There you are. I hope it will serve you well.";
 				getitem 1251,1; //Jur_
+				set ASSIN_Q,17;
 				break;
 			case 2:
 				mes "[Guildmaster]";
@@ -2078,22 +2078,24 @@ OnTouch:
 				mes "I know it will";
 				mes "serve you well.";
 				getitem 1253,1; //Katar_
+				set ASSIN_Q,17;
 				break;
 			case 3:
 				mes "[Guildmaster]";
 				mes "I see. You want to use both hands. Here, take your Main Gauche.";
 				getitem 1208,1; //Main_Gauche_
+				set ASSIN_Q,17;
 				break;
 			case 4:
 				mes "[Guildmaster]";
 				mes "A Gladius...";
 				mes "It used to rule over the Assassin weapon market. Please take care of my gladius.";
 				getitem 1220,1; //Gladius_
+				set ASSIN_Q,17;
 			}
 			next;
 		}
 		else {
-			set ASSIN_Q,17;
 			mes "[Guildmaster]";
 			mes "Well, I talked too much.";
 			mes "Please take this first.";
@@ -2101,18 +2103,23 @@ OnTouch:
 			switch(rand(1,5)) {
 			case 1:
 				getitem 1207,1; //Main_Gauche
+				set ASSIN_Q,17;
 				break;
 			case 2:
 				getitem 1250,1; //Jur
+				set ASSIN_Q,17;
 				break;
 			case 3:
 				getitem 1216,1; //Stiletto
+				set ASSIN_Q,17;
 				break;
 			case 4:
 				getitem 1201,1; //Knife
+				set ASSIN_Q,17;
 				break;
 			case 5:
 				getitem 1252,1; //Katar
+				set ASSIN_Q,17;
 			}
 		}
 		mes "[Guildmaster]";
