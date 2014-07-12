@@ -1,0 +1,190 @@
+//===== rAthena Script ======================================= 
+//= RedditRO Mount Rental
+//===== By: ================================================== 
+//= Poutine
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Rental NPC for secondary mounts
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Poutine]
+//============================================================
+
+prontera,144,229,5	script	Stable Hand	951,{
+
+	set .@fee_seven, 2500000;
+	set .@fee_thirty, 7500000;
+	
+	mes "[Stable Hand]";
+	mes "Welcome " + strcharinfo(0) + "!";
+	mes "I can rent you secondary mounts for the following fees: ";
+	mes "^C358177 Days: " + .@fee_seven + " zeny^000000";
+	mes "^C3581730 Days: " + .@fee_thirty + " zeny^000000";
+	next;
+	switch(select("7 Days:30 Days:Just walk away...")) {
+		case 1:
+			set .@mount2_cost, .@fee_seven;
+			set .@mount2_item, 16682;
+			break;
+		case 2:
+			set .@mount2_cost, .@fee_thirty;
+			set .@mount2_item, 16683;
+			break;
+		case 3:
+			close;
+	}
+
+	if (Zeny < .@mount2_cost) goto NeedZenys;
+
+	mes "[Stable Hand]";
+	mes "Enjoy!";
+	set Zeny, Zeny - .@mount2_cost;
+	getitem .@mount2_item, 1;
+	close;
+	
+NeedZenys:
+	mes "[Stable Hand]";
+	mes "Come back when you're not broke!";
+	close;
+}
+
+prontera,145,230,5	script	Joking Camel	938,{
+	mes "[Joking Camel]";
+	switch(rand(1,12)) {
+		case 1:
+			mes "What do you call a cashew in space?";
+			next;
+			switch(select("What?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "An astronut";
+					close;
+				case 2:
+					close;
+			}
+		case 2:
+			mes "Why don't cats play poker in the jungle?";
+			next;
+			switch(select("Why?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "Too many cheetahs!";
+					close;
+				case 2:
+					close;
+			}
+		case 3:
+			mes "Did you hear about he Antennas that got married?";
+			next;
+			switch(select("Hmm?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "The wedding was lame, but the reception was great!";
+					close;
+				case 2:
+					close;
+			}			
+		case 4:
+			mes "How many tickles does it take to make an octopus laugh?";
+			next;
+			switch(select("How many?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "Ten tickles!";
+					close;
+				case 2:
+					close;
+			}
+		case 5:
+			mes "What do you call a cow with no legs?";
+			next;
+			switch(select("What?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "Ground beef!";
+					close;
+				case 2:
+					close;
+			}
+		case 6:
+			mes "What's a pigs favorite muscle?";
+			next;
+			switch(select("What?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "The hamstring!";
+					close;
+				case 2:
+					close;
+			}
+		case 7:
+			mes "Why did the man with one hand cross the road?";
+			next;
+			switch(select("Why?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "To get to the second hand shop!";
+					close;
+				case 2:
+					close;
+			}
+		case 8:
+			mes "Why is a shooting star better than a hamburger?";
+			next;
+			switch(select("Why?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "It's meteor!";
+					close;
+				case 2:
+					close;
+			}
+		case 9:
+			mes "What do vegan zombies eat?";
+			next;
+			switch(select("What?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "GRAAAAINS!";
+					close;
+				case 2:
+					close;
+			}
+		case 10:
+			mes "What did one frog say to the other frog?";
+			next;
+			switch(select("What?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "Time's fun when you're having flies!";
+					close;
+				case 2:
+					close;
+			}
+		case 11:
+			mes "Why did the grocery delivery guy get fired?";
+			next;
+			switch(select("Why?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "He drove people bananas!";
+					close;
+				case 2:
+					close;
+			}
+		case 12:
+			mes "What do you call a alligator in a vest?";
+			next;
+			switch(select("What?:Just walk away...")) {
+				case 1:
+					mes "[Joking Camel]";
+					mes "Investigator!";
+					close;
+				case 2:
+					close;
+			}				
+	}
+	close;
+}
