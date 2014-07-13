@@ -26,6 +26,7 @@ bat_room,133,178,5	script	Flavius Officer#01a	418,{
 	}
 	mes "[Guillaume Army Officer]";
 	mes "Let's show the power of the Guillaume Army to those stinky Croixs!";
+	if($@happy_hour) mes "^FF0055...and it's double the rewards!^000000";
 	next;
 	switch(select("I want to join your army!:End Conversation")) {
 	case 1:
@@ -93,6 +94,7 @@ bat_room,133,121,1	script	Flavius Officer#01b	414,{
 	}
 	mes "[Croix Army Officer]";
 	mes "Let's show the Guillaumes the power of the Croix Army!";
+	if($@happy_hour) mes "^FF0055...and it's double the rewards!^000000";
 	next;
 	switch(select("I want to join your army!:End Conversation")) {
 	case 1:
@@ -250,6 +252,7 @@ bat_room,148,178,5	script	Flavius Officer#02a	418,{
 	}
 	mes "[Guillaume Army Officer]";
 	mes "Let's show the power of the Guillaume Army to those stinky Croixs!";
+	if($@happy_hour) mes "^FF0055...and it's double the rewards!^000000";
 	next;
 	switch(select("I want to join your army!:End Conversation")) {
 	case 1:
@@ -317,6 +320,7 @@ bat_room,148,121,1	script	Flavius Officer#02b	414,{
 	}
 	mes "[Croix Army Officer]";
 	mes "Let's show the power of the Croix Army to those stinky Guillaumes!";
+	if($@happy_hour) mes "^FF0055...and it's double the rewards!^000000";
 	next;
 	switch(select("I want to join your army!:End Conversation")) {
 	case 1:

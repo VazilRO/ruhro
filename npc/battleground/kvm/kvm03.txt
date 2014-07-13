@@ -180,6 +180,11 @@ OnReadyCheck:
 	if( .@Guillaume < 5 || .@Croix < 5 )
 		end;
 
+	if($@happy_hour) {
+		set $@kvm_PrizeMulti3, 2;
+	} else {
+		set $@kvm_PrizeMulti3, 1;
+	}
 	set $@KvM03BG, 1; // Starting
 	donpcevent "KvM03R_Croix::OnEnterBG";
 	donpcevent "KvM03R_Guillaume::OnEnterBG";
@@ -378,19 +383,21 @@ bat_c03,51,130,5	script	KVM Officer#KVM03A	419,{
 		if( $@KvM03BG_Victory == Bat_Team )
 		{ // Victory
 			set kvm_point,kvm_point + 2;
+			set kvm_point,kvm_point * $@kvm_PrizeMulti3;		
 			mes "[KVM Officer]";
 			mes "Good Game.";
 			mes "May the glory of KVM be with you.";
-			mes "You aquire the winning points: 2";
+			mes "You aquire the winning points: " + kvm_point;
 			close2;
 		}
 		else
 		{ // 
 			set kvm_point,kvm_point + 1;
+			set kvm_point,kvm_point * $@kvm_PrizeMulti3;		
 			mes "[KVM Officer]";
 			mes "I am so sorry.";
 			mes "I wish you better luck next time.";
-			mes "You aquire the losing points: 1";
+			mes "You aquire the losing points: " + kvm_point;
 			close2;
 		}
 		bg_leave;
@@ -407,19 +414,21 @@ bat_c03,148,53,1	script	KVM Officer#KVM03B	415,{
 		if( $@KvM03BG_Victory == Bat_Team )
 		{ // Victory
 			set kvm_point,kvm_point + 2;
+			set kvm_point,kvm_point * $@kvm_PrizeMulti3;		
 			mes "[KVM Officer]";
 			mes "Good Game.";
 			mes "May the glory of KVM be with you.";
-			mes "You aquire the winning points: 2";
+			mes "You aquire the winning points: " + kvm_point;
 			close2;
 		}
 		else
 		{ // 
 			set kvm_point,kvm_point + 1;
+			set kvm_point,kvm_point * $@kvm_PrizeMulti3;		
 			mes "[KVM Officer]";
 			mes "I am so sorry.";
 			mes "I wish you better luck next time.";
-			mes "You aquire the losing points: 1";
+			mes "You aquire the losing points: " + kvm_point;
 			close2;
 		}
 		bg_leave;
