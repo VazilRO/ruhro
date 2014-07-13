@@ -226,7 +226,7 @@ L_Quest:
 		if (.@gathering == 0 || .@gathering == 1) {
 			if(countitem(getarg(1)) < getarg(2)) {
 				mes "[111-120 Mission Board]";
-				mes "Have you finished gathering all the items yet?";
+				mes "Have you finished gathering all " + getarg(2) + " " + getitemname(getarg(1)) + " yet?";
 				close;
 			} else {
 				mes "[111-120 Mission Board]";
@@ -243,6 +243,7 @@ L_Quest:
 		} else {
 			mes "[111-120 Mission Board]";
 			mes getarg(6);
+			mes "Hunt " + getarg(2) + " of them.";
 			next;
 			if(select("I'll hunt them.:No thanks.") == 1) {
 				mes "[111-120 Mission Board]";
