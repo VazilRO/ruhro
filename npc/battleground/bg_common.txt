@@ -628,12 +628,14 @@ function	script	F_BG_Badge	{
 }
 
 -	script	HappyHourHandler	-1,{
+	end;
+	
 	OnMinute00:
 	OnInit:
 		if(gettime(3) == 5 || gettime(3) == 17) {
 			set $@happy_hour, true;
 			announce "[Battlegrounds] Happy Hour is here!! Double the rewards!",bc_all,0xFF0055;
-		} else if (gettime(3) == 6 || gettime(3) = 18) {
+		} else if (gettime(3) == 6 || gettime(3) == 18) {
 			set $@happy_hour, false;
 			announce "[Battlegrounds] Happy Hour is now over. Rewards have returned to normal.",bc_all,0xFF0055;
 		} else { // extra precaution
