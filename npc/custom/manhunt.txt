@@ -20,10 +20,11 @@
 			goto OnStartManHunt;
 		} else if (compare(.@atcmd_parameters$,"off")) {
 			set $@MHStatus, 0;
-			hideonnpc "Man-Hunt Event";
+			disablenpc "Man-Hunt Event";
 			deletearray $@ManHunt[0],getarraysize($@ManHunt);
 			deletearray $@ManHuntN$[0],getarraysize($@ManHuntN$);	
 			announce "A GM has ended the Man Hunt Event",0;
+			mapwarp $@MHMap$,"prontera",150,150;
 			stopnpctimer;
 		} else {
 			dispbottom "type - '@manhunt on' to start the event";
@@ -35,12 +36,12 @@
 		if(gettime(3) == 0 || gettime(3) == 8 || gettime(3) == 16) {
 			goto OnStartManHunt;
 		} else {
-			hideonnpc "Man-Hunt Event";
+			disablenpc "Man-Hunt Event";
 		}
 		end;
 		
 	OnStartManHunt:
-		hideoffnpc "Man-Hunt Event";
+		enablenpc "Man-Hunt Event";
 		set $@MHStatus, 1;
 		announce "Man-Hunt Event Warper will be closed in 3 minutes",0;
 		set $@oMH, 0; // dont touch this
@@ -57,7 +58,7 @@
 		end;
 			
 	OnTimer180000:
-		hideonnpc "Man-Hunt Event";
+		disablenpc "Man-Hunt Event";
 		announce "Man-Hunt Event warper is now closed.",0;
 		sleep2 2000;
 		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
@@ -186,7 +187,7 @@
 		set .MSurvive, 2; 				// Two points for survivor
 		set .MKill, 1; 					// One point for killer
 		
-		hideonnpc "Man-Hunt Event";
+		disablenpc "Man-Hunt Event";
 		setarray $@ManHunt[0],0;
 		setarray $@ManHuntN$[0],"";
 		bindatcmd("manhunt","ManHuntHandler::OnMHAdmin",10,99);	
