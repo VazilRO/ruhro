@@ -19,9 +19,11 @@
 
 //add any other HOURS
 OnHour00:
-OnHour06:
+OnHour04:
+OnHour08:
 OnHour12:
-OnHour18:
+OnHour16:
+OnHour20:
 OnInit:
 	if(gettime(4)==6 || gettime(4)==7) {
 		set $@brate,3000;

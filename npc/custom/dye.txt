@@ -22,7 +22,7 @@
 
 
 //Stylist------------------------------------------------------------------------------------------------------------
-prontera,151,189,1	script	Stylist#custom_stylist	122,{
+prontera,147,195,5	script	Stylist#custom_stylist	122,{
 	mes "[^FF8000Stylist^000000]";
 	mes "I'm the greatest stylist in all of Rune-Midgard~~!";
 	next;
