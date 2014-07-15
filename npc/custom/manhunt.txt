@@ -15,25 +15,19 @@
 
 //====================== Main Control =======================
 -	script	ManHuntHandler	-1,{
-	end;
-		
 	OnMHAdmin: // Admin Controls
-		mes "[Man Hunt Event]";	
-		if(!$@MHStatus) {
-			mes "Start Event?";
-			menu "Start!",-;
+		if (compare(.@atcmd_parameters$,"on")) {
 			goto OnStartManHunt;
-			close;
-		} else {
-			mes "End Event?";
-			menu "End",-;
+		} else if (compare(.@atcmd_parameters$,"off")) {
 			set $@MHStatus, 0;
 			hideonnpc "Man-Hunt Event";
 			deletearray $@ManHunt[0],getarraysize($@ManHunt);
 			deletearray $@ManHuntN$[0],getarraysize($@ManHuntN$);	
 			announce "A GM has ended the Man Hunt Event",0;
 			stopnpctimer;
-			close;
+		} else {
+			dispbottom "type - '@manhunt on' to start the event";
+			dispbottom "type - '@manhunt off' to end the event";
 		}
 		end;	
 	
