@@ -63,7 +63,7 @@ OnEmpDead:
 }
 
 // KoE Entrance
-prontera,156,195,4	script	The King#KoE	58,{
+prontera,155,191,4	script	The King#KoE	58,{
     mes "[The King]";
 	if ( !getcharid(2) ) {
 		mes "You must have a guild to participate in the ^FF0000King of Emperium Hill Tournament^000000.";
