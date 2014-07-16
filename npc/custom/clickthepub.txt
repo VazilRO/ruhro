@@ -1,0 +1,940 @@
+//======Name========================================
+// Click The Pub!
+//======Version=====================================
+// 1.0
+//======Author(s)===================================
+// Based on the script by Sandbox, edited by Alkarl :P
+//======Comments====================================
+// This event will create an NPC chatroom on a random map
+// at random coordinates upon starting, the first player
+// to enter the chat room will be declared winner. 
+//==================================================
+
+-	script	Click The Pub Controller	78,{
+
+OnInit:
+	//Set the Prize's Item ID, followed by amount";
+		setarray $Prize[0],677,1;
+		
+	//Array for random coordinates
+		setarray $coordinate_x,0,300;
+		setarray $coordinate_y,0,300;
+
+OnMinute59:
+	$@j = rand(1,24); //Pick an NPC
+	
+	switch($@j) {
+		case 1:
+			$@k$ = "Prontera";
+			break;
+		case 2:
+			$@k$ = "Morroc";
+			break;
+		case 3:
+			$@k$ = "Geffen";
+			break;
+		case 4:
+			$@k$ = "Payon";
+			break;
+		case 5:
+			$@k$ = "Alberta";
+			break;
+		case 6:
+			$@k$ = "Izlude";
+			break;
+		case 7:
+			$@k$ = "Al De Baran";
+			break;
+		case 8:
+			$@k$ = "Lutie";
+			break;
+		case 9:
+			$@k$ = "Comodo";
+			break;
+		case 10:
+			$@k$ = "Juno";
+			break;
+		case 11:
+			$@k$ = "Amatsu";
+			break;
+		case 12:
+			$@k$ = "Gonryun";
+			break;
+		case 13:
+			$@k$ = "Umbala";
+			break;
+		case 14:
+			$@k$ = "Louyang";
+			break;
+		case 15:
+			$@k$ = "Jawaii";
+			break;
+		case 16:
+			$@k$ = "Ayothaya";
+			break;
+		case 17:
+			$@k$ = "Einbroch";
+			break;
+		case 18:
+			$@k$ = "Lighthalzen";
+			break;
+		case 19:
+			$@k$ = "Einbech";
+			break;
+		case 20:
+			$@k$ = "Hugel";
+			break;
+		case 21:
+			$@k$ = "Rachel";
+			break;
+		case 22:
+			$@k$ = "Veins";
+			break;
+		case 23:
+			$@k$ = "Moscovia";
+			break;
+		case 24:
+			$@k$ = "Brasilis";
+			break;
+		default:
+			$@k$ = "<none>";
+			break;
+	}
+
+}
+
+prontera,0,0,4	script	CTP Prontera	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+	if ($@j == 1)  {
+		enablenpc strnpcinfo(0);
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+morocc,0,0,4	script	CTP Morroc	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+	if ($@j == 2)  {
+		enablenpc strnpcinfo(0);
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+geffen,0,0,4	script	CTP Geffen	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 3)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+payon,0,0,4	script	CTP Payon	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 4)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+alberta,0,0,4	script	CTP Alberta	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 5)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+izlude,0,0,4	script	CTP Izlude	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 6)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+aldebaran,0,0,4	script	CTP Al De Baran	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 7)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+xmas,0,0,4	script	CTP Lutie	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 8)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+comodo,0,0,4	script	CTP Comodo	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 9)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+yuno,0,0,4	script	CTP Juno	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 10)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+amatsu,0,0,4	script	CTP Amatsu	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 11)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+gonryun,0,0,4	script	CTP Gonryun	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 12)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+umbala,0,0,4	script	CTP Umbala	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 13)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+louyang,0,0,4	script	CTP Louyang	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 14)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+jawaii,0,0,4	script	CTP Jawaii	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 15)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+ayothaya,0,0,4	script	CTP Ayothaya	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 16)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+einbroch,0,0,4	script	CTP Einbroch	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 17)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+lighthalzen,0,0,4	script	CTP Lighthalzen	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 18)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+einbech,0,0,4	script	CTP Einbech	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 19)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+hugel,0,0,4	script	CTP Hugel	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 20)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+rachel,0,0,4	script	CTP Rachel	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 21)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+veins,0,0,4	script	CTP Veins	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 22)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+moscovia,0,0,4	script	CTP Moscovia	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 23)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
+
+brasilis,0,0,4	script	CTP Brasilis	78,{
+
+OnInit:
+	sleep 10000;
+OnMinute00:
+	disablenpc strnpcinfo(0);
+
+	if ($@j == 24)  {
+		enablenpc strnpcinfo(0);
+
+		do{
+			$@rand_x = rand( $coordinate_x[0],$coordinate_x[1] ); //Set x coordinate
+			$@rand_y = rand( $coordinate_y[0],$coordinate_y[1] ); //Set y coordinate
+		}while( !checkcell( strnpcinfo(4),$@rand_x,$@rand_y,cell_chkpass ) ); //Check if valid coordinate
+		movenpc strnpcinfo(0),$@rand_x,$@rand_y; //Move NPC to the new coordinates
+		
+		announce "Click The Pub event will start in a few seconds somewhere in "+$@k$,0;
+		sleep 2000;
+		waitingroom "Click Me!",2,strnpcinfo(0)+"::OnFirstClick",1;
+		end;
+	}
+	end;
+	
+OnFirstClick:
+	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
+	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
+	delwaitingroom;
+	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
+	sleep 2000;
+	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	disablenpc strnpcinfo(0);
+	end;
+
+}
