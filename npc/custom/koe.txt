@@ -15,51 +15,54 @@
 //=================================================================
 
 -	script	KoE	-1,{
-OnInit:
-	disablenpc "The King#KoE";
-	disablenpc "Exit#KoE";
-	bindatcmd "koe", strnpcinfo(0)+"::OnCommand", 10,100;
-	end;
-OnCommand:
-	if ( compare( .@atcmd_parameters$, "on" ) ) goto L_start;
-	else if ( compare( .@atcmd_parameters$, "off" ) ) goto L_end;
-	else {
-		dispbottom "type - '@koe on' to start the event";
-		dispbottom "type - '@koe off' to end the event";
-	}
-	end;
-OnClock2000: // everyday 8pm starts
-L_start:
-	if ( .start ) end;
-	gvgon "guild_vs1";
-	announce "The King of Emperium Hill has begun!", bc_all;
-	.start = 1;
-	enablenpc "The King#KoE";
-	disablenpc "Exit#KoE";
-	$koegid = 0;
-	donpcevent "::OnRevKoE";
-	maprespawnguildid "guild_vs1", $koegid, 7;
-	monster "guild_vs1",49,49,"EMPERIUM",1288,1,"KoE::OnEmpDead";
-	end;
-OnClock2030: // everyday 8:30pm ends
-L_end:
-	gvgoff "guild_vs1";
-	announce "The King of Emperium Hill is over!", bc_all;
-	.start = 0;
-	enablenpc "Exit#KoE";
-	disablenpc "The King#KoE";
-	killmonsterall "guild_vs1";
-//	maprespawnguildid "guild_vs1", $koegid, 6; // uncomment this line to kick non-owner off the map when event ends
-	end;
-OnEmpDead:
-	$koegid = getcharid(2);
-	announce "The current King of Emperium Hill is the ["+ strcharinfo(2) +"] guild.", bc_all;
-	donpcevent "::OnRevKoE";
-	maprespawnguildid "guild_vs1", $koegid, 6;
-	sleep 500;
-	if ( .start )
+	OnInit:
+		disablenpc "The King#KoE";
+		disablenpc "Exit#KoE";
+		bindatcmd "koe", strnpcinfo(0)+"::OnCommand", 10,100;
+		end;
+	OnCommand:
+		if ( compare( .@atcmd_parameters$, "on" ) ) goto L_start;
+		else if ( compare( .@atcmd_parameters$, "off" ) ) goto L_end;
+		else {
+			dispbottom "type - '@koe on' to start the event";
+			dispbottom "type - '@koe off' to end the event";
+		}
+		end;
+	OnClock1900: // everyday 7pm starts
+	L_start:
+		if ( .start ) end;
+		gvgon "guild_vs1";
+		announce "The King of Emperium Hill has begun!", bc_all;
+		.start = 1;
+		enablenpc "The King#KoE";
+		disablenpc "Exit#KoE";
+		$koegid = 0;
+		donpcevent "::OnRevKoE";
+		maprespawnguildid "guild_vs1", $koegid, 7;
 		monster "guild_vs1",49,49,"EMPERIUM",1288,1,"KoE::OnEmpDead";
-	end;
+		setnpctimer 0;
+		initnpctimer;
+		end;
+	OnTimer1800000: // Last 30 minutes
+	L_end:
+		gvgoff "guild_vs1";
+		announce "The King of Emperium Hill is over!", bc_all;
+		.start = 0;
+		enablenpc "Exit#KoE";
+		disablenpc "The King#KoE";
+		killmonsterall "guild_vs1";
+		stopnpctimer;
+		maprespawnguildid "guild_vs1", $koegid, 6; // uncomment this line to kick non-owner off the map when event ends
+		end;
+	OnEmpDead:
+		$koegid = getcharid(2);
+		announce "The current King of Emperium Hill is the ["+ strcharinfo(2) +"] guild.", bc_all;
+		donpcevent "::OnRevKoE";
+		maprespawnguildid "guild_vs1", $koegid, 6;
+		sleep 500;
+		if ( .start )
+			monster "guild_vs1",49,49,"EMPERIUM",1288,1,"KoE::OnEmpDead";
+		end;
 }
 
 // KoE Entrance

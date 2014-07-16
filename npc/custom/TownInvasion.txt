@@ -11,57 +11,95 @@
 //==================================================
 
 -	script	towninvasion	-1,{
-OnInit:
-	setarray  $@mapinvasion$[0],"morocc","geffen","payon","alberta","izlude","aldebaran","xmas","comodo","yuno","amatsu","gonryun","umbala","louyang","jawaii","ayothaya","einbroch","lighthalzen","einbech","hugel","rachel","veins","moscovia","brasilis"; //list maps
-	sleep 30000; //wait 1 minutes after server start
-	
-OnInvasionStart:
-	$@town = rand(22); //Pick a random map
-	$@j = 60;
-	$@k = 0;
-
-	announce $@mapinvasion$[$@town]+" is being invaded by monsters!",bc_all,0x00FFFF;
-	monster $@mapinvasion$[$@town],0,0,"--en--",-1,60,"towninvasion::OnMobKill";
-	end;
-
-OnMobKill:
-	set $@j, $@j - 1; //Normal mob counter
-	announce "Killed "+$@j,0;
-	if ($@j == 50 ) {
-		announce "50 Normal Monsters Remaining!",bc_all,0x00FFFF;
-	} else if ($@j == 40) { //When all normal mobs are dead, go to OnFinish
-		announce "40 Normal Monsters Remaining!",bc_all,0x00FFFF;
-	} else if ($@j == 30) { //When all normal mobs are dead, go to OnFinish
-		announce "30 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		sleep 5000;
-		announce "Oh no! An MVP has just appeared!",bc_all,0x00FFFF;
-		monster $@mapinvasion$[$@town],0,0,"--en--",-3,1,"towninvasion::OnMVPKill";
-	} else if ($@j == 20) { //When all normal mobs are dead, go to OnFinish
-		announce "20 Normal Monsters Remaining!",bc_all,0x00FFFF;
-	} else if ($@j == 10) { //When all normal mobs are dead, go to OnFinish
-		announce "10 Normal Monsters Remaining!",bc_all,0x00FFFF;
-	} else if ($@j == 0) { //When all normal mobs are dead, go to OnFinish
-		announce "No Normal Monsters Remaining!",bc_all,0x00FFFF;
-		goto OnFinish;
-	}
-	getitem 677,1; //Normal Mob rewards
-	end;
-
-OnMVPKill:
-	$@k = 1; //MVP Dead!
-	announce "Congratulations "+strcharinfo(0)+"! You killed the MVP!",bc_all,0x00FFFF;
-	getitem 677,5; //MVP rewards
-	goto OnFinish;
-	end;
+	OnInvasionAdmin:
+		if (compare(.@atcmd_parameters$,"on")) {
+			goto OnInvasionStart;
+		} else if (compare(.@atcmd_parameters$,"off")) {
+			goto OnStopEvent;
+		} else {
+			dispbottom "type - '@invasion on' to start the event";
+			dispbottom "type - '@invasion off' to end the event";
+		}
+		end;
 		
-OnFinish:
-	//If all mobs are dead, sleep for 6 hours then restart event
-	if ($@j <= 0 && $@k >= 1) {
+	OnInvasionStart:
+		killmonsterall $@mapinvasion$[$@town],0; // in case there's an overlap
+		$@town = rand(22); //Pick a random map
+		$@j = 60;
+		$@k = 0;
+		$@numMVP = rand(1,3);
+		setnpctimer 0;
+		initnpctimer;
+			
+		announce $@mapinvasion$[$@town]+" is being invaded by monsters!",bc_all,0x00FFFF;
+		monster $@mapinvasion$[$@town],0,0,"--en--",-1,60,"towninvasion::OnMobKill";
+		end;
+		
+	OnTimer3600000: // In case people just don't participate
+		goto OnStopEvent;
+		end;
+		
+	OnMobKill:
+		set $@j, $@j - 1; //Normal mob counter
+		if ($@j == 50 ) {
+			announce "50 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 40) { //When all normal mobs are dead, go to OnFinish
+			announce "40 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 30) { //When all normal mobs are dead, go to OnFinish
+			announce "30 Normal Monsters Remaining!",bc_all,0x00FFFF;
+			sleep 5000;
+			if ($@numMVP == 1) {
+				announce "Oh no! An MVP has just appeared!",bc_all,0x00FFFF;
+			} else {
+				announce "Oh no!" + $@numMVP + " MVPs have just appeared!",bc_all,0x00FFFF;			
+			}
+			monster $@mapinvasion$[$@town],0,0,"--en--",-3,$@numMVP,"towninvasion::OnMVPKill";
+		} else if ($@j == 20) { //When all normal mobs are dead, go to OnFinish
+			announce "20 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 10) { //When all normal mobs are dead, go to OnFinish
+			announce "10 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 0) { //When all normal mobs are dead, go to OnFinish
+			announce "No Normal Monsters Remaining!",bc_all,0x00FFFF;
+			goto OnFinish;
+		}
+		set .@TIdrop, rand(100);
+		if(.@TIdrop < 20) {
+			getitem 677,1; //Normal Mob rewards
+		}
+		end;
+
+	OnMVPKill:
+		$@k = 1; //MVP Dead!
+		announce "Congratulations "+strcharinfo(0)+"! You killed the MVP!",bc_all,0x00FFFF;
+		getitem 677,5; //MVP rewards
+		goto OnFinish;
+		end;
+		
+	OnStopEvent:
 		killmonsterall $@mapinvasion$[$@town],0;
 		announce "Thank you for saving our town!",bc_all,0x00FFFF;
-		sleep 21600000;
+		stopnpctimer;
+		end;
+			
+	OnFinish:
+		//If all mobs are dead, sleep for 6 hours then restart event
+		if ($@j <= 0 && $@k >= $@numMVP) {
+			goto OnStopEvent;
+		}
+		end;
+		
+	OnTue0500:
+	OnTue1000:
+	OnTue1500:
+	OnTue2000:
+	OnThu0500:
+	OnThu1000:
+	OnThu1500:
+	OnThu2000:
 		goto OnInvasionStart;
-	}
-	end;
 
+	OnInit:
+		setarray  $@mapinvasion$[0],"morocc","geffen","payon","alberta","izlude","aldebaran","xmas","comodo","yuno","amatsu","gonryun","umbala","louyang","jawaii","ayothaya","einbroch","lighthalzen","einbech","hugel","rachel","veins","moscovia","brasilis"; //list maps
+		bindatcmd("invasion","towninvasion::OnInvasionStart",10,99);	
+		end;	
 }

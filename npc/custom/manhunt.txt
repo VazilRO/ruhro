@@ -200,7 +200,8 @@ prontera,156,179,4	script	Man-Hunt Event	831,{
 	mes "[Man Hunt Event]";
 	if($@MHStatus)
 	{
-		mes "Status: ^00ff00ACTIVE!^000000";
+		mes "Hi " + strcharinfo(0) + "!";
+		mes "Would you like to join the ^00ff00Man-Hunt Event^000000?";
 		menu "Join Event",-;
 		set $@ManHunt[$@oMH], getcharid(3);
 		set $@ManHuntN$[$@oMH], strcharinfo(0);
