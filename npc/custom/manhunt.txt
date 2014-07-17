@@ -24,7 +24,7 @@
 			deletearray $@ManHunt[0],getarraysize($@ManHunt);
 			deletearray $@ManHuntN$[0],getarraysize($@ManHuntN$);	
 			announce "A GM has ended the Man Hunt Event",0;
-			mapwarp $@MHMap$,"prontera",150,150;
+			mapwarp $@MHMap$,"prontera",156,191;
 			stopnpctimer;
 		} else {
 			dispbottom "type - '@manhunt on' to start the event";
@@ -120,6 +120,7 @@
 					detachrid;
 					sleep2 500;
 					atcommand "#alive "+$@ManHuntN$[.Target]+"";
+					set .MRounds, .MRounds + 1;
 					goto MHNextRound;
 				}
 			}
@@ -144,7 +145,6 @@
 			
 		
 	MHNextRound:
-		atcommand "@raisemap"; // Allow player to participate again
 		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
 		if (.MRounds > .MRoundsMax) {
 			sleep2 1000;
@@ -183,8 +183,8 @@
 		set .MHReward, 677; 			// reward
 		set $@oMH, 0; 					// dont touch this
 		set .MRoundsMax, 10; 			// number of rounds
-		set .MHPlayer, 3; 				// minimum players to start
-		set .MSurvive, 2; 				// Two points for survivor
+		set .MHPlayer, 5; 				// minimum players to start
+		set .MSurvive, 3; 				// Two points for survivor
 		set .MKill, 1; 					// One point for killer
 		
 		disablenpc "Man-Hunt Event";
@@ -206,7 +206,12 @@ prontera,156,179,4	script	Man-Hunt Event	831,{
 		set $@ManHunt[$@oMH], getcharid(3);
 		set $@ManHuntN$[$@oMH], strcharinfo(0);
 		set $@oMH, $@oMH + 1;
+		if(ismounting()) {
+			setmounting();
+		}
 		warp $@MHMap$,50,50;
 	}
 	close;
 }
+
+guild_vs3	mapflag	restricted	6

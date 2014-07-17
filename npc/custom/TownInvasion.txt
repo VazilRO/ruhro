@@ -24,10 +24,10 @@
 		
 	OnInvasionStart:
 		killmonsterall $@mapinvasion$[$@town],0; // in case there's an overlap
-		$@town = rand(22); //Pick a random map
-		$@j = 60;
-		$@k = 0;
-		$@numMVP = rand(1,3);
+		set $@town, rand(22); //Pick a random map
+		set $@j, rand(60,100);
+		set $@k, 0;
+		set $@numMVP, rand(1,4);
 		setnpctimer 0;
 		initnpctimer;
 			
@@ -41,7 +41,18 @@
 		
 	OnMobKill:
 		set $@j, $@j - 1; //Normal mob counter
-		if ($@j == 50 ) {
+		
+		if ($@j == 100 ) {
+			announce "100 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		}else if ($@j == 90 ) {
+			announce "90 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		}else if ($@j == 80 ) {
+			announce "80 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 70 ) {
+			announce "70 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 60 ) {
+			announce "60 Normal Monsters Remaining!",bc_all,0x00FFFF;
+		} else if ($@j == 50 ) {
 			announce "50 Normal Monsters Remaining!",bc_all,0x00FFFF;
 		} else if ($@j == 40) { //When all normal mobs are dead, go to OnFinish
 			announce "40 Normal Monsters Remaining!",bc_all,0x00FFFF;
@@ -51,7 +62,7 @@
 			if ($@numMVP == 1) {
 				announce "Oh no! An MVP has just appeared!",bc_all,0x00FFFF;
 			} else {
-				announce "Oh no!" + $@numMVP + " MVPs have just appeared!",bc_all,0x00FFFF;			
+				announce "Oh no! " + $@numMVP + " MVPs have just appeared!",bc_all,0x00FFFF;			
 			}
 			monster $@mapinvasion$[$@town],0,0,"--en--",-3,$@numMVP,"towninvasion::OnMVPKill";
 		} else if ($@j == 20) { //When all normal mobs are dead, go to OnFinish
@@ -69,10 +80,14 @@
 		end;
 
 	OnMVPKill:
-		$@k = 1; //MVP Dead!
-		announce "Congratulations "+strcharinfo(0)+"! You killed the MVP!",bc_all,0x00FFFF;
+		set $@k, $@k + 1; //MVP Dead!
+		announce "Congratulations, "+strcharinfo(0)+" has killed a MVP!",bc_all,0x00FFFF;
 		getitem 677,5; //MVP rewards
-		goto OnFinish;
+		if($@k < $@numMVP) {
+			announce ($@numMVP - $@k) + " MVPs left!",0;
+		} else {
+			goto OnFinish;
+		}	
 		end;
 		
 	OnStopEvent:
@@ -97,7 +112,7 @@
 	OnThu1500:
 	OnThu2000:
 		goto OnInvasionStart;
-
+		end;
 	OnInit:
 		setarray  $@mapinvasion$[0],"morocc","geffen","payon","alberta","izlude","aldebaran","xmas","comodo","yuno","amatsu","gonryun","umbala","louyang","jawaii","ayothaya","einbroch","lighthalzen","einbech","hugel","rachel","veins","moscovia","brasilis"; //list maps
 		bindatcmd("invasion","towninvasion::OnInvasionAdmin",10,99);	
