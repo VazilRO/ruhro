@@ -60,8 +60,8 @@ struct Damage {
 #endif
 	int64 damage, /// Right hand damage
 		damage2; /// Left hand damage
-	int type, /// chk clif_damage for type @TODO add an enum ?
-		div_; /// Number of hit
+	char type; /// chk clif_damage for type (clif.h enum e_damage_type)
+	short div_; /// Number of hit
 	int amotion,
 		dmotion;
 	int blewcount; /// Number of knockback
@@ -537,6 +537,7 @@ extern struct Battle_Config
 	int feature_autotrade;
 	int feature_autotrade_direction;
 	int feature_autotrade_sit;
+	int feature_autotrade_open_delay;
 
 	// Fame points
 	int fame_taekwon_mission;
@@ -562,6 +563,7 @@ extern struct Battle_Config
 	int taekwon_ranker_min_lv;
 	int revive_onwarp;
 	int mail_delay;
+	int autotrade_monsterignore;
 } battle_config;
 
 void do_init_battle(void);

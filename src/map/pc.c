@@ -1136,6 +1136,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	sd->npc_timer_id = INVALID_TIMER;
 	sd->pvp_timer = INVALID_TIMER;
 	sd->expiration_tid = INVALID_TIMER;
+	sd->autotrade_tid = INVALID_TIMER;
 
 #ifdef SECURE_NPCTIMEOUT
 	// Initialize to defaults/expected
@@ -1453,8 +1454,12 @@ void pc_reg_received(struct map_session_data *sd)
 		clif_changeoption( &sd->bl );
 	}
 
-	if( sd->state.autotrade )
+	pc_check_expiration(sd);
+
+	if( sd->state.autotrade ) {
 		clif_parse_LoadEndAck(sd->fd, sd);
+		sd->autotrade_tid = add_timer(gettick() + battle_config.feature_autotrade_open_delay, pc_autotrade_timer, sd->bl.id, 0);
+	}
 }
 
 static int pc_calc_skillpoint(struct map_session_data* sd)
@@ -4725,11 +4730,11 @@ int pc_useitem(struct map_session_data *sd,int n)
 					int e_tick = DIFF_TICK(sd->item_delay[i].tick, tick)/1000;
 					char e_msg[100];
 					if( e_tick > 99 )
-						sprintf(e_msg,msg_txt(sd,379), //Able to use %.1f min later.
-										(double)e_tick / 60);
+						sprintf(e_msg,msg_txt(sd,379), // Item Failed. [%s] is cooling down. Wait %.1f minutes.
+										itemdb_jname(sd->item_delay[i].nameid), (double)e_tick / 60);
 					else
-						sprintf(e_msg,msg_txt(sd,380), //Able to use %d sec later.
-										e_tick+1);
+						sprintf(e_msg,msg_txt(sd,380), // Item Failed. [%s] is cooling down. Wait %d seconds.
+										itemdb_jname(sd->item_delay[i].nameid), e_tick+1);
 					clif_colormes(sd,color_table[COLOR_YELLOW],e_msg);
 					return 0; // Delay has not expired yet
 				}
@@ -8228,7 +8233,7 @@ void pc_setoption(struct map_session_data *sd,int type)
 	} else if( !( type&OPTION_CART ) && p_type&OPTION_CART ){ //Cart Off
 		clif_clearcart(sd->fd);
 		if(pc_checkskill(sd, MC_PUSHCART) < 10)
-			status_calc_pc(sd,0); //Remove speed penalty.
+			status_calc_pc(sd,SCO_NONE); //Remove speed penalty.
 	}
 #endif
 
@@ -8389,6 +8394,33 @@ bool pc_candrop(struct map_session_data *sd, struct item *item)
 	if( !pc_can_give_items(sd) || sd->sc.cant.drop) //check if this GM level can drop items
 		return false;
 	return (itemdb_isdropable(item, pc_get_group_level(sd)));
+}
+
+/**
+ * Determines whether a player can attack based on status changes
+ *  Why not use status_check_skilluse?
+ *  "src MAY be null to indicate we shouldn't check it, this is a ground-based skill attack."
+ *  Even ground-based attacks should be blocked by these statuses
+ * Called from unit_attack and unit_attack_timer_sub
+ * @retval true Can attack
+ **/
+bool pc_can_attack( struct map_session_data *sd, int target_id ) {
+	nullpo_retr(false, sd);
+
+	if( sd->sc.data[SC_BASILICA] ||
+		sd->sc.data[SC__SHADOWFORM] ||
+		sd->sc.data[SC__MANHOLE] ||
+		sd->sc.data[SC_CURSEDCIRCLE_ATKER] ||
+		sd->sc.data[SC_CURSEDCIRCLE_TARGET] ||
+		sd->sc.data[SC_CRYSTALIZE] ||
+		sd->sc.data[SC_ALL_RIDING] || // The client doesn't let you, this is to make cheat-safe
+		sd->sc.data[SC_TRICKDEAD] ||
+		(sd->sc.data[SC_VOICEOFSIREN] && sd->sc.data[SC_VOICEOFSIREN]->val2 == target_id) ||
+		sd->sc.data[SC_BLADESTOP] ||
+		sd->sc.data[SC_DEEPSLEEP] )
+			return false;
+
+	return true;
 }
 
 /*==========================================
@@ -10730,9 +10762,17 @@ void pc_damage_log_clear(struct map_session_data *sd, int id)
 
 /* Status change data arrived from char-server */
 void pc_scdata_received(struct map_session_data *sd) {
+	// Nothing todo yet
+	return;
+}
+
+/** Check expiration time and rental items
+* @param sd
+*/
+void pc_check_expiration(struct map_session_data *sd) {
 	pc_inventory_rentals(sd);
 
-	if( sd->expiration_time != 0 ) { //Don't display if it's unlimited or unknow value
+	if (sd->expiration_time != 0) { //Don't display if it's unlimited or unknow value
 		time_t exp_time = sd->expiration_time;
 		char tmpstr[1024];
 
@@ -10754,6 +10794,25 @@ int pc_expiration_timer(int tid, unsigned int tick, int id, intptr_t data) {
 		clif_authfail_fd(sd->fd,10);
 
 	map_quit(sd);
+
+	return 0;
+}
+
+int pc_autotrade_timer(int tid, unsigned int tick, int id, intptr_t data) {
+	struct map_session_data *sd = map_id2sd(id);
+
+	if (!sd)
+		return 0;
+
+	sd->autotrade_tid = INVALID_TIMER;
+
+	buyingstore_reopen(sd);
+	vending_reopen(sd);
+
+	if (sd && !sd->vender_id && !sd->buyer_id) {
+		sd->state.autotrade = 0;
+		map_quit(sd);
+	}
 
 	return 0;
 }
@@ -11081,23 +11140,28 @@ short pc_get_itemgroup_bonus_group(struct map_session_data* sd, uint16 group_id)
 * @return True if item in same inventory index, False if doesn't
 */
 bool pc_is_same_equip_index(enum equip_index eqi, int *equip_index, int8 index) {
+<<<<<<< HEAD
 	/// Remove this check to eliminate stat doubling on Two-handed and slotted weapons. 
 	//if (index < 0 || index >= ARRAYLENGTH(equip_index))
 	//	return false;
+=======
+	if (index < 0 || index >= MAX_INVENTORY)
+		return true;
+>>>>>>> 401a7161ce05ea129751d7aaa6bdedde3d92c457
 	// Dual weapon checks
 	if (eqi == EQI_HAND_R && equip_index[EQI_HAND_L] == index)
 		return true;
 	// Headgear with Mid & Low location
-	else if (eqi == EQI_HEAD_MID && equip_index[EQI_HEAD_LOW] == index)
+	if (eqi == EQI_HEAD_MID && equip_index[EQI_HEAD_LOW] == index)
 		return true;
 	// Headgear with Top & Mid or Low location
-	else if (eqi == EQI_HEAD_TOP && (equip_index[EQI_HEAD_MID] == index || equip_index[EQI_HEAD_LOW] == index))
+	if (eqi == EQI_HEAD_TOP && (equip_index[EQI_HEAD_MID] == index || equip_index[EQI_HEAD_LOW] == index))
 		return true;
 	// Headgear with Mid & Low location
-	else if (eqi == EQI_COSTUME_MID && equip_index[EQI_COSTUME_LOW] == index)
+	if (eqi == EQI_COSTUME_MID && equip_index[EQI_COSTUME_LOW] == index)
 		return true;
 	// Headgear with Top & Mid or Low location
-	else if (eqi == EQI_COSTUME_TOP && (equip_index[EQI_COSTUME_MID] == index || equip_index[EQI_COSTUME_LOW] == index))
+	if (eqi == EQI_COSTUME_TOP && (equip_index[EQI_COSTUME_MID] == index || equip_index[EQI_COSTUME_LOW] == index))
 		return true;
 	return false;
 }
@@ -11131,6 +11195,7 @@ void do_init_pc(void) {
 	add_timer_func_list(pc_talisman_timer, "pc_talisman_timer");
 	add_timer_func_list(pc_global_expiration_timer, "pc_global_expiration_timer");
 	add_timer_func_list(pc_expiration_timer, "pc_expiration_timer");
+	add_timer_func_list(pc_autotrade_timer, "pc_autotrade_timer");
 
 	add_timer(gettick() + autosave_interval, pc_autosave, 0, 0);
 
