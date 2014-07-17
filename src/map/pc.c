@@ -11140,14 +11140,14 @@ short pc_get_itemgroup_bonus_group(struct map_session_data* sd, uint16 group_id)
 * @return True if item in same inventory index, False if doesn't
 */
 bool pc_is_same_equip_index(enum equip_index eqi, int *equip_index, int8 index) {
-<<<<<<< HEAD
-	/// Remove this check to eliminate stat doubling on Two-handed and slotted weapons. 
-	//if (index < 0 || index >= ARRAYLENGTH(equip_index))
-	//	return false;
-=======
+///<<<<<<< HEAD
+///	/// Remove this check to eliminate stat doubling on Two-handed and slotted weapons. 
+///	if (index < 0 || index >= ARRAYLENGTH(equip_index))
+///		return false;
+///=======
 	if (index < 0 || index >= MAX_INVENTORY)
 		return true;
->>>>>>> 401a7161ce05ea129751d7aaa6bdedde3d92c457
+///>>>>>>> 401a7161ce05ea129751d7aaa6bdedde3d92c457
 	// Dual weapon checks
 	if (eqi == EQI_HAND_R && equip_index[EQI_HAND_L] == index)
 		return true;
