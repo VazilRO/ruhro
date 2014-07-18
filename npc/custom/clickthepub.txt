@@ -105,6 +105,10 @@ OnMinute59:
 
 prontera,0,0,4	script	CTP Prontera	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -138,6 +142,10 @@ OnFirstClick:
 
 morocc,0,0,4	script	CTP Morroc	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -170,6 +178,10 @@ OnFirstClick:
 }
 
 geffen,0,0,4	script	CTP Geffen	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -206,6 +218,10 @@ OnFirstClick:
 
 payon,0,0,4	script	CTP Payon	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -240,6 +256,10 @@ OnFirstClick:
 }
 
 alberta,0,0,4	script	CTP Alberta	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -276,6 +296,10 @@ OnFirstClick:
 
 izlude,0,0,4	script	CTP Izlude	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -310,6 +334,10 @@ OnFirstClick:
 }
 
 aldebaran,0,0,4	script	CTP Al De Baran	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -346,6 +374,10 @@ OnFirstClick:
 
 xmas,0,0,4	script	CTP Lutie	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -380,6 +412,10 @@ OnFirstClick:
 }
 
 comodo,0,0,4	script	CTP Comodo	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -416,6 +452,10 @@ OnFirstClick:
 
 yuno,0,0,4	script	CTP Juno	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -450,6 +490,10 @@ OnFirstClick:
 }
 
 amatsu,0,0,4	script	CTP Amatsu	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -486,6 +530,10 @@ OnFirstClick:
 
 gonryun,0,0,4	script	CTP Gonryun	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -520,6 +568,10 @@ OnFirstClick:
 }
 
 umbala,0,0,4	script	CTP Umbala	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -556,6 +608,10 @@ OnFirstClick:
 
 louyang,0,0,4	script	CTP Louyang	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -590,6 +646,10 @@ OnFirstClick:
 }
 
 jawaii,0,0,4	script	CTP Jawaii	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -626,6 +686,10 @@ OnFirstClick:
 
 ayothaya,0,0,4	script	CTP Ayothaya	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -660,6 +724,10 @@ OnFirstClick:
 }
 
 einbroch,0,0,4	script	CTP Einbroch	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -696,6 +764,10 @@ OnFirstClick:
 
 lighthalzen,0,0,4	script	CTP Lighthalzen	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -730,6 +802,10 @@ OnFirstClick:
 }
 
 einbech,0,0,4	script	CTP Einbech	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -766,6 +842,10 @@ OnFirstClick:
 
 hugel,0,0,4	script	CTP Hugel	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -800,6 +880,10 @@ OnFirstClick:
 }
 
 rachel,0,0,4	script	CTP Rachel	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
@@ -836,6 +920,10 @@ OnFirstClick:
 
 veins,0,0,4	script	CTP Veins	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -871,6 +959,10 @@ OnFirstClick:
 
 moscovia,0,0,4	script	CTP Moscovia	78,{
 
+mes "Don't click me! Enter the chat room!";
+close;
+end;
+
 OnInit:
 	sleep 10000;
 OnMinute00:
@@ -905,6 +997,10 @@ OnFirstClick:
 }
 
 brasilis,0,0,4	script	CTP Brasilis	78,{
+
+mes "Don't click me! Enter the chat room!";
+close;
+end;
 
 OnInit:
 	sleep 10000;
