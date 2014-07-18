@@ -584,7 +584,7 @@ L_Socket:
 		}
 
 		set .@failchance, rand(1,100);
-		if(.@failchance < 20) set .enchant,9; //Fail
+		if(.@failchance < 20) set .@enchant,9; //Fail
 
 		if (.@enchant == 9) { 
 			specialeffect2 EF_SUI_EXPLOSION;
