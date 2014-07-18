@@ -54,21 +54,21 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 	
 	main_chat:
 	mes .@n$;
-	mes "Status: "+( (login_main) ? "^00BB22On^000000" : "^FF2200Off^000000");
-	menu "I want to "+((!login_main) ? "^00BB22enable^000000" : "^FF2200disable^000000")+" it.",-,"Nothing",L_quit;
+	mes "Status: "+( (login_main) ? "^FF2200Off^000000" : "^00BB22On^000000");
+	menu "I want to "+((!login_main) ? "^FF2200disable^000000": "^00BB22enable^000000")+" it.",-,"Nothing",L_quit;
 
 	
 	mes .@n$;
 	if(login_main == 0) {
-		mes "Main Chat is now ^00BB22On^000000.";
-		mes "You'll still need to use #main to chat in global chat, however.";
+		mes "Main Chat is now ^FF2200Off^000000.";
 		set login_main,1;
-		atcommand "@main join #main";
+		atcommand "@main leave #main";
 		
 	} else if(login_main == 1) {
-		mes "Main Chat is now ^FF2200Off^000000.";
+		mes "Main Chat is now ^00BB22On^000000.";
+		mes "You'll still need to use #main to chat in global chat, however.";
 		set login_main,0;
-		atcommand "@main leave #main";
+		atcommand "@main join #main";
 	}
 	close;
 	
