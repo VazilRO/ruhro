@@ -397,7 +397,7 @@ L_Socket:
 			close;
 		}
 		mes "[Mayomayo]";
-		mes "I'm trying for the "+.@str$+" enchant. ^ff0000It will not touch previous refinement and cards. Also, the equipment will not be destroyed.^000000 Can I continue?";
+		mes "I'm trying for the "+.@str$+" enchant. ^ff0000It will not touch previous refinement and cards. Also, the equipment may be destroyed.^000000 Can I continue?";
 		next;
 		if(select("I'll come back later.:Please, continue.") == 1) {
 			mes "[Mayomayo]";
@@ -582,7 +582,11 @@ L_Socket:
 			mes "Surely I don't enchant at card socket, therefore weapons that have 3 slots can be enchanted only 1 time. Don't forget this~";
 			close;
 		}
-		if (.@enchant == 9) { // Should never happen.
+
+		set .@failchance, rand(1,100);
+		if(.@failchance < 20) set .enchant,9; //Fail
+
+		if (.@enchant == 9) { 
 			specialeffect2 EF_SUI_EXPLOSION;
 			mes "[Mayomayo]";
 			mes "Oh my god!";
