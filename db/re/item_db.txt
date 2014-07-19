@@ -3643,7 +3643,7 @@
 5745,Capricon_Diadem,Capricon Diadem,4,20,,300,,3,,0,0xFFFFFFFF,63,2,256,,1,1,622,{ bonus bDex,2; bonus bMdef,5; },{},{}
 5746,Rune_Circlet,Rune Circlet,4,20,,100,,12,,1,0x00000080,56,2,256,,100,1,623,{ bonus bStr,1; bonus bInt,1; bonus bMdef,5; if(readparam(bStr)>=120){ bonus bBaseAtk,10; bonus bMatk,5; } },{},{}
 5747,Mitra,Mitra,4,20,,100,,12,,1,0x00000100,56,2,256,,100,1,624,{ bonus bVit,1; bonus bInt,1; bonus bMdef,5; bonus bHealPower,5; if(readparam(bInt)>=120){ bonus bMatk,10; } },{},{}
-5748,Sniper_Goggle,Sniper Goggles,4,20,,100,,12,,1,0x40000800,56,2,768,,100,1,625,{ bonus bAgi,1; bonus bDex,1; bonus bMdef,5; if(readparam(bAgi)>=120){ bonus bLongAtkRate,4; bonus bAspd,1; } },{},{}
+5748,Sniper_Goggle,Sniper Goggles,4,20,,100,,12,,1,0x40000800,57,2,768,,100,1,625,{ bonus bAgi,1; bonus bDex,1; bonus bMdef,5; if(readparam(bAgi)>=120){ bonus bLongAtkRate,4; bonus bAspd,1; } },{},{}
 5749,Driver_Band,Driver Band,4,20,,100,,12,,1,0x00000400,56,1,256,,100,1,626,{ bonus bStr,1; bonus bDex,1; bonus bMdef,5; if(readparam(bStr)>=120){ bonus bBaseAtk,10; bonus bCritical,3; } },{},{}
 5750,Shadow_Handicraft,Shadow Crown,4,20,,100,,12,,1,0x00020000,56,2,256,,100,1,627,{ bonus bAgi,1; bonus bInt,1; bonus bMdef,1; if(readparam(bAgi)>=120){ bonus bBaseAtk,10; bonus bFlee,3; } },{},{}
 5751,Minstrel_Song_Hat,Minstrel Song Hat,4,20,,100,,12,,1,0x00080000,56,1,256,,100,1,628,{ bonus bInt,1; bonus bLuk,1; bonus bMdef,5; bonus bLongAtkRate,5; bonus2 bSkillUseSP,"MI_RUSH_WINDMILL",10; bonus2 bSkillUseSP,"MI_ECHOSONG",10; },{},{}
