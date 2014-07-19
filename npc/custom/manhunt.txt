@@ -240,17 +240,28 @@ prontera,156,179,4	script	Man-Hunt Event	831,{
 	{
 		mes "Hi " + strcharinfo(0) + "!";
 		mes "Would you like to join the ^00ff00Man-Hunt Event^000000?";
-		menu "Join Event",-;
-		if(getgmlevel() < 5) {
+		if(getgmlevel() > 10) {
+			menu "Join as GM",manhuntgm,
+				 "Join Event",manhuntplay;
+		} else {
+			menu "Join Event",manhuntplay;
+		}
+		
+		manhuntgm:
+			warp $@MHMap$,50,50;
+			close;
+		manhuntplay:
 			set $@ManHunt[$@oMH], getcharid(3);
 			set $@ManHuntN$[$@oMH], strcharinfo(0);
 			set $@ManHuntKillable$[$@oMH], 0;
 			set $@oMH, $@oMH + 1;
-		}
-		if(ismounting()) {
-			setmounting();
-		}
-		warp $@MHMap$,50,50;
+
+			if(ismounting()) {
+				setmounting();
+			}
+			warp $@MHMap$,50,50;
+			close;
+		
 	}
 	close;
 }
