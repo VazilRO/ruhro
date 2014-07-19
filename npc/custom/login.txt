@@ -30,7 +30,7 @@ mes "Hello, "+strcharinfo(0);
 mes "What setting do you want to change?";
 next;
 menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",auto_loot,
-	 "Main Chat ["+( (login_main)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",main_chat,
+	 "Main Chat ["+( (login_main)? "^00BB22Off^000000" : "^FF2200On^000000")+"]",main_chat,
 	 "Show EXP ["+( (login_showexp)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",auto_showexp,
 	 "@NoAsk ["+( (login_noask)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",no_ask;
 
