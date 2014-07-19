@@ -88,6 +88,7 @@ L_CHECKREBELGAT:
 	delitem 13150,1;
 	delitem 13152,1;
 	delitem 13200,100;
+	getitem 5748, 1;
 	callfunc "Job_Change",Job_Rebellion;
 	close;	
 
