@@ -32,7 +32,7 @@
 		initnpctimer;
 			
 		announce $@mapinvasion$[$@town]+" is being invaded by monsters!",bc_all,0x00FFFF;
-		monster $@mapinvasion$[$@town],0,0,"--en--",-1,60,"towninvasion::OnMobKill";
+		monster $@mapinvasion$[$@town],0,0,"--en--",-1,$@j,"towninvasion::OnMobKill";
 		end;
 		
 	OnTimer3600000: // In case people just don't participate
