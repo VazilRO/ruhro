@@ -150,7 +150,7 @@
 		end;
 		
 	MHPlayerLack:
-		for (.@i = 0; i < getarraysize($@ManHunt); .@i++) {
+		for (.@i = 0; .@i < getarraysize($@ManHunt); .@i++) {
 			if ($@ManHuntKillable[.@i] == 1) {	
 				atcommand "#killable "+$@ManHuntN$[.@i]+"";
 				set $@ManHuntKillable[.@i], 0;
@@ -181,7 +181,7 @@
 			sleep2 2000;
 			set $@MHStatus, 0;
 			set .HuntedTimer, 0;
-			for (.@i = 0; i < getarraysize($@ManHunt); .@i++) {
+			for (.@i = 0; .@i < getarraysize($@ManHunt); .@i++) {
 				if ($@ManHuntKillable[.@i] == 1) {	
 					atcommand "#killable "+$@ManHuntN$[.@i]+"";
 					set $@ManHuntKillable[.@i], 0;
