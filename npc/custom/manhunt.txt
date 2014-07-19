@@ -247,10 +247,16 @@ prontera,156,179,4	script	Man-Hunt Event	831,{
 			menu "Join Event",manhuntplay;
 		}
 		
-		manhuntgm:
+		manhuntgm: // warp GM without adding to the array
 			warp $@MHMap$,50,50;
 			close;
 		manhuntplay:
+			for(.@i = 0; .@i < $@oMH; .@i++) { // avoid duplicates
+				if($@ManHunt[.@i] == getcharid(3)) {
+					warp $@MHMap$,50,50;
+					close;
+				}	
+			}
 			set $@ManHunt[$@oMH], getcharid(3);
 			set $@ManHuntN$[$@oMH], strcharinfo(0);
 			set $@ManHuntKillable[$@oMH], 0;
