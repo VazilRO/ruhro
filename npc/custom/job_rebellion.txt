@@ -12,7 +12,7 @@
 //
 //============================================================
 
-prontera,102,208,4	script	Rebel	78,{
+prontera,102,208,4	script	Rebel	10063,{
 	mes "[Rebel]";
 	if (Class == Job_Rebellion) {
 		mes "Hello ^FF0000Fre^E5E4E2ed^0000FFom^000000 fighter!";
@@ -21,6 +21,7 @@ prontera,102,208,4	script	Rebel	78,{
 		mes "...";
 		close;
 	}
+	if (JobLevel < 70 || BaseLevel < 99) goto L_LVLUPBRO;
 	if (REBELLION_QUEST == 1) goto L_REBELQUESTGATHER;
 	mes "Pew pew pew, I see you're a Gunslinger.";
 	mes "What a boring job. No vision...no drive.";
@@ -60,7 +61,6 @@ prontera,102,208,4	script	Rebel	78,{
 	}
 	
 L_REBELQUESTGATHER:
-	mes "[Rebel]";
 	mes "Have you obtained the items I asked for?";
 	next;
 	switch(select("Yes","Nope")) {
@@ -90,6 +90,11 @@ L_CHECKREBELGAT:
 	delitem 13200,100;
 	callfunc "Job_Change",Job_Rebellion;
 	close;	
+
+L_LVLUPBRO:
+	mes "Too weak...";
+	close;
+		
 }
 						
 	
