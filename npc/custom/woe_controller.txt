@@ -1,4 +1,4 @@
-//===== rAthena Script =======================================
+﻿//===== rAthena Script =======================================
 //= Euphy's WOE Controller
 //===== By: ==================================================
 //= Euphy
@@ -199,6 +199,7 @@ OnReward:
 
 OnPCLoadMapEvent:
 	if (!compare(strcharinfo(3),"g_cas")) end;
+	if (agitcheck() && agitcheck2()) end;
 	if (agitcheck() && (eaclass()&EAJL_THIRD) && compare(strcharinfo(3), “g_cas”)) {
 		message strcharinfo(0), getcastlename(strcharinfo(3))+” is not available to third class characters during WoE 1.0!”;
 		sleep2 1000;
