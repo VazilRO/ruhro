@@ -88,9 +88,9 @@
 	OnTimer30000:
 		if (.HuntedTimer) {
 			mapannounce $@MHMap$,"The Target, "+$@ManHuntN$[.Target]+", managed to survive",0;
-			if ($@ManHuntKillable$[.Target] == 1) {	
+			if ($@ManHuntKillable[.Target] == 1) {	
 				atcommand "#killable "+$@ManHuntN$[.Target]+"";
-				set $@ManHuntKillable$[.Target], 0;
+				set $@ManHuntKillable[.Target], 0;
 			}
 			atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
 			if(attachrid($@ManHunt[.Target])) {
@@ -120,9 +120,9 @@
 		sleep2 1000;
 		mapannounce $@MHMap$,"Man-Hunt Start!",0;
 		atcommand "#size \""+$@ManHuntN$[.Target]+"\" 2";
-		if ($@ManHuntKillable$[.Target] == 0) {	
+		if ($@ManHuntKillable[.Target] == 0) {	
 			atcommand "#killable "+$@ManHuntN$[.Target]+"";
-			set $@ManHuntKillable$[.Target], 1;
+			set $@ManHuntKillable[.Target], 1;
 		}
 		initnpctimer;
 		end;
@@ -132,9 +132,9 @@
 			if( getcharid(3) == $@ManHunt[.Target] ) {
 				if(attachrid(killerrid)) {
 					mapannounce $@MHMap$,""+strcharinfo(0)+" has killed the target",0;
-					if ($@ManHuntKillable$[.Target] == 1) {	
+					if ($@ManHuntKillable[.Target] == 1) {	
 						atcommand "#killable "+$@ManHuntN$[.Target]+"";
-						set $@ManHuntKillable$[.Target], 0;
+						set $@ManHuntKillable[.Target], 0;
 					}
 					atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
 					getitem .MHReward, .MKill; // Reward the Platinum Coins directly
@@ -150,10 +150,10 @@
 		end;
 		
 	MHPlayerLack:
-		for (.@i = 0; i < getarraysize($@ManHuntN$); .@i++) {
-			if ($@ManHuntKillable$[.@i] == 1) {	
+		for (.@i = 0; i < getarraysize($@ManHunt); .@i++) {
+			if ($@ManHuntKillable[.@i] == 1) {	
 				atcommand "#killable "+$@ManHuntN$[.@i]+"";
-				set $@ManHuntKillable$[.@i], 0;
+				set $@ManHuntKillable[.@i], 0;
 			}
 			atcommand "#size \""+$@ManHuntN$[.@i]+"\" 0";			
 		}
@@ -181,10 +181,10 @@
 			sleep2 2000;
 			set $@MHStatus, 0;
 			set .HuntedTimer, 0;
-			for (.@i = 0; i < getarraysize($@ManHuntN$); .@i++) {
-				if ($@ManHuntKillable$[.@i] == 1) {	
+			for (.@i = 0; i < getarraysize($@ManHunt); .@i++) {
+				if ($@ManHuntKillable[.@i] == 1) {	
 					atcommand "#killable "+$@ManHuntN$[.@i]+"";
-					set $@ManHuntKillable$[.@i], 0;
+					set $@ManHuntKillable[.@i], 0;
 				}
 				atcommand "#size \""+$@ManHuntN$[.@i]+"\" 0";			
 			}
@@ -227,7 +227,7 @@
 		disablenpc "Man-Hunt Event";
 		setarray $@ManHunt[0],0;
 		setarray $@ManHuntN$[0],"";
-		setarray $@ManHuntKillable$[0], "";
+		setarray $@ManHuntKillable[0], "";
 		bindatcmd("manhunt","ManHuntHandler::OnMHAdmin",10,99);	
 		end;	
 }
@@ -253,7 +253,7 @@ prontera,156,179,4	script	Man-Hunt Event	831,{
 		manhuntplay:
 			set $@ManHunt[$@oMH], getcharid(3);
 			set $@ManHuntN$[$@oMH], strcharinfo(0);
-			set $@ManHuntKillable$[$@oMH], 0;
+			set $@ManHuntKillable[$@oMH], 0;
 			set $@oMH, $@oMH + 1;
 
 			if(ismounting()) {
