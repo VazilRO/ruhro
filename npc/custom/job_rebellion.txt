@@ -62,6 +62,11 @@ prontera,102,208,4	script	Rebel	10063,{
 	
 L_REBELQUESTGATHER:
 	mes "Have you obtained the items I asked for?";
+	mes "^FFA50050 Rusty Screws^000000";
+	mes "^FFA5001 Poo Poo Hat^000000";
+	mes "^FFA5001 Branch[3]^000000";
+	mes "^FFA5001 Cyclone[2]^000000";
+	mes "^FFA500100 Bullets^000000";
 	next;
 	switch(select("Yes","Nope")) {
 		case 1:

@@ -43,54 +43,61 @@
 	OnStartManHunt:
 		enablenpc "Man-Hunt Event";
 		set $@MHStatus, 1;
-		announce "Man-Hunt Event Warper will be closed in 3 minutes",0;
+		announce "Man-Hunt Event Warper will be closed in 3 minutes. Please visit the middle of Prontera.",0;
 		set $@oMH, 0; // dont touch this
 		setnpctimer 0;
 		initnpctimer;
 		end;
 		
 	OnTimer60000:
-		announce "Man-Hunt Event Warper will be closed in 2 minutes",0;
+		if (.HuntedTimer == 0) {
+			announce "Man-Hunt Event Warper will be closed in 2 minutes. Please visit the middle of Prontera.",0;
+		}
 		end;
 
 	OnTimer120000:
-		announce "Man-Hunt Event Warper will be closed in 60 Seconds",0;
+		if (.HuntedTimer == 0) {
+			announce "Man-Hunt Event Warper will be closed in 60 Seconds. Please visit the middle of Prontera.",0;
+		}
 		end;
 			
 	OnTimer180000:
-		disablenpc "Man-Hunt Event";
-		announce "Man-Hunt Event warper is now closed.",0;
-		sleep2 2000;
-		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
-		mapannounce $@MHMap$,"The goal of this event is to kill the target within 30 seconds.",0;
-		sleep2 2000;
-		mapannounce $@MHMap$,"The one who manages to kill the target will gain 1 Man Hunt Point.",0;
-		sleep2 2000;
-		mapannounce $@MHMap$,"But if the target survives, the target will gain 2 Man Hunt Points.",0;
-		sleep2 2000;
-		mapannounce $@MHMap$,"Points can be exchanged for Platinum Coins at the Event NPC.",0;
-		sleep2 2000;
-		mapannounce $@MHMap$,"Enough explaining, let's do the Man-Hunt Event!",0;
-		sleep2 2000;
-		mapannounce $@MHMap$,"Man-Hunt Event start!",0;
-		atcommand "@doommap";
-		atcommand "@raisemap";
-		set .MStart,1;
-		stopnpctimer;
-		set .MRounds, 1;
-		goto ManHuntStart;
+		if (.HuntedTimer == 0) {
+			disablenpc "Man-Hunt Event";
+			announce "Man-Hunt Event warper is now closed.",0;
+			sleep2 2000;
+			if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
+			mapannounce $@MHMap$,"The goal of this event is to kill the target within 30 seconds.",0;
+			sleep2 4000;
+			mapannounce $@MHMap$,"The one who manages to kill the target will gain 1 Platinum Coin.",0;
+			sleep2 4000;
+			mapannounce $@MHMap$,"But if the target survives, the target will gain 3 Platinum Coins.",0;
+			sleep2 4000;
+			mapannounce $@MHMap$,"Points can be exchanged for Platinum Coins at the Event NPC.",0;
+			sleep2 4000;
+			mapannounce $@MHMap$,"Enough explaining, let's go on with the Man-Hunt Event!",0;
+			atcommand "@doommap";
+			atcommand "@raisemap";
+			set .MStart,1;
+			stopnpctimer;
+			set .MRounds, 1;
+			goto ManHuntStart;
+		}	
 		end;
 			
 	OnTimer30000:
 		if (.HuntedTimer) {
 			mapannounce $@MHMap$,"The Target, "+$@ManHuntN$[.Target]+", managed to survive",0;
-			atcommand "#killable "+$@ManHuntN$[.Target]+"";
+			if ($@ManHuntKillable$[.Target] == 1) {	
+				atcommand "#killable "+$@ManHuntN$[.Target]+"";
+				set $@ManHuntKillable$[.Target], 0;
+			}
 			atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
-			sleep2 1000;
 			if(attachrid($@ManHunt[.Target])) {
 				getitem .MHReward, .MSurvive; // Reward Platinum Coins directly
 				detachrid;					
 			}
+			sleep2 3000;
 			set .MRounds, .MRounds + 1;
 			stopnpctimer;
 			goto MHNextRound;
@@ -99,12 +106,24 @@
 			
 	ManHuntStart:
 		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
-		set .Target, rand(0,getarraysize($@ManHunt)-1);
+		set .Target, rand(0, (getarraysize($@ManHunt) - 1));
 		mapannounce $@MHMap$,"[Round "+.MRounds+"] Our target is "+$@ManHuntN$[.Target]+"!",0;
-		atcommand "#killable "+$@ManHuntN$[.Target]+"";
-		atcommand "#size \""+$@ManHuntN$[.Target]+"\" 2";
 		setnpctimer 0;
 		set .HuntedTimer, 1;
+		mapannounce $@MHMap$,"Ready...?",0;
+		sleep2 1000;
+		mapannounce $@MHMap$,"3",0;
+		sleep2 1000;
+		mapannounce $@MHMap$,"2",0;
+		sleep2 1000;
+		mapannounce $@MHMap$,"1",0;
+		sleep2 1000;
+		mapannounce $@MHMap$,"Man-Hunt Start!",0;
+		atcommand "#size \""+$@ManHuntN$[.Target]+"\" 2";
+		if ($@ManHuntKillable$[.Target] == 0) {	
+			atcommand "#killable "+$@ManHuntN$[.Target]+"";
+			set $@ManHuntKillable$[.Target], 1;
+		}
 		initnpctimer;
 		end;
 			
@@ -113,13 +132,16 @@
 			if( getcharid(3) == $@ManHunt[.Target] ) {
 				if(attachrid(killerrid)) {
 					mapannounce $@MHMap$,""+strcharinfo(0)+" has killed the target",0;
-					atcommand "#killable "+$@ManHuntN$[.Target]+"";
+					if ($@ManHuntKillable$[.Target] == 1) {	
+						atcommand "#killable "+$@ManHuntN$[.Target]+"";
+						set $@ManHuntKillable$[.Target], 0;
+					}
 					atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
 					getitem .MHReward, .MKill; // Reward the Platinum Coins directly
 					stopnpctimer;
 					detachrid;
-					sleep2 500;
-					atcommand "#alive "+$@ManHuntN$[.Target]+"";
+					sleep2 3000;
+					atcommand "@raisemap";
 					set .MRounds, .MRounds + 1;
 					goto MHNextRound;
 				}
@@ -128,13 +150,20 @@
 		end;
 		
 	MHPlayerLack:
+		for (set .i, 0; i < getarraysize($@ManHuntN$); i++) {
+			if ($@ManHuntKillable$[.i] == 1) {	
+				atcommand "#killable "+$@ManHuntN$[.i]+"";
+				set $@ManHuntKillable$[.i], 0;
+			}
+			atcommand "#size \""+$@ManHuntN$[.i]+"\" 0";			
+		}
 		mapannounce $@MHMap$,"Failed to start Man-Hunt Event due to insufficient Players",0;
 		sleep2 2000;
 		mapannounce $@MHMap$,"The minimum player required is "+.MHPlayer+" players",0;
 		sleep2 2000;
-		mapannounce $@MHMap$,"All players will be warped to prontera in 2 seconds.",0;
-		sleep2 2000;
-		mapwarp $@MHMap$,"prontera",150,150;
+		mapannounce $@MHMap$,"All players will be warped to prontera in 10 seconds.",0;
+		sleep2 10000;
+		mapwarp $@MHMap$,"prontera",156,191;
 		set $@MHStatus, 0;
 		set .HuntedTimer, 0;
 		set .Target, 0;
@@ -147,22 +176,30 @@
 	MHNextRound:
 		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
 		if (.MRounds > .MRoundsMax) {
-			sleep2 1000;
+			sleep2 2000;
 			announce "Man-Hunt Event ended.",0;
-			sleep2 1000;
+			sleep2 2000;
 			set $@MHStatus, 0;
 			set .HuntedTimer, 0;
+			for (set .i, 0; i < getarraysize($@ManHuntN$); i++) {
+				if ($@ManHuntKillable$[.i] == 1) {	
+					atcommand "#killable "+$@ManHuntN$[.i]+"";
+					set $@ManHuntKillable$[.i], 0;
+				}
+				atcommand "#size \""+$@ManHuntN$[.i]+"\" 0";			
+			}
 			deletearray $@ManHunt[0],getarraysize($@ManHunt);
 			deletearray $@ManHuntN$[0],getarraysize($@ManHuntN$);
-			mapannounce $@MHMap$,"All Players will be warped to prontera in 5 seconds.",0;
-			sleep2 5000;
+			mapannounce $@MHMap$,"All Players will be warped to prontera in 10 seconds.",0;
+			sleep2 10000;
 			set .Target, 0;
 			set .MStart, 0;
-			mapwarp $@MHMap$,"prontera",150,150;
+			mapwarp $@MHMap$,"prontera",156,191;
 			end;
 		} else {
-			mapannounce $@MHMap$,"Next Round in 10 seconds.",0;
-			sleep2 10000;
+			sleep2 5000;
+			mapannounce $@MHMap$,"Next Round in 30 seconds.",0;
+			sleep2 30000;
 			goto ManHuntStart;
 		}
 		end;
@@ -190,6 +227,7 @@
 		disablenpc "Man-Hunt Event";
 		setarray $@ManHunt[0],0;
 		setarray $@ManHuntN$[0],"";
+		setarray $@ManHuntKillable$[0], "";
 		bindatcmd("manhunt","ManHuntHandler::OnMHAdmin",10,99);	
 		end;	
 }
@@ -203,9 +241,12 @@ prontera,156,179,4	script	Man-Hunt Event	831,{
 		mes "Hi " + strcharinfo(0) + "!";
 		mes "Would you like to join the ^00ff00Man-Hunt Event^000000?";
 		menu "Join Event",-;
-		set $@ManHunt[$@oMH], getcharid(3);
-		set $@ManHuntN$[$@oMH], strcharinfo(0);
-		set $@oMH, $@oMH + 1;
+		if(getgmlevel() < 5) {
+			set $@ManHunt[$@oMH], getcharid(3);
+			set $@ManHuntN$[$@oMH], strcharinfo(0);
+			set $@ManHuntKillable$[$@oMH], 0;
+			set $@oMH, $@oMH + 1;
+		}
 		if(ismounting()) {
 			setmounting();
 		}
