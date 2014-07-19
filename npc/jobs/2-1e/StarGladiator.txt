@@ -700,6 +700,8 @@ comodo,172,230,3	script	Wandering Master#job_sta	730,{
 			mes "that we, as Taekwon Masters,";
 			mes "cannot exist separately from";
 			mes "the Sun, Moon and Stars...";
+			next;
+			atcommand "@refresh";
 			close;
 		}
 		mes "[Moogang]";
