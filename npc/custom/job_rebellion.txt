@@ -1,0 +1,96 @@
+//===== rAthena Script =======================================
+//= Rebellion Job Change
+//===== By: ==================================================
+//= Poutine
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Simple Job Change Quest for Rebellion
+//===== Additional Comments: =================================
+//
+//============================================================
+
+prontera,102,208,4	script	Rebel	78,{
+	mes "[Rebel]";
+	if (Class == Job_Rebellion) {
+		mes "Hello ^FF0000Fre^E5E4E2ed^0000FFom^000000 fighter!";
+		close;
+	} else if (Class != Job_Gunslinger) {
+		mes "...";
+		close;
+	}
+	if (REBELLION_QUEST == 1) goto L_REBELQUESTGATHER;
+	mes "Pew pew pew, I see you're a Gunslinger.";
+	mes "What a boring job. No vision...no drive.";
+	mes "All you are is just a bunch of gimmicks.";
+	next;
+	mes "[Rebel]";
+	mes "Us Rebels fight for a cause!";
+	mes "We fight for what is right!";
+	mes "We fight for ^FF0000Fre^E5E4E2ed^0000FFom^000000.
+	next;
+	switch(select ( "For the Freedom!", "Walk away..." )) {
+		case 1:
+			mes "[Rebel]";
+			mes "Hmm...to prove you are worthy, hunt me the follow:";
+			mes "^FFA50050 Rusty Screws^000000";
+			mes "^FFA5001 Poo Poo Hat^000000";
+			mes "^FFA5001 Branch[3]^000000";
+			mes "^FFA5001 Cyclone[2]^000000";
+			mes "^FFA500100 Bullets^000000";
+			next;
+				switch(select( "Okay!", "Nevermind...")) {
+					case 1:
+						mes "[Rebel]";
+						mes "Looking forward to your support!";
+						set REBELLION_QUEST, 1;
+						close;
+					case 2:
+						mes "[Rebel]";
+						mes "Weakling!";
+						close;
+				}
+			break;
+		case 2:
+			mes "[Rebel]";
+			mes "You will regret this.";
+			close;
+	}
+	
+L_REBELQUESTGATHER:
+	mes "[Rebel]";
+	mes "Have you obtained the items I asked for?";
+	next;
+	switch(select("Yes":"Nope")) {
+		case 1:
+			goto L_CHECKREBELGAT;
+			break;
+		case 2:
+			mes "[Rebel]";
+			mes "Hurry! Time is at the essence!";
+			close;
+	}
+
+L_CHECKREBELGAT:
+	mes "[Rebel]";
+	if(countitem(7317) < 50 || countitem(2289) < 1 || countitem(13150) < 1 || countitem(13152) < 1 || countitem(13200) < 100) {
+		mes "You do not have all I asked for...";
+		close;
+	}
+	mes "Congratulations! You have joined our cause.";
+	next;
+	mes "[Rebel]";
+	mes "Now you will be able to fight for ^FF0000Fre^E5E4E2ed^0000FFom^000000!";
+	delitem 7317,50;
+	delitem 2289,1;
+	delitem 13150,1;
+	delitem 13152,1;
+	delitem 13200,100;
+	callfunc "Job_Change",Job_Rebellion;
+	close;	
+}
+						
+	
+	
