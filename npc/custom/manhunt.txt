@@ -88,16 +88,18 @@
 	OnTimer30000:
 		if (.HuntedTimer) {
 			mapannounce $@MHMap$,"The Target, "+$@ManHuntN$[.Target]+", managed to survive",0;
-			if ($@ManHuntKillable[.Target] == 1) {	
-				atcommand "#killable "+$@ManHuntN$[.Target]+"";
-				set $@ManHuntKillable[.Target], 0;
+			for (.@i = 0; .@i < getarraysize($@ManHunt); .@i++) {
+				if ($@ManHuntKillable[.@i] == 1) {	
+					atcommand "#killable "+$@ManHuntN$[.@i]+"";
+					set $@ManHuntKillable[.@i], 0;
+				}
+				atcommand "#size \""+$@ManHuntN$[.@i]+"\" 0";			
 			}
-			atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
 			if(attachrid($@ManHunt[.Target])) {
 				getitem .MHReward, .MSurvive; // Reward Platinum Coins directly
 				detachrid;					
 			}
-			sleep2 3000;
+			sleep2 2000;
 			set .MRounds, .MRounds + 1;
 			stopnpctimer;
 			goto MHNextRound;
@@ -108,6 +110,7 @@
 		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
 		set .Target, rand(0, (getarraysize($@ManHunt) - 1));
 		mapannounce $@MHMap$,"[Round "+.MRounds+"] Our target is "+$@ManHuntN$[.Target]+"!",0;
+		sleep2 2000;
 		setnpctimer 0;
 		set .HuntedTimer, 1;
 		mapannounce $@MHMap$,"Ready...?",0;
@@ -132,15 +135,18 @@
 			if( getcharid(3) == $@ManHunt[.Target] ) {
 				if(attachrid(killerrid)) {
 					mapannounce $@MHMap$,""+strcharinfo(0)+" has killed the target",0;
-					if ($@ManHuntKillable[.Target] == 1) {	
-						atcommand "#killable "+$@ManHuntN$[.Target]+"";
-						set $@ManHuntKillable[.Target], 0;
+					for (.@i = 0; .@i < getarraysize($@ManHunt); .@i++) {
+						if ($@ManHuntKillable[.@i] == 1) {	
+							atcommand "#killable "+$@ManHuntN$[.@i]+"";
+							set $@ManHuntKillable[.@i], 0;
+						}
+						atcommand "#size \""+$@ManHuntN$[.@i]+"\" 0";			
 					}
-					atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
 					getitem .MHReward, .MKill; // Reward the Platinum Coins directly
 					stopnpctimer;
 					detachrid;
 					sleep2 3000;
+					atcommand "#size \""+$@ManHuntN$[.Target]+"\" 0";
 					atcommand "@raisemap";
 					set .MRounds, .MRounds + 1;
 					goto MHNextRound;
@@ -198,8 +204,8 @@
 			end;
 		} else {
 			sleep2 5000;
-			mapannounce $@MHMap$,"Next Round in 30 seconds.",0;
-			sleep2 30000;
+			mapannounce $@MHMap$,"Next Round in 15 seconds.",0;
+			sleep2 15000;
 			goto ManHuntStart;
 		}
 		end;

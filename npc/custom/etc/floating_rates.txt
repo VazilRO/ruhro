@@ -25,7 +25,7 @@ OnHour12:
 OnHour16:
 OnHour20:
 OnInit:
-	if(gettime(4)==6 || gettime(4)==7) {
+	if(gettime(4)==6 || gettime(4)==0) {
 		set $@brate,3000;
 		set $@jrate,3000;
 	} else {
