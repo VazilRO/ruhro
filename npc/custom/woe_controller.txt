@@ -1,4 +1,4 @@
-﻿//===== rAthena Script =======================================
+//===== rAthena Script =======================================
 //= Euphy's WOE Controller
 //===== By: ==================================================
 //= Euphy
@@ -200,14 +200,16 @@ OnReward:
 OnPCLoadMapEvent:
 	if (!compare(strcharinfo(3),"g_cas")) end;
 	if (agitcheck() && agitcheck2()) end;
-	if (agitcheck() && (eaclass()&EAJL_THIRD) && compare(strcharinfo(3), “g_cas”)) {
-		message strcharinfo(0), getcastlename(strcharinfo(3))+” is not available to third class characters during WoE 1.0!”;
+	if (agitcheck() && (eaclass()&EAJL_THIRD) && compare(strcharinfo(3), "g_cas")) {
+		message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to third class characters during WoE 1.0!";
 		sleep2 1000;
-		warp “SavePoint”,0,0;
-	if (agitcheck2() && !(eaclass()&EAJL_THIRD) && compare(strcharinfo(3), “g_cas”)) {
-		message strcharinfo(0), getcastlename(strcharinfo(3))+” is not available to non third class characters during WoE 2.0!”;
+		warp "SavePoint",0,0;
+	}	
+	if (agitcheck2() && !(eaclass()&EAJL_THIRD) && compare(strcharinfo(3), "g_cas")) {
+		message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to non third class characters during WoE 2.0!";
 		sleep2 1000;
-		warp “SavePoint”,0,0;
+		warp "SavePoint",0,0;
+	}	
 	if (((.AutoKick && .Active[0]) || (.NoOwner && !getcastledata(strcharinfo(3),1))) && !(.Active[0]&(1<<getd("."+strcharinfo(3))))) {
 		if (getcharid(2) && getcastledata(strcharinfo(3),1) == getcharid(2)) end;
 		sleep2 1000;
