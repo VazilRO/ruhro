@@ -20,8 +20,8 @@ prontera,144,229,5	script	Stable Hand	951,{
 	mes "[Stable Hand]";
 	mes "Welcome " + strcharinfo(0) + "!";
 	mes "I can rent you secondary mounts for the following fees: ";
-	mes "^C358177 Days: " + .@fee_seven + " zeny^000000";
-	mes "^C3581730 Days: " + .@fee_thirty + " zeny^000000";
+	mes "^C358177 Days: " + callfunc("F_InsertComma",.@fee_seven) + " z^000000";
+	mes "^C3581730 Days: " + callfunc("F_InsertComma",.@fee_thirty) + " z^000000";
 	next;
 	switch(select("7 Days:30 Days:Just walk away...")) {
 		case 1:

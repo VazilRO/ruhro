@@ -12,7 +12,7 @@
 //= 1.0 First Version
 //= 1.1 Optimized for the greater good. [Kisuka]
 //============================================================ 
-prontera,98,230,4	script	Reset Girl::resetGirl	124,{
+prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 	set .@stzeny,BaseLevel*10000;
 	set .@skzeny,JobLevel*10000;
 	set .@bzeny,((.@stzeny*9)+(.@skzeny*9))/10;
