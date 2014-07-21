@@ -19,7 +19,7 @@
 
 // Information NPC
 //============================================================
-prontera,149,193,4	script	WoE Information	835,{
+prontera,145,200,2	script	WoE Information	835,{
 	doevent "WOE_CONTROL::OnMenu";
 	end;
 OnAgitStart:
