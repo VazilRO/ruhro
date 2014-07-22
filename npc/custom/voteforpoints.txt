@@ -10,7 +10,7 @@
 //2.0 Reworked to give 5 Platinum Coins (677) for 10 Vote Points.
 //====================================================================================
 
-sec_in01,74,154,5	script	VoteForPoints	89,{
+prontera,187,209,3	script	Points Redeemer	72,{
 
 //Function Prototypes
 function garbagecol;//Garbage collection for the Character variables
@@ -38,17 +38,11 @@ add_item(677,5,10,"Coins");
 		case 1:
 		next;
 			mes .npcname$;
-			mes "Okay then, I can exchange your Vote Points into Platinum Coins!";
-			mes "Right now, our exchange rate is 5 Coins for 10 Vote Points.";
-		next;
-			mes .npcname$;			
-			set .@points,getPoints(getcharid(3));			
-			mes "You currently have "+.@points+" pt(s).";
-			garbagecol();
-		next;
-			mes .npcname$;
-			mes "Would you like to exchange 10 Vote points for 5 Platinum Coins?";
-			mes "Do you want to this item?";
+			mes "Right now, our exchange rate is ^FF00005 Coins^000000 for ^FF000010 Vote Points^000000.";			
+			set .@points,getPoints(getcharid(3));
+			mes "You currently have ^FF0000"+.@points+" Vote Points^000000.";
+			mes "\n";
+			mes "Sound Good?";
 			if(select("Yes:No")==1)
 			{
 				set .@points,getPoints(getcharid(3));
@@ -59,17 +53,21 @@ add_item(677,5,10,"Coins");
 					updatePoints(getcharid(3),10);
 					getitem 677,5;
 					mes "Here you go!. Thank you for voting. Don't forget to vote again. :D";
+					end;
 				}
 				else
-					mes "Sorry, you don't have enough points for these.";				
+					next;
+					mes "Sorry, you don't have enough points for these.";
+					end;
 			}
 			else
 			{
 				next;
 				mes .npcname$;			
 				mes "Maybe another time~";
+				end;
 			}			
-			garbagecol();
+			
 		close;
 		case 2:
 			next;
@@ -96,11 +94,101 @@ end;
 			return 0;		
 		return .@points[0];
 	}
+
+	function getItemDetails {
+		set .@key,getarg(0); //Key
+		set .@detail$,getarg(1); //What details to return such as ItemID, Points, Quantity, Category
+		
+		if(strtolower(.@detail$) == strtolower("ItemID"))
+			return @itemID[.@key];
+		else if(strtolower(.@detail$) == strtolower("Quantity"))
+			return @itemQ[.@key];
+		else if(strtolower(.@detail$) == strtolower("Points"))
+			return @points[.@key];
+		else if(strtolower(.@detail$) == strtolower("Category"))
+			return @category$[.@key];
+	}
+
+	function getItemsByCat {		
+		set .@selectedCat$,getarg(0);
+		set .@make_string$,"";
+		set .@x,0;
+		for(set .@i,0; .@i<getarraysize(@category$); set .@i,.@i+1)
+		{
+			if(strtolower(.@selectedCat$) == strtolower(@category$[.@i]))
+			{
+				setarray @itemKeys[.@x],.@i;
+				if(.@make_string$ == "")
+					set .@make_string$,getitemname(@itemID[.@i]);
+				else
+					set .@make_string$,.@make_string$+":"+getitemname(@itemID[.@i]);
+				
+				set .@x,.@x+1;
+			}
+		}
+		return .@make_string$;
+	}
+	
+	
+	function makeCategory {
+		set .@make_string$,"";
+		for(set .@i,0; .@i<getarraysize(@category$); set .@i,.@i+1)
+		{			
+			if(.@make_string$ == "")
+			{
+				setarray @listCat$[getarraysize(@listCat$)],@category$[.@i];
+				set .@make_string$,@category$[.@i];
+			}
+			else
+			{
+				if(compare(.@make_string$,@category$[.@i])==0)
+				{
+					setarray @listCat$[getarraysize(@listCat$)],@category$[.@i];
+					set .@make_string$,.@make_string$+":"+@category$[.@i];				
+				}
+			}
+		}
+		return .@make_string$;
+	}
+			
+	function add_item
+	{
+		set .@itemID,getarg(0,-1); //IteID
+		set .@itemQ,getarg(1,-1); //Item Quantity
+		set .@points,getarg(2,-1);
+		set .@cat$,getarg(3,"Uncategorized"); //Category
+		
+		
+		if(.@itemID == -1)
+		{
+			debugmes "Invalid Item ID. Script not completely loaded.";
+			end;
+		}
+		else if(.@itemQ == -1)
+		{
+			debugmes "Invalid Item Quantity. Script not completely loaded.";
+			end;
+		}
+		else if(.@points == -1)
+		{
+			debugmes "Points assignment error. Script not completely loaded.";
+			end;
+		}
+		set .@key,getarraysize(@itemID);
+		setarray @itemID[.@key],.@itemID;
+		setarray @itemQ[.@key],.@itemQ;
+		setarray @points[.@key],.@points;
+		setarray @category$[.@key],.@cat$;
+		return 1; //return 1 as success
+	}
 	
 	function garbagecol{
 		deletearray @itemID[0],128;
 		deletearray @itemQ[0],128;
-		deletearray @points[0],128;
+		deletearray @points[0],128;	
+		deletearray @category$[0],128;	
+		deletearray @listCat$[0],128;
+		deletearray @itemKeys[0],128;
 		return;
 	}
 }
