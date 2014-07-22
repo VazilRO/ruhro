@@ -100,10 +100,7 @@ end;
 	function garbagecol{
 		deletearray @itemID[0],128;
 		deletearray @itemQ[0],128;
-		deletearray @points[0],128;	
-		deletearray @category$[0],128;	
-		deletearray @listCat$[0],128;
-		deletearray @itemKeys[0],128;
+		deletearray @points[0],128;
 		return;
 	}
 }
