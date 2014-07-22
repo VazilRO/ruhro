@@ -25,7 +25,7 @@ function updatePoints;//This will updates the points of the player stored in the
 set .npcname$,"[ Voting Rewards ]";
 	
 //Initialization of the Rewards
-add_item(667,5,4,"Coins");
+add_item(677,5,4,"Coins");
 
 
 //Script Start	
