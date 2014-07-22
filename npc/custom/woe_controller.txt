@@ -163,6 +163,27 @@ function Add_Zero {
 	return ((getarg(0)<10)?"0":"")+getarg(0)+(getarg(1,0)?".":":")+"00";
 }
 
+function Check_Woe {
+	if(getarg(1) == 1) { // WoE 1.0
+		setarray .current_castles$[0],
+			"prtg_cas01","prtg_cas02","prtg_cas03","prtg_cas04","prtg_cas05",
+			"payg_cas01","payg_cas02","payg_cas03","payg_cas04","payg_cas05",
+			"gefg_cas01","gefg_cas02","gefg_cas03","gefg_cas04","gefg_cas05",
+			"aldeg_cas01","aldeg_cas02","aldeg_cas03","aldeg_cas04","aldeg_cas05";
+	} else { // WoE 2.0
+		setarray .current_castles$[0],
+			"arug_cas01","arug_cas02","arug_cas03","arug_cas04","arug_cas05",
+			"schg_cas01","schg_cas02","schg_cas03","schg_cas04","schg_cas05";	
+	}
+	
+	for(set .@i,0; .@i<getarraysize(.current_castles$); set .@i,.@i+1) {
+		if(getarg(0) == .current_castles$[.@i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
 OnReward:
 	set .@sql$, ((.Options&4)?"position = 0":"online = 1");
 	if (.Options&2) set .@str$,gettimestr("%B %d, %Y",21);
@@ -200,12 +221,12 @@ OnReward:
 OnPCLoadMapEvent:
 	if (!compare(strcharinfo(3),"g_cas")) end;
 	if (!agitcheck() && !agitcheck2()) end;
-	if (agitcheck() && (eaclass()&EAJL_THIRD) && compare(strcharinfo(3), "g_cas")) {
-		message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to third class characters during WoE 1.0!";
+	if (((eaclass()&EAJL_THIRD) || BaseLevel > 99) && Check_Woe(strcharinfo(3), 1)) {
+		message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to third class characters and characters above Level 99 during WoE 1.0!";
 		sleep2 500;
 		warp "SavePoint",0,0;
 	}	
-	if (agitcheck2() && !(eaclass()&EAJL_THIRD) && compare(strcharinfo(3), "g_cas")) {
+	if ((!(eaclass()&EAJL_THIRD) || BaseLevel < 100) && Check_Woe(strcharinfo(3), 2)) {
 		message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to non third class characters during WoE 2.0!";
 		sleep2 500;
 		warp "SavePoint",0,0;
