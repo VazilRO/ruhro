@@ -38,8 +38,8 @@ add_item(677,5,10,"Coins");
 		case 1:
 		next;
 			mes .npcname$;
-			mes "Okay then, I can exchange your Vote Points into Platinum Coins!"
-			mes "Right now, our exchange rate is 5 Coins for 10 Vote Points."
+			mes "Okay then, I can exchange your Vote Points into Platinum Coins!";
+			mes "Right now, our exchange rate is 5 Coins for 10 Vote Points.";
 		next;
 			mes .npcname$;			
 			set .@points,getPoints(getcharid(3));			
@@ -47,7 +47,7 @@ add_item(677,5,10,"Coins");
 			garbagecol();
 		next;
 			mes .npcname$;
-			mes "Would you like to exchange 10 Vote points for 5 Platinum Coins?"
+			mes "Would you like to exchange 10 Vote points for 5 Platinum Coins?";
 			mes "Do you want to this item?";
 			if(select("Yes:No")==1)
 			{
