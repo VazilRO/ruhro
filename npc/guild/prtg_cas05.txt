@@ -94,7 +94,8 @@ prtg_cas05,273,257,4	duplicate(InsideFlagsPR5)	Gondul#12	722
 
 // Guild Flag (Town)
 //============================================================
-prontera,165,194,5	duplicate(InsideFlagsPR5)	Gondul#13	722
+prontera,146,300,5	duplicate(InsideFlagsPR5)	Gondul#13	722
+prontera,165,300,3	duplicate(InsideFlagsPR5)	Gondul#14	722
 
 // Kafra Employee
 //============================================================
