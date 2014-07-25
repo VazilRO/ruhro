@@ -339,7 +339,7 @@
 
 // PC-Cafe Authoritative Badge
 12262,507,100	// Authoritative Badge
-12263,475,100	// Field Manual
+//12263,475,100	// Field Manual
 12264,475,100	// Bubble Gum
 12265,475,100	// Life Insurrance
 
