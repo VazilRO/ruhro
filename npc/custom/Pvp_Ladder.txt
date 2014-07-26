@@ -309,7 +309,7 @@ announce "[Anti-Feed] Your kill count has been rollbacked "+.Rollback+" times.",
 return;
 }
 
-morocc,162,107,3	script	Loki	467,{
+prontera,127,194,5	script	Loki	467,{
 mes "[Loki]"; mes "What can I do for you today?";
 switch(select("Player Ranking:PvP Statistic:Announcer Setting")){
 case 1: //Player Ranking
