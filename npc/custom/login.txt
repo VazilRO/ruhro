@@ -121,7 +121,7 @@ OnPCLoginEvent:
 if(login_loot == 1)	{
 	atcommand "@autoloot";
 }
-if(login_main == 1) {
+if(login_main == 0) {
 	atcommand "@main join #main";
 }
 if(login_showexp == 1) {
