@@ -45,7 +45,7 @@ OnInit:
 set .System, 1; //Toggle PvP System (0:Disable|1:Enable)
 set .ServerType, 1; //Are you using TXT or SQL? (0:TXT|1:SQL)
 set .GMLevel, 10; //GM levels above or equal this level will be ignored by the system
-setarray .PvPMap$[0], "All"; //List all pvp maps here (Index 0:"All" to enable all maps)
+setarray .PvPMap$[0], "06guild_01", "06guild_02"; //List all pvp maps here (Index 0:"All" to enable all maps)
 
 //PvP Ladder
 set .Top, 10; //What is the length of the list?
