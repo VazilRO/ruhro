@@ -44,8 +44,9 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 	mes "[^FF8000Stylist^000000]";
 	mes "I could squeeze you in for a fee?";
 	mes "My standard fee is ^FF0000100,000 zeny.^000000";
+	mes "But I could be persuaded for 2 Platinum Coins";
 	next;
-	menu "Chump Change!",Ldoit,"Oh, um... Not today...",Lnope;
+	menu "Chump Change!",Ldoit,"Platinum Coins!",Lplatinum,"Oh, um... Not today...",Lnope;
 	
 	Ldoit:
 	if (Zeny < 100000) {
@@ -59,6 +60,19 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 	next;
 	menu "Hair style",Lstyle,"Hair color",Lcolor,"Cloth Color",Lcloth,"Nothing",LCancel;
 
+	Lplatinum:
+	if (countitem (677) < 2) {
+				mes "[^FF8000Stylist^000000]";
+				mes "You don't seem to have enough coins...";
+				mes "Maybe some other time?";
+				close;
+			}
+	delitem 677,2;
+	mes "What do you wish to change?";
+	next;
+	menu "Hair style",Lstyle,"Hair color",Lcolor,"Cloth Color",Lcloth,"Nothing",LCancel;
+
+	
 	Lstyle:
 		mes "[^FF8000Stylist^000000]";
 		mes "Do you want to browse through the choices, or do you know what you want?";
