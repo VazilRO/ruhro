@@ -17,16 +17,15 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 	set .@skzeny,JobLevel*10000;
 	set .@bzeny,((.@stzeny*9)+(.@skzeny*9))/10;
 	mes "[Reset Girl]";
-	mes "I am a Reset Girl.";
+	mes "I am the Reset Girl.";
 	mes "Reset Stats: "+.@stzeny+"z";
 	mes "Reset Skills: "+.@skzeny+"z";
 	mes "Reset Both: "+.@bzeny+"z";
+	mes "Platinum Coins: 5 per reset, 10 for both";
 	mes "Please select the service you want:";
 	next;
-	// With Premium Ticket
-	// switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:Premium Ticket?:Quit")) {
-	// Without
-	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:Quit")) {
+
+	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:Platinum Coins:Quit")) {
 		case 1:
 			mes "[Reset Girl]";
 			if (Zeny < .@skzeny) {
@@ -101,44 +100,55 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 				close;
 				}
 		
-		// Premium Ticket
-		// case 5:
-		// 	if (countitem(7608) > 0) {
-		// 	mes "[Reset Girl]";
-		// 	mes "Ahh! Of Course!";
-		// 	mes "I can perform any of my regular services for no charge in exchange for that ticket!";
-		// 	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")){
-		// 	case 1:
-		// 		mes "[Reset Girl]";
-		// 		mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
-		// 		delitem 7608,1;
-		// 		atcommand "@skreset";
-		// 		close;
-		// 	case 2:
-		// 		mes "[Reset Girl]";
-		// 		mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
-		// 		delitem 7608,1;
-		// 		ResetStatus;
-		// 		close;
-		// 	case 3:
-		// 		mes "[Reset Girl]";
-		// 		mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
-		// 		delitem 7608,1;
-		// 		atcommand "@skreset";
-		// 		ResetStatus;
-		// 		close;
-		// 	case 4:
-		// 		close;
-		// 	}
-		// 	} else {
-		// 	
-		// 	mes "[Reset Girl]";
-		// 	mes "I'd need to see your ticket before I can accept it...";
-		// 	close;
-		// 	}
-		// Premium Ticket
-		// case 6:
 		case 5:
+		 	mes "[Reset Girl]";
+		 	mes "Platinum Coins are shiny!";
+		 	mes "Reset Stats: 5 coins";
+			mes "Reset Skills: 5 coins";
+			mes "Reset Both: 10 coins";
+		 	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")){
+			case 1:
+				if (countitem(677) >= 5) {
+					mes "[Reset Girl]";
+					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+					delitem 677,5;
+					ResetSkill;
+					close;
+				} else {
+					mes "[Reset Girl]";
+					mes "You need 5 coins to reset skills";
+					close;
+				}
+		 	case 2:
+				if (countitem(677) >= 5) {
+					mes "[Reset Girl]";
+					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+					delitem 677,5;
+					ResetStatus;
+					close;
+				} else {
+					mes "[Reset Girl]";
+					mes "You need 5 coins to reset stats";
+					close;
+				}
+		 	case 3:
+				if (countitem(677) >= 10) {
+					mes "[Reset Girl]";
+					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+					delitem 677,10;
+					ResetSkill;
+					ResetStatus;
+					close;
+				} else {
+					mes "[Reset Girl]";
+					mes "You need 10 coins for a full reset";
+					close;
+				}
+		 	case 4:
+		 		close;
+		 	}
+
+		case 6:
 			close;
 	}
 }
