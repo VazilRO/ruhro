@@ -1,7 +1,7 @@
 //======Name========================================
 // Click The Pub!
 //======Version=====================================
-// 1.0
+// 1.1
 //======Author(s)===================================
 // Based on the script by Sandbox, edited by Alkarl :P
 //======Comments====================================
@@ -112,6 +112,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 	if ($@j == 1)  {
 		enablenpc strnpcinfo(0);
@@ -127,6 +128,16 @@ OnMinute00:
 		end;
 	}
 	end;
+
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 1) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;	
 	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
@@ -135,6 +146,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -149,6 +161,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 	if ($@j == 2)  {
 		enablenpc strnpcinfo(0);
@@ -165,6 +178,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 2) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -172,6 +195,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -186,6 +210,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 3)  {
@@ -203,7 +228,17 @@ OnMinute00:
 		end;
 	}
 	end;
-	
+
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 3) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -211,6 +246,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -225,6 +261,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 4)  {
@@ -243,6 +280,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 4) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -250,6 +297,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -264,6 +312,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 5)  {
@@ -282,6 +331,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 5) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -289,6 +348,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -303,6 +363,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 6)  {
@@ -320,6 +381,16 @@ OnMinute00:
 		end;
 	}
 	end;
+
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 6) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
 	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
@@ -328,6 +399,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -342,6 +414,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 7)  {
@@ -359,6 +432,16 @@ OnMinute00:
 		end;
 	}
 	end;
+
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 7) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
 	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
@@ -367,6 +450,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -381,6 +465,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 8)  {
@@ -399,6 +484,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 8) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -406,6 +501,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -420,6 +516,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 9)  {
@@ -438,6 +535,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 9) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -445,6 +552,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -459,6 +567,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 10)  {
@@ -477,6 +586,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 10) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -484,6 +603,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -498,6 +618,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 11)  {
@@ -516,6 +637,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 11) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -523,6 +654,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -537,6 +669,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 12)  {
@@ -555,6 +688,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 12) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -562,6 +705,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -576,6 +720,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 13)  {
@@ -594,6 +739,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 13) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -601,6 +756,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -615,6 +771,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 14)  {
@@ -633,6 +790,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 14) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -640,6 +807,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -654,6 +822,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 15)  {
@@ -672,6 +841,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 15) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -679,6 +858,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -693,6 +873,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 16)  {
@@ -711,6 +892,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 16) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -718,6 +909,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -732,6 +924,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 17)  {
@@ -750,6 +943,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 17) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -757,6 +960,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -771,6 +975,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 18)  {
@@ -789,6 +994,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 18) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -796,6 +1011,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -810,6 +1026,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 19)  {
@@ -828,6 +1045,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 19) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -835,6 +1062,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -849,6 +1077,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 20)  {
@@ -867,6 +1096,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 20) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -874,6 +1113,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -888,6 +1128,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 21)  {
@@ -906,6 +1147,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 21) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -913,6 +1164,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -927,6 +1179,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 22)  {
@@ -945,6 +1198,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 22) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -952,6 +1215,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -966,6 +1230,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 23)  {
@@ -984,6 +1249,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 23) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -991,6 +1266,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 
@@ -1005,6 +1281,7 @@ end;
 OnInit:
 	sleep 10000;
 OnMinute00:
+	delwaitingroom;
 	disablenpc strnpcinfo(0);
 
 	if ($@j == 24)  {
@@ -1023,6 +1300,16 @@ OnMinute00:
 	}
 	end;
 	
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+	if ($@j == 24) {
+		announce "Click The Pub in "+$@k$+" still hasn't been found!",0;
+	}
+	end;
+	
 OnFirstClick:
 	warpwaitingpc strnpcinfo(4),$@rand_x,$@rand_y,1;
 	getitem $Prize[0],$Prize[1],$@warpwaitingpc[0];
@@ -1030,6 +1317,7 @@ OnFirstClick:
 	announce rid2name($@warpwaitingpc[0])+" won the Click The Pub event!",0;
 	sleep 2000;
 	announce "I was at "+$@k$+" "+$@rand_x+" "+$@rand_y,0;
+	$@j = 0;
 	disablenpc strnpcinfo(0);
 	end;
 

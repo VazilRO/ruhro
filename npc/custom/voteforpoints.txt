@@ -32,7 +32,7 @@ add_item(677,5,10,"Coins");
 
 //Script Start	
 	mes .npcname$;
-	mes "Hi! Do you want to exchange your vote points?:";
+	mes "Hi! Do you want to exchange your vote points?";
 	switch(select("Yes, I want to exchange my points:See my points"))
 	{
 		case 1:
@@ -73,7 +73,9 @@ add_item(677,5,10,"Coins");
 			next;
 			mes .npcname$;			
 			set .@points,getPoints(getcharid(3));			
-			mes "You currently have "+.@points+" pt(s).";
+			mes "You currently have "+.@points+" points.";
+			mes "\n";
+			mes "You can vote on our webpage!";
 			garbagecol();
 		close;
 	}
