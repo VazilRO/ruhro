@@ -234,7 +234,7 @@
 		setarray $@ManHunt[0],0;
 		setarray $@ManHuntN$[0],"";
 		setarray $@ManHuntKillable[0], "";
-		bindatcmd("manhunt","ManHuntHandler::OnMHAdmin",10,99);	
+		bindatcmd("manhunt","ManHuntHandler::OnMHAdmin",11,11);	
 		end;	
 }
 

@@ -115,6 +115,6 @@
 		end;
 	OnInit:
 		setarray  $@mapinvasion$[0],"morocc","geffen","payon","alberta","izlude","aldebaran","xmas","comodo","yuno","amatsu","gonryun","umbala","louyang","jawaii","ayothaya","einbroch","lighthalzen","einbech","hugel","rachel","veins","moscovia","brasilis"; //list maps
-		bindatcmd("invasion","towninvasion::OnInvasionAdmin",10,99);	
+		bindatcmd("invasion","towninvasion::OnInvasionAdmin",11,11);	
 		end;	
 }

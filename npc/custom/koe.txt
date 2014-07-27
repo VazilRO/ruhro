@@ -18,7 +18,7 @@
 	OnInit:
 		disablenpc "The King#KoE";
 		disablenpc "Exit#KoE";
-		bindatcmd "koe", strnpcinfo(0)+"::OnCommand", 10,100;
+		bindatcmd "koe", strnpcinfo(0)+"::OnCommand", 11,11;
 		end;
 	OnCommand:
 		if ( compare( .@atcmd_parameters$, "on" ) ) goto L_start;
