@@ -9,7 +9,7 @@
 //===== Additional Comments: =================================
 //= 1.0 First release
 
-gef_tower 70,172,5	script Gangster Mage	2561{
+gef_tower,70,172,5	script	Gangster Mage	755,{
 	if (GANGSTER_QUEST == 9000) goto L_PLSGO;
 	
 	mes "[Gangster Mage]";
@@ -93,7 +93,7 @@ L_PLSGO:
 	next;
 	mes "[Gangster Mage]";
 	mes "...why are you still here? Shoo, I'm busy trying to Preserve poison skills here.";
-	emotion e_omg{1};
+	emotion e_omg,1;
 	close;
 	
 }
