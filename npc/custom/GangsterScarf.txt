@@ -29,9 +29,11 @@ M_YES:
 	mes "[Gangster Mage]";
 	mes "This ol' thing? I don't even know why I wear it, it's useless!";
 	emotion e_heh;
-	mes "I'll trade you these items for it!";
 	next;
-	goto L_List;
+	mes "I'll trade you for it!";
+	next;
+	menu "What do I need?",L_List,"I have the items you asked for",L_Make,"I changed my mind...",M_NO;
+	next;
 
 L_List:	
 	mes "Gangster Mask";
