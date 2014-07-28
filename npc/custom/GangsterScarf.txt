@@ -34,12 +34,12 @@ M_YES:
 	goto L_List;
 
 L_List:	
-	mes "^8080FFGangster Mask^000000";
-	mes "^8080FFScarlet Dyestuffs^000000";
-	mes "^8080FFSucsamad^000000";
-	mes "^8080FFAmethyst^000000";
-	mes "^8080FF50 Burning Hearts^000000";
-	mes "^And 30,000z!";
+	mes "Gangster Mask";
+	mes "Scarlet Dyestuffs";
+	mes "Sucsamad";
+	mes "Amethyst";
+	mes "50 Burning Hearts";
+	mes "And 30,000z!";
 	next;
 	mes "Hop to it!";
 	emotion e_pif;
