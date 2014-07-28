@@ -95,3 +95,4 @@ L_PLSGO:
 	emotion e_omg{,1};
 	close;
 	
+}
