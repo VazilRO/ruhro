@@ -71,52 +71,28 @@ moc_para01,49,170,3	script	Ticket Exchanger	10039,{
 	mes "I can exchange your ^4d4dff'Courtesy Tickets'^000000 for certain things!";
 	mes "What would you like?";
 	next;
-	switch(select("Items:Experience:Cancel")) {
-		case 1: // Items TODO: Figure out appropriate items
-			mes "[Ticket Exchanger]";
-			mes "Not implemented yet :(";
-			close;
-		case 2: // Experience
-			if(BaseLevel > 170) {
-				set .@lvlRange, 1;
-			} else if(BaseLevel > 160) {
-				set .@lvlRange, 2;
-			} else if(BaseLevel > 150) {
-				set .@lvlRange, 3;
-			} else if(BaseLevel > 140) {
-				set .@lvlRange, 4;
-			} else if(BaseLevel > 130) {
-				set .@lvlRange, 5;
-			} else if(BaseLevel > 120) {
-				set .@lvlRange, 6;
-			} else if(BaseLevel > 110) {
-				set .@lvlRange, 7;
-			} else if(BaseLevel >= 100) {
-				set .@lvlRange, 8;
-			}
-			callsub L_TickExp, .@lvlRange;
+	switch(select("Experience:Cancel")) {
+		case 1: // Experience
+			goto L_TickExp;
 		case 3: // Cancel
 			close;
 	}
 	end;
 	
 L_TickExp:
-	set .@lvRange, getarg(0);
 	mes "[Ticket Exchanger]";
-	mes "Hmm...let's see.";
+	mes "How many tickets are you willing to cough up.";
 	
-	switch(.@lvRange) {
-		case 1: set .@numTickets, 100;	break;
-		case 2: set .@numTickets, 90;	break;
-		case 3: set .@numTickets, 80;	break;
-		case 4: set .@numTickets, 70;	break;
-		case 5: set .@numTickets, 60;	break;
-		case 6: set .@numTickets, 50;	break;
-		case 7: set .@numTickets, 40;	break;
-		case 8: set .@numTickets, 25;	break;
+	switch(select("10 Tickets:25 Tickets:50 Tickets:100 Tickets:150 Tickets:200 Tickets")) {
+		case 1: set .@numTickets, 10;	break;
+		case 2: set .@numTickets, 25;	break;
+		case 3: set .@numTickets, 50;	break;
+		case 4: set .@numTickets, 100;	break;
+		case 5: set .@numTickets, 150;	break;
+		case 6: set .@numTickets, 200;	break;
 	}
 	
-	mes "It will cost you " + .@numTickets + " to exchange for some experience.";
+	mes "Are you sure you want to exchange " + .@numTickets + " tickets for some experience.";
 	next;
 	switch(select("Okay:Nevermind")) {
 		case 1:
@@ -125,38 +101,30 @@ L_TickExp:
 				mes "You don't seem to have enough ^4d4dff'Courtesy Tickets'^000000...";
 				close;
 			}
-			switch(.@lvRange) {
-				case 1:
-					set .@bxp, 3000000 + rand(0,3) * 100000;
+			switch(.@numTickets) {
+				case 10:
+					set .@bxp, 125000 + rand(0,3) * 10000;
+					set .@jxp, 75000 + rand(0,3) * 5000;
+					break;
+				case 25:
+					set .@bxp, 343750 + rand(0,3) * 15000;
+					set .@jxp, 206250 + rand(0,3) * 7500;
+					break;
+				case 50:
+					set .@bxp, 750000 + rand(0,3) * 20000;
 					set .@jxp, 450000 + rand(0,3) * 10000;
 					break;
-				case 2:
-					set .@bxp, 2500000 + rand(0,3) * 100000;
-					set .@jxp, 400000 + rand(0,3) * 10000;
+				case 100:
+					set .@bxp, 1625000 + rand(0,3) * 25000;
+					set .@jxp, 975000 + rand(0,3) * 15000;
 					break;
-				case 3:
-					set .@bxp, 2250000 + rand(0,3) * 100000;
-					set .@jxp, 350000 + rand(0,3) * 10000;
+				case 150:
+					set .@bxp, 2625000 + rand(0,3) * 50000;
+					set .@jxp, 1575000 + rand(0,3) * 20000;
 					break;
-				case 4:
-					set .@bxp, 2000000 + rand(0,3) * 100000;
-					set .@jxp, 300000 + rand(0,3) * 10000;
-					break;
-				case 5:
-					set .@bxp, 1500000 + rand(0,3) * 100000;
-					set .@jxp, 230000 + rand(0,3) * 10000;
-					break;
-				case 6:
-					set .@bxp, 800000 + rand(0,3) * 100000;
-					set .@jxp, 180000 + rand(0,3) * 10000;
-					break;
-				case 7:
-					set .@bxp, 300000 + rand(0,3) * 100000;
-					set .@jxp, 160000 + rand(0,3) * 10000;
-					break;
-				case 8:
-					set .@bxp, 200000 + rand(0,3) * 50000;
-					set .@jxp, 150000 + rand(0,3) * 10000;
+				case 200:
+					set .@bxp, 3750000 + rand(0,3) * 75000;
+					set .@jxp, 2250000 + rand(0,3) * 25000;
 					break;
 			}		
 			delitem 6549, .@numTickets;
