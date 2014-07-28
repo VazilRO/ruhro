@@ -534,7 +534,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 		mes "on our temp list. Hmmm...";
 		mes "Ah, you're "+strcharinfo(0)+", right?";
 		next;
-		mes "[Burled]";
+		/*mes "[Burled]";
 		if (getareausers("tha_t02",226,156,236,166) < 5) {
 			mes "First, we need to wait until";
 			mes "at least 5 temps are gathered";
@@ -557,7 +557,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 		mes "the minimum 5 temp group";
 		mes "requirement, so we'll open";
 		mes "the gate to the 3rd Floor soon.";
-		next;
+		next;*/
 		mes "[Burled]";
 		mes "The gate to the 3rd Floor";
 		mes "will close shortly, so enter it";
