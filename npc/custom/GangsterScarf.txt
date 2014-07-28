@@ -36,11 +36,12 @@ M_YES:
 	next;
 
 L_List:	
-	mes "Gangster Mask";
-	mes "Scarlet Dyestuffs";
-	mes "Sucsamad";
-	mes "Amethyst";
-	mes "50 Burning Hearts";
+	mes "[Gangster Mage]";
+	mes "1x Gangster Mask";
+	mes "1x Scarlet Dyestuffs";
+	mes "1x Sucsamad";
+	mes "1x Amethyst";
+	mes "50x Burning Hearts";
 	mes "And 30,000z!";
 	next;
 	mes "Hop to it!";
