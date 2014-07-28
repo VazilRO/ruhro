@@ -39,7 +39,7 @@ L_List:
 	mes "^8080FF50 Burning Hearts^000000";
 	mes "^And 30,000z!";
 	next;
-	mes "Hop to it!"
+	mes "Hop to it!";
 	emotion e_pif;
 	close;
 
@@ -51,7 +51,7 @@ M_NO:
 
 L_Make:
 	mes "[Gangster Mage]";
-	mes "Let's make...uh trade for the scarf!"
+	mes "Let's make...uh trade for the scarf!";
 	next;
 	if(countitem(2265) < 1 || countitem(975) < 1 ||	countitem(1236) < 1 || countitem(719) < 1 ||
 	countitem(7097) < 50 ||) goto L_NOITEMS;
@@ -88,10 +88,10 @@ L_NOITEMS:
 
 L_PLSGO:
 	mes "[Gangster Mage]";
-	mes "Killing Cloud! Venom Dust! Venom Splasher! Poisonous Smoke! Poison Burst!"
+	mes "Killing Cloud! Venom Dust! Venom Splasher! Poisonous Smoke! Poison Burst!";
 	next;
 	mes "[Gangster Mage]";
-	mes "...why are you still here? Shoo, I'm busy trying to Preserve poison skills here."
+	mes "...why are you still here? Shoo, I'm busy trying to Preserve poison skills here.";
 	emotion e_omg{,1};
 	close;
 	
