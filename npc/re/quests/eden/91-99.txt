@@ -99,6 +99,7 @@ moc_para01,48,177,3	script	91-99 Mission Board	857,{
 				mes ":: salutary experience.";
 				erasequest .@quest;
 				getexp .@exp[.@quest-4181],0;
+				getitem 6549, rand(1,3); // Courtesy Tickets
 				close;
 			}
 		}
@@ -188,6 +189,7 @@ L_Quest:
 		else if (JobLevel == 69) set .@jexp,311000;
 
 		getexp getarg(2),.@jexp;
+		getitem 6549, rand(1,5); // Courtesy Tickets
 		close;
 	}/* else if (.@hunting == 3) {
 //		recall_completequest .@quest1

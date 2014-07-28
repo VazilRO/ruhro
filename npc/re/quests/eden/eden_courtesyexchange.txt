@@ -91,7 +91,8 @@ L_TickExp:
 		case 5: set .@numTickets, 150;	break;
 		case 6: set .@numTickets, 200;	break;
 	}
-	
+	next;
+	mes "[Ticket Exchanger]";
 	mes "Are you sure you want to exchange " + .@numTickets + " tickets for some experience.";
 	next;
 	switch(select("Okay:Nevermind")) {

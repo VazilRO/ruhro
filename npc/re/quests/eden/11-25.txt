@@ -149,6 +149,7 @@ L_Quest:
 		erasequest getarg(0);
 		setquest getarg(0)+10;
 		getexp getarg(2),0;
+		getitem 6549, rand(1,5); // Courtesy Tickets
 		close;
 	}
 }

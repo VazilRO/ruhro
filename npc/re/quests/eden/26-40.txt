@@ -149,6 +149,7 @@ L_Quest:
 			mes "[Sponiac]";
 			mes "Here it is. Thank you very much. God bless you!";
 			getitem 569,getarg(4); //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			getexp getarg(2),getarg(3);
 			erasequest getarg(0);
 			close;
@@ -376,6 +377,7 @@ prt_fild03,30,254,3	script	Entomologist	83,{
 		delitem 6218,1; //Disin_Delivery_Box
 		erasequest 8272;
 		getitem 569,100; //Novice_Potion
+		getitem 6549, rand(1,5); // Courtesy Tickets
 		getexp 1000,0;
 		close;
 	}
@@ -441,6 +443,7 @@ xmas_fild01,92,57,3	script	Biologist	97,{
 		delitem 6218,1; //Disin_Delivery_Box
 		erasequest 8273;
 		getitem 569,100; //Novice_Potion
+		getitem 6549, rand(1,5); // Courtesy Tickets
 		getexp 1000,0;
 		close;
 	}
@@ -491,6 +494,7 @@ payon,179,66,3	script	Dashia	931,{
 			callsub L_Reward;
 			delitem 932,10; //Skel_Bone
 			getitem 569,100; //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			getexp 1000,100;
 			erasequest 8274;
 			close;
@@ -513,6 +517,7 @@ payon,179,66,3	script	Dashia	931,{
 		if ((countitem(948) > 9) && (countitem(919) > 4)) {
 			callsub L_Reward;
 			getitem 569,100; //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			delitem 948,10; //Bear's_Foot
 			delitem 919,5; //Animal's_Skin
 			getexp 1000,100;
@@ -540,6 +545,7 @@ payon,179,66,3	script	Dashia	931,{
 			delitem 955,20; //Worm_Peelings
 			delitem 910,20; //Garlet
 			getitem 569,100; //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			getexp 1000,100;
 			erasequest 8276;
 			close;
@@ -568,6 +574,7 @@ payon,179,66,3	script	Dashia	931,{
 			delitem 1026,10; //Acorn
 			delitem 945,10; //Raccoon_Leaf
 			getitem 569,150; //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			getexp 1000,200;
 			erasequest 8277;
 			close;
@@ -596,6 +603,7 @@ payon,179,66,3	script	Dashia	931,{
 			delitem 538,5; //Well_Baked_Cookie
 			delitem 539,1; //Piece_Of_Cake
 			getitem 569,150; //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			getexp 1000,200;
 			erasequest 8278;
 			close;
@@ -622,6 +630,7 @@ payon,179,66,3	script	Dashia	931,{
 			delitem 1017,5; //Moustache_Of_Mole
 			delitem 1018,3; //Nail_Of_Mole
 			getitem 569,150; //Novice_Potion
+			getitem 6549, rand(1,5); // Courtesy Tickets
 			getexp 1000,200;
 			erasequest 8279;
 			close;
