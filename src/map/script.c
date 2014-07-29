@@ -11711,7 +11711,7 @@ static int buildin_maprespawnguildid_sub_mob(struct block_list *bl,va_list ap)
 {
 	struct mob_data *md=(struct mob_data *)bl;
 
-	if(!md->guardian_data && md->mob_id != MOBID_EMPERIUM)
+	if(!md->guardian_data && md->mob_id != MOBID_EMPERIUM && md->mob_id != MOBID_EMPERIUM1)
 		status_kill(bl);
 
 	return 0;
@@ -18683,7 +18683,7 @@ BUILDIN_FUNC(montransform) {
 		return SCRIPT_CMD_FAILURE;
 	}
 
-	if (mob_id == MOBID_EMPERIUM) {
+	if (mob_id == MOBID_EMPERIUM || mob_id == MOBID_EMPERIUM1) {
 		ShowWarning("buildin_montransform: Monster 'Emperium' cannot be used.\n");
 		return SCRIPT_CMD_FAILURE;
 	}

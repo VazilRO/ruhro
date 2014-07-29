@@ -482,7 +482,7 @@ int mob_once_spawn(struct map_session_data* sd, int16 m, int16 x, int16 y, const
 		if (!md)
 			continue;
 
-		if (mob_id == MOBID_EMPERIUM)
+		if (mob_id == MOBID_EMPERIUM || mob_id == MOBID_EMPERIUM1)
 		{
 			struct guild_castle* gc = guild_mapindex2gc(map[m].index);
 			struct guild* g = (gc) ? guild_search(gc->guild_id) : NULL;
@@ -593,7 +593,7 @@ static int mob_spawn_guardian_sub(int tid, unsigned int tick, int id, intptr_t d
 	if (g == NULL)
 	{	//Liberate castle, if the guild is not found this is an error! [Skotlex]
 		ShowError("mob_spawn_guardian_sub: Couldn't load guild %d!\n", (int)data);
-		if (md->mob_id == MOBID_EMPERIUM)
+		if (md->mob_id == MOBID_EMPERIUM || md->mob_id == MOBID_EMPERIUM1)
 		{	//Not sure this is the best way, but otherwise we'd be invoking this for ALL guardians spawned later on.
 			md->guardian_data->guild_id = 0;
 			if (md->guardian_data->castle->guild_id) //Free castle up.
@@ -2596,7 +2596,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		log_mvpdrop(mvp_sd, md->mob_id, log_mvp);
 	}
 
-	if (type&2 && !sd && md->mob_id == MOBID_EMPERIUM)
+	if (type & 2 && !sd && (md->mob_id == MOBID_EMPERIUM || md->mob_id == MOBID_EMPERIUM1))
 		//Emperium destroyed by script. Discard mvp character. [Skotlex]
 		mvp_sd = NULL;
 
@@ -2728,7 +2728,7 @@ int mob_guardian_guildchange(struct mob_data *md)
 
 	if (md->guardian_data->castle->guild_id == 0)
 	{	//Castle with no owner? Delete the guardians.
-		if (md->mob_id == MOBID_EMPERIUM)
+		if (md->mob_id == MOBID_EMPERIUM || md->mob_id == MOBID_EMPERIUM1)
 		{	//But don't delete the emperium, just clear it's guild-data
 			md->guardian_data->guild_id = 0;
 			md->guardian_data->emblem_id = 0;

@@ -106,6 +106,7 @@ enum MOBID {
 	MOBID_S_HORNET			= 2158,
 	MOBID_S_GIANT_HORNET,
 	MOBID_S_LUCIOLA_VESPA,
+	MOBID_EMPERIUM1			= 3500,
 };
 
 //The following system marks a different job ID system used by the map server,

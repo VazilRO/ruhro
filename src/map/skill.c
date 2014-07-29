@@ -2364,7 +2364,7 @@ int skill_blown(struct block_list* src, struct block_list* target, int count, in
 	switch (target->type) {
 		case BL_MOB: {
 				struct mob_data* md = BL_CAST(BL_MOB, target);
-				if( md->mob_id == MOBID_EMPERIUM )
+				if( md->mob_id == MOBID_EMPERIUM || md->mob_id == MOBID_EMPERIUM1)
 					return 0;
 				//Bosses or imune can't be knocked-back
 				if(src != target && status_get_mode(target)&(MD_KNOCKBACK_IMMUNE|MD_BOSS))
@@ -3351,7 +3351,7 @@ static int skill_check_unit_range2_sub (struct block_list *bl, va_list ap)
 	if( skill_id == HP_BASILICA && bl->type == BL_PC )
 		return 0;
 
-	if( skill_id == AM_DEMONSTRATION && bl->type == BL_MOB && ((TBL_MOB*)bl)->mob_id == MOBID_EMPERIUM )
+	if (skill_id == AM_DEMONSTRATION && bl->type == BL_MOB && (((TBL_MOB*)bl)->mob_id == MOBID_EMPERIUM || ((TBL_MOB*)bl)->mob_id == MOBID_EMPERIUM1))
 		return 0; //Allow casting Bomb/Demonstration Right under emperium [Skotlex]
 	return 1;
 }
@@ -5573,7 +5573,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			int heal = skill_calc_heal(src, bl, skill_id, skill_lv, true);
 			int heal_get_jobexp;
 			if( status_isimmune(bl) ||
-					(dstmd && (dstmd->mob_id == MOBID_EMPERIUM || mob_is_battleground(dstmd))) ||
+				(dstmd && (dstmd->mob_id == MOBID_EMPERIUM || dstmd->mob_id == MOBID_EMPERIUM1 || mob_is_battleground(dstmd))) ||
 					(dstsd && pc_ismadogear(dstsd)) )//Mado is immune to heal
 				heal=0;
 
@@ -6808,7 +6808,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 			break;
 		}
-		if( dstmd && dstmd->mob_id == MOBID_EMPERIUM )
+		if (dstmd && (dstmd->mob_id == MOBID_EMPERIUM || dstmd->mob_id == MOBID_EMPERIUM1))
 			break; // Cannot be Used on Emperium
 
 		clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
@@ -7005,7 +7005,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case AM_POTIONPITCHER: 
 		{
 			int j,hp = 0,sp = 0;
-			if( dstmd && dstmd->mob_id == MOBID_EMPERIUM ) {
+			if (dstmd && (dstmd->mob_id == MOBID_EMPERIUM || dstmd->mob_id == MOBID_EMPERIUM1)) {
 				map_freeblock_unlock();
 				return 1;
 			}
@@ -7822,7 +7822,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	// Slim Pitcher
 	case CR_SLIMPITCHER:
 		// Updated to block Slim Pitcher from working on barricades and guardian stones.
-		if( dstmd && (dstmd->mob_id == MOBID_EMPERIUM || (dstmd->mob_id >= MOBID_BARRICADE1 && dstmd->mob_id <= MOBID_GUARIDAN_STONE2)) )
+		if (dstmd && (dstmd->mob_id == MOBID_EMPERIUM || dstmd->mob_id == MOBID_EMPERIUM1 || (dstmd->mob_id >= MOBID_BARRICADE1 && dstmd->mob_id <= MOBID_GUARIDAN_STONE2)))
 			break;
 		if (potion_hp || potion_sp) {
 			int hp = potion_hp, sp = potion_sp;
@@ -7895,7 +7895,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		{
 			int count = -1;
 			if( rnd() % 100 > skill_lv * 8 || (tsc && tsc->data[SC_BASILICA]) ||
-			(dstmd && ((dstmd->guardian_data && dstmd->mob_id == MOBID_EMPERIUM) || mob_is_battleground(dstmd))) ) {
+				(dstmd && ((dstmd->guardian_data && (dstmd->mob_id == MOBID_EMPERIUM || dstmd->mob_id == MOBID_EMPERIUM1)) || mob_is_battleground(dstmd)))) {
 				if( sd )
 					clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 
@@ -10333,7 +10333,7 @@ int skill_castend_id(int tid, unsigned int tick, int id, intptr_t data)
 
 			if( ud->skill_id >= SL_SKE && ud->skill_id <= SL_SKA && target->type == BL_MOB )
 			{
-				if( ((TBL_MOB*)target)->mob_id == MOBID_EMPERIUM )
+				if (((TBL_MOB*)target)->mob_id == MOBID_EMPERIUM || ((TBL_MOB*)target)->mob_id == MOBID_EMPERIUM1)
 					break;
 			}
 			else if (inf && battle_check_target(src, target, inf) <= 0){
@@ -14300,7 +14300,7 @@ bool skill_check_condition_castbegin(struct map_session_data* sd, uint16 skill_i
 		case SR_CURSEDCIRCLE:
 			if (map_flag_gvg(sd->bl.m)) {
 			    if (map_foreachinrange(mob_count_sub, &sd->bl, skill_get_splash(skill_id, skill_lv), BL_MOB,
-				    MOBID_EMPERIUM, MOBID_GUARIDAN_STONE1, MOBID_GUARIDAN_STONE2)) {
+				    MOBID_EMPERIUM, MOBID_EMPERIUM1, MOBID_GUARIDAN_STONE1, MOBID_GUARIDAN_STONE2)) {
 				char output[128];
 				sprintf(output,"%s",msg_txt(sd,382)); // You're too close to a stone or emperium to use this skill.
 				clif_colormes(sd,color_table[COLOR_RED], output);

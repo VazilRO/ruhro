@@ -1317,12 +1317,12 @@ bool battle_can_hit_gvg_target(struct block_list *src,struct block_list *bl,uint
 	int class_ = status_get_class(bl);
 
 	if(md && md->guardian_data) {
-		if(class_ == MOBID_EMPERIUM && flag&BF_SKILL && !(skill_get_inf3(skill_id)&INF3_HIT_EMP)) //Skill immunity.
+		if((class_ == MOBID_EMPERIUM || class_ == MOBID_EMPERIUM1) && flag&BF_SKILL && !(skill_get_inf3(skill_id)&INF3_HIT_EMP)) //Skill immunity.
 			return false;
 		if(src->type != BL_MOB) {
 			struct guild *g = src->type == BL_PC ? ((TBL_PC *)src)->guild : guild_search(status_get_guild_id(src));
 
-			if (class_ == MOBID_EMPERIUM && (!g || guild_checkskill(g,GD_APPROVAL) <= 0 ))
+			if ((class_ == MOBID_EMPERIUM || class_ == MOBID_EMPERIUM1) && (!g || guild_checkskill(g, GD_APPROVAL) <= 0))
 				return false;
 
 			if (g && battle_config.guild_max_castles && guild_checkcastles(g)>=battle_config.guild_max_castles)
@@ -4375,7 +4375,7 @@ struct Damage battle_calc_attack_plant(struct Damage wd, struct block_list *src,
 	if (is_attack_right_handed(src, skill_id) && is_attack_left_handed(src, skill_id)) // force left hand to 1 damage while dual wielding [helvetica]
 		wd.damage2 = 1;
 
-	if( attack_hits && class_ == MOBID_EMPERIUM ) {
+	if (attack_hits && (class_ == MOBID_EMPERIUM || class_ == MOBID_EMPERIUM1)) {
 		if(target && map_flag_gvg2(target->m) && !battle_can_hit_gvg_target(src,target,skill_id,(skill_id)?BF_SKILL:0)) {
 			wd.damage = wd.damage2 = 0;
 			return wd;
@@ -6482,7 +6482,7 @@ int battle_damage_area( struct block_list *bl, va_list ap) {
 	amotion=va_arg(ap,int);
 	dmotion=va_arg(ap,int);
 	damage=va_arg(ap,int);
-	if( bl->type == BL_MOB && ((TBL_MOB*)bl)->mob_id == MOBID_EMPERIUM )
+	if (bl->type == BL_MOB && (((TBL_MOB*)bl)->mob_id == MOBID_EMPERIUM || ((TBL_MOB*)bl)->mob_id == MOBID_EMPERIUM1))
 		return 0;
 	if( bl != src && battle_check_target(src,bl,BCT_ENEMY) > 0 ) {
 		map_freeblock_lock();
@@ -7146,7 +7146,7 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 			}
 			break;
 		case BL_MER:
-			if (t_bl->type == BL_MOB && ((TBL_MOB*)t_bl)->mob_id == MOBID_EMPERIUM && flag&BCT_ENEMY)
+			if (t_bl->type == BL_MOB && (((TBL_MOB*)t_bl)->mob_id == MOBID_EMPERIUM || ((TBL_MOB*)t_bl)->mob_id == MOBID_EMPERIUM1) && flag&BCT_ENEMY)
 				return 0; //mercenary may not attack Emperium
 			break;
     } //end switch actual src
@@ -7171,7 +7171,7 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 						return 0; // You can't target anything out of your duel
 				}
 			}
-			if( map_flag_gvg(m) && !sd->status.guild_id && t_bl->type == BL_MOB && ((TBL_MOB*)t_bl)->mob_id == MOBID_EMPERIUM )
+			if (map_flag_gvg(m) && !sd->status.guild_id && t_bl->type == BL_MOB && (((TBL_MOB*)t_bl)->mob_id == MOBID_EMPERIUM || ((TBL_MOB*)t_bl)->mob_id == MOBID_EMPERIUM1))
 				return 0; //If you don't belong to a guild, can't target emperium.
 			if( t_bl->type != BL_PC )
 				state |= BCT_ENEMY; //Natural enemy.

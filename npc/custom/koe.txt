@@ -39,7 +39,7 @@
 		$koegid = 0;
 		donpcevent "::OnRevKoE";
 		maprespawnguildid "guild_vs1", $koegid, 7;
-		monster "guild_vs1",49,49,"EMPERIUM",1288,1,"KoE::OnEmpDead";
+		monster "guild_vs1",49,49,"EMPERIUM",3500,1,"KoE::OnEmpDead";
 		setnpctimer 0;
 		initnpctimer;
 		end;
@@ -61,7 +61,7 @@
 		maprespawnguildid "guild_vs1", $koegid, 6;
 		sleep 500;
 		if ( .start )
-			monster "guild_vs1",49,49,"EMPERIUM",1288,1,"KoE::OnEmpDead";
+			monster "guild_vs1",49,49,"EMPERIUM",3500,1,"KoE::OnEmpDead";
 		end;
 }
 
