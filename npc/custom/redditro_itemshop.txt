@@ -25,8 +25,10 @@
 // Baseball Cap			20
 // Field Manual			20
 // Bloody Branch		20
+// Horse King			20
 // Baby Dragon Hat		25
 // Giant Flywing Box 50	30
 // Archangel Wings		30
-// Convex Mirror		40
-prontera,182,214,3	itemshop	Coin Redeemer	954,677,14508:2,18616:10,5675:10,14209:10,5102:15,5794:15,5352:20,5474:20,5338:20,5199:20,5200:20,12263:20,12103:20,5531:25,13570:30,2573:30,12214:40
+// Convex Mirror 3Day	200
+// Convex Mirror 7Day	400
+prontera,182,214,3	itemshop	Coin Redeemer	954,677,14508:2,18616:10,5675:10,14209:10,5102:15,5794:15,5352:20,5474:20,5338:20,5199:20,5200:20,12263:20,12103:20,19996:20,5531:25,13570:30,2573:30,40000:200,40001:400
