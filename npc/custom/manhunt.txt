@@ -247,7 +247,7 @@
 		set .MHReward, 677; 			// reward
 		set $@oMH, 0; 					// dont touch this
 		set .MRoundsMax, 10; 			// number of rounds
-		set .MHPlayer, 1; 				// minimum players to start
+		set .MHPlayer, 5; 				// minimum players to start
 		set .MSurvive, 3; 				// Two points for survivor
 		set .MKill, 1; 					// One point for killer
 		
