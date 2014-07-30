@@ -23,7 +23,7 @@ prontera,144,229,5	script	Stable Hand	951,{
 	mes "^C358177 Days: " + callfunc("F_InsertComma",.@fee_seven) + " z^000000";
 	mes "^C3581730 Days: " + callfunc("F_InsertComma",.@fee_thirty) + " z^000000";
 	next;
-	switch(select("7 Days:30 Days:Just walk away...")) {
+	switch(select("7 Days:30 Days:Unmount:Just walk away...")) {
 		case 1:
 			set .@mount2_cost, .@fee_seven;
 			set .@mount2_item, 16682;
@@ -33,6 +33,15 @@ prontera,144,229,5	script	Stable Hand	951,{
 			set .@mount2_item, 16683;
 			break;
 		case 3:
+			if ( ismounting() ) {
+				setmounting();
+				close;
+			} else {
+				mes "You aren't riding one of my mounts!";
+				close;
+			}
+			break;
+		case 4:
 			close;
 	}
 
