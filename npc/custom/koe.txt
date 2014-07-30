@@ -65,6 +65,107 @@
 		end;
 }
 
+// KoE Runes
+//http://rathena.org/board/topic/57784-request-dota-runes/page__fromsearch__1
+guild_vs1,1,1,5	script	Runes	757,1,1,{
+dispbottom "Walkthrough to get Runes.";
+end;
+
+OnTouch:
+	switch( .runes ){
+		case 0:
+			// 2x ATK / MATK
+			sc_start SC_INCATKRATE,( .duration * 1000 ),100;
+			sc_start SC_INCMATKRATE,( .duration * 1000 ),100;
+			break;
+		case 1:
+			// Invisible
+			skill "AS_CLOAKING",10,1;
+			sc_start SC_CLOAKING,( .duration * 1000 ),10;
+			break;
+		case 2:
+			// Restore
+			sc_start4 SC_REGENERATION,( .duration * 1000 ),-10,1,0,0;
+			break;
+		case 3:
+			// Clone
+			getmapxy( .@map$,.@x,.@y,0,strcharinfo(0) );
+			clone .@map$,.@X,.@y,"",getcharid(0),getcharid(0),"",1,.duration;
+			clone .@map$,.@X,.@y,"",getcharid(0),getcharid(0),"",1,.duration;
+			break;
+		case 4:
+			// Haste
+			sc_start SC_SpeedUp1,( .duration * 1000 ),0;
+			break;
+		default: end;
+	}
+	announce "[Rune]  "+strcharinfo(0)+" gained "+.name$[.runes]+".",bc_self,0x00FF00;
+	hideonnpc .npc_name$;
+	//delwaitingroom;
+	.runes = -1;
+	attachnpctimer;
+	initnpctimer;
+	specialeffect2 EF_PROVIDENCE;
+	end;
+	
+OnTimer30000:
+	sc_end SC_CLOAKING;
+	sc_end SC_REGENERATION;
+	end;
+OnTimer60000:
+	stopnpctimer;
+	callsub( OnAssign );
+	end;
+
+OnAssign:
+	.random = rand( .coordinate_size );
+	movenpc .npc_name$,.CoordinateX[ .random ],.CoordinateY[ .random ];
+	hideoffnpc .npc_name$;
+	if( .runes < 0 ) 
+		.runes = rand( .rune_size );
+		while(.last_runes == .runes) { // prevent the same rune from spawning
+			.runes = rand( .rune_size );
+		}
+		.last_rune = .runes;
+	if( .npc_sprite[.runes] )
+		setnpcdisplay( .npc_name$,.name$[.runes],.npc_sprite[.runes] );
+	//delwaitingroom;
+	//waitingroom "   "+.name$[.runes],0;
+	return;
+
+OnInit:
+	// Runes Duration in Seconds
+	set .duration,30;
+	set .runes, -1;
+	set .last_runes, -1;
+
+	// Name of Each Runes.
+	setarray .name$[0],
+		"Double Damage",	//	2 x ATK Rate
+		"Invisibility",		//	Cloaking
+		"Regeneration",		//	HP / SP Regeneration
+		"Illusion",		//	Create 2 Clones
+		"Haste";	//	Improve Movement Speed
+
+	// npc sprite switching if any.
+	setarray .npc_sprite,
+		1908,
+		1907,
+		1908,
+		1907,
+		1908;
+		
+	// Random Coordinate where NPC will Shown Again
+	setarray .CoordinateX[0],27,49,73,49,69,69,30,30;
+	setarray .CoordinateY[0],49,73,49,25,69,30,30,69;
+	
+	.rune_size = getarraysize( .name$ );
+	.coordinate_size = getarraysize( .CoordinateX );
+	.npc_name$ = strnpcinfo(0);
+	callsub( OnAssign );
+	end;
+}
+
 // KoE Entrance
 prontera,156,195,4	script	The King#KoE	58,{
     mes "[The King]";

@@ -80,3 +80,7 @@ bat_a02	mapflag	nowarp
 // Poring War ==================
 poring_w01	mapflag	nowarp
 poring_w02	mapflag	nowarp
+
+// RedditRO =====================
+guild_vs1	mapflag	nowarp
+guild_vs3	mapflag	nowarp

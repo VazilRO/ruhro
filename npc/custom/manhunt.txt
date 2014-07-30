@@ -96,7 +96,11 @@
 				atcommand "#size \""+$@ManHuntN$[.@i]+"\" 0";			
 			}
 			if(attachrid($@ManHunt[.Target])) {
-				getitem .MHReward, .MSurvive; // Reward RedditRO Coins directly
+				if(strcharinfo(3) == $@MHMap$) {
+					getitem .MHReward, .MSurvive; // Reward RedditRO Coins directly
+				} else {
+					dispbottom "Shame on you for leaving Manhunt!";
+				}
 				detachrid;					
 			}
 			sleep2 2000;
@@ -105,10 +109,26 @@
 			goto MHNextRound;
 		}
 		end;
+	
+	GetValidTarget:
+		set .valTarg, rand(0, (getarraysize($@ManHunt) - 1));
+		while(true) {
+			if ($@oMH < .MHPlayer || getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
+			if(attachrid($@ManHunt[.valTarg])) {
+				if(strcharinfo(3) != $@MHMap$) {
+					detachrid;			
+					set .valTarg, rand(0, (getarraysize($@ManHunt) - 1));
+				} else {
+					detachrid;
+					return .valTarg;
+				}
+			}
+		}
+
 			
 	ManHuntStart:
-		if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
-		set .Target, rand(0, (getarraysize($@ManHunt) - 1));
+		if ($@oMH < .MHPlayer || getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
+		set .Target, callSub(GetValidTarget);
 		mapannounce $@MHMap$,"[Round "+.MRounds+"] Our target is "+$@ManHuntN$[.Target]+"!",0;
 		sleep2 2000;
 		setnpctimer 0;
@@ -214,6 +234,7 @@
 		if ($@MHStatus)
 			if (getcharid(3) == $@ManHunt[.Target])
 			{
+				stopnpctimer;
 				mapannounce $@MHMap$,"The target has logged out of this game. This round will be nulled.",0;
 				set .MRounds, .MRounds + 1;
 				goto MHNextRound;
@@ -226,7 +247,7 @@
 		set .MHReward, 677; 			// reward
 		set $@oMH, 0; 					// dont touch this
 		set .MRoundsMax, 10; 			// number of rounds
-		set .MHPlayer, 5; 				// minimum players to start
+		set .MHPlayer, 1; 				// minimum players to start
 		set .MSurvive, 3; 				// Two points for survivor
 		set .MKill, 1; 					// One point for killer
 		
