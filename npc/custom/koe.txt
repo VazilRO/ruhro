@@ -108,27 +108,27 @@ OnTouch:
 	specialeffect2 EF_PROVIDENCE;
 	end;
 	
-OnTimer30000:
+OnTimer6000:
 	sc_end SC_CLOAKING;
 	sc_end SC_REGENERATION;
-	end;
-OnTimer60000:
+OnTimerQuit:
 	stopnpctimer;
 	callsub( OnAssign );
 	end;
 
 OnAssign:
-	.random = rand( .coordinate_size );
-	movenpc .npc_name$,.CoordinateX[ .random ],.CoordinateY[ .random ];
-	hideoffnpc .npc_name$;
-	if( .runes < 0 ) 
+	if( .runes < 0 ) {
+		.random = rand( .coordinate_size );
+		movenpc .npc_name$,.CoordinateX[ .random ],.CoordinateY[ .random ];
+		hideoffnpc .npc_name$;
 		.runes = rand( .rune_size );
-		while(.last_runes == .runes) { // prevent the same rune from spawning
+		while(.last_rune == .runes) { // prevent the same rune from spawning
 			.runes = rand( .rune_size );
 		}
 		.last_rune = .runes;
-	if( .npc_sprite[.runes] )
-		setnpcdisplay( .npc_name$,.name$[.runes],.npc_sprite[.runes] );
+		if( .npc_sprite[.runes] )
+			setnpcdisplay( .npc_name$,.name$[.runes],.npc_sprite[.runes] );
+	}
 	//delwaitingroom;
 	//waitingroom "   "+.name$[.runes],0;
 	return;
