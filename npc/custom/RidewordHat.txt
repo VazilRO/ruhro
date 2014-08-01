@@ -31,12 +31,13 @@ M_YES:
 	next;
 
 L_List:	
-	mes "100 WORN OUT PAGES";
-	mes "2 BOOK OF BILLOWS";
-	mes "2 BOOK OF MOTHER EARTH";
-	mes "1 BOOK OF THE BLAZING SUN";
-	mes "1 BOOK OF GUST OF WIND";
-	mes "AND 200 BOOKCLIP IN MEMORY";
+	mes "[Rideword]";
+	mes "100x WORN OUT PAGES";
+	mes "2x BOOK OF BILLOWS";
+	mes "2x BOOK OF MOTHER EARTH";
+	mes "1x BOOK OF THE BLAZING SUN";
+	mes "1x BOOK OF GUST OF WIND";
+	mes "200x BOOKCLIP IN MEMORY";
 	next;
 	mes "NOW GO GET THEM.";
 	percentheal -5, -5;
