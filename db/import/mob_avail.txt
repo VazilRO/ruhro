@@ -14,3 +14,7 @@
 // SpriteID is a job class value.
 // Weapon and Shield uses Item ID, while Head uses View ID.
 
+///MVP GM Alkarl
+5000,4191,1,14,6,1243,2112,5381,2202,5107,0,195
+///MVP GM Poutine
+5001,4063,0,3,0,1565,2199,5075,2202,5361,0,0
