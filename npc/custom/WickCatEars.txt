@@ -40,7 +40,7 @@ L_List:
 	mes "And of course the Black Cat Ears.";
 	next;
 	mes "Get to work.";
-	emotion e_...;
+	emotion e_dots;
 	close;
 
 M_NO:
