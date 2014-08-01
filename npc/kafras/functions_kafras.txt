@@ -204,6 +204,16 @@ function	script	F_KafStor	{
 	// Unable to access Guild Storage (Busy)
 	if(getarg(0) == 1){
 		close2;
+		if(getcharid(2) == 0) {
+			mes "You don't seem to be in a guild";
+			close;
+		}
+		query_sql("SELECT position FROM `guild_member` WHERE char_id='"+getcharid(0)+"'", .@position);
+		if(.@position == 19) {
+			mes "I'm sorry, but you don't have permission to access guild storage.";
+			mes "Talk to your guild master.";
+			close;
+		}
 		if(guildopenstorage()){
 			mes "[Kafra Employee]";
 			mes "I'm sorry but another guild member is using the guild storage";
