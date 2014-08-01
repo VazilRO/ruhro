@@ -22,3 +22,6 @@
 
 2634,329,99	// Wedding Ring
 2635,329,99	// Wedding Ring
+
+//RedditRO Custom Items
+40002,459,100 //Donator's Valkyrie Helm
