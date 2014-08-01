@@ -40,7 +40,7 @@ L_List:
 	next;
 	mes "NOW GO GET THEM.";
 	percentheal -5, -5;
-	emotion e_mute;
+	emotion e_dots;
 	close;
 
 M_NO:
