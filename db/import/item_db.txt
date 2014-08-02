@@ -94,6 +94,6 @@
 40001,Convex_Mirror_7Days,Convex Mirror 7Day Box,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ rentitem 12214,604800; },{},{}
 
 //1st Donator Valkyrie Helm
-40002,VALK_HELM_COSTUME1,Donator's Valkyrie Helm,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,,1500,{ bonus bAllStats,1; bonus3 bAddClassDropItem,677,Class_Boss,50; },{},{}
+40002,VALK_HELM_COSTUME1,Donator's Valkyrie Helm,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,,15000,{ bonus bAllStats,1; bonus3 bAddClassDropItem,677,Class_Boss,50; },{},{}
 //Non-Donator Valkyrie Helm
-40003,VALK_HELM_COSTUME2,Valkyrie Helm,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,,1500,{},{},{}
+40003,VALK_HELM_COSTUME2,Valkyrie Helm,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,,15000,{},{},{}
