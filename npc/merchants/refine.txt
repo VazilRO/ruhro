@@ -1030,8 +1030,9 @@ function	script	orimain	{
 	switch(select("Make Oridecon:Make Elunium:Ask about Enchanted Stones")) {
 	case 1:
 		if (countitem(756) > 4) {
-			delitem 756,5;  //Oridecon_Stone
-			getitem 984,1; // Oridecon
+			set .@oriCount, countitem(756)/5;
+			delitem 756, 5 * .@oriCount;  //Oridecon_Stone
+			getitem 984, .@oriCount; // Oridecon
 			mes "[" + getarg(0) + "]";
 			mes "Here's your Oridecon.";
 			mes "You're welcome to come";
@@ -1046,8 +1047,9 @@ function	script	orimain	{
 		}
 	case 2:
 		if (countitem(757) > 4) {
-			delitem 757,5;  //Elunium_Stone
-			getitem 985,1; // Elunium
+			set .@eluCount, countitem(757)/5;
+			delitem 757, 5 * .@eluCount;  //Elunium_Stone
+			getitem 985, .@eluCount; // Elunium
 			mes "[" + getarg(0) + "]";
 			mes "Here's your Elunium.";
 			mes "You're welcome to come";
