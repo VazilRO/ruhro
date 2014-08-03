@@ -20,6 +20,7 @@ c_tower1,257,37,6	script	Rideword	1195,{
 	mes "HOWEVER, MY CHILDREN ARE VERY HUNGRY. CAN THEY BITE YOUR HEAD OFF?";
 	emotion e_ok;
 	next;
+	mes "[" + strcharinfo(0) + "]";
 	menu "...Will it kill me?",M_YES,"Nope, nope, nope, nope, I'm outta here.",M_NO;
 	next;
 	

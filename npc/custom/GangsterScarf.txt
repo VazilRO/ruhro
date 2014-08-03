@@ -22,6 +22,7 @@ gef_tower,70,172,5	script	Gangster Mage	679,{
 	mes "As you can see, my form is top-notch!";
 	emotion e_heh;
 	next;
+	mes "[" + strcharinfo(0) + "]";
 	menu "Can I have that scarf?",M_YES,"Alright, good luck!",M_NO;
 	next;
 	

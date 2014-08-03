@@ -22,6 +22,7 @@ veins,108,63,3	script	Tres	497,{
 	mes "Why is everyone bothering me today?";
 	emotion e_hum;
 	next;
+	mes "[" + strcharinfo(0) + "]";
 	menu "Can you fix my Cat Ears?",M_YES,"Fine I'm outta here you edgy kid.",M_NO;
 	next;
 	
