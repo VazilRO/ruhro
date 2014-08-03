@@ -9,7 +9,7 @@
 //===== Additional Comments: =================================
 //= 1.0 First release
 
-gef_tower,70,172,5	script	Gangster Mage	755,{
+gef_tower,70,172,5	script	Gangster Mage	679,{
 	if (GANGSTER_QUEST == 9000) goto L_PLSGO;
 	
 	mes "[Gangster Mage]";
