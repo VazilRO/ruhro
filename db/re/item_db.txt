@@ -9282,13 +9282,13 @@
 19534,C_Tha_Despero_Mask,Costume Thanatos Despero Mask,4,20,,0,,0,,0,0xFFFFFFFF,63,2,513,,1,0,693,{ bonus bAtkRate,1; bonus bMatkRate,1; bonus bHealPower,1; },{},{}
 19535,C_Sinsuncho_Hat,Costume Sinsuncho Hat,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,730,{ bonus bUnbreakableHelm,0; bonus bStr,1; bonus2 bExpAddClass,Class_All,1; },{},{}
 19536,C_Rose_Corsage,Costume Rose Corsage,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,533,{ bonus bUnbreakableHelm,0; bonus bInt,1; },{},{}
-19537,C_Gryphon_Hat,Costume Gryphon Hat,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,591,{ bonus bUnbreakableHelm,0; },{},{}
+19537,C_Gryphon_Hat,Costume Gryphon Hat,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,591,{ },{},{}
 19538,Full_Moon,Full Moon,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,780,{ bonus bUnbreakableHelm,0; },{},{}
 19539,C_Reginleif_Hairband,Hairband Of Reginleif,4,20,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,468,{ bonus bAllStats,1; },{},{}
 19540,C_Rabbit_Earplug,Costume Rabbit Earplugs,4,20,,0,,0,,0,0xFFFFFFFF,63,2,7168,,1,0,515,{ bonus bAgi,1; bonus bFlee,2; },{},{}
 19541,C_Romantic_White_Flower,Costume Romantic White Flower,4,20,,0,,0,,0,0xFFFFFFFF,63,2,4096,,1,0,259,{ bonus bUnbreakableHelm,0; },{},{}
 19542,C_Devil_Whisper,Costume Devil Whisper,4,20,,0,,0,,0,0xFFFFFFFF,63,2,2048,,1,0,712,{ bonus bUnbreakableHelm,0; bonus2 bSubRace,RC_Angel,1; bonus2 bSubRace,RC_Demon,1; bonus3 bAddMonsterDropItem,12020,RC_Angel,400; bonus3 bAddMonsterDropItem,523,RC_Demon,400; },{},{}
-19543,Oliver_Wolf_Hood,Oliver Wolf Hood,4,20,,300,,0,,0,0xFFFFFFFF,63,2,1024,,70,0,849,{ bonus bUnbreakableHelm,0; },{},{}
+19543,Oliver_Wolf_Hood,Oliver Wolf Hood,4,20,,300,,0,,0,0xFFFFFFFF,63,2,1024,,70,0,849,{},{},{}
 19544,C_Tare_Neko_Cru,Costume Tare Neko Cru,4,20,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,692,{ bonus bUnbreakableHelm,0; },{},{}
 19545,C_Boy's_Cap,Costume Boy's Cap,4,20,,100,,0,,0,0xFFFFFFFF,63,2,1024,,100,0,102,{ bonus bUnbreakableHelm,0; },{},{}
 19546,C_Valkyrie_Helm,Costume Valkyrie Helm,4,20,,100,,0,,0,0xFFFFFFFF,63,2,1024,,100,0,225,{ bonus bUnbreakableHelm,0; },{},{}
@@ -9306,12 +9306,12 @@
 19579,C_Red_Wind_Hat,Costume Red Wind Hat,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,1,613,{ bonus bHPrecovRate,20; bonus bSPrecovRate,20; },{},{}
 19585,C_Feather_Beret,Costume Feather Beret,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,224,{},{},{}
 19586,C_Pink_Bunny_Hair_Band,Costume Pink Bunny Hair Band,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,1,898,{},{},{}
-19587,C_King_Poring_Hat,Costume King Poring Hat,4,0,,100,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,905,{ bonus bUnbreakableHelm,0; },{},{}
+19587,C_King_Poring_Hat,Costume King Poring Hat,4,0,,100,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,905,{},{},{}
 19588,C_Cat_Hat_J,Costume Cat Hat,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,182,{ bonus bAllStats,3; bonus2 bExpAddClass,Class_All,30; },{},{}
 19589,C_Fallen_Angel_Lost_J,Costume Fallen Angel Lost,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,0,0,907,{},{},{}
 19590,C_Twin_Maiden_Ribbon_J,Maiden's Twin Ribbon,4,20,,0,,0,,0,0xFFFFFFFF,63,2,1024,,0,0,239,{},{},{}
 19598,C_Wandering_Wolf_Hat,Costume Wandering Wolf Hat,4,20,,600,,5,,0,0xFFFFFFFE,63,2,768,,20,0,490,{ bonus bVit,5; bonus bFlee,10; },{},{}
-19599,C_Imp_Hat,Costume Imp Hat,4,20,,400,,1,,0,0xFFFFFFFF,63,2,256,,1,1,589,{ bonus3 bAutoSpell,"SA_FLAMELAUNCHER",1,5; },{},{}
+19599,C_Imp_Hat,Costume Imp Hat,4,20,,400,,1,,0,0xFFFFFFFF,63,2,1024,,1,1,589,{},{},{}
 19600,C_Drooping_Kiehl,Costume Drooping Kiehl,12,0,,40,,,,,0xFFFFFFFF,63,2,1024,,30,,909,{},{},{}
 19601,C_Drooping_Aliot,Costume Drooping Aliot,12,0,,10,,,,,0xFFFFFFFF,63,2,1024,,1,,910,{},{},{}
 19603,C_Invisible_Sunglasses,Costume Invisible Sunglasses,4,0,,0,,0,,0,0xFFFFFFFF,63,2,2048,,1,0,0,{},{},{}
@@ -9325,7 +9325,7 @@
 19621,C_Ear_Of_Devils_Wing,Costume Evil Wing Ear,4,0,,0,,,,,0xFFFFFFFF,63,2,1024,,,,152,{},{},{}
 19622,C_Crescent_Hairpin,Costume Crescent Hairpin,4,0,,0,,,,,0xFFFFFFFF,63,2,1024,,,,132,{},{},{}
 19623,C_Bijofnil_Wings,Costume Bijofnil Wings,4,0,,0,,,,,0xFFFFFFFF,63,2,1024,,,,477,{},{},{}
-19624,C_Round_Eyes,Costume Blank Eyes,4,0,,0,,,,,0xFFFFFFFF,63,2,1024,,,,185,{},{},{}
+19624,C_Round_Eyes,Costume Blank Eyes,4,0,,0,,,,,0xFFFFFFFF,63,2,2048,,,,185,{},{},{}
 19625,C_Bunny_Band,Costume Bunny Band,4,0,,0,,,,,0xFFFFFFFF,63,2,1024,,,,15,{},{},{}
 19629,C_Tiara,Costume Tiara,4,20,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,19,{},{},{}
 19630,C_Crown,Costume Crown,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,1,45,{},{},{}
@@ -9362,7 +9362,7 @@
 19701,C_Red_Bonnet,Costumes Red Bonnet,4,10,,100,,,,0,0xFFFFFFFF,63,2,1024,,100,1,190,{},{},{}
 19702,C_Twin_Pompom_By_JB,Costume Twin Pompom By JB,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,1,390,{},{},{}
 19706,C_Red_Dress_Hat,Costume Red Dress Hat,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,1,670,{},{},{}
-19707,C_Polar_Bear_Cap,Costume Polar Bear Cap,4,20,,0,,0,,0,0xFFFFFFFF,63,2,1024,,0,0,966,{ bonus bUnbreakableHelm,0; },{},{}
+19707,C_Polar_Bear_Cap,Costume Polar Bear Cap,4,20,,0,,0,,0,0xFFFFFFFF,63,2,1024,,0,0,966,{},{},{}
 //19708,Elizabeth,Elizabeth,4,10,,0,,,,0,0xFFFFFFFF,63,2,256,,1,1,,{},{},{}
 19709,C_Yellow_Ribbon,Outfit Yellow Ribbon,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,310,{},{},{}
 19710,C_Wings_Of_Victory,Costume Wings Of Victory,4,10,,0,,,,0,0xFFFFFFFF,63,2,2048,,1,1,365,{},{},{}
@@ -9373,7 +9373,7 @@
 19729,C_Neko_Mimi_Kafra,Outfit Neko Mimi Kafra,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,392,{},{},{}
 19718,C_Gothic_Headdress,Outfit Gothic Headdress,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,978,{},{},{}
 19728,C_Tare_Zonda,Outfit Tare Zonda,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,985,{},{},{}
-19730,C_Snake_Hat,C Snake Hat,4,20,,10,,0,,0,0xFFFFFFFF,63,2,1024,,0,0,986,{},{},{}
+19730,C_Snake_Hat,Snake Hat,4,20,,10,,0,,0,0xFFFFFFFF,63,2,1024,,0,0,986,{},{},{}
 19731,C_Evolved_Evil_Wing,Costume Evolved Evil Wing,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,1,39,{ bonus bStr,1; bonus bAgi,1; bonus bFlee,3; bonus2 bSubRace,RC_Angel,3; },{},{}
 19732,C_Goblin_Leader_Mask,Costume Goblin Leader Mask,4,10,,0,,,,0,0xFFFFFFFF,63,2,2048,,1,1,174,{},{},{}
 19733,C_Panda_Cap,Costume Panda Cap,4,0,,0,,0,,0,0xFFFFFFFF,63,2,1024,,1,0,115,{ bonus bAllStats,1; bonus2 bExpAddClass,Class_All,10; },{},{}
