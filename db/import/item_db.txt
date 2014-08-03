@@ -121,9 +121,9 @@
 40024,C_LEAFCATHAT,Leaf Cat Hat,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,539,{},{},{}
 40025,C_LANGELDOLL,Little Angel Doll,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,344,{},{},{}
 40026,C_LONGTONGUE,Long Tongue,4,10,,0,,,,0,0xFFFFFFF,63,2,4096,,1,0,773,{},{},{}
-40027,C_LOTD_HELM,Lord of the Dead Helm,4,10,,0,,,,0,0xFFFFFFF,63,2,5138,,1,0,742,{},{},{}
+40027,C_LOTD_HELM,Lord of the Dead Helm,4,10,,0,,,,0,0xFFFFFFF,63,2,7168,,1,0,742,{},{},{}
 40028,C_LUNATICHAT,Lunatic Hat,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,521,{},{},{}
-40029,C_NECROHOOD,Necromancer's Hood,4,10,,0,,,,0,0xFFFFFFF,63,2,5138,,1,0,491,{},{},{}
+40029,C_NECROHOOD,Necromancer's Hood,4,10,,0,,,,0,0xFFFFFFF,63,2,7168,,1,0,491,{},{},{}
 40030,C_NOTEHEADPHONE,Note Headphones,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,220,{},{},{}
 40031,C_CAPTAINPIPE,Captain's Pipe,4,10,,0,,,,0,0xFFFFFFF,63,2,4096,,1,0,383,{},{},{}
 40032,C_POPCORNHAT,Popcorn Hat,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,415,{},{},{}
