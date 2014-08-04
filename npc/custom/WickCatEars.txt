@@ -59,8 +59,8 @@ L_Make:
 	if(countitem(7345) < 100 || countitem(7206) < 500 || countitem(1223) < 1 || countitem(5057) < 1) goto L_NOITEMS;
 	if(Zeny < 2000000) goto L_NOITEMS;
 	
-	delitem 7345,40;
-	delitem 7206,40;
+	delitem 7345,100;
+	delitem 7206,500;
 	delitem 1223,1;
 	delitem 5057,1;
 	set Zeny,Zeny-2000000;
