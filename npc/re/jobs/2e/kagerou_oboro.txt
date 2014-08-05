@@ -174,11 +174,16 @@ job_ko,25,115,4	script	Old Man#ko	588,{
 		set job_kagero,2;
 		mes "[Old Man]";
 		mes "You'll have to lend me your ear for I have so much to tell you about the family story.";
+		mes "Oh, I'll need 1 million zeny as well.";
 		close2;
 		cutin "",255;
 		end;
 	} else if (job_kagero == 2) {
 		cutin "job_ko01",2;
+		if (Zeny < 1000000) {
+			mes "You don't have enough zeny.";
+			close;
+		}
 		mes "^1A95E6The Old Man starts the story with a very soothing tone as if he is telling his grandchild a story.^1A95E6";
 		next;
 		mes "[Old Man]";
@@ -217,6 +222,7 @@ job_ko,25,115,4	script	Old Man#ko	588,{
 		erasequest 5132;
 		setquest 5133;
 		set job_kagero,3;
+		set Zeny,Zeny-1000000;
 		mes "^1A95E6The old man looks even more forlorn.^1A95E6";
 		close2;
 		cutin "",255;

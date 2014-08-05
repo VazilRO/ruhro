@@ -67,7 +67,7 @@ payon,215,102,3	script	Moohyun#job_star	828,3,3,{
 				mes "in being a Taekwon Master?";
 				next;
 				if (select("Yes, I am!:No, not so much.") == 1) {
-					if (JobLevel > 39) {
+					if (JobLevel > 39 && BaseLevel > 98) {
 						mes "[Moohyun]";
 						mes "Great, great~ I knew you'd";
 						mes "see things my way. Alright,";
@@ -81,8 +81,13 @@ payon,215,102,3	script	Moohyun#job_star	828,3,3,{
 						mes "your job to Taekwon Master^000000?";
 						mes "If you do, I'll introduce you to somebody who can help";
 						mes "you accomplish that goal.";
+						mes "I will also require 1 million zeny.";
 						next;
 						if (select("Yes, I do.","Let me think about it...") == 1) {
+							if (Zeny < 1000000) {
+								mes "I'm sorry, You need 1 million zeny for me to introduce you";
+								close;
+							}
 							mes "[Moohyun]";
 							mes "Excellent! Now, as you may";
 							mes "have guessed, Taekwon Masters";
@@ -103,6 +108,7 @@ payon,215,102,3	script	Moohyun#job_star	828,3,3,{
 							mes "place that's closest to the sky. In the meantime, I'll write a";
 							mes "letter of recommendation that";
 							mes "I'll send to him for you.";
+							set Zeny,Zeny-1000000;
 							set STGL_Q,1;
 							setquest 7007;
 							close;
