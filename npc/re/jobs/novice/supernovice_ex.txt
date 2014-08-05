@@ -56,7 +56,7 @@ function	script	Esseray_Ex	{
 		next;
 		setquest 5092;
 		set EXSUPNOV_Q,1;
-		set Zeny,Zeny-1000000;
+		set Zeny,Zeny-1000000
 		mes "[Esseray]";
 		mes "He can guide you along";
 		mes "the correct path...";
