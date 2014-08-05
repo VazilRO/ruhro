@@ -55,10 +55,12 @@
 		maprespawnguildid "guild_vs1", $koegid, 6; // uncomment this line to kick non-owner off the map when event ends
 		end;
 	OnEmpDead:
-		$koegid = getcharid(2);
 		announce "The current King of Emperium Hill is the ["+ strcharinfo(2) +"] guild.", bc_all;
+		if($koegid != getcharid(2)) {
+			$koegid = getcharid(2);
+			maprespawnguildid "guild_vs1", $koegid, 6;
+		}
 		donpcevent "::OnRevKoE";
-		maprespawnguildid "guild_vs1", $koegid, 6;
 		sleep 500;
 		if ( .start )
 			monster "guild_vs1",49,49,"EMPERIUM",3500,1,"KoE::OnEmpDead";
