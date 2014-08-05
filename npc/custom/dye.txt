@@ -138,9 +138,9 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		mes "6 is white...";
 		mes "7 is black...";
 		mes "8 is red...";
-		mes "and 9-80 are new colors.";
+		mes "and 9-263 are new colors.";
 		input @color;
-		if (@color>80) close;
+		if (@color>263) close;
 		if (@color<0) close;
 		setlook 6,@color;
 		next;
@@ -163,8 +163,8 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		set @look,@look+1;
 		setlook 6,@look;
 		mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
-		if(@look == 80) menu "Back To The Begin",Lbrowsecolor,"I like this one",Lstop;
-		if(@look != 80)	menu "Keep going",Lbrowsecolorrep,"I like this one",Lstop;
+		if(@look == 263) menu "Back To The Begin",Lbrowsecolor,"I like this one",Lstop;
+		if(@look != 263)	menu "Keep going",Lbrowsecolorrep,"I like this one",Lstop;
 
 		Lstop:
 			mes "[^FF8000Stylist^000000]";
@@ -191,7 +191,7 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		mes "Number 0, by the way, is the default style for your character.";
  		next;
 		input @pal;
-		if (@pal>450) close;
+		if (@pal>553) close;
 		if (@pal<0) close;
 		setlook 7,@pal;
 		next;
@@ -214,15 +214,15 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		set @look,@look+1;
 		setlook 7,@look;
 		mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
-		if(@look == 450) menu "Back To The Beginning",Lbrowsecloth,"I like this one",Lstop;
-		if(@look != 450)	menu "Keep going",Lbrowseclothrep,"Last one, please",Lbrowseclothlast,"I like this one",Lstop;
+		if(@look == 553) menu "Back To The Beginning",Lbrowsecloth,"I like this one",Lstop;
+		if(@look != 553)	menu "Keep going",Lbrowseclothrep,"Last one, please",Lbrowseclothlast,"I like this one",Lstop;
 		
 	Lbrowseclothlast:
 		set @look,@look-1;
 		setlook 7,@look;
 		mes "This is Pallete Number^FF9009 "+@look+" ^000000!";
-		if(@look == 450) menu "Back To The Beginning",Lbrowsecloth,"I like this one",Lstop;
-		if(@look != 450)	menu "Keep going",Lbrowseclothrep,"Last one, please",Lbrowseclothlast,"I like this one",Lstop;
+		if(@look == 553) menu "Back To The Beginning",Lbrowsecloth,"I like this one",Lstop;
+		if(@look != 553)	menu "Keep going",Lbrowseclothrep,"Last one, please",Lbrowseclothlast,"I like this one",Lstop;
 		
 	Lnope:
 		mes "[^FF8000Stylist^000000]";
