@@ -60,7 +60,7 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 		mes "from what I know.";
 		close;
 	}
-	if (JobLevel < 40) {
+	if (JobLevel < 40 || BaseLevel < 99) {
 		mes "[Kid]";
 		mes "So you're studying";
 		mes "Taekwon Do. That's good,";
@@ -69,7 +69,7 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 		mes "stick to your training.";
 		close;
 	}
-	else if (JobLevel > 39) {
+	else if (JobLevel > 39 && BaseLevel > 98) {
 		if (SOUL_Q == 0) {
 			mes "[Kid]";
 			mes "...";
@@ -171,8 +171,9 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 				mes "[Kid]";
 				mes "Now bring me";
 				mes "^0000FF1 3 Carat Diamond^000000,";
-				mes "^0000FF1 Immortal Heart^000000 and";
-				mes "^0000FF1 Witherless Rose^000000.";
+				mes "^0000FF1 Immortal Heart^000000,";
+				mes "^0000FF1 Witherless Rose^000000 and";
+				mes "1 million zeny.";
 				mes "And try not to make me";
 				mes "wait too long, alright?";
 				close;
@@ -190,15 +191,17 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 				mes "You're back, eh?";
 				mes "So did you bring";
 				mes "^0000FF1 3 Carat Diamond^000000,";
-				mes "^0000FF1 Immortal Heart^000000 and";
-				mes "^0000FF1 Witherless Rose^000000.";
+				mes "^0000FF1 Immortal Heart^000000,";
+				mes "^0000FF1 Witherless Rose^000000 and";
+				mes "1 million zeny";
 				mes "like I asked you to?";
 				next;
 				if (select("There you are.:No, not yet...") == 1) {
-					if (countitem(732) > 0 && countitem(929) > 0 && countitem(748) > 0) {
+					if (countitem(732) > 0 && countitem(929) > 0 && countitem(748) > 0 && Zeny > 999999) {
 						delitem 732,1; //Crystal_Jewel__
 						delitem 929,1; //Immortal_Heart
 						delitem 748,1; //Witherless_Rose
+						set Zeny,Zeny-1000000;
 						set SOUL_Q,2;
 						changequest 6005,6006;
 						mes "[Kid]";
@@ -236,8 +239,9 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 					mes "what we need, but I'm";
 					mes "going to remind you again:";
 					mes "^0000FF1 3 Carat Diamond^000000,";
-					mes "^0000FF1 Immortal Heart^000000 and";
-					mes "^0000FF1 Witherless Rose^000000.";
+					mes "^0000FF1 Immortal Heart^000000,";
+					mes "^0000FF1 Witherless Rose^000000 and";
+					mes "1 million zeny.";
 					close;
 				}
 				mes "[Kid]";
@@ -447,6 +451,7 @@ OnTouch:
 			completequest 6008;
 			callfunc "Job_Change",Job_Soul_Linker;
 			callfunc "F_ClearJobVar";	// clears all job variables for the current player
+			atcommand "@stpoint 52";
 			set SOUL_Q,0;
 			mes "[Maia]";
 			mes "I wish the best of luck";

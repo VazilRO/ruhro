@@ -2729,12 +2729,12 @@ static unsigned int status_calc_maxhpsp_pc(struct map_session_data* sd, unsigned
 	level = max(sd->status.base_level,1);
 
 	if (isHP) { //Calculates MaxHP
-		max = job_info[idx].base_hp[level-1] * (1 + (max(stat,1) * 0.01)) * ((sd->class_&JOBL_UPPER)?1.25:1);
+		max = job_info[idx].base_hp[level-1] * (1 + (max(stat,1) * 0.01)) * ((sd->class_&JOBL_UPPER || (job_id == JOB_STAR_GLADIATOR) || (job_id == JOB_KAGEROU) || (job_id == JOB_OBORO) || (job_id == JOB_REBELLION) || (job_id == JOB_SOUL_LINKER) || (job_id == JOB_SUPER_NOVICE_E))?1.25:1);
 		max += status_get_hpbonus(&sd->bl,STATUS_BONUS_FIX);
 		max *= (1 + status_get_hpbonus(&sd->bl,STATUS_BONUS_RATE) * 0.01);
 	}
 	else { //Calculates MaxSP
-		max = job_info[idx].base_sp[level-1] * (1 + (max(stat,1) * 0.01)) * ((sd->class_&JOBL_UPPER)?1.25:1);
+		max = job_info[idx].base_sp[level-1] * (1 + (max(stat,1) * 0.01)) * ((sd->class_&JOBL_UPPER || (job_id == JOB_STAR_GLADIATOR) || (job_id == JOB_KAGEROU) || (job_id == JOB_OBORO) || (job_id == JOB_REBELLION) || (job_id == JOB_SOUL_LINKER) || (job_id == JOB_SUPER_NOVICE_E))?1.25:1);
 		max += status_get_spbonus(&sd->bl,STATUS_BONUS_FIX);
 		max *= (1 + status_get_spbonus(&sd->bl,STATUS_BONUS_RATE) * 0.01);
 	}

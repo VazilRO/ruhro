@@ -41,6 +41,7 @@ prontera,102,208,4	script	Rebel	10063,{
 			mes "^FFA5001 Branch[3]^000000";
 			mes "^FFA5001 Cyclone[2]^000000";
 			mes "^FFA500100 Bullets^000000";
+			mes "1 million zeny";
 			next;
 				switch(select( "Okay!", "Nevermind...")) {
 					case 1:
@@ -67,6 +68,7 @@ L_REBELQUESTGATHER:
 	mes "^FFA5001 Branch[3]^000000";
 	mes "^FFA5001 Cyclone[2]^000000";
 	mes "^FFA500100 Bullets^000000";
+	mes "1 million zeny";
 	next;
 	switch(select("Yes","Nope")) {
 		case 1:
@@ -80,7 +82,7 @@ L_REBELQUESTGATHER:
 
 L_CHECKREBELGAT:
 	mes "[Rebel]";
-	if(countitem(7317) < 50 || countitem(2289) < 1 || countitem(13150) < 1 || countitem(13152) < 1 || countitem(13200) < 100) {
+	if(countitem(7317) < 50 || countitem(2289) < 1 || countitem(13150) < 1 || countitem(13152) < 1 || countitem(13200) < 100 || Zeny < 1000000) {
 		mes "You do not have all I asked for...";
 		close;
 	}
@@ -88,6 +90,7 @@ L_CHECKREBELGAT:
 	next;
 	mes "[Rebel]";
 	mes "Now you will be able to fight for ^FF0000Fre^E5E4E2ed^0000FFom^000000!";
+	set Zeny,Zeny-1000000;
 	delitem 7317,50;
 	delitem 2289,1;
 	delitem 13150,1;
@@ -96,6 +99,7 @@ L_CHECKREBELGAT:
 	getitem 5748, 1;
 	getitem 2795, 1;
 	callfunc "Job_Change",Job_Rebellion;
+	atcommand "@stpoint 52";
 	close;	
 
 L_LVLUPBRO:

@@ -14,3 +14,6 @@
 //	Normally, Novice's max. param uses 'max_parameter' in 'conf/battle/player.conf'.
 //	With this config, Novice's max. param will be 60 (for all stats).
 
+4047,130 //Star Gladiator max stat 130 - in line with Kagerou/Oboro/Rebellion and 3rd jobs
+4048,130 //Star Gladiator (Union) max stat 130 - in line with Kagerou/Oboro/Rebellion and 3rd jobs
+4049,130 //Soul Linker max stat 130 - in line with Kagerou/Oboro/Rebellion and 3rd jobs

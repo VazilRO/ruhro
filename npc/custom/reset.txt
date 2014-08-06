@@ -45,6 +45,9 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 			mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
 			set Zeny,zeny-.@stzeny;
 			ResetStatus;
+			if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+				atcommand "@stpoint 52";
+			}
 			close;
 		case 3:
 			mes "[Reset Girl]";
@@ -56,6 +59,9 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 			set Zeny,zeny-.@bzeny;
 			ResetSkill;
 			ResetStatus;
+			if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+				atcommand "@stpoint 52";
+			}
 			close;
 		case 4:
 			mes "[Reset Girl]";
@@ -87,6 +93,9 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 				mes "[Reset Girl]";
 				mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
 				ResetStatus;
+				if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+					atcommand "@stpoint 52";
+				}
 				set redro_reset,1;
 				close;
 			case 3:
@@ -94,6 +103,9 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 				mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
 				ResetSkill;
 				ResetStatus;
+				if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+					atcommand "@stpoint 52";
+				}
 				set redro_reset,1;
 				close;
 			case 4:
@@ -125,6 +137,9 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
 					delitem 677,5;
 					ResetStatus;
+					if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+						atcommand "@stpoint 52";
+					}
 					close;
 				} else {
 					mes "[Reset Girl]";
@@ -138,6 +153,9 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 					delitem 677,10;
 					ResetSkill;
 					ResetStatus;
+					if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+						atcommand "@stpoint 52";
+					}
 					close;
 				} else {
 					mes "[Reset Girl]";

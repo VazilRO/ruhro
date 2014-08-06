@@ -705,11 +705,8 @@ int pc_equippoint(struct map_session_data *sd,int n){
 		return 0; //Not equippable by players.
 
 	ep = sd->inventory_data[n]->equip;
-	if(sd->inventory_data[n]->look == W_DAGGER	||
-		sd->inventory_data[n]->look == W_1HSWORD ||
-		sd->inventory_data[n]->look == W_1HAXE) {
-		if(ep == EQP_HAND_R && (pc_checkskill(sd,AS_LEFT) > 0 || (sd->class_&MAPID_UPPERMASK) == MAPID_ASSASSIN ||
-			(sd->class_&MAPID_UPPERMASK) == MAPID_KAGEROUOBORO))//Kagerou and Oboro can dual wield daggers. [Rytech]
+	if(sd->inventory_data[n]->look == W_DAGGER	||	sd->inventory_data[n]->look == W_1HSWORD ||	sd->inventory_data[n]->look == W_1HAXE) {
+		if(ep == EQP_HAND_R && (pc_checkskill(sd,AS_LEFT) > 0 || (sd->class_&MAPID_UPPERMASK) == MAPID_ASSASSIN || (sd->class_ == MAPID_KAGEROUOBORO)))//Kagerou and Oboro can dual wield daggers. [Rytech]
 			return EQP_ARMS;
 	}
 	return ep;
@@ -975,6 +972,16 @@ bool pc_adoption(struct map_session_data *p1_sd, struct map_session_data *p2_sd,
  *------------------------------------------*/
 static bool pc_isItemClass (struct map_session_data *sd, struct item_data* item) {
 	while (1) {
+		if (item->class_upper&ITEMJ_UPPER && (sd->class_ == MAPID_KAGEROUOBORO))
+			break;
+		if (item->class_upper&ITEMJ_UPPER && (sd->class_ == MAPID_STAR_GLADIATOR))
+			break;
+		if (item->class_upper&ITEMJ_UPPER && (sd->class_ == MAPID_SOUL_LINKER))
+			break;
+		if (item->class_upper&ITEMJ_UPPER && (sd->class_ == MAPID_REBELLION))
+			break;
+		if (item->class_upper&ITEMJ_UPPER && (sd->class_ == MAPID_SUPER_NOVICE_E))
+			break;
 		if (item->class_upper&ITEMJ_NORMAL && !(sd->class_&(JOBL_UPPER|JOBL_THIRD|JOBL_BABY)))	//normal classes (no upper, no baby, no third)
 			break;
 #ifndef RENEWAL
