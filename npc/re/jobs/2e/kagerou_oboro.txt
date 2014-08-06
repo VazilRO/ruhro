@@ -2630,7 +2630,7 @@ job_ko,148,46,4	script	Guide Gion#ko2	588,{
 		set job_kagero,9;
 		getnameditem .@item,strcharinfo(0);
 		jobchange (Sex)?Job_Kagerou:Job_Oboro;
-		atcommand "@stpoint 52";
+		set StatusPoint,StatusPoint+52;
 		donpcevent "Summon Target#ko::OnEnable";
 		mes "[Guide Gion]";
 		mes "I hope the blessings of Kagerou, dancing sun and Oboro, misty moonlight will be with you on your journey ahead.";

@@ -451,7 +451,7 @@ OnTouch:
 			completequest 6008;
 			callfunc "Job_Change",Job_Soul_Linker;
 			callfunc "F_ClearJobVar";	// clears all job variables for the current player
-			atcommand "@stpoint 52";
+			set StatusPoint,StatusPoint+52;
 			set SOUL_Q,0;
 			mes "[Maia]";
 			mes "I wish the best of luck";

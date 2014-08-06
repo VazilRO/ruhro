@@ -685,7 +685,7 @@ comodo,172,230,3	script	Wandering Master#job_sta	730,{
 			completequest 7011;
 			callfunc "Job_Change",Job_Star_Gladiator;
 			callfunc "F_ClearJobVar";		//clears all job variables for the current player
-			atcommand "@stpoint 52";
+			set StatusPoint,StatusPoint+52;
 			next;
 			mes "[Moogang]";
 			mes "From now on, please";
