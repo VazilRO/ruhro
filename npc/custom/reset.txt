@@ -25,7 +25,7 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 	mes "Please select the service you want:";
 	next;
 
-	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:RedditRO Coins:Quit")) {
+	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:RedditRO Coins:GM Free Reset Ticket:Quit")) {
 		case 1:
 			mes "[Reset Girl]";
 			if (Zeny < .@skzeny) {
@@ -167,6 +167,24 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 		 	}
 
 		case 6:
+			if (countitem(40004) > 0){
+				mes "[Reset Girl]";
+				mes "Ah, I see you have a GM Free Reset Ticket.";
+				mes "I shall provide you with your free reset then!"
+				delitem 40004,1;
+				ResetSkill;
+				ResetStatus;
+				if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+					atcommand "@stpoint 52";
+				}
+				close;
+			} else {
+				mes "[Reset Girl]";
+				mes "You don't have any GM Free Reset Tickets.";
+				close;
+			}
+
+		case 7:
 			close;
 	}
 }

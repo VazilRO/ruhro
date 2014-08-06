@@ -25,3 +25,4 @@
 
 //RedditRO Custom Items
 40002,459,100 //Donator's Valkyrie Helm
+40004,459,100 //GM Free Reset Ticket
