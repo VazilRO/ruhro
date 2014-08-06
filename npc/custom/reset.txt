@@ -170,7 +170,7 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 			if (countitem(40004) > 0){
 				mes "[Reset Girl]";
 				mes "Ah, I see you have a GM Free Reset Ticket.";
-				mes "I shall provide you with your free reset then!"
+				mes "I shall provide you with your free reset then!";
 				delitem 40004,1;
 				ResetSkill;
 				ResetStatus;
