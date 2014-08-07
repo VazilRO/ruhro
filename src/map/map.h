@@ -305,8 +305,8 @@ enum bl_type {
 enum npc_subtype { WARP, SHOP, SCRIPT, CASHSHOP, ITEMSHOP, POINTSHOP, TOMB };
 
 enum e_race {
-	RC_NONE_=-1, //don't give us bonus
-	RC_FORMLESS=0,
+	RC_NONE_ = -1, //don't give us bonus
+	RC_FORMLESS = 0,
 	RC_UNDEAD,
 	RC_BRUTE,
 	RC_PLANT,
@@ -322,7 +322,7 @@ enum e_race {
 };
 
 enum e_classAE {
-	CLASS_NONE=-1, //don't give us bonus
+	CLASS_NONE = -1, //don't give us bonus
 	CLASS_NORMAL = 0,
 	CLASS_BOSS,
 	CLASS_GUARDIAN,
@@ -341,7 +341,8 @@ enum e_race2 {
 	RC2_MAX
 };
 
-enum e_elemen {
+/// Element list
+enum e_element {
 	ELE_NONE=-1,
 	ELE_NEUTRAL=0,
 	ELE_WATER,
@@ -356,6 +357,8 @@ enum e_elemen {
 	ELE_ALL,
 	ELE_MAX
 };
+
+#define MAX_ELE_LEVEL 4 /// Maximum Element level
 
 enum mob_ai {
 	AI_NONE = 0,
@@ -870,6 +873,7 @@ void map_addmap2db(struct map_data *m);
 void map_removemapdb(struct map_data *m);
 
 #define CHK_ELEMENT(ele) ((ele) > ELE_NONE && (ele) < ELE_MAX) /// Check valid Element
+#define CHK_ELEMENT_LEVEL(lv) ((lv) >= 1 && (lv) <= MAX_ELE_LEVEL) /// Check valid element level
 #define CHK_RACE(race) ((race) > RC_NONE_ && (race) < RC_MAX) /// Check valid Race
 #define CHK_RACE2(race2) ((race2) >= RC2_NONE && (race2) < RC2_MAX) /// Check valid Race2
 #define CHK_CLASS(class_) ((class_) > CLASS_NONE && (class_) < CLASS_MAX) /// Check valid Class
@@ -934,7 +938,7 @@ extern int db_use_sqldbs;
 extern Sql* mmysql_handle;
 extern Sql* logmysql_handle;
 
-extern char buyingstore_db[32];
+extern char buyingstores_db[32];
 extern char buyingstore_items_db[32];
 extern char item_db_db[32];
 extern char item_db2_db[32];

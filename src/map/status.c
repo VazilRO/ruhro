@@ -60,7 +60,7 @@ static int atkmods[3][MAX_WEAPON_TYPE];	/// ATK weapon modification for size (si
 static struct eri *sc_data_ers; /// For sc_data entries
 static struct status_data dummy_status;
 
-int current_equip_item_index; /// Contains inventory index of an equipped item. To pass it into the EQUP_SCRIPT [Lupus]
+short current_equip_item_index; /// Contains inventory index of an equipped item. To pass it into the EQUP_SCRIPT [Lupus]
 int current_equip_card_id; /// To prevent card-stacking (from jA) [Skotlex]
 // We need it for new cards 15 Feb 2005, to check if the combo cards are insrerted into the CURRENT weapon only to avoid cards exploits
 
@@ -726,7 +726,6 @@ void initChangeTables(void)
 	set_sc( GN_CARTBOOST			, SC_GN_CARTBOOST	, SI_GN_CARTBOOST			, SCB_SPEED );
 	set_sc( GN_THORNS_TRAP			, SC_THORNSTRAP		, SI_THORNTRAP			, SCB_NONE );
 	set_sc_with_vfx( GN_BLOOD_SUCKER	, SC_BLOODSUCKER	, SI_BLOODSUCKER		, SCB_NONE );
-	add_sc( GN_WALLOFTHORN			, SC_STOP		);
 	set_sc( GN_FIRE_EXPANSION_SMOKE_POWDER	, SC_SMOKEPOWDER	, SI_FIRE_EXPANSION_SMOKE_POWDER, SCB_FLEE );
 	set_sc( GN_FIRE_EXPANSION_TEAR_GAS	, SC_TEARGAS		, SI_FIRE_EXPANSION_TEAR_GAS	, SCB_HIT|SCB_FLEE );
 	set_sc( GN_MANDRAGORA			, SC_MANDRAGORA		, SI_MANDRAGORA			, SCB_INT );
@@ -2756,7 +2755,8 @@ int status_calc_pc_(struct map_session_data* sd, enum e_status_calc_opt opt)
 	const struct status_change *sc = &sd->sc;
 	struct s_skill b_skill[MAX_SKILL]; ///< Previous skill tree
 	int b_weight, b_max_weight, b_cart_weight_max, ///< Previous weight
-	i, index, skill,refinedef=0;
+	i, skill,refinedef=0;
+	short index = -1;
 
 	if (++calculating > 10) // Too many recursive calls!
 		return -1;
@@ -2849,11 +2849,18 @@ int status_calc_pc_(struct map_session_data* sd, enum e_status_calc_opt opt)
 		clif_status_load(&sd->bl, SI_INTRAVISION, 0);
 
 	memset(&sd->special_state,0,sizeof(sd->special_state));
-	memset(&status->max_hp, 0, sizeof(struct status_data)-(sizeof(status->hp)+sizeof(status->sp)));
+
+	if (!sd->state.permanent_speed) {
+		memset(&status->max_hp, 0, sizeof(struct status_data)-(sizeof(status->hp)+sizeof(status->sp)));
+		status->speed = DEFAULT_WALK_SPEED;
+	} else {
+		int pSpeed = status->speed;
+
+		memset(&status->max_hp, 0, sizeof(struct status_data)-(sizeof(status->hp)+sizeof(status->sp)));
+		status->speed = pSpeed;
+	}
 
 	// !FIXME: Most of these stuff should be calculated once, but how do I fix the memset above to do that? [Skotlex]
-	if (!sd->state.permanent_speed)
-		status->speed = DEFAULT_WALK_SPEED;
 	// Give them all modes except these (useful for clones)
 	status->mode = MD_MASK&~(MD_BOSS|MD_PLANT|MD_DETECTOR|MD_ANGRY|MD_TARGETWEAK);
 
@@ -4247,6 +4254,7 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag)
 
 	if(flag&SCB_SPEED) {
 		struct unit_data *ud = unit_bl2ud(bl);
+
 		status->speed = status_calc_speed(bl, sc, b_status->speed);
 
 		/** [Skotlex]
@@ -4257,7 +4265,7 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag)
 		if (ud)
 			ud->state.change_walk_target = ud->state.speed_changed = 1;
 
-		if( bl->type&BL_PC && status->speed < battle_config.max_walk_speed )
+		if( bl->type&BL_PC && !(sd && sd->state.permanent_speed) && status->speed < battle_config.max_walk_speed )
 			status->speed = battle_config.max_walk_speed;
 
 		if( bl->type&BL_HOM && battle_config.hom_setting&HOMSET_COPY_SPEED && ((TBL_HOM*)bl)->master)
@@ -4266,8 +4274,6 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag)
 			status->speed = status_get_speed(&((TBL_MER*)bl)->master->bl);
 		if( bl->type&BL_ELEM && ((TBL_ELEM*)bl)->master)
 			status->speed = status_get_speed(&((TBL_ELEM*)bl)->master->bl);
-
-
 	}
 
 	if(flag&SCB_CRI && b_status->cri) {
@@ -4279,7 +4285,6 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag)
 		/// After status_calc_critical so the bonus is applied despite if you have or not a sc bugreport:5240
 		if( bl->type == BL_PC && ((TBL_PC*)bl)->status.weapon == W_KATAR )
 			status->cri <<= 1;
-
 	}
 
 	if(flag&SCB_FLEE2 && b_status->flee2) {
@@ -5179,7 +5184,7 @@ static unsigned short status_calc_watk(struct block_list *bl, struct status_chan
 		#ifndef RENEWAL
 		else {
 			TBL_PC *sd = (TBL_PC*)bl;
-			int index = sd->equip_index[sd->state.lr_flag?EQI_HAND_L:EQI_HAND_R];
+			short index = sd->equip_index[sd->state.lr_flag?EQI_HAND_L:EQI_HAND_R];
 
 			if(index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->wlv == 4)
 				watk += sc->data[SC_NIBELUNGEN]->val2;
@@ -5826,11 +5831,8 @@ static unsigned short status_calc_speed(struct block_list *bl, struct status_cha
 	TBL_PC* sd = BL_CAST(BL_PC, bl);
 	int speed_rate = 100;
 
-	if( sc == NULL )
-		return cap_value(speed,10,USHRT_MAX);
-
-	if (sd && sd->state.permanent_speed)
-		return (short)cap_value(speed,10,USHRT_MAX);
+	if (sc == NULL || (sd && sd->state.permanent_speed))
+		return (unsigned short)cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
 
 	if( sd && sd->ud.skilltimer != INVALID_TIMER && (pc_checkskill(sd,SA_FREECAST) > 0 || sd->ud.skill_id == LG_EXEEDBREAK) ) {
 		if( sd->ud.skill_id == LG_EXEEDBREAK )
@@ -5992,7 +5994,7 @@ static unsigned short status_calc_speed(struct block_list *bl, struct status_cha
 	if( sc->data[SC_REBOUND] )
 		speed += max(speed, 100);
 
-	return (short)cap_value(speed,10,USHRT_MAX);
+	return (unsigned short)cap_value(speed, MIN_WALK_SPEED, MAX_WALK_SPEED);
 }
 
 #ifdef RENEWAL_ASPD
@@ -6498,7 +6500,7 @@ const char* status_get_name(struct block_list *bl)
 }
 
 /**
-* Gets the class of the given bl
+* Gets the class/sprite id of the given bl
 * @param bl: Object whose class to get [PC|MOB|PET|HOM|MER|NPC|ELEM]
 * @return class or 0 if any other bl->type than noted above
 **/
@@ -7663,7 +7665,7 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 	// Strip skills, need to divest something or it fails.
 	case SC_STRIPWEAPON:
 		if (sd && !(flag&4)) { // Apply sc anyway if loading saved sc_data
-			int i;
+			short i;
 			opt_flag = 0; // Reuse to check success condition.
 			if(sd->bonus.unstripable_equip&EQP_WEAPON)
 				return 0;
@@ -7686,7 +7688,7 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 		if( val2 == 1 ) val2 = 0; // GX effect. Do not take shield off..
 		else
 		if (sd && !(flag&4)) {
-			int i;
+			short i;
 			if(sd->bonus.unstripable_equip&EQP_SHIELD)
 				return 0;
 			i = sd->equip_index[EQI_HAND_L];
@@ -7698,7 +7700,7 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 	break;
 	case SC_STRIPARMOR:
 		if (sd && !(flag&4)) {
-			int i;
+			short i;
 			if(sd->bonus.unstripable_equip&EQP_ARMOR)
 				return 0;
 			i = sd->equip_index[EQI_ARMOR];
@@ -7710,7 +7712,7 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 	break;
 	case SC_STRIPHELM:
 		if (sd && !(flag&4)) {
-			int i;
+			short i;
 			if(sd->bonus.unstripable_equip&EQP_HELM)
 				return 0;
 			i = sd->equip_index[EQI_HEAD_TOP];
@@ -7782,7 +7784,7 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 	break;
 	case SC__STRIPACCESSORY:
 		if( sd ) {
-			int i = -1;
+			short i = -1;
 			if( !(sd->bonus.unstripable_equip&EQP_ACC_L) ) {
 				i = sd->equip_index[EQI_ACC_L];
 				if( i >= 0 && sd->inventory_data[i] && sd->inventory_data[i]->type == IT_ARMOR )
@@ -8195,7 +8197,6 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 			case SC_MARIONETTE:
 			case SC_MARIONETTE2:
 			case SC_NOCHAT:
-			case SC_CHANGE: // Otherwise your Hp/Sp would get refilled while still within effect of the last invocation.
 			case SC_ABUNDANCE:
 			case SC_FEAR:
 			case SC_TOXIN:
@@ -9435,10 +9436,13 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 			tick_time = 10000; // [GodLesZ] tick time
 			break;
 		case SC_EXEEDBREAK:
-			val1 *= 100; // 100 * skill_lv
-			if( sd && sd->inventory_data[sd->equip_index[EQI_HAND_R]] ) {
-				val1 += (sd->inventory_data[sd->equip_index[EQI_HAND_R]]->weight/10 * sd->inventory_data[sd->equip_index[EQI_HAND_R]]->wlv * status_get_lv(bl) / 100);
-				val1 += 10 * sd->status.job_level;
+			{
+				short idx = -1;
+				val1 *= 100; // 100 * skill_lv
+				if( sd && (idx = sd->equip_index[EQI_HAND_R]) >= 0 && sd->inventory_data[idx] ) {
+					val1 += (sd->inventory_data[idx]->weight/10 * sd->inventory_data[idx]->wlv * status_get_lv(bl) / 100);
+					val1 += 10 * sd->status.job_level;
+				}
 			}
 			break;
 		case SC_PRESTIGE:
@@ -9919,7 +9923,7 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 		case SC_STONE:
 		case SC_DEEPSLEEP:
 			if (sd && pc_issit(sd)) // Avoid sprite sync problems.
-				pc_setstand(sd);
+				pc_setstand(sd, true);
 		case SC_TRICKDEAD:
 			status_change_end(bl, SC_DANCING, INVALID_TIMER);
 			// Cancel cast when get status [LuzZza]
@@ -10211,9 +10215,6 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 				status_set_sp(bl, 0, 0); // Damage all SP
 			}
 			sce->val2 = 5 * status->max_hp / 100;
-			break;
-		case SC_CHANGE:
-			status_percent_heal(bl, 100, 100);
 			break;
 		case SC_RUN:
 			{
@@ -10762,7 +10763,7 @@ int status_change_end_(struct block_list* bl, enum sc_type type, int tid, const 
 
 		/* 3rd Stuff */
 		case SC_MILLENNIUMSHIELD:
-			clif_millenniumshield(sd,0);
+			clif_millenniumshield(bl, 0);
 			break;
 		case SC_HALLUCINATIONWALK:
 			sc_start(bl,bl,SC_HALLUCINATIONWALK_POSTDELAY,100,sce->val1,skill_get_time2(GC_HALLUCINATIONWALK,sce->val1));
@@ -10806,8 +10807,7 @@ int status_change_end_(struct block_list* bl, enum sc_type type, int tid, const 
 			sc_start(bl, bl,SC_SITDOWN_FORCE,100,sce->val1,skill_get_time2(WM_SATURDAY_NIGHT_FEVER,sce->val1));
 			break;
 		case SC_SITDOWN_FORCE:
-			if( sd && pc_issit(sd) ) {
-				pc_setstand(sd);
+			if( sd && pc_issit(sd) && pc_setstand(sd, false) ) {
 				clif_standing(bl);
 			}
 			break;
@@ -10866,8 +10866,7 @@ int status_change_end_(struct block_list* bl, enum sc_type type, int tid, const 
 			status_change_end(bl,SC_TEARGAS_SOB,INVALID_TIMER);
 			break;
 		case SC_BANANA_BOMB_SITDOWN:
-			if( sd && pc_issit(sd) ) {
-				pc_setstand(sd);
+			if( sd && pc_issit(sd) && pc_setstand(sd, false) ) {
 				skill_sit(sd,0);
 				clif_standing(bl);
 			}
@@ -12693,47 +12692,42 @@ static bool status_readdb_refine(char* fields[], int columns, int current)
 static bool status_readdb_attrfix(const char *basedir,bool silent)
 {
 	FILE *fp;
-	char line[512], path[512],*p;
-	int entries=0;
+	char line[512], path[512];
+	int entries = 0;
 
 
 	sprintf(path, "%s/attr_fix.txt", basedir);
-	fp=fopen(path,"r");
-	if(fp==NULL) {
-		if(silent==0) ShowError("can't read %s\n", path);
+	fp = fopen(path,"r");
+	if (fp == NULL) {
+		if (silent==0)
+			ShowError("Can't read %s\n", path);
 		return 1;
 	}
-	while(fgets(line, sizeof(line), fp))
-	{
-		char *split[10];
-		int lv,n,i,j;
-		if(line[0]=='/' && line[1]=='/')
-			continue;
-		for(j=0,p=line;j<3 && p;j++) {
-			split[j]=p;
-			p=strchr(p,',');
-			if(p) *p++=0;
-		}
-		if( j < 2 )
+	while (fgets(line, sizeof(line), fp)) {
+		int lv, i, j;
+		if (line[0] == '/' && line[1] == '/')
 			continue;
 
-		lv=atoi(split[0]);
-		n=atoi(split[1]);
+		lv = atoi(line);
+		if (!CHK_ELEMENT_LEVEL(lv))
+			continue;
 
-		for(i=0;i<n && i<ELE_ALL;) {
-			if( !fgets(line, sizeof(line), fp) )
+		for (i = 0; i < ELE_ALL;) {
+			char *p;
+			if (!fgets(line, sizeof(line), fp))
 				break;
-			if(line[0]=='/' && line[1]=='/')
+			if (line[0]=='/' && line[1]=='/')
 				continue;
 
-			for(j=0,p=line;j<n && j<ELE_ALL && p;j++) {
-				while(*p>0 && *p==32) //skipping newline and space (32=' ')
+			for (j = 0, p = line; j < ELE_ALL && p; j++) {
+				while (*p > 0 && *p == 32) //skipping newline and space (32=' ')
 					p++;
-				attr_fix_table[lv-1][i][j]=atoi(p);
-				if(battle_config.attr_recover == 0 && attr_fix_table[lv-1][i][j] < 0)
+				attr_fix_table[lv-1][i][j] = atoi(p);
+				if (battle_config.attr_recover == 0 && attr_fix_table[lv-1][i][j] < 0)
 					attr_fix_table[lv-1][i][j] = 0;
-				p=strchr(p,',');
-				if(p) *p++=0;
+				p = strchr(p,',');
+				if(p)
+					*p++=0;
 			}
 
 			i++;
