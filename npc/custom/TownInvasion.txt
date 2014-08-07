@@ -86,6 +86,7 @@
 		if($@k < $@numMVP) {
 			announce ($@numMVP - $@k) + " MVPs left!",0;
 		} else {
+			announce "All MVPs were killed!",0;
 			goto OnFinish;
 		}	
 		end;

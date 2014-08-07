@@ -1,0 +1,215 @@
+//===== rAthena Script ======================================= 
+//= Russian Roulette Event
+//===== By: ================================================== 
+//= Ghost
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Created: 12/24/2011
+//= Released: 12/24/2011
+//= Compatibility: rAthena | eAthena
+//= rAthena Topic: http://rathena.org/board/topic/58222-ghosts-scripts/
+//= Required File: http://www.mediafire.com/?ry9k4uolxlmj4kv
+//= Reference: http://en.wikipedia.org/wiki/Russian_roulette
+//= Note: Thanks to Z3R0, Arcenciel, and `KeiKun for helping me on making this script.
+//= ©2011-2012 Ghost
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Ghost]
+//= 1.1 Polished the script and modified the controls [Poutine]
+//============================================================
+
+prontera,156,179,6,	script	Russian Roulette	731,{
+
+//--Configuration
+goto Asiong;
+OnInit:
+	set .NPC$, "[Russian Roulette]"; //What is the NPC name?
+	set .RRMAP$, "prontera";
+	set .GMLevel, 90; //What is the minimum gm level to activate the event?
+	set .GetSkull, 0; //Do you want to get the skulls of the dead after winning? 1: Enabled | 0:Disable
+	set .minPlayer, 2; // minimum number of players to start the event
+	set .Zeny, 0; //How much zeny you want the winner to get? | 0:Disable
+	set .pReg, 0;
+	setarray .ItemID[0], 677; //What is the Item ID of the prize? | 0:Disable
+	setarray .ItemAmount[0],3; //How many pieces of the prize?
+	setarray .DeathDialog$[0], "Sayonara!", "Hasta la vista, baby!", "Die!"; //What do you want the NPC will say when someone dies?
+	setarray .AliveDialog$[0], "You lucky bastard!", "Bloody hell!", "Why can't you die!"; //What do you want the NPC will say when someone lives?
+	hideonnpc "Russian Roulette";
+	bindatcmd("russianroulette","Russian Roulette::OnRRAdmin",11,11);	
+	end;
+//--End
+
+Asiong:
+	mes .NPC$;
+	mes "Russian Roulette is a potentially lethal game of chance in which participants place a single round in a revolver, spin the cylinder, place the muzzle against their head and pull the trigger.";
+	if(.play == 2){ close; }
+	switch(select("Play:Nevermind")) {
+		case 1:
+			if(.play == 1) {
+				for(set .@i, 0; .@i < .maxplayer; set .@i, .@i + 1){
+					if(.playerlist$[.@i] == strcharinfo(0)){ 
+						next;
+						mes .NPC$;
+						mes "You are already registered!"; 
+						close;
+					}
+				}
+				set .playerlist$[.pReg], strcharinfo(0);
+				set .pReg, .pReg + 1;
+				set .maxplayer, .maxplayer + 1;
+				mapannounce .RRMAP$,"[Russian Roulette] "+strcharinfo(0)+" is registered.",bc_map;
+				close;
+			}
+			next;
+			mes .NPC$;
+			mes "Event has not yet started.";
+			close;
+		case 2:
+			close;
+	}
+	close;
+	
+OnRRAdmin:
+	if (compare(.@atcmd_parameters$,"on")) {
+		goto RRInit;
+	} else if (compare(.@atcmd_parameters$,"off")) {
+		announce "[Russian Roulette] Cancelled...",bc_all;
+		stopnpctimer;
+		callsub CleanUp;
+	} else {
+			dispbottom "type - '@russianroulette on' to start the event";
+			dispbottom "type - '@russianroulette off' to end the event";
+		}
+	end;
+
+OnClock1302: // Two times a day
+OnClock1630:	
+RRInit:
+	set .play, 1;
+	hideoffnpc "Russian Roulette";
+	announce "[Russian Roulette] Registration is open! You have 2 minutes to get to the centre of Prontera!",bc_all;
+	setnpctimer 0;
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	announce "[Russian Roulette] Registration is open! You have 1 minutes to get to the centre of Prontera!",bc_all;
+	end;
+
+OnTimer120000:
+	stopnpctimer;
+	announce "[Russian Roulette] Registration is now closed!",bc_all;
+	sleep2 3000;
+	if (getarraysize(.playerlist$) < .minPlayer) {		
+		announce "[Russian Roulette] Cancelled due to not enough people...",bc_all;
+		callsub CleanUp;
+		end;
+	}
+	goto PlayRR;
+	end;
+
+PlayRR:
+	copyarray .copiedplayer$[0], .playerlist$[0], 128;
+	set .play, 2;
+	mapannounce .RRMAP$,"[Russian Roulette] Thrilling trigger pulls are about to start!",bc_map;
+	mapannounce .RRMAP$,"Active Player Listing",bc_map,0xFFFFFF;
+	for(set .@i, 0; .@i < getarraysize(.playerlist$); set .@i, .@i + 1){
+		set .@j, .@j + 1;
+		announce ""+.@j+". "+.playerlist$[.@i]+"",bc_all,0xFFFFFF;
+		sleep2 1000;
+	}
+	mapannounce .RRMAP$,"Do not disconnect. You will be disqualified!",bc_map,0xFFFFFF;
+	callsub OnSpin;
+	close;
+
+OnSpin:
+	set .spin, rand(0, .pReg - 1);
+	attachrid(getcharid(3, .playerlist$[.spin]));
+	callsub OnCheck;
+	mapannounce .RRMAP$,.NPC$ +" The revolver is spinning . . .",bc_map;
+	sleep2 3000;
+	mapannounce .RRMAP$,.NPC$ +" Revolver slowly stopped spinning . . .",bc_map;
+	sleep2 2000;
+	mapannounce .RRMAP$,.NPC$ +" The revolver is pointing to "+ strcharinfo(0) +" . . .",bc_map;
+	sleep2 3000;
+	mapannounce .RRMAP$,.NPC$ +" Pull the trigger now "+ strcharinfo(0),bc_map;
+	callsub OnCheck;
+	callsub OnShoot;
+	sleep2 3000;
+	callsub OnSpin;
+	return;
+	
+OnShoot:
+	if(rand(1, 3) == 1){
+		soundeffectall "Revolver.wav", 0;
+		sleep2 2300;
+		specialeffect2 669;
+		specialeffect2 531;
+		percentheal -100, -100;
+		deletearray .playerlist$[.spin], 1;
+		set .pReg, .pReg - 1;
+		mapannounce .RRMAP$,"[Russian Roulette] "+strcharinfo(0)+" is out!",bc_map,0xFF0000;
+		mapannounce .RRMAP$,""+.NPC$+" "+.deathdialog$[rand(1, getarraysize(.deathdialog))]+"", bc_map,0xFF0000;
+	} else {
+		soundeffectall "Revolver.wav", 0;
+		sleep2 2300;
+		specialeffect2 675;
+		specialeffect2 522 + rand(1,14);
+		mapannounce .RRMAP$,""+.NPC$+" "+.alivedialog$[rand(1, getarraysize(.alivedialog))]+"", bc_map,0xFF0000;
+	} 
+	return;
+
+OnCheck:
+	if(.pReg <= 0){
+		announce .NPC$ +" No winner! They all disappear!",bc_all;
+		callsub CleanUp;
+	}
+	else if((.pReg == 1) && (.maxplayer <= 2) && (getarraysize(.disqualified$))){
+		announce .NPC$ +" No winner! A player has been disqualified in 2 player mode.",bc_all;
+		callsub CleanUp;
+	}
+	else if((.pReg == 1) && (.maxplayer >= 2)){
+		announce .NPC$ +" We got a winner! Congratulations "+strcharinfo(0)+"!",bc_all;
+		if(.GetSkull){
+			for(set .@i, 0; .@i < .maxplayer; set .@i, .@i + 1){
+				if(strcharinfo(0) != .copiedplayer$[.@i]){
+				getnameditem 7420, .copiedplayer$[.@i];
+				}
+			}
+		}
+	for(set .@i, 0; .@i < getarraysize(.ItemID); set .@i, .@i + 1){
+		if(.ItemID){ getitem .ItemID[.@i], .ItemAmount[.@i]; }
+	}
+	if(.Zeny){ set Zeny, Zeny + .Zeny; }
+	callsub CleanUp;
+	} return;
+
+OnPCLogoutEvent:
+	if(.play){
+		setarray .disqualified$[.@l], strcharinfo(0);
+		set .@l, .@l + 1;
+		for(set .@i, 0; .@i < .maxplayer; set .@i, .@i + 1){
+			if(.playerlist$[.@i] == strcharinfo(0)){
+			deletearray .playerlist$[.@i], 1;
+			set .pReg, .pReg - 1;
+			mapannounce .RRMAP$,""+.NPC$+" "+strcharinfo(0)+" has disqualified.",bc_map,0xFF0000;
+			break;
+			}
+		}
+	}
+	end;
+
+//--Clean Variables
+CleanUp:
+	set .play, 0;
+	set .pReg, 0;
+	set .maxplayer, 0;
+	deletearray .playerlist$, 128;
+	deletearray .copiedplayer$, 128;
+	deletearray .disqualified$, 128;
+	hideonnpc "Russian Roulette";
+	end;
+//--End
+}
