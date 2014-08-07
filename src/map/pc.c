@@ -11174,9 +11174,10 @@ short pc_get_itemgroup_bonus_group(struct map_session_data* sd, uint16 group_id)
 ///		return false;
 ///=======
 bool pc_is_same_equip_index(enum equip_index eqi, short *equip_index, short index) {
+// Official rAthena fix still not working.
 //>>>>>>> upstream/master
-	if (index < 0 || index >= MAX_INVENTORY)
-		return true;
+//	if (index < 0 || index >= MAX_INVENTORY)
+//		return true;
 ///>>>>>>> 401a7161ce05ea129751d7aaa6bdedde3d92c457
 	// Dual weapon checks
 	if (eqi == EQI_HAND_R && equip_index[EQI_HAND_L] == index)
