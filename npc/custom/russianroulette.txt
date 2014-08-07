@@ -29,7 +29,7 @@ OnInit:
 	set .RRMAP$, "prontera";
 	set .GMLevel, 90; //What is the minimum gm level to activate the event?
 	set .GetSkull, 0; //Do you want to get the skulls of the dead after winning? 1: Enabled | 0:Disable
-	set .minPlayer, 2; // minimum number of players to start the event
+	set .minPlayer, 4; // minimum number of players to start the event
 	set .Zeny, 0; //How much zeny you want the winner to get? | 0:Disable
 	set .pReg, 0;
 	setarray .ItemID[0], 677; //What is the Item ID of the prize? | 0:Disable
