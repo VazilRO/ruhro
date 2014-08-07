@@ -141,5 +141,6 @@
 40041,C_STRAWBERRYHAT,Strawberry Hat,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,755,{},{},{}
 40042,C_TRIPLEPORING,Triple Poring Hat,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,299,{},{},{}
 40043,C_TURTLE_HAT,Turtle Hat,4,10,,0,,,,0,0xFFFFFFF,63,2,1024,,1,0,585,{},{},{}
+40044,C_PIRATEDAGGER,Pirate Dagger,4,10,,0,,,,0,0xFFFFFFF,63,2,4096,,1,0,327,{},{},{}
 //End Costume Headgear
 
