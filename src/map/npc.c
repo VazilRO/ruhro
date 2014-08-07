@@ -3446,7 +3446,8 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		// check if target map has players
 		// (usually shouldn't occur when map server is just starting,
 		// but not the case when we do @reloadscript
-		if( map[data->m].users > 0 )
+		// Parse maps with MVPs on them [Poutine]
+		if (map[data->m].users > 0 || mob.state.boss)
 			npc_parse_mob2(data);
 	}
 	else
