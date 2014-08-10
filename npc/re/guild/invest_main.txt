@@ -147,13 +147,13 @@ function	script	F_Invest_Abyss	{
 				close;
 			} else if (.@units == 0) {
 				mes getarg(1);
-				mes "Canceled.";
+				mes "Cancelled.";
 				close;
 			} else
 				break;
 		case 5:
 			mes getarg(1);
-			mes "Canceled.";
+			mes "Cancelled.";
 			close;
 		}
 		set .@zeny, .@units * 10000;

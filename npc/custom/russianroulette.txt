@@ -129,22 +129,22 @@ OnSpin:
 	attachrid(getcharid(3, .playerlist$[.spin]));
 	callsub OnCheck;
 	mapannounce .RRMAP$,.NPC$ +" The revolver is spinning . . .",bc_map;
-	sleep2 3000;
+	sleep2 1500;
 	mapannounce .RRMAP$,.NPC$ +" Revolver slowly stopped spinning . . .",bc_map;
-	sleep2 2000;
+	sleep2 1000;
 	mapannounce .RRMAP$,.NPC$ +" The revolver is pointing to "+ strcharinfo(0) +" . . .",bc_map;
-	sleep2 3000;
+	sleep2 1500;
 	mapannounce .RRMAP$,.NPC$ +" Pull the trigger now "+ strcharinfo(0),bc_map;
 	callsub OnCheck;
 	callsub OnShoot;
-	sleep2 3000;
+	sleep2 1500;
 	callsub OnSpin;
 	return;
 	
 OnShoot:
 	if(rand(1, 3) == 1){
 		soundeffectall "Revolver.wav", 0;
-		sleep2 2300;
+		sleep2 1300;
 		specialeffect2 669;
 		specialeffect2 531;
 		percentheal -100, -100;
@@ -154,7 +154,7 @@ OnShoot:
 		mapannounce .RRMAP$,""+.NPC$+" "+.deathdialog$[rand(1, getarraysize(.deathdialog))]+"", bc_map,0xFF0000;
 	} else {
 		soundeffectall "Revolver.wav", 0;
-		sleep2 2300;
+		sleep2 1300;
 		specialeffect2 675;
 		specialeffect2 522 + rand(1,14);
 		mapannounce .RRMAP$,""+.NPC$+" "+.alivedialog$[rand(1, getarraysize(.alivedialog))]+"", bc_map,0xFF0000;
