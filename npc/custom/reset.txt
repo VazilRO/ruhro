@@ -170,14 +170,36 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 			if (countitem(40004) > 0){
 				mes "[Reset Girl]";
 				mes "Ah, I see you have a GM Free Reset Ticket.";
-				mes "I shall provide you with your free reset then!";
-				delitem 40004,1;
-				ResetSkill;
-				ResetStatus;
-				if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
-					set StatusPoint,StatusPoint+52;
+				mes "I can provide you with your free reset then!";
+				switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")){
+				case 1:
+					mes "[Reset Girl]";
+					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+					delitem 40004,1;
+					ResetSkill;
+					close;
+				case 2:
+					mes "[Reset Girl]";
+					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+					delitem 40004,1;
+					ResetStatus;
+					if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+						set StatusPoint,StatusPoint+52;
+						}
+					close;
+				case 3:
+					mes "[Reset Girl]";
+					mes "Alright, here we go now.. Remember, some changes might not take effect until you log back on!";
+					delitem 40004,1;
+					ResetSkill;
+					ResetStatus;
+					if (Class == Job_Star_Gladiator || Class == Job_Soul_Linker || Class == Job_Kagerou || Class == Job_Oboro || Class == Job_Rebellion || Class == Job_Super_Novice_E) {
+						set StatusPoint,StatusPoint+52;
+						}
+					close;
+				case 4:
+					close;
 				}
-				close;
 			} else {
 				mes "[Reset Girl]";
 				mes "You don't have any GM Free Reset Tickets.";
