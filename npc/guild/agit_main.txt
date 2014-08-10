@@ -93,8 +93,8 @@ OnStartArena:
 	else {
 		end;
 	}
-	if (!mobcount(strnpcinfo(2),"Agit#"+strnpcinfo(2)+"::OnAgitBreak")) {
-		monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Emperium",3500,1,"Agit#"+strnpcinfo(2)+"::OnAgitBreak";
+	if (!mobcount(strnpcinfo(2),"Agit#"+strnpcinfo(2)+"::OnAgitBreak") && agitcheck()) {
+		monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Emperium",1288,1,"Agit#"+strnpcinfo(2)+"::OnAgitBreak";
 	}
 	end;
 

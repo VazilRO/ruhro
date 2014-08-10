@@ -1,0 +1,8 @@
+sec_in01,79,153,1	script	Castle Clear	57,{
+
+SetCastleData prtg_cas03,1,13;
+SetCastleData prtg_cas04,1,13;
+SetCastleData prtg_cas05,1,13;
+mes "Done.";
+
+}
