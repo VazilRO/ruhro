@@ -428,21 +428,25 @@ brasilis,187,162,5	script	Candy Maker	4_M_BRZ_MAN1,{
 		mes "What about it? Wanna buy some?";
 		mes "It's 4000 zeny each.";
 		next;
-		switch(select("Buy a Guarana Candy.:Cancel.")) {
+		switch(select("Buy Guarana Candy.:Cancel.")) {
 		case 1:
-			if (Zeny > 3999) {
+			input(.@buyguarana);
+			if (.@buyguarana <= 0) {
 				mes "[Candy Maker]";
-				mes "Here is a delicious guarana candy.";
-				Zeny = Zeny-4000;
-				getitem 12414,1; //Guarana_Candy
+				mes "Oh, don't you want my candy any more?";
 				close;
 			}
-			else {
+			if (Zeny < .@buyguarana*4000) {
 				mes "[Candy Maker]";
 				mes "What? You should say before if you don't have money!";
 				mes "Even if you are poor, I can't give this away for free.";
 				close;
 			}
+			mes "[Candy Maker]";
+			mes "Here is your delicious guarana candy.";
+			Zeny = Zeny-(.@buyguarana*4000);
+			getitem 12414,.@buyguarana; //Guarana_Candy
+			close;
 		case 2:
 			mes "[Candy Maker]";
 			mes "Sometimes some people don't like it due to it's arousal effect.";
