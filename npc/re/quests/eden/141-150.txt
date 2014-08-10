@@ -1,5 +1,5 @@
 //===== rAthena Script =======================================
-//= Eden Group Quests - Mission [141 - 150]
+//= Eden Group Quests - Mission [141 - 175]
 //===== By: ==================================================
 //= Chilly
 //===== Current Version: =====================================
@@ -7,12 +7,12 @@
 //===== Compatible With: =====================================
 //= rAthena Project
 //===== Description: =========================================
-//= Repeatable Quests for Players between Base level 141 - 150.
+//= Repeatable Quests for Players between Base level 141 - 175.
 //===== Additional Comments: =================================
 //= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [90-99]" v1.3 [Poutine]
 //============================================================
 
-moc_para01,34,184,5	script	141-150 Mission Board	857,{
+moc_para01,34,184,5	script	141-175 Mission Board	857,{
 	if (countitem(6219) < 1) {
 		mes "Wait a minute!";
 		mes "-You need to have an-";
@@ -71,7 +71,7 @@ moc_para01,34,184,5	script	141-150 Mission Board	857,{
 			1000000,1000000,1000000,
 			1100000,1100000,1100000,1100000,1100000,
 			1000000;
-		mes "You must be within level 141-150 to accept these missions.";
+		mes "You must be within level 141-175 to accept these missions.";
 		for(set .@quest,55400; .@quest<=55458; set .@quest,.@quest+1) {
 			set .@hunting, checkquest(.@quest,HUNTING);
 			if (.@hunting == 0 || .@hunting == 1) {
@@ -98,7 +98,7 @@ moc_para01,34,184,5	script	141-150 Mission Board	857,{
 		}
 		close;
 	}
-	mes "[141-150 Mission Board]";
+	mes "[141-175 Mission Board]";
 	mes "There are several requests on this board.";
 	next;
 	switch(select("^8B4513Hunting Mission^000000:^8B4513Gathering Mission^000000")) {
@@ -148,18 +148,18 @@ L_Quest:
 	set .@quest2, .@quest1+50;
 	set .@playtime, checkquest(.@quest2,PLAYTIME);
 	if (.@playtime == 0 || .@playtime == 1) {
-		mes "[141-150 Mission Board]";
+		mes "[141-175 Mission Board]";
 		mes "You need to wait 1 hour before you can take this mission again.";
 		close;
 	}
 	if(getarg(3) == 0) { // Hunting
 		set .@hunting, checkquest(.@quest1,HUNTING);
 		if (.@hunting == 0 || .@hunting == 1) {
-			mes "[141-150 Mission Board]";
+			mes "[141-175 Mission Board]";
 			mes "Have you finished hunting all "+getarg(2)+" "+getmonsterinfo(getarg(1),MOB_NAME)+" yet?";
 			close;
 		} else if (.@hunting == 2) {
-			mes "[141-150 Mission Board]";
+			mes "[141-175 Mission Board]";
 			mes "You have completed the hunting.";
 			mes "Please accept this reward as a compensation.";
 			erasequest .@quest1;
@@ -170,14 +170,14 @@ L_Quest:
 			getitem 6549, rand(1,5); // Courtesy Tickets
 			close;
 		} else {
-			mes "[141-150 Mission Board]";
+			mes "[141-175 Mission Board]";
 			mes getarg(6);
 			next;
-			mes "[141-150 Mission Board]";
+			mes "[141-175 Mission Board]";
 			mes "Hunt "+getarg(2)+" "+getmonsterinfo(getarg(1),MOB_NAME)+" monsters there and post your success on this board.";
 			next;
 			if(select("I'll hunt them.:No thanks.") == 1) {
-				mes "[141-150 Mission Board]";
+				mes "[141-175 Mission Board]";
 				mes "When you have completed the mission, post it on this board and collect your reward.";
 				if (.@playtime > -1) erasequest .@quest2;
 				setquest .@quest1;
@@ -188,11 +188,11 @@ L_Quest:
 		set .@gathering, checkquest(.@quest1);
 		if (.@gathering == 0 || .@gathering == 1) {
 			if(countitem(getarg(1)) < getarg(2)) {
-				mes "[141-150 Mission Board]";
+				mes "[141-175 Mission Board]";
 				mes "Have you finished gathering all " + getarg(2) + " " + getitemname(getarg(1)) + " yet?";
 				close;
 			} else {
-				mes "[141-150 Mission Board]";
+				mes "[141-175 Mission Board]";
 				mes "You have completed the gathering.";
 				mes "Please accept this reward as a compensation.";
 				delitem getarg(1),getarg(2);
@@ -205,12 +205,12 @@ L_Quest:
 				close;
 			}
 		} else {
-			mes "[141-150 Mission Board]";
+			mes "[141-175 Mission Board]";
 			mes getarg(6);
 			mes "Hunt " + getarg(2) + " of them.";
 			next;
 			if(select("I'll hunt them.:No thanks.") == 1) {
-				mes "[141-150 Mission Board]";
+				mes "[141-175 Mission Board]";
 				mes "When you have completed the mission, post it on this board and collect your reward.";
 				if (.@playtime > -1) erasequest .@quest2;
 				setquest .@quest1;
