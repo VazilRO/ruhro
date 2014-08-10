@@ -84,7 +84,7 @@ OnRRAdmin:
 		}
 	end;
 
-OnClock1302: // Two times a day
+OnClock0430: // Two times a day
 OnClock1630:	
 RRInit:
 	set .play, 1;
@@ -95,7 +95,7 @@ RRInit:
 	end;
 
 OnTimer60000:
-	announce "[Russian Roulette] Registration is open! You have 1 minutes to get to the centre of Prontera!",bc_all;
+	announce "[Russian Roulette] Registration is open! You have 1 minute to get to the centre of Prontera!",bc_all;
 	end;
 
 OnTimer120000:
