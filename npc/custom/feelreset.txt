@@ -1,0 +1,68 @@
+//===== rAthena Script ======================================= 
+//= Feeling Reset NPC
+//===== By: ================================================== 
+//= Alkarl
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Allows Star Gladiators to reset map feeling (if that makes sense)
+
+pay_fild04,347,335,3	script	Feeling Master	843,{
+
+	mes "[Feeling Master]";
+	mes "Welcome " + strcharinfo(0) + "!";
+	if (Class != Job_Star_Gladiator) {
+		mes "You are free to remain on my island";
+		mes "However I cannot assist you further";
+		close;
+	}
+	mes "I see that you have mastered the ways of the Taekwon.";
+	mes "I can help you unalign your places of the Sun, Moon and Stars.";
+	mes "Are you interested?";
+	next;
+	menu "What do I need?",listitems,"I have what you asked for",feelreset,"No, thank you.",donothing;
+	
+listitems:
+	mes "[Feeling Master]";
+	mes "I need the following items:";
+	mes "50 Jellopy,";
+	mes "20 Apples,";
+	mes "10 Green Herbs,";
+	mes "10 Garlets,";
+	mes "and 1 Candy.";
+	next;
+	mes "[Feeling Master]";
+	mes "You should be able to find these items from the nearby monsters.";
+	mes "Return to me when you have the items.";
+	close;
+	
+feelreset:
+	if (countitem(909) < 50 || countitem(512) < 20 || countitem(511) < 10 || countitem(910) < 10 || countitem(529) < 1) {
+		mes "[Feeling Master]";
+		mes "You did not bring me the items I asked for.";
+		next;
+		goto listitems;
+	}
+	mes "[Feeling Master]";
+	mes "Yes, these will do perfectly,";
+	mes "Meditate with me.";
+	next;
+	delitem 909,50;
+	delitem 512,20;
+	delitem 511,10;
+	delitem 910,10;
+	delitem 529,1;
+	atcommand "@feelreset";
+	mes "[Feeling Master]";
+	mes "I sense that your places of the Sun, Moon and Stars have unaligned.";
+	mes "Return to me if you need my assistance again.";
+	close;
+	
+donothing:
+	mes "[Feeling Master]";
+	mes "I understand,";
+	mes "Come back when you are ready.";
+	close;
+}
