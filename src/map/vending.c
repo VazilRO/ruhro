@@ -87,6 +87,10 @@ void vending_closevending(struct map_session_data* sd)
 		sd->state.vending = false;
 		sd->vender_id = 0;
 		clif_closevendingboard(&sd->bl, 0);
+			//vending to db [Sanasol]
+			if( SQL_ERROR == Sql_Query(mmysql_handle,"delete from `vending` where `char_id`='%d'", sd->status.char_id) )
+			Sql_ShowDebug(mmysql_handle);
+			//vending to db [Sanasol]
 		idb_remove(vending_db, sd->status.char_id);
 	}
 }
@@ -248,6 +252,19 @@ void vending_purchasereq(struct map_session_data* sd, int aid, int uid, const ui
 
 		pc_cart_delitem(vsd, idx, amount, 0, LOG_TYPE_VENDING);
 		clif_vendingreport(vsd, idx, amount);
+		
+		//vending to db [Sanasol]
+			if(vsd->vending[vend_list[i]].amount >= 1)
+			{
+				if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending` set `amount`='%d' where `char_id`='%d' and `index`='%d'", vsd->vending[vend_list[i]].amount, vsd->status.char_id, vend_list[i]) )
+					Sql_ShowDebug(mmysql_handle);
+			}
+			else
+			{
+				if( SQL_ERROR == Sql_Query(mmysql_handle,"delete from `vending` where `char_id`='%d' and `index`='%d'", vsd->status.char_id, vend_list[i]) )
+					Sql_ShowDebug(mmysql_handle);
+			}
+		//vending to db [Sanasol]
 
 		//print buyer's name
 		if( battle_config.buyer_name ) {
@@ -393,6 +410,20 @@ char vending_openvending(struct map_session_data* sd, const char* message, const
 
 	clif_openvending(sd,sd->bl.id,sd->vending);
 	clif_showvendingboard(&sd->bl,message,0);
+	
+	//vending to db [Sanasol]
+		for( j = 0; j < count; j++ )
+		{
+			int index = sd->vending[j].index;
+			struct item_data* data = itemdb_search(sd->status.cart[index].nameid);
+			int nameid = ( data->view_id > 0 ) ? data->view_id : sd->status.cart[index].nameid;
+			int amount = sd->vending[j].amount;
+			int price = cap_value(sd->vending[j].value, 0, (unsigned int)battle_config.vending_max_value);
+	
+			if( SQL_ERROR == Sql_Query(mmysql_handle,"INSERT INTO `vending` (`char_id`,`name`,`index`,`nameid`,`amount`,`price`,`refine`,`card0`,`card1`,`card2`,`card3`) VALUES (%d, '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d')", sd->status.char_id, message, j, nameid, amount, price, sd->status.cart[index].refine, sd->status.cart[index].card[0], sd->status.cart[index].card[1], sd->status.cart[index].card[2], sd->status.cart[index].card[3]) )
+			Sql_ShowDebug(mmysql_handle);
+		}
+    //vending to db [Sanasol]
 
 	idb_put(vending_db, sd->status.char_id, sd);
 
