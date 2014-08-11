@@ -9153,7 +9153,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			int val = 0, splash = 0;
 			short index = sd->equip_index[EQI_HAND_L];
 			struct item_data *shield_data = NULL;
-			if( index < 0 || !(shield_data = sd->inventory_data[index]) || shield_data->type == IT_ARMOR ) {	// No shield?
+			if( index < 0 || !(shield_data = sd->inventory_data[index]) || shield_data->type != IT_ARMOR ) {	// No shield?
 				clif_skill_fail(sd, skill_id, USESKILL_FAIL_LEVEL, 0);
 				break;
 			}
