@@ -8889,12 +8889,19 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			if( !sc )
 				break;
 
+			switch (skill_id) { // Set val1. The SC element for this ball
+				case WL_SUMMONFB:    element = WLS_FIRE;  break;
+				case WL_SUMMONBL:    element = WLS_WIND;  break;
+				case WL_SUMMONWB:    element = WLS_WATER; break;
+				case WL_SUMMONSTONE: element = WLS_STONE; break;
+			}
+
 			for( i = SC_SPHERE_1; i <= SC_SPHERE_5; i++ ) {
 				if( !sctype && !sc->data[i] )
 					sctype = i; // Take the free SC
 				if( sc->data[i] ) {
 					pos = max(sc->data[i]->val2,pos);
-					j++;
+					if (sc->data[i]->val1 == element) j++; // Check to make sure its the correct element [Poutine]
 				}
 			}
 
@@ -8905,12 +8912,6 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			}
 
 			pos++; // Used in val2 for SC. Indicates the order of this ball
-			switch( skill_id ) { // Set val1. The SC element for this ball
-				case WL_SUMMONFB:    element = WLS_FIRE;  break;
-				case WL_SUMMONBL:    element = WLS_WIND;  break;
-				case WL_SUMMONWB:    element = WLS_WATER; break;
-				case WL_SUMMONSTONE: element = WLS_STONE; break;
-			}
 
 			sc_start4(src,src,(enum sc_type)sctype,100,element,pos,skill_lv,0,skill_get_time(skill_id,skill_lv));
 			clif_skill_nodamage(src,bl,skill_id,0,0);
