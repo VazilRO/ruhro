@@ -1,7 +1,7 @@
 //======Name========================================
 // Town Invasion
 //======Version=====================================
-// 1.0
+// 1.1
 //======Author(s)===================================
 // Based on http://rathena.org/board/topic/82384-simple-town-invasion/
 // Edited by Alkarl :P
@@ -25,14 +25,89 @@
 	OnInvasionStart:
 		killmonsterall $@mapinvasion$[$@town],0; // in case there's an overlap
 		set $@town, rand(22); //Pick a random map
-		set $@j, rand(60,100);
-		set $@k, 0;
+		set $@nummob, rand(60,100);
+		set $@mvpcounter, 0;
 		set $@numMVP, rand(1,4);
 		setnpctimer 0;
 		initnpctimer;
+		
+	switch($@town) {
+		case 0:
+			$@name$ = "Morroc";
+			break;
+		case 1:
+			$@name$ = "Geffen";
+			break;
+		case 2:
+			$@name$ = "Payon";
+			break;
+		case 3:
+			$@name$ = "Alberta";
+			break;
+		case 4:
+			$@name$ = "Izlude";
+			break;
+		case 5:
+			$@name$ = "Al De Baran";
+			break;
+		case 6:
+			$@name$ = "Lutie";
+			break;
+		case 7:
+			$@name$ = "Comodo";
+			break;
+		case 8:
+			$@name$ = "Juno";
+			break;
+		case 9:
+			$@name$ = "Amatsu";
+			break;
+		case 10:
+			$@name$ = "Gonryun";
+			break;
+		case 11:
+			$@name$ = "Umbala";
+			break;
+		case 12:
+			$@name$ = "Louyang";
+			break;
+		case 13:
+			$@name$ = "Jawaii";
+			break;
+		case 14:
+			$@name$ = "Ayothaya";
+			break;
+		case 15:
+			$@name$ = "Einbroch";
+			break;
+		case 16:
+			$@name$ = "Lighthalzen";
+			break;
+		case 17:
+			$@name$ = "Einbech";
+			break;
+		case 18:
+			$@name$ = "Hugel";
+			break;
+		case 19:
+			$@name$ = "Rachel";
+			break;
+		case 20:
+			$@name$ = "Veins";
+			break;
+		case 21:
+			$@name$ = "Moscovia";
+			break;
+		case 22:
+			$@name$ = "Brasilis";
+			break;
+		default:
+			$@name$ = "<none>";
+			break;
+	}
 			
-		announce $@mapinvasion$[$@town]+" is being invaded by monsters!",bc_all,0x00FFFF;
-		monster $@mapinvasion$[$@town],0,0,"--en--",-1,$@j,"towninvasion::OnMobKill";
+		announce $@name$+" is being invaded by monsters!",bc_all,0x00FFFF;
+		monster $@mapinvasion$[$@town],0,0,"--en--",-1,$@nummob,"towninvasion::OnMobKill";
 		end;
 		
 	OnTimer3600000: // In case people just don't participate
@@ -40,23 +115,23 @@
 		end;
 		
 	OnMobKill:
-		set $@j, $@j - 1; //Normal mob counter
+		set $@nummob, $@nummob - 1; //Normal mob counter
 		
-		if ($@j == 100 ) {
+		if ($@nummob == 100 ) {
 			announce "100 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		}else if ($@j == 90 ) {
+		}else if ($@nummob == 90 ) {
 			announce "90 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		}else if ($@j == 80 ) {
+		}else if ($@nummob == 80 ) {
 			announce "80 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 70 ) {
+		} else if ($@nummob == 70 ) {
 			announce "70 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 60 ) {
+		} else if ($@nummob == 60 ) {
 			announce "60 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 50 ) {
+		} else if ($@nummob == 50 ) {
 			announce "50 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 40) { //When all normal mobs are dead, go to OnFinish
+		} else if ($@nummob == 40) { 
 			announce "40 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 30) { //When all normal mobs are dead, go to OnFinish
+		} else if ($@nummob == 30) { 
 			announce "30 Normal Monsters Remaining!",bc_all,0x00FFFF;
 			sleep 5000;
 			if ($@numMVP == 1) {
@@ -65,11 +140,11 @@
 				announce "Oh no! " + $@numMVP + " MVPs have just appeared!",bc_all,0x00FFFF;			
 			}
 			monster $@mapinvasion$[$@town],0,0,"--en--",-3,$@numMVP,"towninvasion::OnMVPKill";
-		} else if ($@j == 20) { //When all normal mobs are dead, go to OnFinish
+		} else if ($@nummob == 20) { 
 			announce "20 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 10) { //When all normal mobs are dead, go to OnFinish
+		} else if ($@nummob == 10) { 
 			announce "10 Normal Monsters Remaining!",bc_all,0x00FFFF;
-		} else if ($@j == 0) { //When all normal mobs are dead, go to OnFinish
+		} else if ($@nummob == 0) { //When all normal mobs are dead, go to OnFinish
 			announce "No Normal Monsters Remaining!",bc_all,0x00FFFF;
 			goto OnFinish;
 		}
@@ -80,11 +155,11 @@
 		end;
 
 	OnMVPKill:
-		set $@k, $@k + 1; //MVP Dead!
+		set $@mvpcounter, $@mvpcounter + 1; //MVP Dead!
 		announce "Congratulations, "+strcharinfo(0)+" has killed a MVP!",bc_all,0x00FFFF;
 		getitem 677,5; //MVP rewards
-		if($@k < $@numMVP) {
-			announce ($@numMVP - $@k) + " MVPs left!",0;
+		if($@mvpcounter < $@numMVP) {
+			announce ($@numMVP - $@mvpcounter) + " MVPs left!",0;
 		} else {
 			announce "All MVPs were killed!",0;
 			goto OnFinish;
@@ -99,7 +174,7 @@
 			
 	OnFinish:
 		//If all mobs are dead, sleep for 6 hours then restart event
-		if ($@j <= 0 && $@k >= $@numMVP) {
+		if ($@nummob <= 0 && $@mvpcounter >= $@numMVP) {
 			goto OnStopEvent;
 		}
 		end;
