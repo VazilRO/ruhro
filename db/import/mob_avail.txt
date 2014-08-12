@@ -15,7 +15,7 @@
 // Weapon and Shield uses Item ID, while Head uses View ID.
 
 ///MVP GM Alkarl
-3501,4191,1,14,6,1243,2112,387,12,188,0,195
+3501,4191,1,14,6,0,0,326,326,326,0,217
 ///MVP GM Poutine
 3502,4063,0,3,0,1565,2199,159,12,369,0,0
 ///MVP GM Carbuncle
