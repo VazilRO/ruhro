@@ -60,7 +60,7 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 		mes "from what I know.";
 		close;
 	}
-	if (JobLevel < 40 || BaseLevel < 99) {
+	if (JobLevel < 40 || BaseLevel < 70) {
 		mes "[Kid]";
 		mes "So you're studying";
 		mes "Taekwon Do. That's good,";
@@ -69,7 +69,7 @@ morocc_in,174,30,6	script	Kid#link1	716,{
 		mes "stick to your training.";
 		close;
 	}
-	else if (JobLevel > 39 && BaseLevel > 98) {
+	else if (JobLevel > 39 && BaseLevel > 69) {
 		if (SOUL_Q == 0) {
 			mes "[Kid]";
 			mes "...";

@@ -67,7 +67,7 @@ payon,215,102,3	script	Moohyun#job_star	828,3,3,{
 				mes "in being a Taekwon Master?";
 				next;
 				if (select("Yes, I am!:No, not so much.") == 1) {
-					if (JobLevel > 39 && BaseLevel > 98) {
+					if (JobLevel > 39 && BaseLevel > 69) {
 						mes "[Moohyun]";
 						mes "Great, great~ I knew you'd";
 						mes "see things my way. Alright,";
@@ -124,6 +124,7 @@ payon,215,102,3	script	Moohyun#job_star	828,3,3,{
 					mes "Great, great~";
 					mes "But first,you";
 					mes "gotta be at least Job Level 40";
+					mes "and Base Level 70";
 					mes "before you can begin Taekwon";
 					mes "Master training. Otherwise, ";
 					mes "it'll go over your head.";
