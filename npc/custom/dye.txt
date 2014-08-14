@@ -189,7 +189,7 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 
 	Lwantcloth:
 		mes "[^FF8000Stylist^000000]";
-		mes "Great!  Now just pick a pallete and I'll get started!";
+		mes "Great!  Now just pick a palette and I'll get started!";
  		next;
 		mes "[^FF8000Stylist^000000]";
 		mes "Please pick a style number ^0000FFbetween 0 and 553^000000.";
