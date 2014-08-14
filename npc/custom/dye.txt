@@ -1,15 +1,15 @@
 //===== eAthena Script ======================================= 
 //= Stylist Script
 //===== By: ================================================== 
-//= eAthena Dev team
-//= Revised by Nekosume [pyRO v3.0] 
+//= Revised by Martin 
 //===== Current Version: ===================================== 
-//= 4.2
+//= 4.3
 //===== Compatible With: ===================================== 
 //= Any eAthena Version 
 //===== Description: ========================================= 
 //= Revised dye NPC
 //===== Additional Comments: =================================
+//= v4.3 - Added a menu to return to, to prevent multiple charges. [Martin]
 //= v4.2 - Renamed to avoid conflict [Paradox924X]
 //= v4.1 - New hairstyles added [Mass Zero]
 //= v4.0 - Refined and Combined [Darkchild]
@@ -46,9 +46,9 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 	mes "My standard fee is ^FF0000100,000 zeny.^000000";
 	mes "But I could be persuaded for 2 RedditRO Coins";
 	next;
-	menu "Chump Change!",Ldoit,"These shiny coins?",Lplatinum,"Oh, um... Not today...",Lnope;
+	menu "Chump Change!",LzenyCharge,"These shiny coins?",Lplatinum,"Oh, um... Not today...",Lnope;
 	
-	Ldoit:
+	LzenyCharge:
 	if (Zeny < 100000) {
 				mes "[^FF8000Stylist^000000]";
 				mes "Honey, I can see from here you don't have that kind of cash.";
@@ -56,9 +56,7 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 				close;
 			}
 	set Zeny,zeny-100000;
-	mes "What do you wish to change?";
-	next;
-	menu "Hair style",Lstyle,"Hair color",Lcolor,"Cloth Color",Lcloth,"Nothing",LCancel;
+	goto Lmenu;
 
 	Lplatinum:
 	if (countitem (677) < 2) {
@@ -68,10 +66,12 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 				close;
 			}
 	delitem 677,2;
-	mes "What do you wish to change?";
-	next;
-	menu "Hair style",Lstyle,"Hair color",Lcolor,"Cloth Color",Lcloth,"Nothing",LCancel;
-
+	goto Lmenu;
+	
+	Lmenu:
+		mes "What do you wish to change?";
+		next;
+		menu "Hair style",Lstyle,"Hair color",Lcolor,"Cloth Color",Lcloth,"Nothing",LCancel;
 	
 	Lstyle:
 		mes "[^FF8000Stylist^000000]";
@@ -98,8 +98,10 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		menu "This is good",-,"Different style, please",Lwantsty;
 		next;
 		mes "[^FF8000Stylist^000000]";
-		mes "You look great~!  Come back again, okay?";
-		close;
+		mes "You look great~!  Want to change anything else?";
+		next;
+		menu "No, thank you.",Lbye,"What were the choices again?",Lmenu;
+
 
 	Lbrowsesty:
 		set @look, -1;
@@ -150,8 +152,9 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		menu "This is good",-,"Different color, please",Lwantcolor;
 		next;
 		mes "[^FF8000Stylist^000000]";
-		mes "You look great~!  Come back again, okay?";
-		close;
+		mes "You look great~!   Want to change anything else?";
+		next;
+		menu "No, thank you.",Lbye,"What were the choices again?",Lmenu;
 
 	Lbrowsecolor:
 		set @look, -1;
@@ -169,7 +172,9 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		Lstop:
 			mes "[^FF8000Stylist^000000]";
 			mes "You look great~!  I love it~! ^_^";
-			close;
+			mes  "Want to change anything else?";
+			next;
+			menu "No, thank you.",Lbye,"What were the choices again?",Lmenu;
 
 	LCancel:
 		mes "[^FF8000Stylist^000000]";
@@ -201,8 +206,9 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		menu "This is good",-,"Different pallet, please",Lwantcloth;
 		next;
 		mes "[^FF8000Stylist^000000]";
-		mes "You look great~!  Come back again, okay?";
-		close;
+		mes "You look great~!   Want to change anything else?";
+		next;
+		menu "No, thank you.",Lbye,"What were the choices again?",Lmenu;";
 
 	Lbrowsecloth:
 		set @look, -1;
@@ -228,6 +234,11 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		mes "[^FF8000Stylist^000000]";
 		mes "I see.";
 		mes "It's not cheap being beautiful.";
+		close;
+	
+	Lbye:
+		mes "[^FF8000Stylist^000000]";
+		mes "Come back again, okay?";
 		close;
 }
 
