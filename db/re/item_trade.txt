@@ -34,8 +34,8 @@
 7308,507,100	// Witch's Tonic
 7309,507,100	// Crow Wing
 2642,507,100	// Serin's Gold Ring
-2644,507,100	// The Sign
-7314,507,100	// The Sign
+2644,475,100	// The Sign (accessory)
+7314,507,100	// The Sign (misc)
 7025,475,100	// Lucifer's Lament
 
 // "2nd Anniversary Event" items
