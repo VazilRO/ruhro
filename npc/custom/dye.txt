@@ -208,7 +208,7 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		mes "[^FF8000Stylist^000000]";
 		mes "You look great~!   Want to change anything else?";
 		next;
-		menu "No, thank you.",Lbye,"What were the choices again?",Lmenu;";
+		menu "No, thank you.",Lbye,"What were the choices again?",Lmenu;
 
 	Lbrowsecloth:
 		set @look, -1;
