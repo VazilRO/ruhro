@@ -1,9 +1,9 @@
 //===== rAthena Script ======================================= 
 //= Nidhoggr's Nest
 //===== By: ================================================== 
-//= L0ne_W0lf, various sources
+//= Martin, various sources
 //===== Current Version: ===================================== 
-//= 1.6
+//= 1.7
 //===== Compatible With: ===================================== 
 //= rAthena Project
 //===== Description: ========================================= 
@@ -18,6 +18,7 @@
 //= 1.4 Cleaning. [Euphy]
 //= 1.5 Instance system rewrite. [Euphy]
 //= 1.6 Added GM management NPCs. [Euphy]
+//= 1.7 Removed bugged warp and added re-entry on floor 2. [Martin]
 //============================================================ 
 
 nyd_dun02,100,201,3	script	Yggdrasil Gatekeeper	111,8,8,{
@@ -1647,8 +1648,9 @@ OnTouch_:
 		close;
 	} else {
 		mes "[World Tree Yggdrasil]";
-		mes "Those who want to taint the sacred Sanctuary of the Guardian... Get out.";
-		warp "mid_camp",100,100;
+		//mes "Those who want to taint the sacred Sanctuary of the Guardian... Get out.";
+		mes "Please...there isn't much time, hurry.";
+		//warp "mid_camp",180,240;
 	}
 	end;
 
@@ -1760,7 +1762,7 @@ OnEnable:
 	end;
 
 OnTouch:
-	set 'ins_nyd2,3;
+	//set 'ins_nyd2,3;  this should allow re-entry after the second floor.
 	warp instance_mapname("2@nyd"),200,10;
 	end;
 }
