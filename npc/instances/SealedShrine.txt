@@ -210,7 +210,7 @@ monk_test,306,151,3	script	Grave of Baphomet#edq	111,{
 		close;
 
 	// 12 hour cooldown
-	set .@ins_bapho_check,checkquest(3040,PLAYTIME);
+	//set .@ins_bapho_check,checkquest(3040,PLAYTIME);
 	// Two hour play limit
 	//set .@ins_bapho_check2,checkquest(3045,PLAYTIME);
 
