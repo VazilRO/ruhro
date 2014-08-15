@@ -105,7 +105,7 @@ monk_test,309,146,3	script	Friar Patrick#edq	412,{
 			next;
 
 			// 12 hour cooldown
-			//set .@ins_bapho_check,checkquest(3040,PLAYTIME);
+			set .@ins_bapho_check,checkquest(3040,PLAYTIME);
 			// Two hour play limit
 			//set .@ins_bapho_check2,checkquest(3045,PLAYTIME);
 
@@ -210,7 +210,7 @@ monk_test,306,151,3	script	Grave of Baphomet#edq	111,{
 		close;
 
 	// 12 hour cooldown
-	//set .@ins_bapho_check,checkquest(3040,PLAYTIME);
+	set .@ins_bapho_check,checkquest(3040,PLAYTIME);
 	// Two hour play limit
 	//set .@ins_bapho_check2,checkquest(3045,PLAYTIME);
 
@@ -226,7 +226,7 @@ monk_test,306,151,3	script	Grave of Baphomet#edq	111,{
 			close;
 		case 0:
 			mapannounce "monk_test","[" + strcharinfo(0) + "] member of the [" + getpartyname(.@party_id) + "] party has entered the Sealed Shrine.",bc_map,"0x00ff99";
-			setquest 3040;
+			//setquest 3040;
 			//warp "1@cata",100,224;
 			close;
 		}
@@ -1246,7 +1246,7 @@ OnMyMobDead:
 		donpcevent instance_npcname("control_baphomet")+"::OnDisable";
 		disablenpc instance_npcname("control_baphomet");
 		// 12 hour cooldown
-		set .@ins_bapho_check,checkquest(3040,PLAYTIME);
+		setquest 3040;
 	}
 	end;
 }
