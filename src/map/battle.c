@@ -5373,7 +5373,7 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 						skillratio += (tstatus->size!=SZ_BIG?5*skill_lv:-99); //Full damage is dealt on small/medium targets
 						break;
 					case SL_SMA:
-						skillratio += -60 + status_get_lv(src); //Base damage is 40% + lv%
+						skillratio += 0 + status_get_lv(src); //Base damage is 100% + lv%
 						break;
 					case NJ_KOUENKA:
 						skillratio -= 10;
