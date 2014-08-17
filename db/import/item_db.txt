@@ -3,6 +3,11 @@
 // Structure of Database:
 // ID,Name,Name,Type,Price,Sell,Weight,ATK,DEF,Range,Slot,Job,Class,Gender,Loc,wLV,eLV,Refineable,View,{ Script },{ OnEquip_Script },{ OnUnequip_Script }
 //
+
+6145,Vulcan_Bullet,Vulcan Bullet,10,10,,2,,,,,,,,,,,,,{},{},{}
+12383,Vulcan_Bullet_Magazine,Vulcan Bullet Magazine,2,11000,,500,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 6145,1000; },{},{}
+6147,Liquid_Condensed_Bullet,Liquid Condensed Bullet,10,100,,3,,,,,,,,,,,,,{},{},{}
+
 25000,Odin_Mask,Odin Mask,4,20,,10,,0,,0,0xFFFFFFFF,63,2,6144,,1,0,480,{},{},{}
 35001,Afro_Wig_E,Afro Wig,4,20,,10,,0,,0,0xFFFFFFFF,63,2,768,,1,0,302,{},{},{}
 35002,Ancient_Elven_Ear_E,Ancient Elven Ear,4,10,,10,,0,,0,0xFFFFFFFF,63,2,512,,1,0,665,{},{},{}
