@@ -1,0 +1,73 @@
+//===== rAthena Script ======================================= 
+//= Soul Drain NPC
+//===== By: ================================================== 
+//= Alkarl
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Allows star gladitors and soul linkers to "de-level" if
+//= they accidently level past 99 so they can continue to WoE
+
+niflheim,21,161,3	script	Soul Drain	950,{
+
+	mes "[Soul Drain]";
+	if (Class != Job_Star_Gladiator || Class != Job_Soul_Linker || BaseLevel < 100) {
+		mes "You are not worthy...";
+		mes "I shall feast on your essence...";
+		percentheal -50,-50;
+		close;
+	}
+	mes "You are worthy...";
+	mes "I can drain you of essence... for a price...";
+	mes "Are you interested...";
+	next;
+	menu "What do I need?",listitems,"I have what you asked for",drainme,"No, thank you.",donothing;
+	
+listitems:
+	mes "[Soul Drain]";
+	mes "I require the following...";
+	mes "50 Tooth of Bat...";
+	mes "20 Skel-Bone...";
+	mes "10 Rotten Bandage...";
+	mes "10 Worn-out Prison Uniform...";
+	mes "1 Cursed Ruby...";
+	close;
+	
+drainme:
+	if (countitem(913) < 50 || countitem(932) < 20 || countitem(930) < 10 || countitem(1099) < 10 || countitem(724) < 1) {
+		mes "[Soul Drain]";
+		mes "You lie!";
+		mes "I will tell you one more time...";
+		percentheal -75,-75;
+		next;
+		goto listitems;
+	}
+	mes "[Soul Drain]";
+	mes "Yes... you have what I require...";
+	mes "Allow me to feast on you...";
+	next;
+	delitem 913,50;
+	delitem 932,20;
+	delitem 930,10;
+	delitem 1099,10;
+	delitem 724,1;
+	
+	set BaseLevel,99;
+	ResetStatus;
+	set StatusPoint,StatusPoint+52;
+	percentheal -50,-50;
+	
+	mes "[Feeling Master]";
+	mes "I am satiated... for now...";
+	mes "Come back when you have an abundance of essence...";
+	close;
+	
+donothing:
+	mes "[Feeling Master]";
+	mes "You waste my time...";
+	percentheal -25,-25;
+	close;
+
+}
