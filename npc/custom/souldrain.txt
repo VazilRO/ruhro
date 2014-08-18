@@ -13,9 +13,15 @@
 niflheim,21,161,3	script	Soul Drain	950,{
 
 	mes "[Soul Drain]";
-	if (Class != Job_Star_Gladiator || Class != Job_Soul_Linker || BaseLevel < 100) {
+	if (Class != Job_Star_Gladiator || Class != Job_Soul_Linker) {
 		mes "You are not worthy...";
-		mes "I shall feast on your essence...";
+		mes "I shall feast on your soul...";
+		percentheal -50,-50;
+		close;
+	}
+	if (BaseLevel < 100) {
+		mes "You do not have enough essence...";
+		mes "I shall feast on your soul...";
 		percentheal -50,-50;
 		close;
 	}
