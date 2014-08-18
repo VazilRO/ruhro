@@ -34,8 +34,12 @@ prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,14209:10,12263:20,1210
 // Baby Dragon Hat				25
 // Baseball Cap					20
 // BF Recruiter Hat				20
+// Black Devil Mask				15
+// Black Frame Glasses			15
+// Black Musang Hat				20
 // Blank Eyes					15
 // Cap of Blindness				25
+// CD In Mouth					15
 // Coppola						20
 // Demon Mask					25
 // Deviling Hat					20
@@ -44,22 +48,29 @@ prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,14209:10,12263:20,1210
 // Dragon Skull					25
 // Evil Snake Lord Hat			30
 // Fish Head Hat				25
+// Flapping Angel Wing			25
 // Flapping Angeling Hat		25
+// Flapping Fallen Angel		25
+// Gozarian Mask				20
 // Gryphon Hat					25
+// Helm of the Sun God			40
 // Horse King					15
 // Ifrit Mask					40
 // Imp Hat						30
 // Incarnation of Morroc Doll	25
+// Jejecap						20
 // Jumping Poring				20
 // King Poring Hat				35
 // Lady Tanee Doll				20
 // Leaf Cat Hat					20
 // Lif Doll Hat					20
 // Little Angel Doll			25
+// Little Feather Hat			20
 // Long Tongue					10
 // Lord of the Dead Helm		20
 // Lunatic Hat					15
 // Necromancer's Hood			20
+// Ninja Scroll					15
 // Note Headphones				15
 // Odin Mask					40
 // Oliver Wolf Hood				25
@@ -72,15 +83,27 @@ prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,14209:10,12263:20,1210
 // Potted Muka Hat				15
 // Rainbow Poring Hat			30
 // Ramen Hat					15
+// Rose of Crimson				15
 // Santa Poring Hat				30
 // Shining Santa Poring Hat		35
+// Side Cap						20
+// Sigrun's Wings				20
+// Skull Cap					30
 // Small Poring Band			25
 // Snake Hat					25
 // Snowman Hat					20
 // Spare Card					10
 // Strawberry Hat				25
+// Takius Headband				20
 // Triple Poring Hat			30
 // Turtle Hat					20
+// Umbala Spirit				15
+// Vanagand Helm				30
 // Vanilmirth Hat				20
+// Wanderer's Sakkat			30
+// Well-Chewed Pencil			15
+// Wild Rose Hat				25
+// Witch's Pumpkin Hat			25
+// Yggdrasil Crown				25
 
-prontera,183,213,3	itemshop	Costume Shop	950,677,40005:15,40006:20,19716:20,40007:20,40008:25,19834:20,40009:20,19624:15,40010:25,40011:20,40012:25,40013:20,40014:25,40015:15,40016:25,40017:30,40018:25,40019:25,19537:25,19996:15,40020:40,19599:30,40021:25,40022:20,19587:35,40023:20,40024:20,19835:20,40025:25,40026:10,40027:20,40028:15,40029:20,40030:15,25000:40,19543:25,40031:15,40044:15,19707:20,40032:15,40033:20,40034:10,40035:15,19676:30,40036:15,40037:30,19685:35,40038:25,19730:25,40039:20,40040:10,40041:25,40042:30,40043:20,19839:20
+prontera,183,213,3	itemshop	Costume Shop	950,677,40005:15,40006:20,19716:20,40007:20,40008:25,19834:20,40009:20,40045:15,40046:15,40047:20,19624:15,40010:25,40048:15,40011:20,40012:25,40013:20,40014:25,40015:15,40016:25,40017:30,40018:25,40049:25,40019:25,19589:25,40050:20,19537:25,40051:40,19996:15,40020:40,19599:30,40021:25,40052:20,40022:20,19587:35,40023:20,40024:20,19835:20,40025:25,40053:20,40026:10,40027:20,40028:15,40029:20,40054:15,40030:15,25000:40,19543:25,40031:15,40044:15,19707:20,40032:15,40033:20,40034:10,40035:15,19676:30,40036:15,40055:15,40037:30,19685:35,40056:20,40057:20,40058:30,40038:25,19730:25,40039:20,40040:10,40041:25,40059:20,40042:30,40043:20,40060:15,19884:30,19839:20,40061:30,40062:15,19530:25,40063:25,40064:25
