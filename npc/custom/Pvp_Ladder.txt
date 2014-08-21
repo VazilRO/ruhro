@@ -309,8 +309,8 @@ announce "[Anti-Feed] Your kill count has been rollbacked "+.Rollback+" times.",
 return;
 }
 
-prontera,127,194,5	script	Loki	467,{
-mes "[Loki]"; mes "What can I do for you today?";
+prontera,127,194,5	script	PvP Ladder	467,{
+mes "[PvP Ladder]"; mes "What can I do for you today?";
 switch(select("Player Ranking:PvP Statistic:Announcer Setting")){
 case 1: //Player Ranking
 	next; 
@@ -375,7 +375,7 @@ case 2: //PvP Statistic
 		set .ZenyFee, getvariableofnpc(.ZenyFee, "Versus");
 		set .CashFee, getvariableofnpc(.CashFee, "Versus");
 		set .SkullFee, getvariableofnpc(.SkullFee, "Versus");
-		mes "[Loki]"; mes "Are you sure you want to reset your PvP Statistics?";
+		mes "[PvP Ladder]"; mes "Are you sure you want to reset your PvP Statistics?";
 		if(.Reset == 1){ mes "^FF0000Reset Fee:^000000 "+.ZenyFee+" Zeny"; }
 		if(.Reset == 2){ mes "^FF0000Reset Fee:^000000 "+.CashFee+" Kill Point"; }
 		if(.Reset == 3){ mes "^FF0000Reset Fee:^000000 "+.SkullFee+" Skull"; }
@@ -385,24 +385,24 @@ case 2: //PvP Statistic
 			switch(.Reset){
 				case 0: break;
 				case 1:
-					if(Zeny < .ZenyFee){ next; mes "[Loki]"; mes "You don't have enough Zeny."; close; }
+					if(Zeny < .ZenyFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Zeny."; close; }
 					set Zeny, Zeny - .ZenyFee; break;
 				case 2:
-					if(#CASHPOINTS < .CashFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+					if(#CASHPOINTS < .CashFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 					set #CASHPOINTS, #CASHPOINTS - .CashFee; break;
 				case 3:
-					if(countitem(7420) < .SkullFee){ next; mes "[Loki]"; mes "You don't have enough Skull."; close; }
+					if(countitem(7420) < .SkullFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Skull."; close; }
 					delitem 7420, .SkullFee; break;
 				default: break;
 			}
 		if(getvariableofnpc(.ServerType, "Versus")){ query_sql "DELETE FROM `pvp_rank` WHERE `pvp_rank`.`char_id` = "+getcharid(0)+""; }
-		callsub OnPvPReset; announce "[Loki] Your PvP Statistic has been reset.",bc_self,0xFF0000; close;
+		callsub OnPvPReset; announce "[PvP Ladder] Your PvP Statistic has been reset.",bc_self,0xFF0000; close;
 		}
 		close;
 	}
 close;
 case 3: //Announcer Setting
-	next; mes "[Loki]"; mes "What kind of announcer you want to use?";
+	next; mes "[PvP Ladder]"; mes "What kind of announcer you want to use?";
 	if(getvariableofnpc(.AnnouncerFee, "Versus")){ set .AnnouncerFee, getvariableofnpc(.AnnouncerFee, "Versus"); }
 	L_Announce:
 	switch(select(""+((#Announcer == 0)?"^FF0000DotA^000000":"DotA")+":"+((#Announcer == 1)?"^FF0000HoN^000000":"HoN")+":"+((#Announcer == 2)?"^FF0000Ms. Pudding^000000":"Ms. Pudding")+":"+((#Announcer == 3)?"^FF0000Flamboyant^000000":"Flamboyant")+":"+((#Announcer == 4)?"^FF0000English^000000":"English")+":"+((#Announcer == 5)?"^FF0000Balls of Steel^000000":"Balls of Steel")+":"+((#Announcer == 6)?"^FF0000BreakyCPK^000000":"BreakyCPK")+"")){
@@ -410,103 +410,103 @@ case 3: //Announcer Setting
 			if(#Announcer == 0){ goto L_Announce; }
 			soundeffect "0_KS1.wav", 0;
 			set #Announcer, 0;
-			announce "[Loki] DotA announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] DotA announcer has been configured to your account.",bc_self,0xFF0000;
 			close;
 		case 2: //HoN
 			if(#Announcer == 1){ goto L_Announce; }
 			if((.AnnouncerFee) && (!#Hon)){
-			next; mes "[Loki]"; mes "Do you want to purchase HoN announcer for "+.AnnouncerFee+" Kill Point?";
+			next; mes "[PvP Ladder]"; mes "Do you want to purchase HoN announcer for "+.AnnouncerFee+" Kill Point?";
 			switch(select("No:Yes")){
 				case 1: close;
 				case 2: 
-				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 				set #CASHPOINTS, #CASHPOINTS - .AnnouncerFee;
 				set #Hon, 1;
 			 }
 			}
 			soundeffect "1_KS1.wav", 0;
 			set #Announcer, 1;
-			announce "[Loki] HoN announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] HoN announcer has been configured to your account.",bc_self,0xFF0000;
 			close;
 		case 3: //Ms. Pudding
 			if(#Announcer == 2){ goto L_Announce; }
 			if((.AnnouncerFee) && (!#MsPudding)){
-			next; mes "[Loki]"; mes "Do you want to purchase Ms. Pudding announcer for "+.AnnouncerFee+" Kill Point?";
+			next; mes "[PvP Ladder]"; mes "Do you want to purchase Ms. Pudding announcer for "+.AnnouncerFee+" Kill Point?";
 			switch(select("No:Yes")){
 				case 1: close;
 				case 2: 
-				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 				set #CASHPOINTS, #CASHPOINTS - .AnnouncerFee;
 				set #MsPudding, 1;
 			 }
 			}
 			soundeffect "2_KS1.wav", 0;
 			set #Announcer, 2;
-			announce "[Loki] Ms. Pudding announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] Ms. Pudding announcer has been configured to your account.",bc_self,0xFF0000;
 			close;		
 		case 4: //Flamboyant
 			if(#Announcer == 3){ goto L_Announce; }
 			if((.AnnouncerFee) && (!#Flamboyant)){
-			next; mes "[Loki]"; mes "Do you want to purchase Flamboyant announcer for "+.AnnouncerFee+" Kill Point?";
+			next; mes "[PvP Ladder]"; mes "Do you want to purchase Flamboyant announcer for "+.AnnouncerFee+" Kill Point?";
 			switch(select("No:Yes")){
 				case 1: close;
 				case 2: 
-				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 				set #CASHPOINTS, #CASHPOINTS - .AnnouncerFee;
 				set #Flamboyant, 1;
 			 }
 			}
 			soundeffect "3_KS1.wav", 0;
 			set #Announcer, 3;
-			announce "[Loki] Flamboyant announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] Flamboyant announcer has been configured to your account.",bc_self,0xFF0000;
 			close;			
 		case 5: //English
 			if(#Announcer == 4){ goto L_Announce; }
 			if((.AnnouncerFee) && (!#English)){
-			next; mes "[Loki]"; mes "Do you want to purchase English announcer for "+.AnnouncerFee+" Kill Point?";
+			next; mes "[PvP Ladder]"; mes "Do you want to purchase English announcer for "+.AnnouncerFee+" Kill Point?";
 			switch(select("No:Yes")){
 				case 1: close;
 				case 2: 
-				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 				set #CASHPOINTS, #CASHPOINTS - .AnnouncerFee;
 				set #English, 1;
 			 }
 			}
 			soundeffect "4_KS1.wav", 0;
 			set #Announcer, 4;
-			announce "[Loki] English announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] English announcer has been configured to your account.",bc_self,0xFF0000;
 			close;
 		case 6: //Balls of Steel
 			if(#Announcer == 5){ goto L_Announce; }
 			if((.AnnouncerFee) && (!#BallsofSteel)){
-			next; mes "[Loki]"; mes "Do you want to purchase Balls of Steel announcer for "+.AnnouncerFee+" Kill Point?";
+			next; mes "[PvP Ladder]"; mes "Do you want to purchase Balls of Steel announcer for "+.AnnouncerFee+" Kill Point?";
 			switch(select("No:Yes")){
 				case 1: close;
 				case 2: 
-				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 				set #CASHPOINTS, #CASHPOINTS - .AnnouncerFee;
 				set #BallsofSteel, 1;
 			 }
 			}
 			soundeffect "5_KS1.wav", 0;
 			set #Announcer, 5;
-			announce "[Loki] Balls of Steel announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] Balls of Steel announcer has been configured to your account.",bc_self,0xFF0000;
 			close;
 		case 7: //BreakyCPK
 			if(#Announcer == 6){ goto L_Announce; }
 			if((.AnnouncerFee) && (!#BreakyCPK)){
-			next; mes "[Loki]"; mes "Do you want to purchase BreakyCPK announcer for "+.AnnouncerFee+" Kill Point?";
+			next; mes "[PvP Ladder]"; mes "Do you want to purchase BreakyCPK announcer for "+.AnnouncerFee+" Kill Point?";
 			switch(select("No:Yes")){
 				case 1: close;
 				case 2: 
-				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[Loki]"; mes "You don't have enough Kill Point."; close; }
+				if(#CASHPOINTS < .AnnouncerFee){ next; mes "[PvP Ladder]"; mes "You don't have enough Kill Point."; close; }
 				set #CASHPOINTS, #CASHPOINTS - .AnnouncerFee;
 				set #BreakyCPK, 1;
 			 }
 			}
 			soundeffect "6_KS1.wav", 0;
 			set #Announcer, 6;
-			announce "[Loki] BreakyCPK announcer has been configured to your account.",bc_self,0xFF0000;
+			announce "[PvP Ladder] BreakyCPK announcer has been configured to your account.",bc_self,0xFF0000;
 			close;
 	default: close;
 	}
