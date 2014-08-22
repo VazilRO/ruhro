@@ -167,11 +167,8 @@
 40062,C_CHEWEDPENCIL,Well-Chewed Pencil,4,10,,0,,,,0,0xFFFFFFFF,63,2,4096,,1,0,555,{},{},{}
 40063,C_WITCHPUMPKINHAT,Witch's Pumpkin Hat,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,717,{},{},{}
 40064,C_YGGDRASILCROWN,Yggdrasil Crown,4,10,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,746,{},{},{}
-//End Costume
-
-//Experimental
 40065,C_ETERNALWING,Eternal Wings,4,0,,0,,,,0,0xFFFFFFFF,63,2,8192,,1,0,1,{},{},{}
 40066,C_FALLENWING,Fallen Angel Wing,4,0,,0,,,,0,0xFFFFFFFF,63,2,8192,,1,0,3,{},{},{}
 40067,C_HEROICBACKPACK,Heroic Backpack,4,0,,0,,,,0,0xFFFFFFFF,63,2,8192,,1,0,2,{},{},{}
-
+//End Costume
 
