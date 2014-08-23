@@ -1,0 +1,251 @@
+//===== rAthena Script ======================================= 
+//= Special Bullet Maker NPC
+//===== By: ================================================== 
+//= Alkarl
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Allows the rebellion class to make special bullets
+
+prontera,100,208,3	script	Rebel Blacksmith	10062,{
+
+	mes "[Rebel Blacksmith]";
+	if (Class == Job_Gunslinger) {
+		mes "I see you are a Gunslinger.";
+		mes "Talk to my partner.";
+		close;
+	} else if (Class != Job_Rebellion) {
+		mes "...";
+		close;
+	}
+	mes "Hello fellow ^FF0000Fre^E5E4E2ed^0000FFom^000000 fighter!";
+	mes "I make special bullets usable only by us!";
+	mes "If you are interested I will need specific items.";
+	next;
+	goto bullet_menu;
+	
+bullet_menu:
+	mes "[Rebel Blacksmith]";
+	mes "I will need:";
+	mes "5 Steel,";
+	mes "500 Bullets,";
+	mes "10,000 Zeny,";
+	mes "and a special item depending on which type of bullet I am to make.";
+	mes "What type of bullets are you interested in?";
+	menu "Piercing Bullets",bullet_piercing,"Ice Bullets",bullet_ice,"Stone Bullets",bullet_stone,"Incendiary Bullets",bullet_incendiary,"Shock Bullets",bullet_shock,"Poison Bullets",bullet_poison,"Holy Bullets",bullet_holy,"Dark Bullets",bullet_dark,"Immateral Bullets",bullet_immaterial,"Fragmentation Bullets",bullet_fragmentation,"None for now",bullet_end;
+	
+bullet_end:
+	mes "[Rebel Blacksmith]";
+	mes "No problem!";
+	mes "Remember to always fight for ^FF0000Fre^E5E4E2ed^0000FFom^000000!";
+	close;
+	
+bullet_require:
+	mes "[Rebel Blacksmith]";
+	mes "These aren't the right materials!";
+	mes "Do you remember what I asked for?";
+	mes "Here is the list again.";
+	next;
+	goto bullet_menu;
+	
+bullet_complete:
+	mes "[Rebel Blacksmith]";
+	mes "All done!";
+	mes "Would you like me to make something else?";
+	menu "Yes please!",bullet_menu,"No thanks!",bullet_end;
+	
+bullet_piercing:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Piercing Bullets.";
+	mes "These are like normal bullets.";
+	mes "Except they pack more of a punch";
+	mes "And may cause Bleeding!";
+	mes "I will need the usual items and 1 Elunium to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(985) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 985,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41010,1;
+	goto bullet_complete;
+	
+bullet_ice:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Ice Bullets.";
+	mes "These are bullets enchanted with the Water property.";
+	mes "They may also Freeze your target!";
+	mes "I will need the usual items and 1 Crystal Blue to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(991) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 991,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41011,1;
+	goto bullet_complete;
+	
+bullet_stone:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Stone Bullets.";
+	mes "These are bullets enchanted with the Earth property.";
+	mes "They may also Stone Curse you target!";
+	mes "I will need the usual items and 1 Green Live to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(993) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 993,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41012,1;
+	goto bullet_complete;
+
+bullet_incendiary:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Incendiary Bullets.";
+	mes "These are bullets enchanted with the Fire property.";
+	mes "They may also Burn your target!";
+	mes "I will need the usual items and 1 Red Blood to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(990) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 990,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41013,1;
+	goto bullet_complete;
+
+bullet_shock:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Shock Bullets.";
+	mes "These are bullets enchanted with the Wind property.";
+	mes "They may also Stun your target!";
+	mes "I will need the usual items and 1 Wind of Verdure to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(992) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 992,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41014,1;
+	goto bullet_complete;
+
+bullet_poison:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Poison Bullets.";
+	mes "These are bullets enchanted with the Poison property.";
+	mes "They may also Poison your target!";
+	mes "I will need the usual items and 1 Poisonous Powder to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(7154) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 7154,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41015,1;
+	goto bullet_complete;
+
+bullet_holy:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Holy Bullets.";
+	mes "These are bullets enchanted with the Holy property.";
+	mes "They may also Silence your target!";
+	mes "I will need the usual items and 1 Holy Water to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(523) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 523,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41016,1;
+	goto bullet_complete;
+
+bullet_dark:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Dark Bullets.";
+	mes "These are bullets enchanted with the Shadow property.";
+	mes "They may also Blind your target!";
+	mes "I will need the usual items and 1 Dark Crystal Fragment to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(7315) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 7315,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41017,1;
+	goto bullet_complete;
+
+bullet_immaterial:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Immaterial Bullets.";
+	mes "These are bullets enchanted with the Ghost property.";
+	mes "They may also Curse your target!";
+	mes "I will need the usual items and 1 Star Dust to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(1001) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 1001,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41018,1;
+	goto bullet_complete;
+
+bullet_fragmentation:
+	mes "[Rebel Blacksmith]";
+	mes "Ah, Fragmentation Bullets.";
+	mes "These are like normal bullets.";
+	mes "Except they pack more of a punch";
+	mes "And help you to critically damage your target!";
+	mes "I will need the usual items and 1 Oridecon to make these";
+	menu "Make them for me!",-,"What were my other choices?",bullet_menu,"I changed my mind.",bullet_end;
+	
+	if (countitem(984) < 1 || countitem(999) < 5 || countitem(13200) < 500 || Zeny < 10000) {
+		goto bullet_require;
+	}
+	
+	delitem 984,1;
+	delitem 999,5;
+	delitem 13200,500;
+	set Zeny,Zeny-10000;
+	getitem 41019,1;
+	goto bullet_complete;
+
+}
