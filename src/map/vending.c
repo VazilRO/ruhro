@@ -88,7 +88,9 @@ void vending_closevending(struct map_session_data* sd)
 		sd->vender_id = 0;
 		clif_closevendingboard(&sd->bl, 0);
 			//vending to db [Sanasol]
-			if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending` set `active`='0' where `char_id`='%d'", sd->status.char_id) )
+			if( SQL_ERROR == Sql_Query(mmysql_handle,"delete from `vending` where `char_id`='%d'", sd->status.char_id) )
+			Sql_ShowDebug(mmysql_handle);
+			if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending_history` set `active`='0' where `char_id`='%d'", sd->status.char_id) )
 			Sql_ShowDebug(mmysql_handle);
 			//vending to db [Sanasol]
 		idb_remove(vending_db, sd->status.char_id);
@@ -257,11 +259,15 @@ void vending_purchasereq(struct map_session_data* sd, int aid, int uid, const ui
 			if(vsd->vending[vend_list[i]].amount >= 1)
 			{
 				if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending` set `amount`='%d' where `char_id`='%d' and `index`='%d'", vsd->vending[vend_list[i]].amount, vsd->status.char_id, vend_list[i]) )
+				Sql_ShowDebug(mmysql_handle);
+				if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending_history` set `amount`='%d' where `char_id`='%d' and `index`='%d'", vsd->vending[vend_list[i]].amount, vsd->status.char_id, vend_list[i]) )
 					Sql_ShowDebug(mmysql_handle);
 			}
 			else
 			{
-				if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending` set `sold`='1' where `char_id`='%d' and `index`='%d'", vsd->status.char_id, vend_list[i]) )
+				if( SQL_ERROR == Sql_Query(mmysql_handle,"delete from `vending` where `char_id`='%d' and `index`='%d'", vsd->status.char_id, vend_list[i]) )
+				Sql_ShowDebug(mmysql_handle);
+				if( SQL_ERROR == Sql_Query(mmysql_handle,"update `vending_history` set `sold`='1' where `char_id`='%d' and `index`='%d'", vsd->status.char_id, vend_list[i]) )
 					Sql_ShowDebug(mmysql_handle);
 			}
 		//vending to db [Sanasol]
@@ -421,6 +427,8 @@ char vending_openvending(struct map_session_data* sd, const char* message, const
 			int price = cap_value(sd->vending[j].value, 0, (unsigned int)battle_config.vending_max_value);
 	
 			if( SQL_ERROR == Sql_Query(mmysql_handle,"INSERT INTO `vending` (`char_id`,`name`,`index`,`nameid`,`amount`,`price`,`refine`,`card0`,`card1`,`card2`,`card3`,`date`,`active`,`sold`) VALUES (%d, '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d',NOW(),'1','0')", sd->status.char_id, message, j, nameid, amount, price, sd->status.cart[index].refine, sd->status.cart[index].card[0], sd->status.cart[index].card[1], sd->status.cart[index].card[2], sd->status.cart[index].card[3]) )
+			Sql_ShowDebug(mmysql_handle);
+			if( SQL_ERROR == Sql_Query(mmysql_handle,"INSERT INTO `vending_history` (`char_id`,`name`,`index`,`nameid`,`amount`,`price`,`refine`,`card0`,`card1`,`card2`,`card3`,`date`,`active`,`sold`) VALUES (%d, '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d',NOW(),'1','0')", sd->status.char_id, message, j, nameid, amount, price, sd->status.cart[index].refine, sd->status.cart[index].card[0], sd->status.cart[index].card[1], sd->status.cart[index].card[2], sd->status.cart[index].card[3]) )
 			Sql_ShowDebug(mmysql_handle);
 		}
     //vending to db [Sanasol]
