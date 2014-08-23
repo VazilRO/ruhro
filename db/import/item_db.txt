@@ -170,5 +170,30 @@
 40065,C_ETERNALWING,Eternal Wings,4,0,,0,,,,0,0xFFFFFFFF,63,2,8192,,1,0,1,{},{},{}
 40066,C_FALLENWING,Fallen Angel Wing,4,0,,0,,,,0,0xFFFFFFFF,63,2,8192,,1,0,3,{},{},{}
 40067,C_HEROICBACKPACK,Heroic Backpack,4,0,,0,,,,0,0xFFFFFFFF,63,2,8192,,1,0,2,{},{},{}
+40068,C_BRIGHTFURY,Bright Fury,4,0,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,548,{},{},{}
+40069,C_MUSKETEERHAT,Musketeer Hat,4,0,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,466,{},{},{}
 //End Costume
 
+
+//Rebellion Bullets!
+41000,BULLET_NEUTRAL,Piercing Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Neutral; bonus2 bAddEff,Eff_Bleeding,100; },{},{}
+41001,BULLET_ICE,Ice Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Water; bonus2 bAddEff,Eff_Freeze,100; },{},{}
+41002,BULLET_STONE,Stone Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Earth; bonus2 bAddEff,Eff_Stone,100; },{},{}
+41003,BULLET_INCENDIARY,Incendiary Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Fire; bonus2 bAddEff,Eff_Burning,100; },{},{}
+41004,BULLET_SHOCK,Shock Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Wind; bonus2 bAddEff,Eff_Stun,100; },{},{}
+41005,BULLET_POISON,Poison Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Poison; bonus2 bAddEff,Eff_Poison,100; },{},{}
+41006,BULLET_HOLY,Holy Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Holy; bonus2 bAddEff,Eff_Silence,100; },{},{}
+41007,BULLET_DARK,Dark Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Dark; bonus2 bAddEff,Eff_Blind,100; },{},{}
+41008,BULLET_IMMATERIAL,Immaterial Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Ghost; bonus2 bAddEff,Eff_Curse,100; },{},{}
+41009,BULLET_FRAGMENTATION,Fragmentation Bullet,10,1,,2,50,,,,0x40000000,63,2,32768,,100,,3,{ bonus bAtkEle,Ele_Neutral; bonus bCritical,20; },{},{}
+41010,CARTRIDGE_NEUTRAL,Piercing Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41000,500; },{},{}
+41011,CARTRIDGE_ICE,Ice Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41001,500; },{},{}
+41012,CARTRIDGE_STONE,Stone Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41002,500; },{},{}
+41013,CARTRIDGE_INCENDIARY,Incendiary Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41003,500; },{},{}
+41014,CARTRIDGE_SHOCK,Shock Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41004,500; },{},{}
+41015,CARTRIDGE_POISON,Poison Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41005,500; },{},{}
+41016,CARTRIDGE_HOLY,Holy Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41006,500; },{},{}
+41017,CARTRIDGE_DARK,Dark Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41007,500; },{},{}
+41018,CARTRIDGE_IMMATERIAL,Immaterial Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41008,500; },{},{}
+41019,CARTRIDGE_FRAGMENTATION,Fragmentation Cartridge,2,2,,250,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 41009,500; },{},{}
+//End Rebellion Bullets
