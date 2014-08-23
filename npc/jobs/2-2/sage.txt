@@ -2178,7 +2178,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 			mes "Don't be scared, its just an eensy weensy favor. Tee hee~";
 			next;
 			mes "[Aebecee George]";
-			mes "Please bring me ^3355FF15 Stone^000000, that's all.";
+			mes "Please bring me ^3355FF30 Stones^000000, that's all.";
 			mes "It's not so hard, isn't it?";
 			next;
 			set SAGE_Q2,1;
@@ -2189,7 +2189,7 @@ yuno_in03,244,31,3	script	Physics Professor#sa	120,{
 			close;
 		}
 		else if (SAGE_Q2 == 1) {
-			if (countitem(7049) > 14) {
+			if (countitem(7049) > 29) {
 				mes "Oh~ how sweet! You brought them all~ thank you~";
 				mes "Oh, can you wait a little bit? I need to do something before we start. Tee hee~";
 				next;
