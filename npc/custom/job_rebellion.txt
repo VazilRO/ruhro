@@ -35,7 +35,7 @@ prontera,102,208,4	script	Rebel	10063,{
 	switch(select ( "For the Freedom!", "Walk away..." )) {
 		case 1:
 			mes "[Rebel]";
-			mes "Hmm...to prove you are worthy, hunt me the follow:";
+			mes "Hmm...to prove you are worthy, hunt me the following:";
 			mes "^FFA50050 Rusty Screws^000000";
 			mes "^FFA5001 Poo Poo Hat^000000";
 			mes "^FFA5001 Branch[3]^000000";
