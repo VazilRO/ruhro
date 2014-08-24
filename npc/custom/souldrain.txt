@@ -13,7 +13,7 @@
 niflheim,21,161,3	script	Soul Drain	950,{
 
 	mes "[Soul Drain]";
-	if (Class != Job_Star_Gladiator || Class != Job_Soul_Linker) {
+	if (Class != 4047 || Class != 4048 || Class != 4049) {
 		mes "You are not worthy...";
 		mes "I shall feast on your soul...";
 		percentheal -50,-50;
