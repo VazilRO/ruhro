@@ -13,23 +13,27 @@
 niflheim,21,161,3	script	Soul Drain	950,{
 
 	mes "[Soul Drain]";
-	if (Class != 4047 || Class != 4048 || Class != 4049) {
+	if (Class == 4047 || Class == 4048 || Class == 4049) {
+	
+		if (BaseLevel < 100) {
+			mes "You do not have enough essence...";
+			mes "I shall feast on your soul...";
+			percentheal -50,-50;
+			close;
+		}
+		mes "You are worthy...";
+		mes "I can drain you of essence... for a price...";
+		mes "Are you interested...";
+		next;
+		menu "What do I need?",listitems,"I have what you asked for",drainme,"No, thank you.",donothing;
+		
+	} else {
+	
 		mes "You are not worthy...";
 		mes "I shall feast on your soul...";
 		percentheal -50,-50;
 		close;
 	}
-	if (BaseLevel < 100) {
-		mes "You do not have enough essence...";
-		mes "I shall feast on your soul...";
-		percentheal -50,-50;
-		close;
-	}
-	mes "You are worthy...";
-	mes "I can drain you of essence... for a price...";
-	mes "Are you interested...";
-	next;
-	menu "What do I need?",listitems,"I have what you asked for",drainme,"No, thank you.",donothing;
 	
 listitems:
 	mes "[Soul Drain]";
