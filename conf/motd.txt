@@ -1,8 +1,6 @@
 // Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.c
 Welcome to RedditRO! Have fun! 
 
-Next Server Update is 10:00 24 AUG 2014 Server Time
-Updates going into effect are:
- -Shield Spell should be working now.
- -Tetra Vortex now correctly checks for Spirit Balls.
- -Max storage is now increased to 850.
+Make sure you've patched to the newest client version to clear the Morocc bug!
+
+We'll be hiring new GM's soon, keep your ear to the ground if that sounds interesting to you.
