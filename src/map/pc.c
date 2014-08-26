@@ -1596,6 +1596,7 @@ void pc_calc_skilltree(struct map_session_data *sd)
 				case LG_OVERBRAND_BRANDISH:
 				case LG_OVERBRAND_PLUSATK:
 				case WM_SEVERE_RAINSTORM_MELEE:
+				case RL_R_TRIP_PLUSATK:
 					continue;
 				default:
 					break;
@@ -4314,10 +4315,8 @@ char pc_additem(struct map_session_data *sd,struct item *item,int amount,e_log_p
 		sd->last_addeditem_index = i;
 		clif_additem(sd,i,amount,0);
 	}
-#ifdef NSI_UNIQUE_ID
 	if( !itemdb_isstackable2(id) && !item->unique_id )
-		sd->status.inventory[i].unique_id = itemdb_unique_id(0,0);
-#endif
+		sd->status.inventory[i].unique_id = itemdb_unique_id(sd);
 	log_pick_pc(sd, log_type, amount, &sd->status.inventory[i]);
 
 	sd->weight += w;
@@ -8424,6 +8423,9 @@ bool pc_candrop(struct map_session_data *sd, struct item *item)
 bool pc_can_attack( struct map_session_data *sd, int target_id ) {
 	nullpo_retr(false, sd);
 
+	if (!&sd->sc)
+		return true;
+
 	if( sd->sc.data[SC_BASILICA] ||
 		sd->sc.data[SC__SHADOWFORM] ||
 		sd->sc.data[SC__MANHOLE] ||
@@ -9400,7 +9402,7 @@ bool pc_unequipitem(struct map_session_data *sd,int n,int flag) {
 
 	if((sd->status.inventory[n].equip & EQP_ARMS) &&
 		sd->weapontype1 == 0 && sd->weapontype2 == 0 && (!sd->sc.data[SC_SEVENWIND] || sd->sc.data[SC_ASPERSIO])) //Check for seven wind (but not level seven!)
-		skill_enchant_elemental_end(&sd->bl,-1);
+		skill_enchant_elemental_end(&sd->bl,SC_NONE);
 
 	if(sd->status.inventory[n].equip & EQP_ARMOR) {
 		// On Armor Change...
@@ -9521,12 +9523,17 @@ void pc_check_available_item(struct map_session_data *sd) {
 		for( i = 0; i < MAX_INVENTORY; i++ ) {
 			it = sd->status.inventory[i].nameid;
 
-			if( it && !itemdb_available(it) ) {
+			if (!it)
+				continue;
+			if (!itemdb_available(it)) {
 				sprintf(output, msg_txt(sd, 709), it); // Item %hu has been removed from your inventory.
 				clif_displaymessage(sd->fd, output);
 				ShowWarning("Removed invalid/disabled item id %hu from inventory (amount=%d, char_id=%d).\n", it, sd->status.inventory[i].amount, sd->status.char_id);
 				pc_delitem(sd, i, sd->status.inventory[i].amount, 0, 0, LOG_TYPE_OTHER);
+				continue;
 			}
+			if (!sd->status.inventory[i].unique_id && !itemdb_isstackable(it))
+				sd->status.inventory[i].unique_id = itemdb_unique_id(sd);
 		}
 	}
 
@@ -9534,12 +9541,17 @@ void pc_check_available_item(struct map_session_data *sd) {
 		for( i = 0; i < MAX_CART; i++ ) {
 			it = sd->status.cart[i].nameid;
 
-			if( it && !itemdb_available(it) ) {
+			if (!it)
+				continue;
+			if (!itemdb_available(it)) {
 				sprintf(output, msg_txt(sd, 710), it); // Item %hu has been removed from your cart.
 				clif_displaymessage(sd->fd, output);
 				ShowWarning("Removed invalid/disabled item id %hu from cart (amount=%d, char_id=%d).\n", it, sd->status.cart[i].amount, sd->status.char_id);
 				pc_cart_delitem(sd, i, sd->status.cart[i].amount, 0, LOG_TYPE_OTHER);
+				continue;
 			}
+			if (!sd->status.cart[i].unique_id && !itemdb_isstackable(it))
+				sd->status.cart[i].unique_id = itemdb_unique_id(sd);
 		}
 	}
 
@@ -9547,12 +9559,17 @@ void pc_check_available_item(struct map_session_data *sd) {
 		for( i = 0; i < sd->storage_size; i++ ) {
 			it = sd->status.storage.items[i].nameid;
 
-			if( it && !itemdb_available(it) ) {
+			if (!it)
+				continue;
+			if (!itemdb_available(it)) {
 				sprintf(output, msg_txt(sd, 711), it); // Item %hu has been removed from your storage.
 				clif_displaymessage(sd->fd, output);
 				ShowWarning("Removed invalid/disabled item id %hu from storage (amount=%d, char_id=%d).\n", it, sd->status.storage.items[i].amount, sd->status.char_id);
 				storage_delitem(sd, i, sd->status.storage.items[i].amount);
+				continue;
 			}
+			if (!sd->status.storage.items[i].unique_id && !itemdb_isstackable(it))
+				sd->status.storage.items[i].unique_id = itemdb_unique_id(sd);
  		}
 	}
 }
@@ -10094,6 +10111,7 @@ void pc_del_talisman(struct map_session_data *sd,int count,int type)
 int pc_level_penalty_mod(struct map_session_data *sd, int mob_level, uint32 mob_class, int type)
 {
 	int diff, rate = 100, i;
+	int tmp;
 
 	nullpo_ret(sd);
 
@@ -10102,9 +10120,11 @@ int pc_level_penalty_mod(struct map_session_data *sd, int mob_level, uint32 mob_
 	if( diff < 0 )
 		diff = MAX_LEVEL + ( ~diff + 1 );
 
+	if((tmp = level_penalty[type][mob_class][diff] ) > 0 ) //use mobclass directly
+		return tmp;
+	
+	//wtf is that for ? if penalty not found use the 1st one we found ?? ̂[lighta]
 	for( i = 0; i < CLASS_ALL; i++ ) {
-		int tmp;
-
 		if( ( tmp = level_penalty[type][i][diff] ) > 0 ) {
 			rate = tmp;
 			break;

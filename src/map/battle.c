@@ -3701,6 +3701,7 @@ static int battle_calc_attack_skill_ratio(struct Damage wd, struct block_list *s
 				uint16 lv = skill_lv;
 				skillratio += 100 * skill_check_pc_partner(sd,skill_id,&lv,skill_get_splash(skill_id,skill_lv),0);
 			}
+			RE_LVL_DMOD(100);
 			break;
 		case WM_SOUND_OF_DESTRUCTION:
 			skillratio = (1000 * skill_lv) + (((sd) ? pc_checkskill(sd, WM_LESSON) : skill_get_max(WM_LESSON)) * status_get_int(src));
@@ -3875,6 +3876,9 @@ static int battle_calc_attack_skill_ratio(struct Damage wd, struct block_list *s
 		case RL_R_TRIP:
 			skillratio += -100 + (150 * skill_lv); //(custom)
 			break;
+		case RL_R_TRIP_PLUSATK:
+			skillratio += -100 + (50 * skill_lv); //(custom)
+			break;
 		case RL_H_MINE:
 			skillratio += 100 + (200 * skill_lv);
 			//If damaged by Flicker
@@ -4009,7 +4013,11 @@ struct Damage battle_attack_sc_bonus(struct Damage wd, struct block_list *src, u
 
 	//The following are applied on top of current damage and are stackable.
 	if (sc) {
-#ifndef RENEWAL
+#ifdef RENEWAL
+		if (sc->data[SC_WATK_ELEMENT])
+			if (skill_id != ASC_METEORASSAULT)
+				ATK_ADDRATE(wd.weaponAtk, wd.weaponAtk2, sc->data[SC_WATK_ELEMENT]->val2);
+#else
 		if( sc->data[SC_TRUESIGHT] )
 			ATK_ADDRATE(wd.damage, wd.damage2, 2*sc->data[SC_TRUESIGHT]->val1);
 #endif
@@ -6270,14 +6278,14 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
  *	Initial refactoring by Baalberith
  *	Refined and optimized by helvetica
  */
-struct Damage battle_calc_attack(int attack_type,struct block_list *bl,struct block_list *target,uint16 skill_id,uint16 skill_lv,int count)
+struct Damage battle_calc_attack(int attack_type,struct block_list *bl,struct block_list *target,uint16 skill_id,uint16 skill_lv,int flag)
 {
 	struct Damage d;
 
 	switch(attack_type) {
-		case BF_WEAPON: d = battle_calc_weapon_attack(bl,target,skill_id,skill_lv,count); break;
-		case BF_MAGIC:  d = battle_calc_magic_attack(bl,target,skill_id,skill_lv,count);  break;
-		case BF_MISC:   d = battle_calc_misc_attack(bl,target,skill_id,skill_lv,count);   break;
+		case BF_WEAPON: d = battle_calc_weapon_attack(bl,target,skill_id,skill_lv,flag); break;
+		case BF_MAGIC:  d = battle_calc_magic_attack(bl,target,skill_id,skill_lv,flag);  break;
+		case BF_MISC:   d = battle_calc_misc_attack(bl,target,skill_id,skill_lv,flag);   break;
 		default:
 			ShowError("battle_calc_attack: unknown attack type! %d (skill_id=%d, skill_lv=%d)\n", attack_type, skill_id, skill_lv);
 			memset(&d,0,sizeof(d));
@@ -7790,6 +7798,8 @@ static const struct _battle_data {
 	{ "mail_delay",                         &battle_config.mail_delay,                      1000,   1000,   INT_MAX,        },
 	{ "at_monsterignore",                   &battle_config.autotrade_monsterignore,         0,      0,      1,              },
 	{ "idletime_option",                    &battle_config.idletime_option,                 0x25,   1,      INT_MAX,        },
+	{ "spawn_direction",                    &battle_config.spawn_direction,                 0,      0,      1,              },
+	{ "arrow_shower_knockback",             &battle_config.arrow_shower_knockback,          1,      0,      1,              },
 };
 #ifndef STATS_OPT_OUT
 /**
