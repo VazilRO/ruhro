@@ -122,3 +122,15 @@ Thumbs.db
 /vcproj-9/map-server_sql
 /vcproj-9/mapcache
 /conf/.tmp-desd_conf.yml
+*.conf
+*.conf
+src/login/ipban_sql.c
+src/login/account_sql.c
+src/login/loginlog_sql.c
+conf/map_athena.conf
+conf/login_athena.conf
+conf/char_athena.conf
+vcproj-10/char-server_sql.vcxproj
+vcproj-10/char-server_sql.vcxproj
+*.vcxproj
+*.conf
