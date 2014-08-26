@@ -1,0 +1,68 @@
+//===== rAthena Script =======================================
+//= Peco Peco Hairband Quest
+//===== By: ==================================================
+//= Kayel
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Quest to obtain the PecoPeco Hairband
+//===== Additional Comments: =================================
+//= 1.0 First Version. [Kayel]
+//============================================================
+
+yuno_fild08,261,157,3	script	Peko#01_KL	428,{
+	mes "[Peko]";
+	mes "Freefall in Paris~";
+	mes "Sundreams in flashes~";
+	mes "Growing and rising~";
+	mes "Rain fills the skies in~";
+	emotion e_ho;
+	next;
+	mes "[Peko]";
+	mes "What? Ahem... Who are you?";
+	mes "Wait... Did you come here to make a ^0000FFPecoPeco Hairband^FF0000?";
+	next;
+	switch(select("I'm here for a ^0000FFPecoPeco Hairband^FF0000.:Leave.:Were you just singing?!")) {
+	case 1:
+		mes "[Peko]";
+		mes "Yes, of course. Bring me:";
+		mes "^0000FF1000x PecoPeco Feather^000000";
+		mes "^0000FF1x Peco Peco Egg Card^000000";
+		mes "^0000FF1x Peco Peco Card^000000";
+		mes "^0000FF500,000 Zeny^000000";
+		next;
+		switch(select("I have those:I will be right back")){
+		case 1:
+			if((countitem(7101) >= 1000) && (countitem(4007) >= 1) && (countitem(4031) >= 1) && (Zeny >= 500000)) {
+				mes "[Peko]";
+				mes "Ah yes, you have everything";
+				mes "Here take it.";
+				delitem 7101,1000;
+				delitem 4007,1;
+				delitem 4031,1;
+				set Zeny, Zeny-500000;
+				getitem 5286,1;
+				close;
+			}
+			mes "[Peko]";
+			mes "You seem to be missing something.";
+			close;
+		case 2:
+			mes "[Peko]";
+			mes "Okay then...";
+			close;
+		}
+	case 2:
+		mes "[Peko]";
+		mes "What a strange person... Didn't even say anything...";
+		close;
+	case 3:
+		mes "[Peko]";
+		mes "Ah! Yes I was! Did you want to know what the song was?";
+		mes "Go look up ^0000FFRufus - Sundream^FF0000";
+		close;
+	}
+	end;
+}
