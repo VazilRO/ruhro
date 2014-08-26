@@ -165,8 +165,13 @@ L_Quest:
 			erasequest .@quest1;
 			if (.@playtime > -1) erasequest .@quest2;
 			setquest .@quest2;
-
-			getexp getarg(4),getarg(5);
+			if(BaseLevel == 175) {
+				// Double the Job EXP and give them no Base EXP since they're maxed.
+				// Credits to Kayel for the idea
+				getexp 0, getarg(5)*2; 
+			} else {
+				getexp getarg(4),getarg(5);
+			}
 			getitem 6549, rand(1,5); // Courtesy Tickets
 			close;
 		} else {
