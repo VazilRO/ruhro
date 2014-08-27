@@ -1,0 +1,218 @@
+//======Name========================================
+// Poring Events
+//======Version=====================================
+// 1.0
+//======Author(s)===================================
+// Alkarl
+//======Comments====================================
+// 50% chance of starting 1 of the following events every hour:
+// Find the Porings!
+//	You need to kill the correct porings to gain the prize
+//	Kill the wrong poring and you die!
+// Dodge the Porings!
+//	Consists of up to 5 rounds, each round will spawn 20*CurrentRound
+//	Bomb Porings. Players will need to not die. If all players die
+//	then the event ends. If only 1 Player survives a round, that player
+//	wins. If multiple players survive all the rounds, they all win.
+//==================================================
+
+-	script	poringevent	-1,{
+OnInit:
+	disablenpc "Poring Warper";
+	disablenpc "Poring Rewarder";
+	mapwarp "guild_vs5","SavePoint",0,0;
+	killmonsterall "guild_vs5";
+	end;
+	
+OnMinute00:
+	disablenpc "Poring Warper";
+	disablenpc "Poring Rewarder";
+	mapwarp "guild_vs5","SavePoint",0,0;
+	killmonsterall "guild_vs5";
+	
+	$@randstart = rand(0,1);
+	if ($@randstart == 0) {
+		end;
+	}
+	$@randevent = rand(0,1);
+	setnpctimer 0;
+	initnpctimer;
+	if ($@randevent == 0) {
+		announce "Find the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
+	} else if ($@randevent == 1) {
+		announce "Dodge the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
+	}
+	enablenpc "Poring Warper";
+	end;
+		
+OnTimer60000:
+	if ($@randevent == 0) {
+		announce "Find the Poring Event will start in 4 minutes! Find me just north of the Prontera Fountain",0;
+	} else if ($@randevent == 1) {
+		announce "Dodge the Poring Event will start in 4 minutes! Find me just north of the Prontera Fountain",0;
+	}
+	end;
+	
+OnTimer120000:
+	if ($@randevent == 0) {
+		announce "Find the Poring Event will start in 3 minutes! Find me just north of the Prontera Fountain",0;
+	} else if ($@randevent == 1) {
+		announce "Dodge the Poring Event will start in 3 minutes! Find me just north of the Prontera Fountain",0;
+	}
+	end;
+	
+OnTimer180000:
+	if ($@randevent == 0) {
+		announce "Find the Poring Event will start in 2 minutes! Find me just north of the Prontera Fountain",0;
+	} else if ($@randevent == 1) {
+		announce "Dodge the Poring Event will start in 2 minutes! Find me just north of the Prontera Fountain",0;
+	}
+	end;
+	
+OnTimer240000:
+	if ($@randevent == 0) {
+		announce "Find the Poring Event will start in 1 minute! Find me just north of the Prontera Fountain",0;
+	} else if ($@randevent == 1) {
+		announce "Dodge the Poring Event will start in 1 minute! Find me just north of the Prontera Fountain",0;
+	}
+	end;
+
+OnTimer300000:
+	stopnpctimer;
+	disablenpc "Poring Warper";
+	if ($@randevent == 0) {
+		if (getmapusers >= 5) {
+		announce "Find the Poring Event is now starting",0;
+		goto OnFindPoringStart;
+		} else {
+		goto OnNotEnoughPlayers;
+		}
+	} else if ($@randevent == 1) {
+		if (getmapusers >= 5) {
+		announce "Dodge the Poring Event is now starting",0;
+		goto OnDodgePoringStart;
+		} else {
+		goto OnNotEnoughPlayers;
+		}
+	}
+	end;
+	
+//If not enough players, end event
+OnNotEnoughPlayers:
+	announce "Not Enough Players, Event Cancelled :(",0;
+	mapwarp "guild_vs5","prontera",155,220;
+	killmonsterall "guild_vs5";
+	end;
+	
+//Find the Porings!	
+OnFindPoringStart:
+	set .@specialremain,5;
+	
+	mapannounce "guild_vs5","Find the Porings Event will start in 5 seconds!",bc_map;
+	sleep 5000;
+	mapannounce "guild_vs5","Kill GM Alkarl's Minions but not his Pets!",bc_map;
+		
+	monster "guild_vs5",0,0,"GM Alkarl's Pet",1002,100,"poringevent::OnPoringKill";
+	monster "guild_vs5",0,0,"GM Alkarl's Minion",1002,5,"poringevent::OnSpecialKill";
+	end;
+		
+OnPoringKill:
+	monster "guild_vs5",0,0,"--en--",1002,1,"poringevent::OnPoringKill";
+	dispbottom "Wrong Poring! GM Alkarl will not be happy.";		
+	percentheal -100,-100;
+	end;
+
+OnSpecialKill:
+	set .@specialremain,.@specialremain-1;
+	mapannounce "guild_vs5",.@specialremain+" of GM Alkarl's Minions remain.",bc_map;
+	getitem 677,5; //reward
+	if(.@specialremain < 1) {
+		announce "All of GM Alkarl's Minions have been killed!",0;
+		killmonsterall "guild_vs5";
+		sleep 1000;
+		announce "Find the Porings Event Complete.",0;
+		mapwarp "guild_vs5","prontera",155,220;
+	}
+	end;
+//End Find the Porings!
+	
+//Start Dodge the Porings!
+OnDodgePoringStart:
+	mapannounce "guild_vs5","Dodge the Porings Event will start in 10 seconds!",bc_map;
+	sleep 9000;
+	
+	set .@round,1;
+	
+	while (.@round <= 5) {
+		mapannounce "guild_vs5","Round "+.@round+" of 5!",bc_map;
+		sleep 1000;
+		monster "guild_vs5",0,0,"--en--",1904,.@round*20,"";
+		sleep 20000;
+		if (getmapusers("guild_vs5") < 2) {
+			announce "We have a winner! Dodge the Porings Event Complete!",0;
+			sleep 500;
+			mapannounce "guild_vs5","Talk to the NPC for your reward!",bc_map;
+			enablenpc "Poring Rewarder";
+			break;
+		} else if (getmapusers("guild_vs5") < 1) {
+			break;
+		}
+		set .@round,.@round+1;
+	}
+	
+	if (.@round > 5) {
+		announce "We have multiple winners! Dodge the Porings Event Complete!",0;
+		sleep 500;
+		mapannounce "guild_vs5","Talk to the NPC for your reward!",bc_map;
+		enablenpc "Poring Rewarder";
+	}
+	end;
+//End Dodge the Porings!
+	
+//Map PCDieEvent, kick dead players from map, end event if no players remaining
+OnPCDieEvent:
+	if (strcharinfo(3) == "guild_vs5") {
+		if (getmapusers("guild_vs5") < 1) {
+			announce "All Players have died. Event Complete.",0;
+			killmonsterall "guild_vs5";
+		}
+		dispbottom "You have died.";
+		warp "SavePoint",0,0;
+	}
+	end;
+	
+}
+
+prontera,155,220,3, script	Poring Warper	948{
+
+	mes "[Poring Warper]";
+	mes "Hi! I can take you to the event location";
+	if ($@randevent == 0) {
+		mes "The current event is the Find the Porings!";
+	} else if ($@randevent == 1) {
+		mes "The current event is the Dodge the Porings!";
+	}
+	mes "Are you interested?";
+	menu "Take me there!",warpplayer,"No thanks.",-;
+	
+	mes "[Poring Warper]";
+	mes "We will miss you :(";
+	close;
+
+warpplayer:
+	warp "guild_vs5",49,71;
+	end;
+	
+}
+
+guild_vs5,49,71,3,	script	Poring Rewarder	949{
+
+	mes "[Poring Rewarder]";
+	mes "Congratulations!";
+	mes "I will now reward you and take you back to Prontera!"
+	next;
+	getitem 677,10;
+	warp "prontera",155,220;
+	end;
+	
+}
