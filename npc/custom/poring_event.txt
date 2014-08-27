@@ -216,3 +216,7 @@ guild_vs5,49,71,3,	script	Poring Rewarder	949{
 	end;
 	
 }
+
+guild_vs5	mapflag noexp
+guild_vs5	mapflag nodrop
+guild_vs5	mapflag nocommand	5
