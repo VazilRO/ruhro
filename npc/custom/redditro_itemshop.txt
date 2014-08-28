@@ -15,15 +15,23 @@
 
 // ======= Available Items =========
 // Zeny Scroll			 1
+// 10x Fire Converter Box	3
+// 10x Water Converter Box	3
+// 10x Earth Converter Box	3
+// 10x Wind Converter Box	3
+// 5x Fireproof Potion Box	3
+// 5x Waterproof Potion Box	3
+// 5x Earthproof Potion Box	3
+// 5x Thunderproof Potion Box	3
 // Token of Sieg Box(5)	10
 // Field Manual			20
 // Bloody Branch		20
 // Giant Flywing Box 50	30
+// Convex Mirror 3Day	50
+// Convex Mirror 7Day	100
 // Bubblegum			100
-// Convex Mirror 3Day	200
-// Convex Mirror 7Day	400
 
-prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,14209:10,12263:20,12103:20,13570:30,12210:100,40000:200,40001:400
+prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,41020:3,41021:3,41022:3,41023:3,41024:3,41025:3,41025:3,41026:3,14209:10,12263:20,12103:20,13570:30,40000:50,40001:100,12210:100
 
 // ======= Costume Shop =========
 // 3D Glasses					15

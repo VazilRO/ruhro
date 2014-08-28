@@ -39,3 +39,6 @@
 
 12596,300000	//Magic_Candy
 14586,300000	//Spark_Candy
+
+//RedditRO Custom Delays!
+12214,1800000	//Convex Mirror - 30 minutes
