@@ -1,0 +1,116 @@
+//===== rAthena Script ======================================= 
+//= Monster Quiz NPC
+//===== By: ================================================== 
+//= Alkarl
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Asks players a random question about a random monster.
+
+prontera,0,0,3	script	Quiz Master	950,{
+
+	mes "[Quiz Master]";
+	
+	.@maxrounds = 10; //Number of Rounds
+	.@currentround = 1;
+	
+	while (.@currentround <= .@maxrounds; ) {
+		.@guessmob = mob_get_random_id(0,,);
+		.@randtype = rand(1,15);
+		
+		if (.@randtype == 1) { //Guess monster Level
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,1);
+			mes "What level is a "+.@mobname+"?";
+			menu;
+		} else if (.@randtype == 2) { //Guess monster Max HP
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,2);
+			mes "What is the Max HP of a "+.@mobname+"?";
+			menu;
+		} else if (.@randtype == 3) { //Guess monster Base EXP
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,3);
+			mes "How much Base EXP does a "+.@mobname+" give?";
+			menu;
+		} else if (.@randtype == 4) { //Guess monster Job EXP
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,4);
+			mes "How much Job EXP does a "+.@mobname+" give?";
+			menu;
+		} else if (.@randtype == 5) { //Guess monster DEF
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,7);
+			mes "How much DEF does a "+.@mobname+" have?";
+			menu;		
+		} else if (.@randtype == 6) { //Guess monster MDEF
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,8);
+			mes "How much MDEF does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 7) { //Guess monster STR
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,9);
+			mes "How much STR does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 8) { //Guess monster AGI
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,10);
+			mes "How much AGI does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 9) { //Guess monster VIT
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,11);
+			mes "How much VIT does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 10) { //Guess monster INT
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,12);
+			mes "How much INT does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 11) { //Guess monster DEX
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,13);
+			mes "How much DEX does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 12) { //Guess monster LUK
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,14);
+			mes "How much LUK does a "+.@mobname+" have?";
+			menu;
+		} else if (.@randtype == 13) { //Guess monster size
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,18);
+			mes "What is the size of a "+.@mobname+"?";
+			menu;
+		} else if (.@randtype == 14) { //Guess monster race
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,19);
+			mes "What race is a "+.@mobname+"?";
+			menu;
+		} else if (.@randtype == 15) { //Guess monster element
+			.@mobname = getmonsterinfo(.@guessmob,0);
+			.@mobanswer = getmonsterinfo(.@guessmob,20);
+			mes "What element is a "+.@mobname+"?";
+			menu;
+		}
+			
+	}
+	
+IncorrectAnswer:
+	//Incorrect Answer, do nothing.
+	mes "[Quiz Master]";
+	mes "Sorry, that answer is incorrect...";
+	close;
+	
+CorrectAnswer:
+	//Correct Answer, reward player, goto next round.
+	mes "[Quiz Master]";
+	mes "That is the correct answer!";
+	getitem 677,1;
+	set .@currentround,.@currentround+1;
+	close;
+	
+}
