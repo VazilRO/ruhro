@@ -1546,7 +1546,7 @@ int skill_additional_effect (struct block_list* src, struct block_list *bl, uint
 		sc_start4(src,bl,SC_BURNING,55+5*skill_lv,skill_lv,1000,src->id,0,skill_get_time(skill_id,skill_lv));
 		break;
 	case NC_MAGMA_ERUPTION:
-		sc_start4(src, bl, SC_BURNING, 10 * skill_lv, skill_lv, 500, src->id, 0, skill_get_time2(skill_id, skill_lv));
+		sc_start4(src, bl, SC_BURNING, 10 * skill_lv, skill_lv, 1000, src->id, 0, skill_get_time2(skill_id, skill_lv));
 		sc_start(src, bl, SC_STUN, 10 * skill_lv, skill_lv, skill_get_time(skill_id, skill_lv));
 		break;
 	case GC_DARKCROW:
