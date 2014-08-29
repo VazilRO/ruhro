@@ -195,13 +195,13 @@
 //End Rebellion Bullets
 
 //Elemental Converter Scrolls Boxes
-41020,FireConverterBox10,Box of 10 Fire Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12114,10; },{},{}
-41021,WaterConverterBox10,Box of 10 Water Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12115,10; },{},{}
-41022,EarthConverterBox10,Box of 10 Earth Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12116,10; },{},{}
-41023,WindConverterBox10,Box of 10 Wind Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12117,10; },{},{}
+41020,FireConverterBox5,Box of 5 Fire Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12114,5; },{},{}
+41021,WaterConverterBox5,Box of 5 Water Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12115,5; },{},{}
+41022,EarthConverterBox5,Box of 5 Earth Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12116,5; },{},{}
+41023,WindConverterBox5,Box of 5 Wind Converters,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12117,5; },{},{}
 
 //Elemental Resist Potion Boxes
-41024,FireproofPotionBox10,Box of 10 Fireproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12118,5; },{},{}
-41025,WaterproofPotionBox10,Box of 10 Waterproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12119,5; },{},{}
-41026,EarthproofPotionBox10,Box of 10 Earthproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12120,5; },{},{}
-41027,ThunderproofPotionBox10,Box of 10 Thunderproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12121,5; },{},{}
+41024,FireproofPotionBox10,Box of 10 Fireproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12118,10; },{},{}
+41025,WaterproofPotionBox10,Box of 10 Waterproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12119,10; },{},{}
+41026,EarthproofPotionBox10,Box of 10 Earthproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12120,10; },{},{}
+41027,ThunderproofPotionBox10,Box of 10 Thunderproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12121,10; },{},{}

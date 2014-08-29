@@ -15,14 +15,14 @@
 
 // ======= Available Items =========
 // Zeny Scroll			 1
-// 10x Fire Converter Box	3
-// 10x Water Converter Box	3
-// 10x Earth Converter Box	3
-// 10x Wind Converter Box	3
-// 5x Fireproof Potion Box	3
-// 5x Waterproof Potion Box	3
-// 5x Earthproof Potion Box	3
-// 5x Thunderproof Potion Box	3
+// 5x Fire Converter Box	3
+// 5x Water Converter Box	3
+// 5x Earth Converter Box	3
+// 5x Wind Converter Box	3
+// 10x Fireproof Potion Box	3
+// 10x Waterproof Potion Box	3
+// 10x Earthproof Potion Box	3
+// 10x Thunderproof Potion Box	3
 // Token of Sieg Box(5)	10
 // Field Manual			20
 // Bloody Branch		20
