@@ -118,7 +118,7 @@ PlayRR:
 	mapannounce .RRMAP$,"Active Player Listing",bc_map,0xFFFFFF;
 	for(set .@i, 0; .@i < getarraysize(.playerlist$); set .@i, .@i + 1){
 		set .@j, .@j + 1;
-		mapannounce ""+.@j+". "+.playerlist$[.@i]+"",bc_all,0xFFFFFF;
+		mapannounce .RRMAP$,""+.@j+". "+.playerlist$[.@i]+"",bc_map,0xFFFFFF;
 		sleep2 1000;
 	}
 	mapannounce .RRMAP$,"Do not disconnect. You will be disqualified!",bc_map,0xFFFFFF;
