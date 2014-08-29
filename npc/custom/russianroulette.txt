@@ -18,6 +18,7 @@
 //===== Additional Comments: ================================= 
 //= 1.0 First Version. [Ghost]
 //= 1.1 Polished the script and modified the controls [Poutine]
+//= 1.2 Reduced spam and kept from announcing server wide. [Kyo]
 //============================================================
 
 prontera,156,179,6,	script	Russian Roulette	731,{
@@ -117,7 +118,7 @@ PlayRR:
 	mapannounce .RRMAP$,"Active Player Listing",bc_map,0xFFFFFF;
 	for(set .@i, 0; .@i < getarraysize(.playerlist$); set .@i, .@i + 1){
 		set .@j, .@j + 1;
-		announce ""+.@j+". "+.playerlist$[.@i]+"",bc_all,0xFFFFFF;
+		mapannounce ""+.@j+". "+.playerlist$[.@i]+"",bc_all,0xFFFFFF;
 		sleep2 1000;
 	}
 	mapannounce .RRMAP$,"Do not disconnect. You will be disqualified!",bc_map,0xFFFFFF;
@@ -130,11 +131,7 @@ OnSpin:
 	callsub OnCheck;
 	mapannounce .RRMAP$,.NPC$ +" The revolver is spinning . . .",bc_map;
 	sleep2 1500;
-	mapannounce .RRMAP$,.NPC$ +" Revolver slowly stopped spinning . . .",bc_map;
-	sleep2 1000;
-	mapannounce .RRMAP$,.NPC$ +" The revolver is pointing to "+ strcharinfo(0) +" . . .",bc_map;
-	sleep2 1500;
-	mapannounce .RRMAP$,.NPC$ +" Pull the trigger now "+ strcharinfo(0),bc_map;
+	mapannounce .RRMAP$,.NPC$ +" The revolver is pointing to "+ strcharinfo(0) +". Pull the trigger!",bc_map;
 	callsub OnCheck;
 	callsub OnShoot;
 	sleep2 1500;

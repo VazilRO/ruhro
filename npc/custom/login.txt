@@ -31,6 +31,7 @@ mes "What setting do you want to change?";
 next;
 menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",auto_loot,
 	 "Main Chat ["+( (login_main)? "^FF2200Off^000000" : "^00BB22On^000000")+"]",main_chat,
+	 "Trade Chat ["+( (login_trade)? "^FF2200Off^000000" : "^00BB22On^000000")+"]",trade_chat,
 	 "Show EXP ["+( (login_showexp)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",auto_showexp,
 	 "@NoAsk ["+( (login_noask)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",no_ask;
 
@@ -70,6 +71,26 @@ menu "Autoloot ["+( (login_loot)? "^00BB22On^000000" : "^FF2200Off^000000")+"]",
 		mes "You'll still need to use #main to chat in global chat, however.";
 		set login_main,0;
 		atcommand "@main join #main";
+	}
+	close;
+	
+	trade_chat:
+	mes .@n$;
+	mes "Status: "+( (login_trade) ? "^FF2200Off^000000" : "^00BB22On^000000");
+	menu "I want to "+((!login_trade) ? "^FF2200disable^000000": "^00BB22enable^000000")+" it.",-,"Nothing",L_quit;
+
+	
+	mes .@n$;
+	if(login_trade == 0) {
+		mes "Trade Chat is now ^FF2200Off^000000.";
+		set login_trade,1;
+		atcommand "@main leave #trade";
+		
+	} else if(login_trade == 1) {
+		mes "Trade Chat is now ^00BB22On^000000.";
+		mes "You'll still need to use #trade to chat in trade chat, however.";
+		set login_trade,0;
+		atcommand "@main join #trade";
 	}
 	close;
 	
