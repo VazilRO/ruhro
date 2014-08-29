@@ -24,6 +24,8 @@
 // 10x Earthproof Potion Box	3
 // 10x Thunderproof Potion Box	3
 // Token of Sieg Box(5)	10
+// Nidhoggur Guild Warp Scroll	10
+// Valfreyja Guild Warp Scroll	10
 // Field Manual			20
 // Bloody Branch		20
 // Giant Flywing Box 50	30
@@ -31,7 +33,7 @@
 // Convex Mirror 7Day	100
 // Bubblegum			100
 
-prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,41020:3,41021:3,41022:3,41023:3,41024:3,41025:3,41025:3,41026:3,14209:10,12263:20,12103:20,13570:30,40000:50,40001:100,12210:100
+prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,41020:3,41021:3,41022:3,41023:3,41024:3,41025:3,41025:3,41026:3,14209:10,41028:10,41029:10,12263:20,12103:20,13570:30,40000:50,40001:100,12210:100
 
 // ======= Costume Shop =========
 // 3D Glasses					15
