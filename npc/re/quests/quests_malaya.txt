@@ -8209,15 +8209,15 @@ malaya,276,367,4	script	Bent Shaman#ma	782,{
 /*
 Description
 -----------
-The Pintados Festival begins when players have accumulated 1000 Lesser Agimats,
-1000 Silver Crosses, and 300 dyestuffs, and lasts for 7 days. During that time,
+The Pintados Festival begins when players have accumulated 500 Lesser Agimats,
+500 Silver Crosses, and 300 dyestuffs, and lasts for 7 days. During that time,
 players are able to create a tattoo.
 
 Global Variables
 ----------------
 $malaya_pintados_00  - Festival time limit, in 30-minute intervals. (range: 0~344)
-$malaya_pintados_01  - Number of Lesser Agimats collected. (range: 0~1000)
-$malaya_pintados_02  - Number of Silver Crosses collected. (range: 0~1000)
+$malaya_pintados_01  - Number of Lesser Agimats collected. (range: 0~500)
+$malaya_pintados_02  - Number of Silver Crosses collected. (range: 0~500)
 $malaya_pintados_03  - Number of dyestuffs collected. (range: 0~300)
 $malaya_pintados_04$ - Last player to create a tattoo.
 */
@@ -8232,8 +8232,8 @@ ma_fild01,1,1,4	script	Pintados Manager#pin	894,{
 	}
 	mes "Hi, I'm the Pintados Festival Manager. Please select an item.";
 	mes "Time Value: ("+$malaya_pintados_00+"/344)";
-	mes "Lesser Agimat Value: ("+$malaya_pintados_01+"/1,000)";
-	mes "Cross Value: ("+$malaya_pintados_02+"/1,000)";
+	mes "Lesser Agimat Value: ("+$malaya_pintados_01+"/500)";
+	mes "Cross Value: ("+$malaya_pintados_02+"/500)";
 	mes "Dyestuffs Value: ("+$malaya_pintados_03+"/300)";
 	mes "Recent Tattoo Creator: "+$malaya_pintados_04$;
 	next;
@@ -8288,19 +8288,19 @@ ma_fild01,1,1,4	script	Pintados Manager#pin	894,{
 				break;
 			case 3:
 				mes "Adjust the accumulated value for the Lesser Agimat.";
-				mes "Values can be adjusted between 0 to 1000.";
+				mes "Values can be adjusted between 0 to 500.";
 				next;
 				input .@input;
-				if (.@input < 0 || .@input > 1000)
+				if (.@input < 0 || .@input > 500)
 					close;
 				set $malaya_pintados_01, .@input;
 				break;
 			case 4:
 				mes "Adjust the accumulated value of the Silver Cross.";
-				mes "Values can be adjusted between 0 to 1000.";
+				mes "Values can be adjusted between 0 to 500.";
 				next;
 				input .@input;
-				if (.@input < 0 || .@input > 1000)
+				if (.@input < 0 || .@input > 500)
 					close;
 				set $malaya_pintados_02, .@input;
 				break;
@@ -8315,8 +8315,8 @@ ma_fild01,1,1,4	script	Pintados Manager#pin	894,{
 				break;
 			}
 			mes "Time Value: ("+$malaya_pintados_00+"/344)";
-			mes "Lesser Agimat Value: ("+$malaya_pintados_01+"/1,000)";
-			mes "Cross Value: ("+$malaya_pintados_02+"/1,000)";
+			mes "Lesser Agimat Value: ("+$malaya_pintados_01+"/500)";
+			mes "Cross Value: ("+$malaya_pintados_02+"/500)";
 			mes "Dyestuffs Value: ("+$malaya_pintados_03+"/300)";
 			mes "This is the current value. Do you want to adjust it?";
 			next;
@@ -8386,7 +8386,7 @@ ma_fild01,179,260,2	script	Festival Helper Boy#pin	577,{
 		close;
 	}
 	if ($malaya_pintados_00 == 0) {
-		if ($malaya_pintados_01 > 999 && $malaya_pintados_02 > 999 && $malaya_pintados_03 > 299) {
+		if ($malaya_pintados_01 > 499 && $malaya_pintados_02 > 499 && $malaya_pintados_03 > 299) {
 			set $malaya_pintados_00,1;
 			donpcevent "Pintados Manager#pin::OnEnable";
 			emotion e_lv;
@@ -8462,7 +8462,7 @@ ma_fild01,179,260,2	script	Festival Helper Boy#pin	577,{
 		next;
 		select("Why?");
 		mes "[Isco]";
-		mes "I was going back to the village delivering 1000 Lesser Agimats, 1000 Silver Crosses, and 300 Dyestuffs as an errand from Port Malaya.";
+		mes "I was going back to the village delivering 500 Lesser Agimats, 500 Silver Crosses, and 300 Dyestuffs as an errand from Port Malaya.";
 		next;
 		mes "[Isco]";
 		mes "But '^FF8440Bongisungisu^000000' appeared out of nowhere and took the items away from me.";
@@ -8497,20 +8497,20 @@ ma_fild01,179,260,2	script	Festival Helper Boy#pin	577,{
 	mes "He he. What did you bring?";
 	next;
 	set .@i, select(
-		"Lesser Agimat (^FF0000"+(($malaya_pintados_01 > 999)?"Collection complete":(1000 - $malaya_pintados_01)+" short")+"^000000):"+
-		"Silver Cross (^FF0000"+(($malaya_pintados_02 > 999)?"Collection complete":(1000 - $malaya_pintados_02)+" short")+"^000000):"+
+		"Lesser Agimat (^FF0000"+(($malaya_pintados_01 > 499)?"Collection complete":(500 - $malaya_pintados_01)+" short")+"^000000):"+
+		"Silver Cross (^FF0000"+(($malaya_pintados_02 > 499)?"Collection complete":(500 - $malaya_pintados_02)+" short")+"^000000):"+
 		"Dyestuff (^FF0000"+(($malaya_pintados_03 > 299)?"Collection complete":(300 - $malaya_pintados_03)+" short")+"^000000)"
 	);
 	switch(.@i) {
 	case 1:
 		set .@item,6497; //Lesser_Agimat
 		set .@name$,"Lesser Agimats";
-		set .@total,1000;
+		set .@total,500;
 		break;
 	case 2:
 		set .@item,6502; //Silver_Cross
 		set .@name$,"Silver Crosses";
-		set .@total,1000;
+		set .@total,500;
 		break;
 	case 3:
 		setarray .@items[0],975,976,978,979,980,981,982,983;
