@@ -5697,6 +5697,7 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 			mes "and take them to ^0000FFMissing Person's Father^000000";
 			mes "for me.";
 			set malaya_bakona2,1;
+			addmonsterdrop 2314,6520,10;
 			setquest 1180;
 			close;
 		}
@@ -5706,6 +5707,7 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		mes "retrieve two ^FF0000Lost Belongings^000000";
 		mes "and deliver them to ^0000FFMissing Person's Father^000000";
 		mes "for me.";
+		addmonsterdrop 2314,6520,10; // for people who missed it
 		close;
 	} else if (malaya_bakona2 == 2) {
 		mes "[Village Chief]";
@@ -5850,6 +5852,7 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		erasequest 1193;
 		set malaya_bakona2,15;
 		getexp 1000000,600000;
+		delmonsterdrop 2314,6520;
 		if (!VIP_SCRIPT || vip_status(1))
 			getitem 6497,7; //Lesser_Agimat
 		else
@@ -5872,7 +5875,7 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 	}
 }
 
-malaya,269,267,5	script	Missing Person's Father	582,{
+malaya,270,267,5	script	Missing Person's Father	582,{
 	if (malaya_hi < 20) {
 		mes "- He seems cautious of you. -";
 		close;

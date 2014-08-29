@@ -81,14 +81,14 @@ OnTimer300000:
 	stopnpctimer;
 	disablenpc "Poring Warper";
 	if ($@randevent == 0) {
-		if (getmapusers >= 5) {
+		if (getmapusers("guild_vs5") >= 5) {
 		announce "Find the Poring Event is now starting",0;
 		goto OnFindPoringStart;
 		} else {
 		goto OnNotEnoughPlayers;
 		}
 	} else if ($@randevent == 1) {
-		if (getmapusers >= 5) {
+		if (getmapusers("guild_vs5") >= 5) {
 		announce "Dodge the Poring Event is now starting",0;
 		goto OnDodgePoringStart;
 		} else {
@@ -183,8 +183,7 @@ OnPCDieEvent:
 	
 }
 
-prontera,155,220,3, script	Poring Warper	948{
-
+prontera,155,220,3,	script	Poring Warper	948,{
 	mes "[Poring Warper]";
 	mes "Hi! I can take you to the event location";
 	if ($@randevent == 0) {
@@ -205,18 +204,17 @@ warpplayer:
 	
 }
 
-guild_vs5,49,71,3,	script	Poring Rewarder	949{
+guild_vs5,49,71,3,	script	Poring Rewarder	949,{
 
 	mes "[Poring Rewarder]";
 	mes "Congratulations!";
-	mes "I will now reward you and take you back to Prontera!"
+	mes "I will now reward you and take you back to Prontera!";
 	next;
 	getitem 677,10;
 	warp "prontera",155,220;
 	end;
-	
 }
 
-guild_vs5	mapflag noexp
-guild_vs5	mapflag nodrop
-guild_vs5	mapflag nocommand	5
+guild_vs5	mapflag	noexp
+guild_vs5	mapflag	nodrop
+guild_vs5	mapflag	nocommand	5

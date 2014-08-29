@@ -1,0 +1,244 @@
+//===== rAthena Script =======================================
+//= GM Event
+//===== By: ==================================================
+//= Poutine
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= GM Event for RedditRO
+//===== Additional Comments: =================================
+//= 1.0 First Version. [Poutine]
+//============================================================
+
+// Investment
+-	script	Fake GM::fakegm	-1,{	
+	mes .NPCName$;
+	mes "Yeah...uhh...I'm the GM.";
+	next;
+	mes .NPCName$;
+	mes "I'll...uhh...let you submit a complaint if you give a donation...";
+	mes "Minimum donations is units of ^4d4dff"+callfunc("F_InsertComma",.unitInvest)+" Zeny^000000.";
+	next;
+	switch(select("Donate:Cancel")) {
+		case 1:
+			mes .NPCName$;
+			mes "Please enter the amount you want to invest.";
+			mes "Please enter a number between 1-1000";
+			mes "Please enter 0 to cancel.";
+			next;
+			input .@units;
+			if (.@units <= 0) {
+				mes .NPCName$;
+				mes "Cancelled.";
+				close;
+			} else if (.@units > 1000) {
+				mes .NPCName$;
+				mes "Please try again.";
+				close;
+			} else
+				break;			
+		case 2:
+			mes .NPCName$;
+			mes "Cancelled.";
+			close;
+	}
+	if (Zeny < .@units*.unitInvest) {
+		mes .NPCName$;
+		mes "You do not have enough money.";
+		close;
+	}
+	mes .NPCName$;
+	mes "You've donated " +callfunc("F_InsertComma",.@units*.unitInvest)+" Zeny. Here's a little something in return...";
+	set Zeny, Zeny-.@units*.unitInvest;
+	set $GMInvestment, $GMInvestment + .@units*.unitInvest;
+	getitem .reward, .@units;
+	next;
+	mes .NPCName$;
+	mes "Go ahead and leave a complaint...";
+	next;
+	input .@uselessComplaint$;
+	mes .NPCName$;
+	mes "I'll...uhh...forward this to the GMs...yeah..that's what I'll do...";
+	close;
+	
+	OnInit:
+		set .NPCName$, "[Fake GM]"; // Name of the NPC
+		set $GMInvestReq, 50000000; // Amount required to gain access to the dungeon
+		set .unitInvest, 10000;
+		set .reward, 677;
+		end;	
+}
+prontera,113,191,3	duplicate(fakegm)	Fake GM#fakegm1	864
+
+// Weekly Investment Check Handler
+-	script	GMShowdownEventHandler	-1,{
+	OnInit:
+		set .GMEventName$, "[GM Showdown]";
+		bindatcmd("checkgminvest","GMShowdownEventHandler::OnGMAdmin",11,11);	
+		end;
+	OnGMAdmin:
+	OnClock0000:
+		if($GMInvestment >= $GMInvestReq) {
+			announce .GMEventName$ + " Donations have reached the required amount. Event is now activated. Investment has now reset.",0;
+			set $GMEvent, 1; // set the GM event to ON
+			set $GMInvestment, 0; // Reset the Investment for next round
+			set $GMMap, rand(0,4); // determine which MVP GM instance to use
+		} else {
+			announce .GMEventName$ + " Insufficient donations to proceed.",0;
+			set $GMEvent, 0; // set the GM event to OFF
+		}
+	end;
+}
+
+// Investment Board NPC
+-	script	GM Investment Board::gminvestboard	-1,{
+	mes "[GM Showdown Investment]";
+	mes "Current investment total is:";
+	mes callfunc("F_InsertComma",$GMInvestment) + " Zeny";
+	close;
+}
+prontera,115,191,3	duplicate(gminvestboard)	GM Investment Board#gminvestboard1	857
+
+// Warper/Instance Manager NPC
+-	script	GM Warper#gmwarper	-1,{
+	OnInit:
+		set .GMWarperN$, "[GM Dungeon Keeper]"; // NPC Name
+		set .GMQuestID, 56000; // Quest ID
+		end;
+
+	mes .GMWarperN$;
+	if($GMEvent != 1) {
+		mes "The Overlords are angry...the Overlords are angry...";
+		close;
+	}
+
+	mes "Welcome...would you and your party like to try your hand at defeating the Overlords?";
+	next;
+	if(select("Yes:No thanks") == 2) {
+		mes .GMWarperN$;
+		mes "Fear them...";
+		close;
+	}
+
+	mes .GMWarperN$;
+	set .@GMquestcheck, checkquest(.GMQuestID,PLAYTIME);
+	if(.@GMquestcheck == 0 || .@GMquestcheck == 1) { // On cooldown - do nothing
+		mes "Hmm...It seems you have attempted to slay the Overlords already...You cannot enter again if the Overlords do not will it!";
+		close;
+	} else if(.@GMquestcheck == 2) { // Cooldown ended - clear the quest
+		mes "It seems the Overlords have permitted your re-admittance.";
+		next;
+		mes .GMWarperN$;
+		mes "HOOO-WAHHH. You should now be able to re-enter the portal.";
+		erasequest .GMQuestID;
+		close;
+	}
+
+	switch($GMMap) {
+		case 0:
+			set .@GMInstance$, "GM Kyo";
+			set .@GMInstanceID, 11;
+		break;
+		case 1:
+			set .@GMInstance$, "GM Alkarl";
+			set .@GMInstanceID, 12;
+		break;
+		case 2:
+			set .@GMInstance$, "GM Carbuncle";
+			set .@GMInstanceID, 13;
+		break;
+		case 3:
+			set .@GMInstance$, "GM Lachryma";
+			set .@GMInstanceID, 14;
+		break;
+		case 4:
+			set .@GMInstance$, "GM Poutine";
+			set .@GMInstanceID, 15;
+		break;
+	}
+
+	mes "Alright, in order to do so a portal must be opened and entered.";
+	next;
+	switch(select("Enter the portal:Open the portal:No thanks")) {
+		case 1: // Enter the portal
+			goto GMEventInstanceEnter;
+			break;
+		case 2: // Open the portal
+			if(getpartyleader(getcharid(1),2) != getcharid(0)) {
+				mes .GMWarperN$;
+				mes "The party leader must be brave enough to discuss this matter with me!";
+				close;
+			}
+			// Check to see if party reaches requirements
+			// * At least 4 people
+			// * Levels 150 - 175
+			if(instance_check_party(getcharid(1),4,150,175)) {
+				mes .GMWarperN$;
+				mes "The showdown is limited to:";
+				mes "- A party of at least 4 people.";
+				mes "- Characters between levels 150 - 175";
+				close;
+			}
+
+			mes .GMWarperN$;
+			mes "I should warn you...they will show no mercy...";
+			next;
+			switch(select("I am ready!:This is impossible!")) {
+				case 1:
+					mes .GMWarperN$;
+					mes "I will begin the incantation to open the portal to the Overlords.";
+					next;
+					goto GMEventInstanceCreate;
+					break;
+				case 2:
+					mes .GMWarperN$;
+					mes "Even you cannot withstand the wrath of the Overlords!";
+					close;
+			}
+			break;
+		case 3: // Give up
+			mes .GMWarperN$;
+			mes "A wise choice.";
+			close;
+	}
+
+	GMEventInstanceCreate:
+		// Attempt to create the instance
+		if (instance_create(.@GMInstance$) < 0) {
+			mes .GMWarperN$;
+			mes "Something went wrong...";
+			close;
+		}
+		mes .GMWarperN$;
+		mes "Portal has been created successfully!";
+		next;
+		mes .GMWarperN$;
+		mes "Would you like enter now?";
+		next;
+		if(select("Yes:Not yet") == 2) {
+			mes .GMWarperN$;
+			mes "Come back when you're ready...";
+			close;
+		}
+		goto GMEventInstanceEnter;
+		end;
+
+	GMEventInstanceEnter:
+		mes .GMWarperN$;
+		switch(instance_enter(.@GMInstance$)) {
+			case 3:
+			case 2:
+				mes "The portal could not be found...";
+				break;
+			case 1:
+				mes "You cannot enter alone!";
+				break;
+			case 0:
+				mes "Good luck!";
+				setquest .GMQuestID;
+				break;
+		}
+		close;
+}

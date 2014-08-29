@@ -10,7 +10,7 @@
 //= 1.0 First release
 
 	
-Payon,269,220,3	script	Sssnake	1025,{
+payon,269,220,3	script	Sssnake	1025,{
 	
 	if (SNAKE_QUEST == 9000) goto L_PLSGO;
 	
@@ -35,7 +35,7 @@ M_YES:
 	next;
 
 L_List:
-	mes "[Sssnake]"
+	mes "[Sssnake]";
 	mes "1000 Snake Scales";
 	mes "300 Horrendous Hair";
 	mes "100 Sticky Mucus";

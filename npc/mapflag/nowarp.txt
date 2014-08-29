@@ -84,4 +84,4 @@ poring_w02	mapflag	nowarp
 // RedditRO =====================
 guild_vs1	mapflag	nowarp
 guild_vs3	mapflag	nowarp
-guild_vs5	mapflag nowarp
+guild_vs5	mapflag	nowarp
