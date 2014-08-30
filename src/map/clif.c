@@ -9812,7 +9812,7 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd)
 	if(!sd->state.autotrade && map[sd->bl.m].flag.loadevent) // Lance
 		npc_script_event(sd, NPCE_LOADMAP);
 
-	if (pc_checkskill(sd, SG_DEVIL) && !pc_nextjobexp(sd))
+	if (pc_checkskill(sd, SG_DEVIL) && sd->status.job_level >= MIN_DEVIL_LEVEL)
 		clif_status_load(&sd->bl, SI_DEVIL, 1);  //blindness [Komurka]
 
 	if (sd->sc.opt2) //Client loses these on warp.
