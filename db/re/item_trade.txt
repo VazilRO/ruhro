@@ -2535,4 +2535,4 @@
 6549,495,100 // Courtesy Ticket
 
 // RedditRO Item Shop
-677,459,100 // Platinum Coin
+677,459,11 // Platinum Coin
