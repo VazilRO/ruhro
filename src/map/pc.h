@@ -819,6 +819,9 @@ short pc_maxparameter(struct map_session_data *sd, enum e_params param);
     )
 #endif
 
+// Star Gladiator Demon Skill minimum Job level for activation
+#define MIN_DEVIL_LEVEL 50
+
 int pc_split_atoi(char* str, int* val, char sep, int max);
 int pc_class2idx(int class_);
 int pc_get_group_level(struct map_session_data *sd);
