@@ -22,9 +22,11 @@
 35016,Leaf_Cat_Hat_E,Leaf Cat Hat,4,20,,10,,3,,0,0xFFFFFFFF,63,2,256,,0,1,539,{},{},{}
 35017,Fur_Seal_Hat_E,Seal Hat,4,20,,10,,3,,0,0xFFFFFFFF,63,2,769,,55,1,540,{},{},{}
 35018,Wild_Rose_Hat_E,Wild Rose Hat,4,20,,10,,6,,1,0xFFFFFFFF,63,2,256,,20,1,541,{ bonus bAgi,3; },{},{}
-35019,Candy_Cane_In_The_Mouth_E,Candy Cane In Mouth,4,20,,10,,0,,0,0xFFFFFFFF,63,2,1,,0,0,446,{},{},{}
-35020,Cheer_Scarf_E,Cheer Scarf6,4,0,,10,,0,,0,0xFFFFFFFF,63,2,1,,1,0,369,{},{},{}
-35021,24_Bolt_E,24 Bolt,4,20,,10,,0,,0,0xFFFFFFFF,63,2,512,,10,0,696,{},{},{}
+35019,GM_Clip_P,GM's Priest Clip,4,30000,,100,,0,,1,0xFFFFFFFF,63,2,136,,0,0,0,{ skill "AL_WARP",4; skill "AL_HEAL",10; skill "AL_INCAGI",10; skill "AL_BLESSING",10; skill "HP_ASSUMPTIO",5; },{},{}
+35020,GM_Clip_A,GM's Alchemist Clip,4,30000,,100,,0,,1,0xFFFFFFFF,63,2,136,,0,0,0,{ skill "AM_BIOETHICS",1; skill "AM_REST",1; skill "AM_CALLHOMUN",1; skill "AM_RESURRECTHOMUN",1; },{},{}
+35021,GM_Clip_G,GM's General Clip,4,30000,,100,,0,,1,0xFFFFFFFF,63,2,136,,0,0,0,{ skill "MC_INCCARRY",10; skill "MC_VENDING",10; skill "MC_PUSHCART",10; skill "NPC_SUMMONMONSTER",10; skill "NPC_HALLUCINATION",10; },{},{}
+
+
 
 
 
