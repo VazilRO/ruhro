@@ -145,6 +145,9 @@ if(login_loot == 1)	{
 if(login_main == 0) {
 	atcommand "@main join #main";
 }
+if(login_trade == 1) {
+	atcommand "@main join #trade";
+}
 if(login_showexp == 1) {
 	atcommand "@showexp";
 }
