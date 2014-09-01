@@ -35,7 +35,7 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 	set .@menu$, .@menu$ + ":Bravery Badge => KVM Point ["+.tierratokvm+" - 1]";
 	set .@menu$, .@menu$ + ":KVM Point => Bravery Badge [1 - "+.tierratokvm+"]";
 	set .@menu$, .@menu$ + ":Nevermind";
-	
+	next;
 	switch(select(.@menu$)) {
 		case 1: // flavius to kvm
 			callsub L_ConvertPoints,"Valor Badges","KVM Points",.flaviustokvm,0;
@@ -54,8 +54,13 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 			end;
 		case 6: // kvm to tierra
 			callsub L_ConvertPoints,"KVM Points","Bravery Badges",.tierratokvm,1;
-			end;		
+			end;
+		case 7: // Nevermind..	
+			mes .BGExchangeNPCName$;
+			mes "Come back anytime!";
+			close;	
 	}
+	close;
 
 L_ConvertPoints:
 	set .@BGfrom$, getarg(0); // What to convert
@@ -63,7 +68,7 @@ L_ConvertPoints:
 	set .@rate, getarg(2); // The exchange rate
 	set .@inverse, getarg(3);
 	mes .BGExchangeNPCName$;
-	mes "How many ^A00000"+.@BGfrom$+"^000000 do you want to exchange into"+.@BGto$+"?";
+	mes "How many ^A00000"+.@BGfrom$+"^000000 do you want to exchange into "+.@BGto$+"?";
 	mes "Enter a number between 0 ~ 100. 0 to cancel.";
 	mes "NOTE: I will automatically adjust the value to be divisible by "+.@rate+"!";
 	next;
