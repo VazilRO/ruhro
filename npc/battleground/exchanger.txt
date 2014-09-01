@@ -16,27 +16,25 @@
 bat_room,160,146,3	script	Rewards Exchanger	655,{	
 	mes .BGExchangeNPCName$;
 	mes "Hello! I am the Rewards Exchanger.";
-	mes "I can swap your ^FFFF00Battleground Rewards^000000 for one another.";
+	mes "I can swap your ^A00000Battleground Rewards^000000 for one another.";
 	next;
 	mes .BGExchangeNPCName$;
 	mes "The rates for the exchange are as follows:";
-	mes "^0099FFFlavius:KVM -- " + .flaviustokvm + ":1^000000";
-	mes "^0099FFTierra:KVM -- " + .tierratokvm + ":1^000000";
-	mes "^0099FFFlavius:Tierra -- " + .tierratoflavius + ":1^000000";
+	mes "^000099Flavius:KVM -- " + .flaviustokvm + ":1^000000";
+	mes "^000099Tierra:KVM -- " + .tierratokvm + ":1^000000";
+	mes "^000099Flavius:Tierra -- " + .tierratoflavius + ":1^000000";
 	next;
 	mes .BGExchangeNPCName$;
 	mes "What would you like to exchange?";
 	mes "^0099FFKVM Points: "+kvm_point+"^000000";
 	set .@menu$, "";
-	setarray .@selection[0], 0;
-	set .@totalOptions, 0;
-	set .@menu$, .@menu + ":Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
-	set .@menu$, .@menu + ":KVM Point => Valor Badges [1 - "+.flaviustokvm+"]";
-	set .@menu$, .@menu + ":Valor Badges => Bravery Badge [2"+.flaviustotierra+" - 1]";
-	set .@menu$, .@menu + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"2]";
-	set .@menu$, .@menu + ":Bravery Badge => KVM Point ["+.tierratokvm+" - 1]";
-	set .@menu$, .@menu + ":KVM Point => Bravery Badge [1 - "+.tierratokvm+"]";
-	set .@menu$, .@menu + "Nevermind";
+	set .@menu$, .@menu$ + ":Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
+	set .@menu$, .@menu$ + ":KVM Point => Valor Badges [1 - "+.flaviustokvm+"]";
+	set .@menu$, .@menu$ + ":Valor Badges => Bravery Badge [2"+.flaviustotierra+" - 1]";
+	set .@menu$, .@menu$ + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"2]";
+	set .@menu$, .@menu$ + ":Bravery Badge => KVM Point ["+.tierratokvm+" - 1]";
+	set .@menu$, .@menu$ + ":KVM Point => Bravery Badge [1 - "+.tierratokvm+"]";
+	set .@menu$, .@menu$ + "Nevermind";
 	
 	switch(select(.@menu$)) {
 		case 1: // flavius to kvm
@@ -65,7 +63,7 @@ L_ConvertPoints:
 	set .@rate, getarg(2); // The exchange rate
 	set .@inverse, getarg(3);
 	mes .BGExchangeNPCName$;
-	mes "How many ^0099FF"+.@BGfrom$+"^000000 do you want to exchange into"+.@BGto$+"?";
+	mes "How many ^A00000"+.@BGfrom$+"^000000 do you want to exchange into"+.@BGto$+"?";
 	mes "Enter a number between 0 ~ 100. 0 to cancel.";
 	mes "NOTE: I will automatically adjust the value to be divisible by "+.@rate+"!";
 	next;
@@ -96,7 +94,7 @@ L_ConvertPoints:
 		set kvm_point, kvm_point - .@delamt;
 	} else {
 		mes .BGExchangeNPCName$;
-		mes "You don't have enough ^0099FF"+.@BGfrom$+"^000000!";
+		mes "You don't have enough ^A00000"+.@BGfrom$+"^000000!";
 		close;
 	}
 	
