@@ -19,7 +19,7 @@
 //= 2.0 Clean-up. [Capuche]
 //============================================================
 
-alberta,118,157,3	script	Magazine Dealer Kenny::mdk	83,{
+-	script	Magazine Dealer Kenny#01::mdk	83,{
 	if (BaseJob == Job_Gunslinger || Class == Job_Rebellion) {
 		mes "[Kenny]";
 		mes "Welcome to my Magazine Shop.";
@@ -28,7 +28,7 @@ alberta,118,157,3	script	Magazine Dealer Kenny::mdk	83,{
 		mes "easily when they're in Magazines. Now, can I interest you in";
 		mes "anything in particular?";
 		next;
-		switch(select("Wind Sphere Pack:Shadow Sphere Pack:Poison Sphere Pack:Water Sphere Pack:Fire Sphere Pack:Cartridge:Blood Cartridge:Silver Cartridge:Cancel")) {
+		switch(select("Wind Sphere Pack:Shadow Sphere Pack:Poison Sphere Pack:Water Sphere Pack:Fire Sphere Pack:Cartridge:Blood Cartridge:Silver Cartridge:Rebellion Cartridges?:Cancel")) {
 		case 1: callsub S_Casing,13204,12144;// <bullet id>, <pack id>
 		case 2: callsub S_Casing,13206,12145;
 		case 3: callsub S_Casing,13205,12146;
@@ -37,7 +37,8 @@ alberta,118,157,3	script	Magazine Dealer Kenny::mdk	83,{
 		case 6: callsub S_Casing,13200,12149;
 		case 7: callsub S_Casing,13202,12150;
 		case 8: callsub S_Casing,13201,12151;
-		case 9:
+		case 9: goto rebel_cartridge;
+		case 10:
 			mes "[Kenny]";
 			mes "Well, if you ever find";
 			mes "that you have too many";
@@ -128,4 +129,36 @@ S_Casing:
 		mes "then come back to me later.";
 	}
 	close;
+	
+rebel_cartridge:
+	if (Class == Job_Rebellion) {
+		mes "[Kenny]";
+		mes "Ah, the special bullet cartridges...";
+		mes "Yes, I can do those.";
+		mes "What type are you interested in?";
+		next;
+		switch(select("Armor-Piercing Cartridge:Incandescence Cartidge:Glaciation Cartridge:Dengeki Cartridge:Hearthstone Cartridge:Purification Cartridge:Cancel")) {
+		case 1: callsub S_Casing,13215,22744;// <bullet id>, <pack id>
+		case 2: callsub S_Casing,13216,22745;
+		case 3: callsub S_Casing,13217,22746;
+		case 4: callsub S_Casing,13218,22747;
+		case 5: callsub S_Casing,13219,22748;
+		case 6: callsub S_Casing,13220,22749;
+		case 7:
+			mes "[Kenny]";
+			mes "Well, if you ever find";
+			mes "that you have too many";
+			mes "bullets, come and see me.";
+			mes "It's a smart idea to store";
+			mes "bullets with my Magazines.";
+			close;
+		}
+	}
+	mes "Sorry, but these cartridges";
+	mes "are only available to Rebellion.";
+	close;
+	
 }
+
+alberta,118,157,3	duplicate(mdk)	Magazine Dealer Kenny	83
+prontera,88,209,4	duplicate(mdk)	Magazine Dealer Kenny	83
