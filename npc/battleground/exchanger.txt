@@ -27,8 +27,7 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 	mes .BGExchangeNPCName$;
 	mes "What would you like to exchange?";
 	mes "^0099FFKVM Points: "+kvm_point+"^000000";
-	set .@menu$, "";
-	set .@menu$, .@menu$ + ":Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
+	set .@menu$, "Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
 	set .@menu$, .@menu$ + ":KVM Point => Valor Badges [1 - "+.flaviustokvm+"]";
 	set .@menu$, .@menu$ + ":Valor Badges => Bravery Badge ["+.flaviustotierra+" - 1]";
 	set .@menu$, .@menu$ + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"]";
@@ -55,13 +54,13 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 		case 6: // kvm to tierra
 			callsub L_ConvertPoints,"KVM Points","Bravery Badges",.tierratokvm,1;
 			end;
-		case 7: // Nevermind..	
+		case 7: // Nevermind... 	
 			mes .BGExchangeNPCName$;
 			mes "Come back anytime!";
-			close;	
+			close;
 	}
 	close;
-
+	
 L_ConvertPoints:
 	set .@BGfrom$, getarg(0); // What to convert
 	set .@BGto$, getarg(1); // What to convert to
