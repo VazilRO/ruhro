@@ -1,0 +1,63 @@
+//===== rAthena Script ======================================= 
+//= BattleGround System - Point/Badge Exchanger
+//===== By: ================================================== 
+//= Poutine
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Allows player to exchange the KVM points or Flavius/Tierra
+//= badges for one another
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Poutine]
+//============================================================
+
+
+bat_room,167,178,5	script	Battlegrounds Exchanger	417,{
+
+OnInit:
+	set .flaviustokvm, 2;
+	set .tierratokvm, 1;
+	set .flaviustotierra, 2;
+	set .flavBadge, 7829;
+	set .tierrBadge, 7828;
+	set .BGExchangeNPCName$, "[Battlegrounds Exchanger]";
+	end;
+	
+	mes .BGExchangeNPCName$;
+	mes "Hello! I am the Battlegrounds Exchanger.";
+	mes "I can swap your ^FFFF00Battleground Rewards^000000 for one another.";
+	next;
+	mes .BGExchangeNPCName$;
+	mes "The rates for the exchange are as follows:";
+	mes "^0099FFFlavius:KVM -- " + .flaviustokvm + ":1^000000";
+	mes "^0099FFTierra:KVM -- " + .tierratokvm + ":1^000000";
+	mes "^0099FFFlavius:Tierra -- " + .tierratoflavius + ":1^000000";
+	next;
+	mes .BGExchangeNPCName$;
+	mes "What would you like to exchange?";
+	set .@menu$, "";
+	if (countitem(.flavBadge) >= .flaviustokvm) {
+		set .@menu$, .@menu + ":Valor Badges => KVM Point [2:1]";
+	}
+	if (kvm_point > 0) {
+		set .@menu$, .@menu + ":KVM Point => Valor Badges [1:2]";
+	}
+	if (countitem(.flavBadge) >= .flaviustotierra) {
+		set .@menu$, .@menu + ":Valor Badges => Bravery Badge [2:1]";
+	}
+	if (countitem(.tierrBadge) > 0) {
+		set .@menu$, .@menu + ":Bravery Badge => Valor Badges [1:2]";
+	}
+	if (countitem(.tierrBadge) >= .tierratokvm) {
+		set .@menu$, .@menu + ":Bravery Badge => KVM Point [1:1]";
+	}
+	if (kvm_point > 0) {
+		set .@menu$, .@menu + ":KVM Point => Bravery Badge [1:1]";
+	}
+	set .@menu$, .@menu + "Nevermind";
+	
+	
+	
+}

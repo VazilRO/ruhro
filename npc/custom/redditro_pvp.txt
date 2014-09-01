@@ -18,6 +18,8 @@
 06guild_02	mapflag	pvp
 06guild_01	mapflag	pvp_noparty
 06guild_02	mapflag	pvp_noparty
+06guild_01	mapflag	partylock
+06guild_02	mapflag	partylock
 06guild_01	mapflag	pvp_noguild
 06guild_02	mapflag	pvp_noguild
 06guild_01	mapflag	nomemo
