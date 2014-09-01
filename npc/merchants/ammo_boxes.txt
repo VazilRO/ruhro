@@ -160,5 +160,5 @@ rebel_cartridge:
 	
 }
 
-alberta,118,157,3	duplicate(mdk)	Magazine Dealer Kenny	83
-prontera,88,209,4	duplicate(mdk)	Magazine Dealer Kenny	83
+alberta,118,157,3	duplicate(mdk)	Magazine Dealer Kenny#02	83
+prontera,88,209,4	duplicate(mdk)	Magazine Dealer Kenny#03	83
