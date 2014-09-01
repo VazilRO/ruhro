@@ -209,5 +209,5 @@
 41027,ThunderproofPotionBox10,Box of 10 Thunderproof Potions,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ getitem 12121,10; },{},{}
 
 //WoE 2.0 Dungeon Warp Scrolls
-41028,NidhoggurGuildWarpScroll,Nidhoggur Guild Warp Scroll,2,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ warp "schgdun_01",199,167; },{},{}
-41029,ValfreyjaGuildWarpScroll,Valfreyja Guild Warp Scroll,2,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ warp "arugdun_01",200,14; },{},{}
+41028,NidhoggurGuildWarpScroll,Nidhoggur Guild Warp Scroll,2,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "F_Gdungeon_Nid"; },{},{}
+41029,ValfreyjaGuildWarpScroll,Valfreyja Guild Warp Scroll,2,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "F_Gdungeon_Val"; },{},{}
