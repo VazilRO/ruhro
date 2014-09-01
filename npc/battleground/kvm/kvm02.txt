@@ -187,6 +187,7 @@ OnReadyCheck:
 		set $@kvm_PrizeMulti2, 1;
 	}
 	set $@KvM02BG, 1; // Starting
+	announce "[Battlegrounds] KVM for levels 1-59 is about to begin!",0xFF0055;
 	donpcevent "KvM02R_Croix::OnEnterBG";
 	donpcevent "KvM02R_Guillaume::OnEnterBG";
 	donpcevent "KvM02_BG::OnStart";
