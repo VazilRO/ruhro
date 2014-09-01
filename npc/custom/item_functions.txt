@@ -1,7 +1,7 @@
 function	script	F_Gdungeon_Nid	{
-	warp "schg_dun01",199,167;
+	warp "schg_dun01",0,0;
 	}
 	
 function	script	F_Gdungeon_Val	{
-	warp "arug_dun01",200,14;
+	warp "arug_dun01",0,0;
 	}
