@@ -67,7 +67,7 @@ L_ConvertPoints:
 	set .@rate, getarg(2); // The exchange rate
 	set .@inverse, getarg(3);
 	mes .BGExchangeNPCName$;
-	mes "How many ^A00000"+.@BGfrom$+"^000000 do you want to exchange into "+.@BGto$+"?";
+	mes "How many ^A00000"+.@BGfrom$+"^000000 do you want to exchange into ^A00000"+.@BGto$+"^000000?";
 	mes "Enter a number between 0 ~ 100. 0 to cancel.";
 	mes "NOTE: I will automatically adjust the value to be divisible by "+.@rate+"!";
 	next;
