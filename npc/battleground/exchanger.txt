@@ -20,9 +20,9 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 	next;
 	mes .BGExchangeNPCName$;
 	mes "The rates for the exchange are as follows:";
-	mes "^000099Flavius:KVM -- " + .flaviustokvm + ":1^000000";
-	mes "^000099Tierra:KVM -- " + .tierratokvm + ":1^000000";
-	mes "^000099Flavius:Tierra -- " + .tierratoflavius + ":1^000000";
+	mes "^0000CCFlavius:KVM -- " + .flaviustokvm + ":1^000000";
+	mes "^0000CCTierra:KVM -- " + .tierratokvm + ":1^000000";
+	mes "^0000CCFlavius:Tierra -- " + .flaviustotierra + ":1^000000";
 	next;
 	mes .BGExchangeNPCName$;
 	mes "What would you like to exchange?";
@@ -30,11 +30,11 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 	set .@menu$, "";
 	set .@menu$, .@menu$ + ":Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
 	set .@menu$, .@menu$ + ":KVM Point => Valor Badges [1 - "+.flaviustokvm+"]";
-	set .@menu$, .@menu$ + ":Valor Badges => Bravery Badge [2"+.flaviustotierra+" - 1]";
-	set .@menu$, .@menu$ + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"2]";
+	set .@menu$, .@menu$ + ":Valor Badges => Bravery Badge ["+.flaviustotierra+" - 1]";
+	set .@menu$, .@menu$ + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"]";
 	set .@menu$, .@menu$ + ":Bravery Badge => KVM Point ["+.tierratokvm+" - 1]";
 	set .@menu$, .@menu$ + ":KVM Point => Bravery Badge [1 - "+.tierratokvm+"]";
-	set .@menu$, .@menu$ + "Nevermind";
+	set .@menu$, .@menu$ + ":Nevermind";
 	
 	switch(select(.@menu$)) {
 		case 1: // flavius to kvm
