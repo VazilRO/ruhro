@@ -13,16 +13,7 @@
 //= 1.0 First Version. [Poutine]
 //============================================================
 
-bat_room,160,146,3	script	Rewards Exchanger	655,{
-OnInit:
-	set .flaviustokvm, 2;
-	set .tierratokvm, 1;
-	set .flaviustotierra, 2;
-	set .flavBadge, 7829;
-	set .tierrBadge, 7828;
-	set .BGExchangeNPCName$, "[Rewards Exchanger]";
-	end;
-	
+bat_room,160,146,3	script	Rewards Exchanger	655,{	
 	mes .BGExchangeNPCName$;
 	mes "Hello! I am the Rewards Exchanger.";
 	mes "I can swap your ^FFFF00Battleground Rewards^000000 for one another.";
@@ -121,5 +112,14 @@ L_ConvertPoints:
 	mes .BGExchangeNPCName$;
 	mes "All done! Enjoy your rewards warrior!";
 	close;
+	
+OnInit:
+	set .flaviustokvm, 2;
+	set .tierratokvm, 1;
+	set .flaviustotierra, 2;
+	set .flavBadge, 7829;
+	set .tierrBadge, 7828;
+	set .BGExchangeNPCName$, "[Rewards Exchanger]";
+	end;
 
 }
