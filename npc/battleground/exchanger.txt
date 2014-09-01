@@ -1,0 +1,125 @@
+//===== rAthena Script ======================================= 
+//= BattleGround System - Point/Badge Exchanger
+//===== By: ================================================== 
+//= Poutine
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Allows player to exchange the KVM points or Flavius/Tierra
+//= badges for one another
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Poutine]
+//============================================================
+
+bat_room,160,146,3	script	Rewards Exchanger	655,{
+OnInit:
+	set .flaviustokvm, 2;
+	set .tierratokvm, 1;
+	set .flaviustotierra, 2;
+	set .flavBadge, 7829;
+	set .tierrBadge, 7828;
+	set .BGExchangeNPCName$, "[Rewards Exchanger]";
+	end;
+	
+	mes .BGExchangeNPCName$;
+	mes "Hello! I am the Rewards Exchanger.";
+	mes "I can swap your ^FFFF00Battleground Rewards^000000 for one another.";
+	next;
+	mes .BGExchangeNPCName$;
+	mes "The rates for the exchange are as follows:";
+	mes "^0099FFFlavius:KVM -- " + .flaviustokvm + ":1^000000";
+	mes "^0099FFTierra:KVM -- " + .tierratokvm + ":1^000000";
+	mes "^0099FFFlavius:Tierra -- " + .tierratoflavius + ":1^000000";
+	next;
+	mes .BGExchangeNPCName$;
+	mes "What would you like to exchange?";
+	mes "^0099FFKVM Points: "+kvm_point+"^000000";
+	set .@menu$, "";
+	setarray .@selection[0], 0;
+	set .@totalOptions, 0;
+	set .@menu$, .@menu + ":Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
+	set .@menu$, .@menu + ":KVM Point => Valor Badges [1 - "+.flaviustokvm+"]";
+	set .@menu$, .@menu + ":Valor Badges => Bravery Badge [2"+.flaviustotierra+" - 1]";
+	set .@menu$, .@menu + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"2]";
+	set .@menu$, .@menu + ":Bravery Badge => KVM Point ["+.tierratokvm+" - 1]";
+	set .@menu$, .@menu + ":KVM Point => Bravery Badge [1 - "+.tierratokvm+"]";
+	set .@menu$, .@menu + "Nevermind";
+	
+	switch(select(.@menu$)) {
+		case 1: // flavius to kvm
+			callsub L_ConvertPoints,"Valor Badges","KVM Points",.flaviustokvm,0;
+			end;
+		case 2: // kvm to flavius
+			callsub L_ConvertPoints,"KVM Points","Valor Badges",.flaviustokvm,1;
+			end;
+		case 3: // flavius to tierra
+			callsub L_ConvertPoints,"Valor Badges","Bravery Badges",.flaviustotierra,0;
+			end;
+		case 4: // tierra to flavius
+			callsub L_ConvertPoints,"Bravery Badges","Valor Badges",.flaviustotierra,1;
+			end;
+		case 5: // tierra to kvm
+			callsub L_ConvertPoints,"Bravery Badges","KVM Points",.tierratokvm,0;
+			end;
+		case 6: // kvm to tierra
+			callsub L_ConvertPoints,"KVM Points","Bravery Badges",.tierratokvm,1;
+			end;		
+	}
+
+L_ConvertPoints:
+	set .@BGfrom$, getarg(0); // What to convert
+	set .@BGto$, getarg(1); // What to convert to
+	set .@rate, getarg(2); // The exchange rate
+	set .@inverse, getarg(3);
+	mes .BGExchangeNPCName$;
+	mes "How many ^0099FF"+.@BGfrom$+"^000000 do you want to exchange into"+.@BGto$+"?";
+	mes "Enter a number between 0 ~ 100. 0 to cancel.";
+	mes "NOTE: I will automatically adjust the value to be divisible by "+.@rate+"!";
+	next;
+	input .@units;
+	if (.@units <= 0) {	
+		mes .BGExchangeNPCName$;
+		mes "Cancelled.";
+		close;
+	} else if (.@units > 100) {
+		mes .BGExchangeNPCName$;
+		mes "What did I tell you?? 0 ~ 100!!";
+		close;
+	}
+	if(.@inverse != 1) {
+		set .@amt, .@units/.@rate;
+		set .@delamt, .@rate*.@amt; // Only delete the amount divisible by rate
+	} else { // for exchanging KVM => other points
+		set .@amt, .@units*.@rate;
+		set .@delamt, .@units;
+	}
+	
+	// From
+	if(.@BGfrom$ == "Valor Badges" && countitem(.flavBadge) >= .@delamt) {
+		delitem .flavBadge, .@delamt;
+	} else if(.@BGfrom$ == "Bravery Badges" && countitem(.tierrBadge) >= .@delamt) {
+		delitem .tierrBadge, .@delamt;
+	} else if(.@BGfrom$ == "KVM Points" && kvm_point >= .@delamt) {
+		set kvm_point, kvm_point - .@delamt;
+	} else {
+		mes .BGExchangeNPCName$;
+		mes "You don't have enough ^0099FF"+.@BGfrom$+"^000000!";
+		close;
+	}
+	
+	// To
+	if(.@BGto$ == "Valor Badges") {
+		getitem .flavBadge, .@amt;
+	} else if (.@BGto$ == "Bravery Badges") {
+		getitem .tierrBadge, .@amt;
+	} else if(.@BGto$ == "KVM Points") {
+		set kvm_point, kvm_point + .@amt;
+	}
+	
+	mes .BGExchangeNPCName$;
+	mes "All done! Enjoy your rewards warrior!";
+	close;
+
+}
