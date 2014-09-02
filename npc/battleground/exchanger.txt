@@ -29,32 +29,24 @@ bat_room,160,146,3	script	Rewards Exchanger	655,{
 	mes "^0099FFKVM Points: "+kvm_point+"^000000";
 	set .@menu$, "Valor Badges => KVM Point ["+.flaviustokvm+" - 1]";
 	set .@menu$, .@menu$ + ":KVM Point => Valor Badges [1 - "+.flaviustokvm+"]";
-	set .@menu$, .@menu$ + ":Valor Badges => Bravery Badge ["+.flaviustotierra+" - 1]";
-	set .@menu$, .@menu$ + ":Bravery Badge => Valor Badges [1 - "+.flaviustotierra+"]";
 	set .@menu$, .@menu$ + ":Bravery Badge => KVM Point ["+.tierratokvm+" - 1]";
 	set .@menu$, .@menu$ + ":KVM Point => Bravery Badge [1 - "+.tierratokvm+"]";
 	set .@menu$, .@menu$ + ":Nevermind";
 	next;
 	switch(select(.@menu$)) {
 		case 1: // flavius to kvm
-			callsub L_ConvertPoints,"Valor Badges","KVM Points",.flaviustokvm,0;
+			callsub L_ConvertPoints,"Valor Badges","KVM Points",.flaviustokvm,1;
 			end;
 		case 2: // kvm to flavius
-			callsub L_ConvertPoints,"KVM Points","Valor Badges",.flaviustokvm,1;
+			callsub L_ConvertPoints,"KVM Points","Valor Badges",.flaviustokvm,0;
 			end;
-		case 3: // flavius to tierra
-			callsub L_ConvertPoints,"Valor Badges","Bravery Badges",.flaviustotierra,0;
+		case 3: // tierra to kvm
+			callsub L_ConvertPoints,"Bravery Badges","KVM Points",.tierratokvm,1;
 			end;
-		case 4: // tierra to flavius
-			callsub L_ConvertPoints,"Bravery Badges","Valor Badges",.flaviustotierra,1;
+		case 4: // kvm to tierra
+			callsub L_ConvertPoints,"KVM Points","Bravery Badges",.tierratokvm,0;
 			end;
-		case 5: // tierra to kvm
-			callsub L_ConvertPoints,"Bravery Badges","KVM Points",.tierratokvm,0;
-			end;
-		case 6: // kvm to tierra
-			callsub L_ConvertPoints,"KVM Points","Bravery Badges",.tierratokvm,1;
-			end;
-		case 7: // Nevermind... 	
+		case 5: // Nevermind... 	
 			mes .BGExchangeNPCName$;
 			mes "Come back anytime!";
 			close;
@@ -117,8 +109,7 @@ L_ConvertPoints:
 	
 OnInit:
 	set .flaviustokvm, 2;
-	set .tierratokvm, 1;
-	set .flaviustotierra, 2;
+	set .tierratokvm, 3;
 	set .flavBadge, 7829;
 	set .tierrBadge, 7828;
 	set .BGExchangeNPCName$, "[Rewards Exchanger]";
