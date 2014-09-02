@@ -1,5 +1,5 @@
 //===== rAthena Script ======================================= 
-//= BattleGround System - KvM 60-80
+//= BattleGround System - KvM Non-Third Class
 //===== By: ================================================== 
 //= ???, L0ne_W0lf
 //===== Current Version: ===================================== 
@@ -8,8 +8,8 @@
 //= rAthena Project
 //===== Description: ========================================= 
 //= [Official Conversion]
-//= Kreiger Von Midgard Battleground for levels 60 to 80
-//= - Winning Team: 2 points
+//= Kreiger Von Midgard Battleground for Non-Third Class
+//= - Winning Team: 5 points
 //= - Losing Team: 1 point
 //===== Additional Comments: ================================= 
 //= 1.0 First Version.
@@ -186,7 +186,7 @@ OnReadyCheck:
 		set $@kvm_PrizeMulti3, 1;
 	}
 	set $@KvM03BG, 1; // Starting
-	announce "[Battlegrounds] KVM for levels 60-79 is about to begin!",0xFF0055;
+	announce "[Battlegrounds] KVM for Non-Third Classes is about to begin!",0xFF0055;
 	donpcevent "KvM03R_Croix::OnEnterBG";
 	donpcevent "KvM03R_Guillaume::OnEnterBG";
 	donpcevent "KvM03_BG::OnStart";
@@ -415,7 +415,7 @@ bat_c03,148,53,1	script	KVM Officer#KVM03B	415,{
 		set .@amount, 0;
 		if( $@KvM03BG_Victory == Bat_Team )
 		{ // Victory
-			set .@amount, 2 * $@kvm_PrizeMulti3;
+			set .@amount, 5 * $@kvm_PrizeMulti3;
 			mes "[KVM Officer]";
 			mes "Good Game.";
 			mes "May the glory of KVM be with you.";
@@ -423,7 +423,7 @@ bat_c03,148,53,1	script	KVM Officer#KVM03B	415,{
 			close2;
 		}
 		else
-		{ // 
+		{ //  
 			set .@amount, $@kvm_PrizeMulti3;
 			mes "[KVM Officer]";
 			mes "I am so sorry.";

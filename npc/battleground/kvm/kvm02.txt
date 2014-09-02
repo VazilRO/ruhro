@@ -1,5 +1,5 @@
 //===== rAthena Script ======================================= 
-//= BattleGround System - KvM 1-59
+//= BattleGround System - KvM First Jobs
 //===== By: ================================================== 
 //= ???, L0ne_W0lf
 //===== Current Version: ===================================== 
@@ -8,9 +8,9 @@
 //= rAthena Project
 //===== Description: ========================================= 
 //= [Official Conversion]
-//= Kreiger Von Midgard Battleground for levels 1 to 59
-//= - Winning Team: 1 point
-//= - Losing Team: 0 points
+//= Kreiger Von Midgard Battleground for First Classes only
+//= - Winning Team: 5 point
+//= - Losing Team: 1 points
 //===== Additional Comments: ================================= 
 //= 1.0 First Version.
 //= 1.1 Updated using official Aegis files. [L0ne_W0lf]
@@ -187,7 +187,7 @@ OnReadyCheck:
 		set $@kvm_PrizeMulti2, 1;
 	}
 	set $@KvM02BG, 1; // Starting
-	announce "[Battlegrounds] KVM for levels 1-59 is about to begin!",0xFF0055;
+	announce "[Battlegrounds] KVM for First Jobs is about to begin!",0xFF0055;
 	donpcevent "KvM02R_Croix::OnEnterBG";
 	donpcevent "KvM02R_Guillaume::OnEnterBG";
 	donpcevent "KvM02_BG::OnStart";
@@ -415,7 +415,7 @@ bat_c02,148,53,1	script	KVM Officer#KVM02B	415,{
 		set .@amount, 0;
 		if( $@KvM02BG_Victory == Bat_Team )
 		{ // Victory
-			set .@amount, $@kvm_PrizeMulti2;
+			set .@amount, 5 * $@kvm_PrizeMulti2;
 			mes "[KVM Officer]";
 			mes "Good Game.";
 			mes "May the glory of KVM be with you.";
@@ -424,10 +424,11 @@ bat_c02,148,53,1	script	KVM Officer#KVM02B	415,{
 		}
 		else
 		{ // 
+			set .@amount, $@kvm_PrizeMulti2;
 			mes "[KVM Officer]";
 			mes "I am so sorry.";
 			mes "I wish you better luck next time.";
-			mes "You acquire the losing points: 0";
+			mes "You acquire the losing points: " + .@amount;
 			close2;
 		}
 		set kvm_point,kvm_point + .@amount;

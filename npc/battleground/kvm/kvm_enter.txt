@@ -32,7 +32,7 @@ bat_room,164,178,5	script	KVM Mercenary Officer#1	418,{
 	set .@permit,checkquest(6025,PLAYTIME);
 	if ((.@permit == 0) || (.@permit == 1)) {
 		mes "[Guillaume Mercenary Officer]";
-		mes "It seems you have recently participated in a KVM battle. You must wait 5 minutes before signing up again.";
+		mes "It seems you have recently participated in a KVM battle. You must wait 2.5 minutes before signing up again.";
 		close;
 	}
 	else if (.@permit == 2) erasequest 6025;
@@ -46,9 +46,9 @@ bat_room,164,178,5	script	KVM Mercenary Officer#1	418,{
 		mes "Today, everyone will hear the shout of triumph from Guillaume!";
 		close2;
 		//setquest 6025;
-		if (BaseLevel > 79)  warp "bat_room",169,223;
-		else if (BaseLevel < 60) warp "bat_room",197,223;
-		else warp "bat_room",225,223;
+		if ((eaclass()&EAJL_THIRD) || BaseLevel > 99)  warp "bat_room",169,223; // Third Class
+		else if (!(eaclass()&EAJL_2)) warp "bat_room",197,223; // First Class
+		else warp "bat_room",225,223; // Second Class and below
 		end;
 	case 2:
 		mes "[Guillaume Mercenary Officer]";
@@ -132,7 +132,7 @@ bat_room,164,121,1	script	KVM Mercenary Officer#2	414,{
 	set .@permit,checkquest(6025,PLAYTIME);
 	if ((.@permit == 0) || (.@permit == 1)) {
 		mes "[Croix Mercenary Officer]";
-		mes "It seems you have recently participated in a KVM battle. You must wait 5 minutes before signing up again.";
+		mes "It seems you have recently participated in a KVM battle. You must wait 2.5 minutes before signing up again.";
 		close;
 	}
 	else if (.@permit == 2) erasequest 6025;
@@ -146,8 +146,8 @@ bat_room,164,121,1	script	KVM Mercenary Officer#2	414,{
 		mes "Today, everyone will hear the shout of triumph from Croix!";
 		close2;
 		//setquest 6026;
-		if (BaseLevel > 79) warp "bat_room",169,207;
-		else if (BaseLevel < 60) warp "bat_room",197,207;
+		if ((eaclass()&EAJL_THIRD) || BaseLevel > 99) warp "bat_room",169,207;
+		else if (!(eaclass()&EAJL_2)) warp "bat_room",197,207;
 		else warp "bat_room",225,207;
 		end;
 	case 2:

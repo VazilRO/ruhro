@@ -791,7 +791,7 @@
 6022,0,0,0,0,0,0,0,"Making a voucher"
 6023,0,0,0,0,0,0,0,"Wise Bull Horn's Favor"
 6024,0,0,0,0,0,0,0,"Job Change to Gunslinger!"
-6025,300,0,0,0,0,0,0,"KVM Guillaume"
+6025,150,0,0,0,0,0,0,"KVM Guillaume"
 6026,300,0,0,0,0,0,0,"KVM Croix"
 6027,300,0,0,0,0,0,0,"KVM Indicator"
 7000,0,0,0,0,0,0,0,"Job Change to Dancer!"
