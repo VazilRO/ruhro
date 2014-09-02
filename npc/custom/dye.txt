@@ -203,7 +203,7 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		mes "[^FF8000Stylist^000000]";
 		mes "Is this good, do you want a different pallet, or do you want to browse from here?";
 		next;
-		menu "This is good",-,"Different pallet, please",Lwantcloth, "Let me browse from here.", Lbrowseclothrep;
+		menu "This is good",-,"Different pallet, please",Lwantcloth, "Let me browse from here.", Lbrowsepoint;
 		next;
 		mes "[^FF8000Stylist^000000]";
 		mes "You look great~!   Want to change anything else?";
@@ -222,6 +222,11 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 		mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
 		if(@look == 553) menu "Back To The Beginning",Lbrowsecloth,"I like this one",Lstop;
 		if(@look != 553)	menu "Keep going",Lbrowseclothrep,"Last one, please",Lbrowseclothlast,"I like this one",Lstop;
+	
+	Lbrowsepoint:
+		mes "This is Pallete Number^FF9009 "+@look+" ^000000!"; 
+		if(@look == 553) menu "Back To The Beginning",Lbrowsecloth,"I like this one",Lstop;
+		if(@look != 553)	menu "Keep going",Lbrowsepoint,"Last one, please",Lbrowseclothlast,"I like this one",Lstop;
 		
 	Lbrowseclothlast:
 		set @look,@look-1;
