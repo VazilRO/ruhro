@@ -5697,7 +5697,7 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 			mes "and take them to ^0000FFMissing Person's Father^000000";
 			mes "for me.";
 			set malaya_bakona2,1;
-			addmonsterdrop 2314,6520,10;
+			addmonsterdrop 2314,6520,1000;
 			setquest 1180;
 			close;
 		}
@@ -5707,7 +5707,7 @@ malaya,283,265,4	script	Village Chief#bako2	580,{
 		mes "retrieve two ^FF0000Lost Belongings^000000";
 		mes "and deliver them to ^0000FFMissing Person's Father^000000";
 		mes "for me.";
-		addmonsterdrop 2314,6520,10; // for people who missed it
+		addmonsterdrop 2314,6520,1000; // for people who missed it
 		close;
 	} else if (malaya_bakona2 == 2) {
 		mes "[Village Chief]";
