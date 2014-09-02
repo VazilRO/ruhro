@@ -1,15 +1,9 @@
 // Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.c
 Welcome to RedditRO! Have fun! 
 
-Next update's going to be 10:00 01 SEP. It's going to be longer than our previous updates, we're imposing some new data integrity features that should add a nice layer of security to your data, and let us pick back up much quicker if anything should happen.
+No real update for you today, we'll probably be doing a second round of hiring to fill the spot of our beloved and ancient GM Baskura soonish. Details to follow.
 
-This update may take us up to 30-60 Minutes to fully complete.
+Yesterday I accidentally swallowed some food coloring. The doctor says I'm OK, but I feel like I've dyed a little inside.
 
-We'll also be updating the following:
--Fix Start Gladiator's Demon skill to properly activate at Job 50.
--Fix Sorcerer's Elemental Spirits to properly drain SP (Not at 95 times the rate)
--Reduce Pintados Festival Requirements
--Adding Guild Dungeon Warp Scrolls to previously unaccessible dungeons
-
-As always, I apologize for any inconvenience this might cause, and appreciate your patience!
+Remember to be nice to your fellow players, and report bugs you find!
 .

@@ -1,0 +1,5 @@
+prontera,155,196,6,	script	placeholder	731,{
+OnInit:
+hideonnpc "placeholder";
+end;
+}
