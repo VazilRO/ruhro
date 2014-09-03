@@ -177,9 +177,6 @@ L_Quest:
 		mes "[91-99 Mission Board]";
 		mes "You have completed the hunting.";
 		mes "Please accept this reward as a compensation.";
-		erasequest .@quest1;
-		if (.@playtime > -1) erasequest .@quest2;
-		setquest .@quest2;
 
 		// Job Experience calculation.
 		if (JobLevel < 56) set .@jexp,67000;
@@ -187,8 +184,19 @@ L_Quest:
 		else if (JobLevel > 60 && JobLevel < 66) set .@jexp,141000;
 		else if (JobLevel > 65 && JobLevel < 69) set .@jexp,212000;
 		else if (JobLevel >= 69) set .@jexp,311000;
-
-		getexp getarg(2),.@jexp;
+		next;
+		switch(select("Normal:Zero Base EXP - Double Job EXP")) {
+			case 1:
+				getexp getarg(2),.@jexp;
+				break;
+			case 2:	
+				getexp 0,.@jexp*2;
+				break;			
+		}
+		// Moved deleting of quest to after selecting option to avoid timeout menu problems
+		erasequest .@quest1;
+		if (.@playtime > -1) erasequest .@quest2;
+		setquest .@quest2;
 		getitem 6549, rand(1,5); // Courtesy Tickets
 		close;
 	}/* else if (.@hunting == 3) {
