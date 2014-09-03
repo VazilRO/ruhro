@@ -71,6 +71,10 @@ function	script	F_CoolEventCorp	{
 		openstorage;
 		break;
 	case 3:
+		callfunc "F_KafStor",1,0;
+		next;
+		break;
+	case 4:
 		mes "Please choose";
 		mes "your destination.";
 		next;
@@ -101,7 +105,7 @@ function	script	F_CoolEventCorp	{
 		}
 		close2;
 		break;
-	case 4:
+	case 5:
 		mes "[Cool Event Corp. Staff]";
 		if(BaseClass != Job_Merchant){
 			mes "I'm sorry, but the";
@@ -155,10 +159,10 @@ function	script	F_CoolEventCorp	{
 		}
 		close2;
 		break;
-	case 5:
+	case 6:
 		callfunc("F_SetKafCode","[Cool Event Corp. Staff]","Cool Event Corp.");
 		//the function closes msg and removes cutins
-	case 6:
+	case 7:
 	default:
 		mes "[Cool Event Corp. Staff]";
 		mes "Cool Event Corp. is always";
@@ -175,21 +179,21 @@ function	script	F_CoolEventCorp	{
 
 hugel,88,168,4	script	Cool Event Corp. Staff::CoolEventCorpStaffHugel	874,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage::Rent a Pushcart:Storage Password Service:Cancel",
+		"Save:Use Storage:Use Guild Storage::Rent a Pushcart:Storage Password Service:Cancel",
 		"in the village of Hugel","hugel",96,155;
 	end;
 }
 
 rachel,109,138,5	script	Cool Event Corp. Staff::CoolEventCorpStaffRachel	874,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
+		"Save:Use Storage:Use Guild Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
 		"in the town of Rachel","rachel",113,137,"Veins";
 	end;
 }
 
 veins,208,128,5	script	Cool Event Corp. Staff::CoolEventCorpStaffVeins	874,{
 	callfunc "F_CoolEventCorp",
-		"Save:Use Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
+		"Save:Use Storage:Use Guild Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
 		"in the town of Veins","veins",204,103,"Rachel";
 	end;
 }
