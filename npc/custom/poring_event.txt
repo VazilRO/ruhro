@@ -1,11 +1,10 @@
 //======Name========================================
 // Poring Events
 //======Version=====================================
-// 1.0
+// 1.1
 //======Author(s)===================================
 // Alkarl
 //======Comments====================================
-// 50% chance of starting 1 of the following events every hour:
 // Find the Porings!
 //	You need to kill the correct porings to gain the prize
 //	Kill the wrong poring and you die!
@@ -18,22 +17,18 @@
 
 -	script	poringevent	-1,{
 OnInit:
-	disablenpc "Poring Warper";
-	disablenpc "Poring Rewarder";
+	disablenpc "poringwarper";
+	disablenpc "poringrewarder";
 	mapwarp "guild_vs5","SavePoint",0,0;
 	killmonsterall "guild_vs5";
 	end;
 	
 OnMinute00:
-	disablenpc "Poring Warper";
-	disablenpc "Poring Rewarder";
+	disablenpc "poringwarper";
+	disablenpc "poringrewarder";
 	mapwarp "guild_vs5","SavePoint",0,0;
 	killmonsterall "guild_vs5";
 	
-	$@randstart = rand(0,1);
-	if ($@randstart == 0) {
-		end;
-	}
 	$@randevent = rand(0,1);
 	setnpctimer 0;
 	initnpctimer;
@@ -42,7 +37,7 @@ OnMinute00:
 	} else if ($@randevent == 1) {
 		announce "Dodge the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
 	}
-	enablenpc "Poring Warper";
+	enablenpc "poringwarper";
 	end;
 		
 OnTimer60000:
@@ -79,7 +74,7 @@ OnTimer240000:
 
 OnTimer300000:
 	stopnpctimer;
-	disablenpc "Poring Warper";
+	disablenpc "poringwarper";
 	if ($@randevent == 0) {
 		if (getmapusers("guild_vs5") >= 5) {
 		announce "Find the Poring Event is now starting",0;
@@ -99,7 +94,7 @@ OnTimer300000:
 	
 //If not enough players, end event
 OnNotEnoughPlayers:
-	announce "Not Enough Players, Event Cancelled :(",0;
+	announce "Not Enough Players, Event Cancelled.",0;
 	mapwarp "guild_vs5","prontera",155,220;
 	killmonsterall "guild_vs5";
 	end;
@@ -118,7 +113,7 @@ OnFindPoringStart:
 		
 OnPoringKill:
 	monster "guild_vs5",0,0,"--en--",1002,1,"poringevent::OnPoringKill";
-	dispbottom "Wrong Poring! GM Alkarl will not be happy.";		
+	dispbottom "Wrong Poring! GM Alkarl will not be happy.";
 	percentheal -100,-100;
 	end;
 
@@ -152,7 +147,7 @@ OnDodgePoringStart:
 			announce "We have a winner! Dodge the Porings Event Complete!",0;
 			sleep 500;
 			mapannounce "guild_vs5","Talk to the NPC for your reward!",bc_map;
-			enablenpc "Poring Rewarder";
+			enablenpc "poringrewarder";
 			break;
 		} else if (getmapusers("guild_vs5") < 1) {
 			break;
@@ -164,7 +159,7 @@ OnDodgePoringStart:
 		announce "We have multiple winners! Dodge the Porings Event Complete!",0;
 		sleep 500;
 		mapannounce "guild_vs5","Talk to the NPC for your reward!",bc_map;
-		enablenpc "Poring Rewarder";
+		enablenpc "poringrewarder";
 	}
 	end;
 //End Dodge the Porings!
@@ -183,7 +178,7 @@ OnPCDieEvent:
 	
 }
 
-prontera,155,220,3,	script	Poring Warper	948,{
+prontera,155,220,3,	script	Poring Warper::poringwarper	948,{
 	mes "[Poring Warper]";
 	mes "Hi! I can take you to the event location";
 	if ($@randevent == 0) {
@@ -195,7 +190,7 @@ prontera,155,220,3,	script	Poring Warper	948,{
 	menu "Take me there!",warpplayer,"No thanks.",-;
 	
 	mes "[Poring Warper]";
-	mes "We will miss you :(";
+	mes "We will miss you...";
 	close;
 
 warpplayer:
@@ -204,7 +199,7 @@ warpplayer:
 	
 }
 
-guild_vs5,49,71,3,	script	Poring Rewarder	949,{
+guild_vs5,49,71,3,	script	Poring Rewarder::poringrewarder	949,{
 
 	mes "[Poring Rewarder]";
 	mes "Congratulations!";
@@ -217,4 +212,3 @@ guild_vs5,49,71,3,	script	Poring Rewarder	949,{
 
 guild_vs5	mapflag	noexp
 guild_vs5	mapflag	nodrop
-guild_vs5	mapflag	nocommand	5
