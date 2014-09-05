@@ -1,23 +1,23 @@
 -	script	AutoShutdown	-1,{
 
 OnClock04:
-announce "We will be having an automated update in ~2 Hours.";
+announce "We will be having an automated update in ~2 Hours."bc_all,0xFFFFFF;
 sleep 10000;
-announce "This is an automated message.";
+announce "This is an automated message."bc_all,0xFFFFFF;
 OnClock05:
-announce "We will be having an automated update in ~1 Hour.";
+announce "We will be having an automated update in ~1 Hour."bc_all,0xFFFFFF;
 sleep 10000;
-announce "This is an automated message.";
+announce "This is an automated message."bc_all,0xFFFFFF;
 OnClock06:
-announce "We will be having an automated update in ~15 Minutes.";
+announce "We will be having an automated update in ~15 Minutes."bc_all,0xFFFFFF;
 sleep 10000;
-announce "Please log yourself off when convenient.";
+announce "Please log yourself off when convenient."bc_all,0xFFFFFF;
 sleep 10000;
-announce "This is an automated message.";
+announce "This is an automated message."bc_all,0xFFFFFF;
 OnClock0615:
-announce "We will be having an automated update now.";
+announce "We will be having an automated update now."bc_all,0xFFFFFF;
 sleep 10000;
-announce "Please log yourself off.";
+announce "Please log yourself off."bc_all,0xFF1010;
 sleep 60000;
 atcommand "@mapexit";
 
