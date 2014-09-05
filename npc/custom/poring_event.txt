@@ -205,7 +205,7 @@ guild_vs5,49,71,3,	script	Poring Rewarder::poringrewarder	949,{
 	mes "Congratulations!";
 	mes "I will now reward you and take you back to Prontera!";
 	next;
-	getitem 677,10;
+	getitem 677,5;
 	warp "prontera",155,220;
 	end;
 }
