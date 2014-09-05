@@ -120,7 +120,7 @@ OnPoringKill:
 OnSpecialKill:
 	set $@specialremain,$@specialremain-1;
 	mapannounce "guild_vs5",$@specialremain+" of GM Alkarl's Minions remain.",bc_map;
-	getitem 677,5; //reward
+	getitem 677,2; //reward
 	if($@specialremain < 1) {
 		announce "All of GM Alkarl's Minions have been killed!",0;
 		killmonsterall "guild_vs5";
