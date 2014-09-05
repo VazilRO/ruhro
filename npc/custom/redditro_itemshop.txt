@@ -48,10 +48,13 @@ prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,41020:3,41021:3,41022:
 // Black Frame Glasses			15
 // Black Musang Hat				20
 // Blank Eyes					15
+// Bolt Ears          25
 // Bright Fury					20
 // Bunny Top Hat				25
+// Butterfly Ears       15
 // Cap of Blindness				25
 // CD In Mouth					15
+// Chicken Beak       15
 // Coppola						20
 // Demon Mask					25
 // Deviling Hat					20
@@ -80,6 +83,7 @@ prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,41020:3,41021:3,41022:
 // Lady Tanee Doll				20
 // Leaf Cat Hat					20
 // Lif Doll Hat					20
+// Lightning Cloud      35
 // Little Angel Doll			25
 // Little Feather Hat			20
 // Long Tongue					10
@@ -87,17 +91,20 @@ prontera,181,215,3	itemshop	Coin Redeemer	954,677,14508:1,41020:3,41021:3,41022:
 // Lord Kaho's Horn				30
 // Lunatic Hat					15
 
-prontera,182,214,3	itemshop	Costumes #-L	984,677,40005:15,40006:20,19716:20,40080:20,40007:20,40008:25,19834:20,40009:20,40045:15,40046:15,40047:20,19624:15,40068:20,40072:25,40010:25,40048:15,40011:20,40012:25,40013:20,40014:25,40015:15,40016:25,40065:30,40017:30,40066:30,40018:25,40049:25,40019:25,19589:25,40050:20,19537:25,40051:40,40073:25,40067:30,19996:15,40020:40,19599:30,40021:25,40052:20,40022:20,19587:35,40023:20,40024:20,19835:20,40025:25,40053:20,40026:10,40027:20,40070:30,40028:15
+prontera,182,214,3	itemshop	Costumes A-L	984,677,40005:15,40006:20,19716:20,40080:20,40007:20,40008:25,19834:20,40009:20,40045:15,40046:15,40047:20,19624:15,40068:20,40072:25,40010:25,40048:15,40011:20,40012:25,40013:20,40014:25,40015:15,40016:25,40065:30,40017:30,40066:30,40018:25,40049:25,40019:25,19589:25,40050:20,19537:25,40051:40,40073:25,40067:30,19996:15,40020:40,19599:30,40021:25,40052:20,40022:20,19587:35,40023:20,40024:20,19835:20,40025:25,40053:20,40026:10,40027:20,40070:30,40028:15
 
 // ======= Costume Shop M-Z =========
 // Magic Eyes					20
 // Mercury Riser				25
+// Mini Crown           40
 // Mischievous Fairy			20
 // Musketeer Hat				20
 // Necromancer's Hood			20
 // Ninja Scroll					15
 // Note Headphones				15
 // Odin Mask					40
+// Old Timey Derby        15
+// Old Timey Mustache     10
 // Oliver Wolf Hood				25
 // Captain's Pipe				15
 // Pig Moneybox					20
@@ -108,13 +115,18 @@ prontera,182,214,3	itemshop	Costumes #-L	984,677,40005:15,40006:20,19716:20,4008
 // Poporing Cap					20
 // Poring Letter				10
 // Potted Muka Hat				15
+// Rain Cloud             25
+// Rainbow                25
 // Rainbow Poring Hat			30
 // Ramen Hat					15
+// Rooster's Comb     15
 // Rose of Crimson				15
 // Santa Poring Hat				30
 // Shining Santa Poring Hat		35
+// Shining Sun                25
 // Side Cap						20
 // Sigrun's Wings				20
+// Singing Bird       20
 // Skull Cap					30
 // Small Poring Band			25
 // Snake Hat					25
@@ -133,6 +145,7 @@ prontera,182,214,3	itemshop	Costumes #-L	984,677,40005:15,40006:20,19716:20,4008
 // Wild Rose Hat				25
 // Wings Of Victory				25
 // Witch's Pumpkin Hat			25
+// Yellow Hat             30
 // Yggdrasil Crown				25
 
 
