@@ -19,14 +19,14 @@
 OnInit:
 	disablenpc "poringwarper";
 	disablenpc "poringrewarder";
-	mapwarp "guild_vs5","SavePoint",0,0;
+	mapwarp "guild_vs5",SavePoint,0,0;
 	killmonsterall "guild_vs5";
 	end;
 	
 OnMinute00:
 	disablenpc "poringwarper";
 	disablenpc "poringrewarder";
-	mapwarp "guild_vs5","SavePoint",0,0;
+	mapwarp "guild_vs5",SavePoint,0,0;
 	killmonsterall "guild_vs5";
 	
 	$@randevent = rand(0,1);
@@ -172,7 +172,7 @@ OnPCDieEvent:
 			killmonsterall "guild_vs5";
 		}
 		dispbottom "You have died.";
-		warp "SavePoint",0,0;
+		warp SavePoint,0,0;
 	}
 	end;
 	
