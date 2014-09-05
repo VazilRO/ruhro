@@ -1,14 +1,14 @@
 -	script	AutoShutdown	-1,{
 
-OnClock04:
+OnClock0400:
 announce "We will be having an automated update in ~2 Hours."bc_all,0xFFFFFF;
 sleep 10000;
 announce "This is an automated message."bc_all,0xFFFFFF;
-OnClock05:
+OnClock0500:
 announce "We will be having an automated update in ~1 Hour."bc_all,0xFFFFFF;
 sleep 10000;
 announce "This is an automated message."bc_all,0xFFFFFF;
-OnClock06:
+OnClock0600:
 announce "We will be having an automated update in ~15 Minutes."bc_all,0xFFFFFF;
 sleep 10000;
 announce "Please log yourself off when convenient."bc_all,0xFFFFFF;
