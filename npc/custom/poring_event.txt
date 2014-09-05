@@ -101,7 +101,7 @@ OnNotEnoughPlayers:
 	
 //Find the Porings!	
 OnFindPoringStart:
-	set .@specialremain,5;
+	set $@specialremain,5;
 	
 	mapannounce "guild_vs5","Find the Porings Event will start in 5 seconds!",bc_map;
 	sleep 5000;
@@ -118,10 +118,10 @@ OnPoringKill:
 	end;
 
 OnSpecialKill:
-	set .@specialremain,.@specialremain-1;
-	mapannounce "guild_vs5",.@specialremain+" of GM Alkarl's Minions remain.",bc_map;
+	set $@specialremain,$@specialremain-1;
+	mapannounce "guild_vs5",$@specialremain+" of GM Alkarl's Minions remain.",bc_map;
 	getitem 677,5; //reward
-	if(.@specialremain < 1) {
+	if($@specialremain < 1) {
 		announce "All of GM Alkarl's Minions have been killed!",0;
 		killmonsterall "guild_vs5";
 		sleep 1000;
