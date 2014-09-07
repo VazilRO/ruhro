@@ -7122,61 +7122,69 @@ int status_get_sc_def(struct block_list *src, struct block_list *bl, enum sc_typ
 			}
 			break;
 		case SC_STUN:
+			sc_def = status->vit * 100;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def2 = status->vit * 10;
+			break;
 		case SC_SILENCE:
+			sc_def = status->int_ * 100;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def2 = (status->vit + status->int_ + status->luk) * 10;
+			break;
 		case SC_BLEEDING:
-			sc_def = status->vit*100;
-			sc_def2 = status->luk*10 + status_get_lv(bl)*10 - status_get_lv(src)*10;
-			tick_def2 = status->luk*10;
+			sc_def = status->agi * 100;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def2 = status->agi * 10;
 			break;
 		case SC_SLEEP:
-			sc_def = status->int_*100;
-			sc_def2 = status->luk*10 + status_get_lv(bl)*10 - status_get_lv(src)*10;
-			tick_def2 = status->luk*10;
+			sc_def = status->agi * 100;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def2 = (status->int_ + status->luk) * 10;
 			break;
 		case SC_STONE:
-			sc_def = status->mdef*100;
-			sc_def2 = status->luk*10 + status_get_lv(bl)*10 - status_get_lv(src)*10;
-			tick_def = 0; // No duration reduction
+			sc_def = status->mdef * 100;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def = status->luk * 10;
 			break;
 		case SC_FREEZE:
-			sc_def = status->mdef*100;
-			sc_def2 = status->luk*10 + status_get_lv(bl)*10 - status_get_lv(src)*10;
-			tick_def2 = status_src->luk*-10; // Caster can increase final duration with luk
+			sc_def = status->mdef * 100;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def2 = status->luk * 10 - status_src->luk * 10; // Caster can increase final duration with luk
 			break;
 		case SC_CURSE:
 			// Special property: immunity when luk is zero
 			if (status->luk == 0)
 				return 0;
-			sc_def = status->luk*100;
-			sc_def2 = status->luk*10 - status_get_lv(src)*10; // Curse only has a level penalty and no resistance
-			tick_def = status->vit*100;
-			tick_def2 = status->luk*10;
+			sc_def = status->luk * 100;
+			sc_def2 = status->luk * 10 - status_get_lv(src) * 10; // Curse only has a level penalty and no resistance
+			tick_def = status->vit * 100;
+			tick_def2 = status->luk * 10;
 			break;
 		case SC_BLIND:
-			sc_def = (status->vit + status->int_)*50;
-			sc_def2 = status->luk*10 + status_get_lv(bl)*10 - status_get_lv(src)*10;
-			tick_def2 = status->luk*10;
+			sc_def = (status->vit + status->int_) * 50;
+			sc_def2 = status->luk * 10 + status_get_lv(bl) * 10 - status_get_lv(src) * 10;
+			tick_def2 = status->luk * 10;
 			break;
 		case SC_CONFUSION:
-			sc_def = (status->str + status->int_)*50;
-			sc_def2 = status_get_lv(src)*10 - status_get_lv(bl)*10 - status->luk*10; // Reversed sc_def2
-			tick_def2 = status->luk*10;
+			sc_def = (status->str + status->int_) * 50;
+			sc_def2 = status_get_lv(src) * 10 - status_get_lv(bl) * 10 - status->luk * 10; // Reversed sc_def2
+			tick_def2 = status->luk * 10;
 			break;
 		case SC_DECREASEAGI:
 		case SC_ADORAMUS: // Arch Bishop
-			if (sd) tick>>=1; // Half duration for players.
-			sc_def = status->mdef*100;
+			if (sd) tick >>= 1; // Half duration for players.
+			sc_def = status->mdef * 100;
 			tick_def = 0; // No duration reduction
 			break;
 		case SC_ANKLE:
-			if(status->mode&MD_BOSS) // Lasts 5 times less on bosses
+			if (status->mode&MD_BOSS) // Lasts 5 times less on bosses
 				tick /= 5;
-			sc_def = status->agi*50;
+			sc_def = status->agi * 50;
 			break;
 		case SC_DEEPSLEEP:
-			sc_def = b_status->int_*50;
+			sc_def = b_status->int_ * 50;
 			tick_def = 0; // Linear reduction instead
-			tick_def2 = (b_status->int_ + status_get_lv(bl))*50; // kRO balance update lists this formula
+			tick_def2 = (b_status->int_ + status_get_lv(bl)) * 50; // kRO balance update lists this formula
 			break;
 		case SC_NETHERWORLD:
 			tick_def2 = (status_get_lv(bl) > 150 ? 150 : status_get_lv(bl)) * 20 +

@@ -9993,7 +9993,7 @@ void clif_parse_WalkToXY(int fd, struct map_session_data *sd)
 	else if (pc_cant_act(sd))
 		return;
 
-	if(sd->sc.data[SC_RUN] || sd->sc.data[SC_WUGDASH])
+	if (sd->sc.data[SC_RUN] || sd->sc.data[SC_WUGDASH] || pc_readglobalreg(sd, "PC_BLOCKMOUSE"))
 		return;
 
 	// Cloaking wall check is actually updated when you click to process next movement
