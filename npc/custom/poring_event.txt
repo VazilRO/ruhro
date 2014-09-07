@@ -1,7 +1,7 @@
 //======Name========================================
 // Poring Events
 //======Version=====================================
-// 1.1
+// 1.5
 //======Author(s)===================================
 // Alkarl
 //======Comments====================================
@@ -15,13 +15,19 @@
 //	wins. If multiple players survive all the rounds, they all win.
 //==================================================
 
--	script	poringevent	-1,{
+guild_vs5,0,0	script	poringevent	-1,300,300{
 OnInit:
 	disablenpc "poringwarper";
 	disablenpc "poringrewarder";
 	mapwarp "guild_vs5","prontera",155,220;
 	killmonsterall "guild_vs5";
 	end;
+	
+OnTouch:	//make sure no one reequips weapon
+	if(getequipid(EQI_HAND_R)!=-1) {
+        unequip EQI_HAND_R;
+    }
+    end;
 	
 OnMinute00:
 	disablenpc "poringwarper";
@@ -191,6 +197,7 @@ prontera,155,220,3,	script	Poring Warper::poringwarper	948,{
 	} else if ($@randevent == 1) {
 		mes "The current event is the Dodge the Porings!";
 	}
+	mes "Your weapon will be unequipped and you will be dismounted";
 	mes "Are you interested?";
 	menu "Take me there!",warpplayer,"No thanks.",-;
 	
@@ -199,6 +206,15 @@ prontera,155,220,3,	script	Poring Warper::poringwarper	948,{
 	close;
 
 warpplayer:
+	if(getequipid(EQI_HAND_R)!=-1) {
+        unequip EQI_HAND_R;	//unequips weapon
+    }
+	if (ismounting()) {
+		setmounting();	//dismounts rental mount
+	}
+	if (checkriding()) {
+		setriding(0);	//dismounts pecos, etc
+	}
 	warp "guild_vs5",49,71;
 	end;
 	
@@ -215,5 +231,6 @@ guild_vs5,49,71,3,	script	Poring Rewarder::poringrewarder	949,{
 	end;
 }
 
-guild_vs5	mapflag	noexp
-guild_vs5	mapflag	nodrop
+guild_vs5	mapflag	noexp	//disables xp
+guild_vs5	mapflag	nodrop	//disables dropping items?
+guild_vs5	mapflag	noitemconsumption	//disables item consumption?
