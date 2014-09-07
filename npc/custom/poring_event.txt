@@ -112,9 +112,14 @@ OnFindPoringStart:
 	end;
 		
 OnPoringKill:
-	monster "guild_vs5",0,0,"--en--",1002,1,"poringevent::OnPoringKill";
+	monster "guild_vs5",0,0,"GM Alkarl's Pet",1002,1,"poringevent::OnPoringKill";
 	dispbottom "Wrong Poring! GM Alkarl will not be happy.";
 	percentheal -100,-100;
+	if (getmapusers("guild_vs5") < 1) {
+		announce "All Players have died. Event Complete.",0;
+		killmonsterall "guild_vs5";
+	}
+	warp "SavePoint",0,0;
 	end;
 
 OnSpecialKill:
