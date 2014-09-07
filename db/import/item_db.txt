@@ -25,7 +25,11 @@
 35019,GM_Clip_P,GM's Priest Clip,4,30000,,100,,0,,1,0xFFFFFFFF,63,2,136,,0,0,0,{ skill "AL_WARP",4; skill "AL_HEAL",10; skill "AL_INCAGI",10; skill "AL_BLESSING",10; skill "HP_ASSUMPTIO",5; },{},{}
 35020,GM_Clip_A,GM's Alchemist Clip,4,30000,,100,,0,,1,0xFFFFFFFF,63,2,136,,0,0,0,{ skill "AM_BIOETHICS",1; skill "AM_REST",1; skill "AM_CALLHOMUN",1; skill "AM_RESURRECTHOMUN",1; },{},{}
 35021,GM_Clip_G,GM's General Clip,4,30000,,100,,0,,1,0xFFFFFFFF,63,2,136,,0,0,0,{ skill "MC_INCCARRY",10; skill "MC_VENDING",10; skill "MC_PUSHCART",10; skill "NPC_SUMMONMONSTER",10; skill "NPC_HALLUCINATION",10; },{},{}
-
+17507,Up,Up,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",1; },{},{}
+17508,Down,Down,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",2; },{},{}
+17509,Left,Left,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",3; },{},{}
+17510,Right,Right,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",4; },{},{}
+17511,Red_Shroom,Red Mushroom,2,10,,100,,,,0,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_SpeedUp1,3000,0; },{},{}
 
 
 
