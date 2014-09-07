@@ -9012,7 +9012,7 @@
 18627,Dried_Leaf,Dried Leaf,4,20,,50,,0,,0,0xFFFFFFFF,63,2,1,,10,0,711,{ bonus bUnbreakableHelm,0; },{},{}
 18628,Tare_Brownie,Tare Brownie,4,20,,500,,5,,1,0xFFFFFFFF,63,2,256,,50,0,781,{},{},{}
 18629,B_Desert_Wolf_Hat,B Desert Wolf Hat,4,10,,300,,0,,1,0xFFFFFFFF,63,2,256,,1,1,783,{},{},{}
-18630,Dep_Alice_Hat,Drooping Alicel,4,20,,500,,6,,0,0xFFFFFFFE,63,2,256,,70,1,784,{bonus2 bAddRace,RC_DemiHuman,10; bonus2 bSubRace,RC_Demon,10; if(getrefine()>6) autobonus "{ bonus bAspdRate,100; }",70,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";	},{},{}
+18630,Dep_Alice_Hat,Drooping Alicel,4,20,,500,,6,,0,0xFFFFFFFE,63,2,256,,70,1,784,{bonus2 bAddRace,RC_DemiHuman,10; bonus2 bSubRace,RC_Demon,10; if(getrefine()>6) autobonus "{ bonus bAspdRate,100; }",30,7000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";	},{},{}
 18631,Ribbon_Chef_Hat,Ribbon Chef Hat,4,20,,300,,5,,0,0xFFFFFFFF,63,2,256,,70,1,785,{ bonus bDex,3; bonus bLuk,1; },{},{}
 18632,Yellow_Poring_Hairpin,Yellow Poring Hairpin,4,20,,100,,3,,1,0xFFFFFFFF,63,2,256,,1,1,786,{},{},{}
 18633,Pink_Poring_Hairpin,Pink Poring Hairpin,4,20,,100,,3,,1,0xFFFFFFFF,63,2,256,,1,1,787,{},{},{}
