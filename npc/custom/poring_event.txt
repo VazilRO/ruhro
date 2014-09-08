@@ -197,7 +197,7 @@ prontera,155,220,3,	script	Poring Warper::poringwarper	948,{
 	} else if ($@randevent == 1) {
 		mes "The current event is the Dodge the Porings!";
 	}
-	mes "Your weapon will be unequipped and you will be dismounted";
+	mes "Your weapon will be unequipped, you will be dismounted and you will be dispelled";
 	mes "Are you interested?";
 	menu "Take me there!",warpplayer,"No thanks.",-;
 	
@@ -215,6 +215,7 @@ warpplayer:
 	if (checkriding()) {
 		setriding(0);	//dismounts pecos, etc
 	}
+	sc_end SC_All;	//dispel
 	warp "guild_vs5",49,71;
 	end;
 	
