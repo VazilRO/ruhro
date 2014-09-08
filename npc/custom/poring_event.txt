@@ -15,7 +15,7 @@
 //	wins. If multiple players survive all the rounds, they all win.
 //==================================================
 
-guild_vs5,0,0	script	poringevent	-1,300,300,{
+guild_vs5,0,0,0	script	poringevent	-1,300,300,{
 OnInit:
 	disablenpc "poringwarper";
 	disablenpc "poringrewarder";
