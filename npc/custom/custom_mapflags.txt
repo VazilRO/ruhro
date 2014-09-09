@@ -1,0 +1,36 @@
+//===== rAthena Script =======================================
+//= Custom Mapflags for RedditRO
+//===== By: ==================================================
+//= Alkarl
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//============================================================
+
+//Towns - No Loot (nomobloot, nomvploot)
+prontera	mapflag	noloot
+morroc	mapflag	noloot
+geffen	mapflag	noloot
+payon	mapflag	noloot
+alberta	mapflag	noloot
+izlude	mapflag	noloot
+aldebaran	mapflag	noloot
+xmas	mapflag	noloot
+comodo	mapflag	noloot
+juno	mapflag	noloot
+amatsu	mapflag	noloot
+gonryun	mapflag	noloot
+umbala	mapflag	noloot
+louyang	mapflag	noloot
+jawaii	mapflag noloot
+ayothaya	mapflag	noloot
+einbroch	mapflag	noloot
+lighthalzen	mapflag	noloot
+einbech	mapflag	noloot
+hugel	mapflag	noloot
+rachel	mapflag	noloot
+veins	mapflag	noloot
+moscovia	mapflag	noloot
+brasilis	mapflag	noloot
+
