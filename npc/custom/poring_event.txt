@@ -1,7 +1,7 @@
 //======Name========================================
 // Poring Events
 //======Version=====================================
-// 1.5
+// 1.5a
 //======Author(s)===================================
 // Alkarl
 //======Comments====================================
@@ -15,7 +15,7 @@
 //	wins. If multiple players survive all the rounds, they all win.
 //==================================================
 
-guild_vs5,0,0,0	script	poringevent	-1,300,300,{
+guild_vs5,1,1,0	script	poringevent	-1,300,300,{
 OnInit:
 	disablenpc "poringwarper";
 	disablenpc "poringrewarder";
@@ -23,9 +23,12 @@ OnInit:
 	killmonsterall "guild_vs5";
 	end;
 	
-OnTouch:	//make sure no one reequips weapon
+OnTouch:	//make sure no one reequips weapons
 	if(getequipid(EQI_HAND_R)!=-1) {
         unequip EQI_HAND_R;
+    }
+	if(getequipid(EQI_HAND_L)!=-1) {
+        unequip EQI_HAND_L;
     }
     end;
 	
@@ -209,11 +212,17 @@ warpplayer:
 	if(getequipid(EQI_HAND_R)!=-1) {
         unequip EQI_HAND_R;	//unequips weapon
     }
+	if(getequipid(EQI_HAND_L)!=-1) {
+        unequip EQI_HAND_L;	//unequips other hand, just in case
+    }
 	if (ismounting()) {
 		setmounting();	//dismounts rental mount
 	}
 	if (checkriding()) {
-		setriding(0);	//dismounts pecos, etc
+		setriding 0;	//dismounts pecos, etc
+	}
+	if (checkoption(0x00200000) == 1) {
+		setoption 0x00200000,0;	//dismounts wargs
 	}
 	sc_end SC_All;	//dispel
 	warp "guild_vs5",49,71;
