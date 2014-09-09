@@ -10,7 +10,7 @@
 
 //Towns - No Loot (nomobloot, nomvploot)
 prontera	mapflag	noloot
-morroc	mapflag	noloot
+morocc	mapflag	noloot
 geffen	mapflag	noloot
 payon	mapflag	noloot
 alberta	mapflag	noloot
@@ -18,12 +18,12 @@ izlude	mapflag	noloot
 aldebaran	mapflag	noloot
 xmas	mapflag	noloot
 comodo	mapflag	noloot
-juno	mapflag	noloot
+yuno	mapflag	noloot
 amatsu	mapflag	noloot
 gonryun	mapflag	noloot
 umbala	mapflag	noloot
 louyang	mapflag	noloot
-jawaii	mapflag noloot
+jawaii	mapflag	noloot
 ayothaya	mapflag	noloot
 einbroch	mapflag	noloot
 lighthalzen	mapflag	noloot
