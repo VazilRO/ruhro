@@ -39,7 +39,9 @@ job3_rune01,88,62,5	script	Dragon Breeder	105,{
 				mes "Please remove your cash mount.";
 				close;
 			}
-			setdragon;
+			mes "Select the color of your dragon";
+			set .@choice,select("Green Dragon","Brown Dragon","Gray Dragon","Blue Dragon","Red Dragon");
+			setdragon(.@choice);
 			close;
 		case 2:
 			mes "[Dragon Breeder]";
@@ -77,7 +79,9 @@ prontera,130,213,5	script	Riding Creature Master	105,{
 				mes "Please remove your cash mount.";
 				close;
 			}
-			setdragon;
+			mes "Select the color of your dragon";
+			set .@choice,select("Green Dragon","Brown Dragon","Gray Dragon","Blue Dragon","Red Dragon");
+			setdragon(.@choice);
 			close;
 		case 2:
 			mes "[Riding Creature Master]";
