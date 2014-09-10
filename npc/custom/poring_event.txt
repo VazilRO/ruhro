@@ -219,7 +219,10 @@ warpplayer:
 		setmounting();	//dismounts rental mount
 	}
 	if (checkriding()) {
-		setriding 0;	//dismounts pecos, etc
+		setriding 0;	//dismounts pecos/gryphons
+	}
+	if (checkdragon()) {
+		setdragon();	//dismounts dragons
 	}
 	if (checkoption(0x00200000) == 1) {
 		setoption 0x00200000,0;	//dismounts wargs
