@@ -4,6 +4,12 @@
 // ID,Name,Name,Type,Price,Sell,Weight,ATK,DEF,Range,Slot,Job,Class,Gender,Loc,wLV,eLV,Refineable,View,{ Script },{ OnEquip_Script },{ OnUnequip_Script }
 //
 
+// Item Fixes
+2788,Bradium_Earing,Bradium Earring,4,20,,200,,0,,1,0xFFFFFFFF,18,2,136,,60,0,0,{ bonus bInt,1; bonus bDex,1; bonus bMatk,5; bonus bMatkRate,2;},{},{}
+2789,Bradium_Ring,Bradium Ring,4,20,,200,,0,,1,0xFFFFFFFF,18,2,136,,60,0,0,{ bonus bStr,1; bonus bVit,1; bonus bAtkRate,2; },{},{}
+2790,Bradium_Brooch,Bradium Brooch,4,20,,200,,0,,1,0xFFFFFFFF,18,2,136,,60,0,0,{ bonus bAgi,1; bonus bFlee,4; bonus bAspdRate,2; if(readparam(bAgi)>=120) bonus bCritical,4; },{},{}
+
+// Costumes
 25000,Odin_Mask,Odin Mask,4,20,,10,,0,,0,0xFFFFFFFF,63,2,6144,,1,0,480,{},{},{}
 35001,Afro_Wig_E,Afro Wig,4,20,,10,,0,,0,0xFFFFFFFF,63,2,768,,1,0,302,{},{},{}
 35002,Ancient_Elven_Ear_E,Ancient Elven Ear,4,10,,10,,0,,0,0xFFFFFFFF,63,2,512,,1,0,665,{},{},{}
