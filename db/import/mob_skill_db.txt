@@ -182,3 +182,6 @@
 3504,GM Kyo@AL_RUWACH,any,24,1,2000,500,30000,no,self,closedattacked,,,,,,,,
 3504,GM Kyo@AL_HEAL,idle,28,12,10000,0,5000,yes,self,myhpltmaxrate,50,,,,,,,
 3504,GM Kyo@AL_HEAL,idle,28,6,10000,0,10000,yes,self,myhpltmaxrate,99,,,,,,,
+
+//RedditRO Racing
+3550,Bomb@NPC_SELFDESTRUCTION,attack,173,1,10000,0,0,no,self,always,0,,,,,,,

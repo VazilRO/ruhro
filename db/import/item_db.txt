@@ -29,8 +29,9 @@
 17508,Down,Down,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",2; },{},{}
 17509,Left,Left,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",3; },{},{}
 17510,Right,Right,11,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "WalkToXY_RainbowSurfers",4; },{},{}
-17511,Red_Shroom,Red Mushroom,2,10,,100,,,,0,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_SpeedUp1,3000,0; },{},{}
-
+17511,Red_Shroom,Red Mushroom,2,10,,100,,,,0,0xFFFFFFFF,63,2,,,,,,{if(strcharinfo(3) == "r_road"){ set RaceItemCount,RaceItemCount-1; sc_start SC_SpeedUp1,3000,0;}},{},{}
+17512,Bombring,Bombring,2,10,,100,,,,0,0xFFFFFFFF,63,2,,,,,,{if(strcharinfo(3) == "r_road"){ set RaceItemCount,RaceItemCount-1; callfunc "racePlaceObject",3550;}},{},{}
+17513,Fakebox,Fakebox,2,10,,100,,,,0,0xFFFFFFFF,63,2,,,,,,{if(strcharinfo(3) == "r_road"){ set RaceItemCount,RaceItemCount-1; callfunc "summon_fake_box";}},{},{}
 
 
 

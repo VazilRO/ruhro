@@ -1,0 +1,461 @@
+//===== rAthena Script ======================================= 
+//= Rainbow Surfer
+//===== By: ================================================== 
+//= Goddameit web : http://bit.ly/RMReEj
+//= Idea : Emistry
+//= Map : Syouji
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= 
+//===== Additional Comments: ================================= 
+//= 1.0 - Initial Version 
+//= 1.1 - Reworked for RedditRO [Poutine]
+//============================================================
+
+// mapflags
+r_road	mapflag	nopenalty
+r_road	mapflag	nosave	SavePoint
+r_road	mapflag	noreturn
+r_road	mapflag	noteleport
+r_road	mapflag	noskill
+r_road	mapflag	nomemo
+r_road	mapflag	nobranch
+r_road	mapflag	noicewall
+r_road	mapflag	nowarp
+r_road	mapflag	nocommand	5
+
+r_road,0,0,4	script	rainbowracehandler	-1,{
+OnInit:
+	bindatcmd "rainbowrace", strnpcinfo(0)+"::OnCommand", 11,11;
+	sleep 1;
+	set $racestart,0;
+	set .GlobAnnColor$, "0x33FF00";
+	set .MapAnnColor$, "0x33FF00";
+	set .RaceMap$, "r_road";
+	setwall .RaceMap$,150,207,8,6,0,"kartstartwall";
+	setwall .RaceMap$,150,186,8,6,0,"kartstartwall1";
+	callsub OnEndd;
+	end;
+OnCommand:
+	if ( compare( .@atcmd_parameters$, "on" ) ) goto L_start;
+	else if ( compare( .@atcmd_parameters$, "off" ) ) goto L_end;
+	else {
+		dispbottom "type - '@rainbowrace on' to start the event";
+		dispbottom "type - '@rainbowrace off' to end the event";
+	}
+	end;
+
+OnClock1700:
+OnClock0500:
+L_start:
+	if ( $racestart > 0 ) end;
+	callsub OnEndd;
+	hideoffnpc "Rainbow Race Warper";
+	announce "[Rainbow Racing] Registration is open! You have 3 minutes to get to the centre of Prontera!",bc_all,.GlobAnnColor$;
+	set $racestart, 1;
+	setnpctimer 0;
+	initnpctimer;
+	end;
+L_end:
+	announce "[Rainbow Racing] Cancelled by a GM.",bc_all,.GlobAnnColor$;	
+	callsub OnEndd;
+	end;
+OnEndd:
+	hideonnpc "Rainbow Race Warper";
+	stopnpctimer;
+	addrid(1);
+	callfunc "race_cleanup";
+	mapwarp .RaceMap$,"prontera",156,191;
+	return;	
+OnTimer60000:
+	if($racestart != 1) end;
+	announce "[Rainbow Racing] Registration is open! You have 2 minutes to get to the centre of Prontera!",bc_all,.GlobAnnColor$;
+	end;
+OnTimer120000:
+	if($racestart != 1) end;
+	announce "[Rainbow Racing] Registration is open! You have 1 minute to get to the centre of Prontera!",bc_all,.GlobAnnColor$;
+	end;
+OnTimer180000:
+	if($racestart != 1) end;
+	stopnpctimer;
+	announce "[Rainbow Racing] Registration is now closed!",bc_all,.GlobAnnColor$;
+	hideonnpc "Rainbow Race Warper";
+	sleep(3000);
+	/*if(getmapusers(.RaceMap$) < 5) {
+		announce "[Rainbow Racing] Race cancelled. Not enough players!",bc_all,.GlobAnnColor$;
+		callsub OnEndd;
+		end;
+	}*/
+	mapannounce .RaceMap$,"[Rainbow Racing] Welcome to Rainbow Racing!",0,.MapAnnColor$;
+	sleep(2000);
+	mapannounce .RaceMap$,"[Rainbow Racing] The goal of the game is to finish a lap...",0,.MapAnnColor$;
+	sleep(2000);
+	mapannounce .RaceMap$,"[Rainbow Racing] But without your mouse!",0,.MapAnnColor$;
+	sleep(2000);
+	mapannounce .RaceMap$,"[Rainbow Racing] You've all received 4 items to use to control your character.",0,.MapAnnColor$;
+	sleep(2000);
+	mapannounce .RaceMap$,"[Rainbow Racing] Item boxes are placed throughout the map that provide you with powerups.",0,.MapAnnColor$;
+	sleep(2000);
+	mapannounce .RaceMap$,"[Rainbow Racing] Without further adieu, racers get in position!",0,.MapAnnColor$;
+	sleep(1000);
+	mapannounce .RaceMap$,"[Rainbow Racing] THREE!!",0,.MapAnnColor$;
+	sleep(1000);
+	mapannounce .RaceMap$,"[Rainbow Racing] TWO!!",0,.MapAnnColor$;
+	sleep(1000);
+	mapannounce .RaceMap$,"[Rainbow Racing] ONE!!",0,.MapAnnColor$;
+	sleep(1000);
+	mapannounce "r_road","[Rainbow Racing] GO!!",0,.MapAnnColor$;
+	goto L_startrace;
+	end;
+L_startrace:
+	set $racestart, 2;
+	delwall "kartstartwall";
+	delwall "kartstartwall1";
+	end;	
+OnPCLogInEvent:
+	sleep2(1);
+	callfunc "race_cleanup";
+	if( strcharinfo(3) == .RaceMap$ ) {		
+		if($racestart == 2) dispbottom "You have been disqualified!";
+		warp "Save",0,0;
+	}
+	end;
+OnPCDieEvent:
+	if(strcharinfo(3) != .RaceMap$ && $racestart == 2) end;
+	dispbottom "You have died! You will be resurrected in:";
+	dispbottom "3...";
+	sleep2(1000);
+	dispbottom "2...";
+	sleep2(1000);
+	dispbottom "1...";
+	recovery 0,getcharid(0),4;
+	callfunc "WalkToXY_RainbowSurfers",0;
+	end;
+}
+
+prontera,150,180,4	script	Rainbow Race Warper	100,{
+
+	mes "[Rainbow Race Warper]";
+	mes "Hi! Would you like to compete in the Rainbow Race?";
+	next;
+	switch(select("Yes:Maybe next time")) {
+		case 1:
+			break;
+		case 2:
+			mes "[Rainbow Race Warper]";
+			mes "Come back when the event is announced!";
+			close;
+	}
+	mes "[Rainbow Race Warper]";
+	mes "Okay, you will now be warped!";
+	next;
+	callfunc "race_cleanup";
+	callfunc "race_init";
+	set .tmp_time,gettimetick(2);
+	warp "r_road",154,197;
+	end;
+
+OnInit:
+	end;
+
+}
+
+function	script	race_init	{
+	function	Block_Player_Move	;
+	getitem 17507,1;
+	getitem 17508,1;
+	getitem 17509,1;
+	getitem 17510,1;
+	Block_Player_Move(1);
+	return;
+	
+	function	Block_Player_Move	{
+		set PC_BLOCKMOUSE,getarg(0,0);
+		return;
+	}
+}
+
+function	script	race_cleanup	{
+	function	Block_Player_Move	;
+	set race_chkpt1,0;
+	set race_lap, 0;
+	set RaceItemCount, 0;
+	Block_Player_Move(0);
+	setarray .@item[0],17507,17508,17509,17510,17511,17512;
+	for(set .@i,0;.@i<getarraysize(.@item);set .@i,.@i+1)
+		if( set(.@tmp,countitem(.@item[.@i])) > 0 )
+		delitem .@item[.@i],.@tmp;
+	return;
+	
+	function	Block_Player_Move	{
+		set PC_BLOCKMOUSE,getarg(0,0);
+		return;
+	}
+}
+	
+function	script	WalkToXY_RainbowSurfers	{
+	if(.tmp == getarg(0,0) || 0 == getarg(0,0)) set .tmp,0;
+	else set .tmp,getarg(0,0);	
+	while(isloggedin(getcharid(3)) && (.tmp != 0)) {
+		getmapxy(.@m$,.@x,.@y,0);
+		if( .@m$ != "r_road" ) {
+			callfunc "race_cleanup";
+			.tmp = 0;
+		} else {
+			//attempt to walk 5 blocks..."for smoothness" lower amount until possible to walk again
+			set .@walBloc, 5;
+			while(!unitwalk(getcharid(3), 
+			.@x+(.tmp==4?.@walBloc:.tmp==3?-1*.@walBloc:0), .@y+(.tmp==1?.@walBloc:.tmp==2?-1*.@walBloc:0)) && 
+			(.@walBloc > 0)) {	
+				set .@walBloc, .@walBloc - 1;
+			}
+			sleep2 200;
+		}
+	}
+	end;
+}
+
+function	script	racePlaceObject	{
+	getmapxy(.@m$,.@x,.@y,0);
+	set .@mobP, getarg(0,0);
+	sleep(500);
+	monster .@m$,.@x,.@y,"",.@mobP,1;
+}
+
+r_road,72,92,8	script	chkpt1	-1,8,3,{
+OnTouch:
+	if($racestart != 2) end;
+	if(race_chkpt1 != 1) {
+		set race_chkpt1, 1;
+		dispbottom "Checkpoint Reached!";
+	}
+	end;
+}
+
+r_road,150,184,8	script	chkpt2	-1,8,2,{
+OnTouch:
+	if($racestart != 2) end;
+	if(race_chkpt1 == 1) {
+		set race_chkpt1, 0;
+		set race_lap, race_lap + 1;
+		if(race_lap > 2) goto L_Winner;
+		dispbottom "Lap [" + race_lap + "/" + .NumLaps + "] completed!";
+	}
+	end;
+OnInit:
+	set .NumLaps, 3;
+	set .RaceWinners, 0;
+	set .RewardItem, 677;
+	set .RaceMap$, "r_road";
+	end;
+L_Winner:
+	if(.RaceWinners == 0) {
+		mapannounce .RaceMap$,"First Place: " + strcharinfo(0) + "!",0,0xFFCC00;
+		getitem .RewardItem, 5; // 5 coins for first place
+	} else if (.RaceWinners == 1) {
+		mapannounce .RaceMap$,"Second Place: " + strcharinfo(0) + "!",0,0x909090;
+		getitem .RewardItem, 3; // 3 coins for second place
+	} else {
+		mapannounce .RaceMap$,"Third Place: " + strcharinfo(0) + "!",0,0x996633;
+		getitem .RewardItem, 1; // 1 coin for third place
+		callsub OnEndd;
+	} 
+	set .RaceWinners, .RaceWinners + 1;
+	end;
+OnEndd:	
+	addrid(1);
+	callfunc "race_cleanup";
+	mapwarp .RaceMap$,"prontera",150,150;
+	return;	
+}
+
+// Item Box
+-	script	Item Box::racebox	-1,{
+dispbottom "Walk through to get Runes.";
+end;
+
+OnTouch:
+	if (RaceItemCount < 1) {
+		set .@runes, rand(0,3);
+		switch( .@runes ) {
+			case 0:
+				// 1 Red Mushroom
+				getitem 17511,1;
+				set RaceItemCount, 1;
+				break;
+			case 1:
+				// 3 Red Mushrooms
+				getitem 17511,3;
+				set RaceItemCount, 3;
+				break;
+			case 2:
+				// 1 Bombrings
+				getitem 17512,1;
+				set RaceItemCount, 1;
+				break;
+			case 3:
+				// 5 Bombrings
+				getitem 17512,5;
+				set RaceItemCount, 5;
+				break;
+			default: 
+				end;
+		}
+	}
+	disablenpc strnpcinfo(3);
+	initnpctimer;
+	specialeffect2 EF_PROVIDENCE;
+	end;
+
+OnTimer3000:
+OnTimerQuit:
+	stopnpctimer;
+	callsub( OnAssign );
+	end;
+
+OnAssign:
+	enablenpc strnpcinfo(3);
+	return;
+
+OnInit:
+	// Runes Duration in Seconds
+	set .duration,3;
+	callsub( OnAssign );
+	end;
+}
+r_road,184,87,1	duplicate(racebox)	Item Box#racebox1	1324,1,1
+r_road,187,87,1	duplicate(racebox)	Item Box#racebox2	1324,1,1
+r_road,186,133,1	duplicate(racebox)	Item Box#racebox3	1324,1,1
+r_road,186,130,1	duplicate(racebox)	Item Box#racebox4	1324,1,1
+r_road,150,172,1	duplicate(racebox)	Item Box#racebox5	1324,1,1
+r_road,150,172,1	duplicate(racebox)	Item Box#racebox6	1324,1,1
+r_road,157,172,1	duplicate(racebox)	Item Box#racebox7	1324,1,1
+r_road,152,225,1	duplicate(racebox)	Item Box#racebox8	1324,1,1
+r_road,155,225,1	duplicate(racebox)	Item Box#racebox9	1324,1,1
+r_road,235,281,1	duplicate(racebox)	Item Box#racebox10	1324,1,1
+r_road,232,281,1	duplicate(racebox)	Item Box#racebox11	1324,1,1
+r_road,248,281,1	duplicate(racebox)	Item Box#racebox12	1324,1,1
+r_road,251,281,1	duplicate(racebox)	Item Box#racebox13	1324,1,1
+r_road,255,353,1	duplicate(racebox)	Item Box#racebox14	1324,1,1
+r_road,255,350,1	duplicate(racebox)	Item Box#racebox15	1324,1,1
+r_road,214,381,1	duplicate(racebox)	Item Box#racebox16	1324,1,1
+r_road,214,378,1	duplicate(racebox)	Item Box#racebox17	1324,1,1
+r_road,66,363,1	duplicate(racebox)	Item Box#racebox18	1324,1,1
+r_road,69,363,1	duplicate(racebox)	Item Box#racebox19	1324,1,1
+r_road,66,269,1	duplicate(racebox)	Item Box#racebox20	1324,1,1
+r_road,69,269,1	duplicate(racebox)	Item Box#racebox21	1324,1,1
+r_road,78,193,1	duplicate(racebox)	Item Box#racebox22	1324,1,1
+r_road,76,189,1	duplicate(racebox)	Item Box#racebox23	1324,1,1
+r_road,78,185,1	duplicate(racebox)	Item Box#racebox24	1324,1,1
+r_road,76,181,1	duplicate(racebox)	Item Box#racebox25	1324,1,1
+r_road,78,177,1	duplicate(racebox)	Item Box#racebox26	1324,1,1
+r_road,76,173,1	duplicate(racebox)	Item Box#racebox27	1324,1,1
+r_road,78,169,1	duplicate(racebox)	Item Box#racebox28	1324,1,1
+r_road,90,128,1	duplicate(racebox)	Item Box#racebox29	1324,1,1
+r_road,93,128,1	duplicate(racebox)	Item Box#racebox30	1324,1,1
+
+function	script	summon_fake_box	{
+	getmapxy(.@m$,.@x,.@y,0);
+	if(.boxCount > 50) set .BoxCount, 1;
+	set .@fakeboxN$, "Item Box#fakebox" + .boxCount;
+	enablenpc .@fakeboxN$;
+	sleep(500);
+	movenpc .@fakeboxN$,.@x,.@y;
+	set .boxCount, .boxCount + 1;
+	end;
+OnInit:
+	set .boxCount, 1;
+	end;
+}
+
+-	script	Item Box::fakebox	-1,{
+dispbottom "Walk through to get Runes.";
+end;
+
+OnTouch:
+	set .@effect, rand(0,3);
+	switch( .@effect ) {
+		case 0:
+			// Cursed
+			sc_start SC_CURSE,5000,1;
+			break;
+		case 1:
+			// Sleep
+			sc_start SC_SLEEP,2000,1;
+			break;
+		case 2:
+			// Blind
+			sc_start SC_BLIND,6000,1;
+			break;
+		case 3:
+			// Agi Up
+			sc_start SC_INCREASEAGI,5000,1;
+			break;
+		default: 
+			end;
+	}
+	disablenpc strnpcinfo(3);
+	specialeffect2 EF_PROVIDENCE;
+	end;
+
+OnAssign:
+	enablenpc strnpcinfo(3);
+	return;
+
+OnInit:
+	disablenpc strnpcinfo(3);
+	end;
+}
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox1	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox2	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox3	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox4	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox5	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox6	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox7	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox8	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox9	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox10	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox11	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox12	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox13	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox14	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox15	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox16	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox17	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox18	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox19	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox20	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox21	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox22	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox23	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox24	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox25	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox26	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox27	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox28	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox29	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox30	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox31	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox32	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox33	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox34	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox35	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox36	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox37	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox38	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox39	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox40	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox41	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox42	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox43	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox44	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox45	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox46	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox47	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox48	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox49	1324,1,1
+r_road,0,0,1	duplicate(fakebox)	Item Box#fakebox50	1324,1,1
