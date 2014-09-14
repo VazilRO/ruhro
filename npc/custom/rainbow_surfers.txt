@@ -27,7 +27,7 @@ r_road	mapflag	noicewall
 r_road	mapflag	nowarp
 r_road	mapflag	nocommand	5
 
-r_road,0,0,4	script	rainbowracehandler	-1,{
+-	script	rainbowracehandler	-1,{
 OnInit:
 	bindatcmd "rainbowrace", strnpcinfo(0)+"::OnCommand", 11,11;
 	sleep 1;
@@ -53,7 +53,7 @@ OnClock0500:
 L_start:
 	if ( $racestart > 0 ) end;
 	callsub OnEndd;
-	hideoffnpc "Rainbow Race Warper";
+	enablenpc "Rainbow Race Warper";
 	announce "[Rainbow Racing] Registration is open! You have 3 minutes to get to the centre of Prontera!",bc_all,.GlobAnnColor$;
 	set $racestart, 1;
 	setnpctimer 0;
@@ -64,9 +64,10 @@ L_end:
 	callsub OnEndd;
 	end;
 OnEndd:
-	hideonnpc "Rainbow Race Warper";
+	disablenpc "Rainbow Race Warper";
+	set $racestart, 0;
 	stopnpctimer;
-	addrid(1);
+	addrid(0);
 	callfunc "race_cleanup";
 	mapwarp .RaceMap$,"prontera",156,191;
 	return;	
@@ -82,7 +83,7 @@ OnTimer180000:
 	if($racestart != 1) end;
 	stopnpctimer;
 	announce "[Rainbow Racing] Registration is now closed!",bc_all,.GlobAnnColor$;
-	hideonnpc "Rainbow Race Warper";
+	disablenpc "Rainbow Race Warper";
 	sleep(3000);
 	/*if(getmapusers(.RaceMap$) < 5) {
 		announce "[Rainbow Racing] Race cancelled. Not enough players!",bc_all,.GlobAnnColor$;
@@ -265,10 +266,11 @@ L_Winner:
 	} 
 	set .RaceWinners, .RaceWinners + 1;
 	end;
-OnEndd:	
+OnEndd:
+	announce "[Rainbow Racing] The event has now ended! Congratulations to the winners!",bc_all,0x33FF00;
 	addrid(1);
 	callfunc "race_cleanup";
-	mapwarp .RaceMap$,"prontera",150,150;
+	mapwarp .RaceMap$,"prontera",156,191;
 	return;	
 }
 
