@@ -70,6 +70,7 @@ OnEndd:
 	addrid(0);
 	callfunc "race_cleanup";
 	mapwarp .RaceMap$,"prontera",156,191;
+	detachrid;
 	return;	
 OnTimer60000:
 	if($racestart != 1) end;
@@ -213,18 +214,18 @@ function	script	race_cleanup	{
 }
 	
 function	script	WalkToXY_RainbowSurfers	{
-	if(.tmp == getarg(0,0) || 0 == getarg(0,0)) set .tmp,0;
-	else set .tmp,getarg(0,0);	
-	while(isloggedin(getcharid(3)) && (.tmp != 0)) {
+	if(RACEDIR == getarg(0,0) || 0 == getarg(0,0)) set RACEDIR,0;
+	else set RACEDIR,getarg(0,0);	
+	while(isloggedin(getcharid(3)) && (RACEDIR != 0)) {
 		getmapxy(.@m$,.@x,.@y,0);
 		if( .@m$ != "r_road" ) {
 			callfunc "race_cleanup";
-			.tmp = 0;
+			RACEDIR = 0;
 		} else {
 			//attempt to walk 5 blocks..."for smoothness" lower amount until possible to walk again
 			set .@walBloc, 5;
 			while(!unitwalk(getcharid(3), 
-			.@x+(.tmp==4?.@walBloc:.tmp==3?-1*.@walBloc:0), .@y+(.tmp==1?.@walBloc:.tmp==2?-1*.@walBloc:0)) && 
+			.@x+(RACEDIR==4?.@walBloc:RACEDIR==3?-1*.@walBloc:0), .@y+(RACEDIR==1?.@walBloc:RACEDIR==2?-1*.@walBloc:0)) && 
 			(.@walBloc > 0)) {	
 				set .@walBloc, .@walBloc - 1;
 			}
@@ -288,6 +289,7 @@ OnEndd:
 	addrid(1);
 	callfunc "race_cleanup";
 	mapwarp .RaceMap$,"prontera",156,191;
+	detachrid;
 	return;	
 }
 
