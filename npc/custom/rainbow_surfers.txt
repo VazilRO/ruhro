@@ -125,7 +125,7 @@ OnPCLogInEvent:
 	}
 	end;
 OnPCDieEvent:
-	if(strcharinfo(3) != .RaceMap$ && $racestart == 2) end;
+	if(strcharinfo(3) != .RaceMap$ || $racestart != 2) end;
 	dispbottom "You have died! You will be resurrected in:";
 	dispbottom "3...";
 	sleep2(1000);
@@ -155,7 +155,17 @@ prontera,150,180,4	script	Rainbow Race Warper	100,{
 	next;
 	callfunc "race_cleanup";
 	callfunc "race_init";
-	set .tmp_time,gettimetick(2);
+	if (checkriding()) {
+		setriding 0;	//dismounts pecos/gryphons
+	}
+	if (checkdragon()) {
+		setdragon();	//dismounts dragons
+	}
+	if (checkoption(0x00200000) == 1) {
+		setoption 0x00200000,0;	//dismounts wargs
+	}
+	nude;
+	sc_end SC_All;	//dispel	
 	warp "r_road",154,197;
 	end;
 
@@ -179,16 +189,21 @@ function	script	race_init	{
 	}
 }
 
+function	script	race_deleteItems	{
+	setarray .@item[0],17507,17508,17509,17510,17511,17512,17513;
+	for(set .@i,0;.@i<getarraysize(.@item);set .@i,.@i+1)
+		if( set(.@tmp,countitem(.@item[.@i])) > 0 )
+		delitem .@item[.@i],.@tmp;
+	return;
+}
+
 function	script	race_cleanup	{
 	function	Block_Player_Move	;
 	set race_chkpt1,0;
 	set race_lap, 0;
 	set RaceItemCount, 0;
 	Block_Player_Move(0);
-	setarray .@item[0],17507,17508,17509,17510,17511,17512;
-	for(set .@i,0;.@i<getarraysize(.@item);set .@i,.@i+1)
-		if( set(.@tmp,countitem(.@item[.@i])) > 0 )
-		delitem .@item[.@i],.@tmp;
+	callfunc "race_deleteItems";
 	return;
 	
 	function	Block_Player_Move	{
@@ -265,6 +280,8 @@ L_Winner:
 		callsub OnEndd;
 	} 
 	set .RaceWinners, .RaceWinners + 1;
+	//callfunc "race_deleteItems";
+	//callfunc "WalkToXY_RainbowSurfers",0;
 	end;
 OnEndd:
 	announce "[Rainbow Racing] The event has now ended! Congratulations to the winners!",bc_all,0x33FF00;
