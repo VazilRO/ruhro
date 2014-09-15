@@ -258,12 +258,12 @@ OnTouch:
 	if(race_chkpt1 == 1) {
 		set race_chkpt1, 0;
 		set race_lap, race_lap + 1;
-		if(race_lap > 2) goto L_Winner;
+		if(race_lap > 0) goto L_Winner;
 		dispbottom "Lap [" + race_lap + "/" + .NumLaps + "] completed!";
 	}
 	end;
 OnInit:
-	set .NumLaps, 3;
+	set .NumLaps, 1;
 	set .RaceWinners, 0;
 	set .RewardItem, 677;
 	set .RaceMap$, "r_road";
@@ -300,7 +300,7 @@ end;
 
 OnTouch:
 	if (RaceItemCount < 1) {
-		set .@runes, rand(0,3);
+		set .@runes, rand(0,4);
 		switch( .@runes ) {
 			case 0:
 				// 1 Red Mushroom
@@ -322,6 +322,10 @@ OnTouch:
 				getitem 17512,5;
 				set RaceItemCount, 5;
 				break;
+			case 4:
+				// Fake box
+				getitem 17513,1;
+				set RaceItemCount, 1;
 			default: 
 				end;
 		}
