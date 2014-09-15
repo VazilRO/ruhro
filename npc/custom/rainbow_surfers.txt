@@ -85,11 +85,11 @@ OnTimer180000:
 	announce "[Rainbow Racing] Registration is now closed!",bc_all,.GlobAnnColor$;
 	disablenpc "Rainbow Race Warper";
 	sleep(3000);
-	/*if(getmapusers(.RaceMap$) < 5) {
+	if(getmapusers(.RaceMap$) < 3) {
 		announce "[Rainbow Racing] Race cancelled. Not enough players!",bc_all,.GlobAnnColor$;
 		callsub OnEndd;
 		end;
-	}*/
+	}
 	mapannounce .RaceMap$,"[Rainbow Racing] Welcome to Rainbow Racing!",0,.MapAnnColor$;
 	sleep(2000);
 	mapannounce .RaceMap$,"[Rainbow Racing] The goal of the game is to finish a lap...",0,.MapAnnColor$;
@@ -270,10 +270,10 @@ OnInit:
 L_Winner:
 	if(.RaceWinners == 0) {
 		mapannounce .RaceMap$,"First Place: " + strcharinfo(0) + "!",0,0xFFCC00;
-		getitem .RewardItem, 5; // 5 coins for first place
+		getitem .RewardItem, 3; // 3 coins for first place
 	} else if (.RaceWinners == 1) {
 		mapannounce .RaceMap$,"Second Place: " + strcharinfo(0) + "!",0,0x909090;
-		getitem .RewardItem, 3; // 3 coins for second place
+		getitem .RewardItem, 2; // 2 coins for second place
 	} else {
 		mapannounce .RaceMap$,"Third Place: " + strcharinfo(0) + "!",0,0x996633;
 		getitem .RewardItem, 1; // 1 coin for third place
