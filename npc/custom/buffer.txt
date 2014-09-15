@@ -5,7 +5,7 @@ prontera,147,177,5	script	Shifty Priest::shiftyPriest	60,{
 //Configuration
 //===============================
 set $@zeny,1500;
-set $@zeny,BaseLevel*250;
+set $@zeny,BaseLevel*200;
 
 mes "[Shifty Priest]";
 mes "Hey buddy, you look like you could use some help.";
@@ -20,13 +20,13 @@ L_B:
 if (Zeny < $@zeny) goto NeedZenys;
 Set Zeny,zeny-$@zeny;
 specialeffect2 42;
-sc_start SC_BLESSING,600000,10;
+sc_start SC_BLESSING,300000,10;
 specialeffect2 43;
-sc_start SC_INCREASEAGI,600000,10;
+sc_start SC_INCREASEAGI,300000,10;
 specialeffect2 76;
-sc_start SC_MAGNIFICAT,600000,5;
+sc_start SC_MAGNIFICAT,300000,5;
 specialeffect2 41;
-sc_start SC_ANGELUS,600000,10;
+sc_start SC_ANGELUS,300000,10;
 mes "[Shifty Priest]";
 mes "Yeah, Yeah, that's real nice.";
 mes "Heh heh...";
