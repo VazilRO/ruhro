@@ -653,6 +653,18 @@ OnTimer320000:
 	mapwarp "sword_2-1","yuno_fild07",255,178;
 	stopnpctimer;
 	end;
+OnPCDieEvent:
+	if (strcharinfo(3) == "sword_2-1") {
+		dispbottom "You have died.";
+		donpcevent "Buddy#Sura_Salon::OnReset";
+		donpcevent "Buddy#job_shuaneh::OnDisable";
+		donpcevent "#Sura_garajjom::OnDisable";
+		donpcevent "Drawing Room::OnEnable";
+		stopnpctimer;
+		warp "SavePoint",0,0;
+	}
+	end;
+
 }
 
 sword_2-1,223,205,7	script	Buddy#job_shuaneh	753,{
