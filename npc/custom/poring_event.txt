@@ -38,18 +38,8 @@ OnMinute00:
 	initnpctimer;
 	if ($@randevent == 0) {
 		announce "Find the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
-		if (getmapusers("guild_vs5") < 5) {
-			set $@prize_amount,1;
-		} else {
-			set $@prize_amount,2;
-		}
 	} else if ($@randevent == 1) {
 		announce "Dodge the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
-		if (getmapusers("guild_vs5") < 5) {
-			set $@prize_amount,2;
-		} else {
-			set $@prize_amount,5;
-		}
 	}
 	enablenpc "poringwarper";
 	end;
@@ -116,6 +106,11 @@ OnNotEnoughPlayers:
 //Find the Porings!	
 OnFindPoringStart:
 	set $@specialremain,5;
+	if (getmapusers("guild_vs5") < 5) {
+		set $@prize_amount,1;
+	} else {
+		set $@prize_amount,2;
+	}
 	
 	mapannounce "guild_vs5","Find the Porings Event will start in 5 seconds!",bc_map;
 	sleep 5000;
@@ -152,6 +147,12 @@ OnSpecialKill:
 	
 //Start Dodge the Porings!
 OnDodgePoringStart:
+	if (getmapusers("guild_vs5") < 5) {
+		set $@prize_amount,2;
+	} else {
+		set $@prize_amount,5;
+	}
+	
 	mapannounce "guild_vs5","Dodge the Porings Event will start in 10 seconds!",bc_map;
 	sleep 9000;
 	
