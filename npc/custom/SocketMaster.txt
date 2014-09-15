@@ -62,7 +62,8 @@ H_BlackBeret: //18561
 	mes "4x Black Dyestuffs"; //983
 	mes "1x Feather Beret"; //5170
 	mes "10x Berets"; //5172
-	mes "and 4 Million Zeny";
+	mes "200x Soft Feathers"; //7063
+	mes "and 5 Million Zeny";
 	mes "Let's not forget the 30% success chance.";
 	emotion e_heh;
 	menu "YOLO BLACK HATS!",M_BlackBeret,"Return to Menu",H_CHOICE, "Nah, forget it.",N_CLOSE;
@@ -166,12 +167,13 @@ M_ANGELEAR:
 
 
 M_BlackBeret:
-		if(countitem(983)<4 || countitem(5170)<1 || countitem(5172)<10 || zeny < 4000000)
+		if(countitem(983)<4 || countitem(5170)<1 || countitem(5172)<10 || countitem(7063)<200 || zeny < 5000000)
 			goto M_insufficient;
         delitem 983,4;
         delitem 5170,1;
 		delitem 5172,10;
-        set Zeny,zeny-4000000;
+		delitem 7063,200;
+        set Zeny,zeny-5000000;
 		
 		if (rand(100) <30){
 			mes "[Socket Master]";
