@@ -247,5 +247,6 @@ guild_vs5,49,71,3,	script	Poring Rewarder::poringrewarder	949,{
 
 guild_vs5	mapflag	noexp	//disables xp
 guild_vs5	mapflag	nodrop	//disables dropping items?
+guild_vs5	mapflag	noloot	//disables loot
 guild_vs5	mapflag	noitemconsumption	//disables item consumption?
 guild_vs5	mapflag	nocommand	5	//disables atcommands for GM level < 5
