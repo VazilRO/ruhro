@@ -1,7 +1,7 @@
 //======Name========================================
 // Poring Events
 //======Version=====================================
-// 1.5b
+// 1.6
 //======Author(s)===================================
 // Alkarl
 //======Comments====================================
@@ -38,8 +38,18 @@ OnMinute00:
 	initnpctimer;
 	if ($@randevent == 0) {
 		announce "Find the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
+		if (getmapusers("guild_vs5") < 5) {
+			set $@prize_amount,1;
+		} else {
+			set $@prize_amount,2;
+		}
 	} else if ($@randevent == 1) {
 		announce "Dodge the Poring Event will start in 5 minutes! Find me just north of the Prontera Fountain",0;
+		if (getmapusers("guild_vs5") < 5) {
+			set $@prize_amount,2;
+		} else {
+			set $@prize_amount,5;
+		}
 	}
 	enablenpc "poringwarper";
 	end;
@@ -80,14 +90,14 @@ OnTimer300000:
 	stopnpctimer;
 	disablenpc "poringwarper";
 	if ($@randevent == 0) {
-		if (getmapusers("guild_vs5") >= 5) {
+		if (getmapusers("guild_vs5") > 0) {
 		announce "Find the Poring Event is now starting",0;
 		goto OnFindPoringStart;
 		} else {
 		goto OnNotEnoughPlayers;
 		}
 	} else if ($@randevent == 1) {
-		if (getmapusers("guild_vs5") >= 5) {
+		if (getmapusers("guild_vs5") > 0) {
 		announce "Dodge the Poring Event is now starting",0;
 		goto OnDodgePoringStart;
 		} else {
@@ -129,7 +139,7 @@ OnPoringKill:
 OnSpecialKill:
 	set $@specialremain,$@specialremain-1;
 	mapannounce "guild_vs5",$@specialremain+" of GM Alkarl's Minions remain.",bc_map;
-	getitem 677,2; //reward
+	getitem 677,$@prize_amount; //reward
 	if($@specialremain < 1) {
 		announce "All of GM Alkarl's Minions have been killed!",0;
 		killmonsterall "guild_vs5";
@@ -229,7 +239,7 @@ guild_vs5,49,71,3,	script	Poring Rewarder::poringrewarder	949,{
 	mes "Congratulations!";
 	mes "I will now reward you and take you back to Prontera!";
 	next;
-	getitem 677,5;
+	getitem 677,$@prize_amount;
 	warp "prontera",155,220;
 	end;
 }
