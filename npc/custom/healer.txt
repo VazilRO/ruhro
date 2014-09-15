@@ -13,7 +13,7 @@
 //= 1.1 Aligned coordinates with @go.
 //============================================================
 
--	script	Healer	-1,{
+-	script	Healer	601,{
 
 	.@Price = 5000;	// Zeny required for heal
 	.@Buffs = 0;	// Also buff players? (1: yes / 0: no)
