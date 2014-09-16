@@ -3114,6 +3114,12 @@ int status_calc_pc_(struct map_session_data* sd, enum e_status_calc_opt opt)
 				}
 				if(!data->script)
 					continue;
+				if ( map[sd->bl.m].flag.noitem ) {
+					int k;
+					ARR_FIND(0, MAX_RESTRICTED_LIST, k, c == map[sd->bl.m].noitemlist[k] || data->type == map[sd->bl.m].noitemlist[k] );
+					if ( k < MAX_RESTRICTED_LIST )
+						continue;
+				}
 				if(!pc_has_permission(sd,PC_PERM_USE_ALL_EQUIPMENT) && itemdb_isNoEquip(data,sd->bl.m)) // Card restriction checks.
 					continue;
 				if(i == EQI_HAND_L && sd->status.inventory[index].equip == EQP_HAND_L) { // Left hand status.

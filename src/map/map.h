@@ -50,6 +50,7 @@ void map_msg_reload(void);
 #define MAX_IGNORE_LIST 20 	// official is 14
 #define MAX_VENDING 12
 #define MAX_MAP_SIZE 512*512 	// Wasn't there something like this already? Can't find it.. [Shinryo]
+#define MAX_RESTRICTED_LIST 50 // use in noitem mapflag
 
 /** Added definitions for WoESE objects and other [L0ne_W0lf], [aleos] */
 enum MOBID {
@@ -679,6 +680,7 @@ struct map_data {
 #ifdef ADJUST_SKILL_DAMAGE
 		unsigned skill_damage : 1;
 #endif
+		unsigned noitem	: 1;
 	} flag;
 	struct point save;
 	struct npc_data *npc[MAX_NPC_PER_MAP];
@@ -692,6 +694,7 @@ struct map_data {
 	int mob_delete_timer;	// [Skotlex]
 	uint32 zone;	// zone number (for item/skill restrictions)
 	int nocommand; //Blocks @/# commands for non-gms. [Skotlex]
+	int noitemlist[MAX_RESTRICTED_LIST];	
 	struct {
 		int jexp;	// map experience multiplicator
 		int bexp;	// map experience multiplicator

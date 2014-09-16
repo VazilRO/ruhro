@@ -3132,6 +3132,7 @@ void map_flags_init(void)
 		map[i].adjust.bexp = 100;  // per map base exp multiplicator
 		map[i].adjust.jexp = 100;  // per map job exp multiplicator
 		memset(map[i].drop_list, 0, sizeof(map[i].drop_list));  // pvp nightmare drop list
+		memset(map[i].noitemlist, -1, sizeof(map[i].noitemlist));// noitem item list mapflag
 
 		// skill damage
 #ifdef ADJUST_SKILL_DAMAGE

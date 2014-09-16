@@ -1088,6 +1088,13 @@ bool pc_isequip(struct map_session_data *sd,int n)
 	if (!pc_isItemClass(sd,item))
 		return false;
 
+	if ( map[sd->bl.m].flag.noitem ) {
+		int i;
+		ARR_FIND( 0, MAX_RESTRICTED_LIST, i, item->nameid == map[sd->bl.m].noitemlist[i] || item->type == map[sd->bl.m].noitemlist[i] );
+		if ( i < MAX_RESTRICTED_LIST )
+			return false;
+	}		
+		
 	return true;
 }
 
@@ -4664,6 +4671,13 @@ bool pc_isUseitem(struct map_session_data *sd,int n)
 	
 	if (!pc_isItemClass(sd,item))
 		return false;
+		
+	if ( map[sd->bl.m].flag.noitem ) {
+		int i;
+		ARR_FIND( 0, MAX_RESTRICTED_LIST, i, map[sd->bl.m].noitemlist[i] == nameid || item->type == map[sd->bl.m].noitemlist[i] );
+		if( i < MAX_RESTRICTED_LIST )
+			return false;
+	}
 
 	//Dead Branch items
 	if( item->flag.dead_branch )
@@ -9113,6 +9127,16 @@ bool pc_equipitem(struct map_session_data *sd,short n,int req_pos)
 
 	if (!(id = sd->inventory_data[n]))
 		return false;
+		
+	if ( map[sd->bl.m].flag.noitem ) {
+		int b;
+		ARR_FIND(0, MAX_RESTRICTED_LIST, b, id->nameid == map[sd->bl.m].noitemlist[b] || id->type == map[sd->bl.m].noitemlist[b] );
+		if ( b < MAX_RESTRICTED_LIST ) {
+			clif_equipitemack(sd,n,0,0);
+			return false;
+		}
+	}
+		
 	pos = pc_equippoint(sd,n); //With a few exceptions, item should go in all specified slots.
 
 	if(battle_config.battle_log)
@@ -9509,6 +9533,19 @@ void pc_checkitem(struct map_session_data *sd) {
 			calc_flag = 1;
 			continue;
 		}
+		
+		if ( map[sd->bl.m].flag.noitem ) {
+			int j;
+			struct item_data *i_data = itemdb_exists( it.nameid );
+			for ( j = 0; j < MAX_RESTRICTED_LIST; j++ ) {
+				if ( map[sd->bl.m].noitemlist[j] == i_data->type || map[sd->bl.m].noitemlist[j] == it.nameid ) {
+					pc_unequipitem(sd, i, 2);
+					calc_flag = 1;
+					continue;
+				}
+			}
+		}
+		
 	}
 
 	if( calc_flag && sd->state.active ) {
