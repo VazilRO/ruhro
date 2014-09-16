@@ -3794,6 +3794,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 #else
 		ShowInfo("npc_parse_mapflag: skill_damage: ADJUST_SKILL_DAMAGE is inactive (core.h). Skipping this mapflag..\n");
 #endif
+	}
 	else if (!strcmpi(w3,"noitem")) {
 		int id = 0, i = 0, j = 0, k = 0, l = 0;
 		char *temp = (char*)aMalloc( strlen(w4) +1 );
@@ -3817,7 +3818,6 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 			}
 		}
 		map[m].flag.noitem = state;
-	}
 	}
 	else
 		ShowError("npc_parse_mapflag: unrecognized mapflag '%s' (file '%s', line '%d').\n", w3, filepath, strline(buffer,start-buffer));
