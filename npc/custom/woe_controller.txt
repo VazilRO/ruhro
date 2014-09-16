@@ -226,11 +226,11 @@ OnPCLoadMapEvent:
 		sleep2 500;
 		warp "SavePoint",0,0;
 	}	
-	if ((!(eaclass()&EAJL_THIRD) || BaseLevel < 100) && Check_Woe(strcharinfo(3), 2)) {
-		message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to non third class characters during WoE 2.0!";
-		sleep2 500;
-		warp "SavePoint",0,0;
-	}	
+	//if ((!(eaclass()&EAJL_THIRD) || BaseLevel < 100) && Check_Woe(strcharinfo(3), 2)) {
+	//	message strcharinfo(0), getcastlename(strcharinfo(3))+" is not available to non third class characters during WoE 2.0!";
+	//	sleep2 500;
+	//	warp "SavePoint",0,0;
+	//}	
 	if (((.AutoKick && .Active[0]) || (.NoOwner && !getcastledata(strcharinfo(3),1))) && !(.Active[0]&(1<<getd("."+strcharinfo(3))))) {
 		if (getcharid(2) && getcastledata(strcharinfo(3),1) == getcharid(2)) end;
 		sleep2 1000;
