@@ -15,17 +15,13 @@
 //	wins. If multiple players survive all the rounds, they all win.
 //==================================================
 
-guild_vs5,1,1,0	script	poringevent	-1,300,300,{
+-	script	poringevent	-1,{
 OnInit:
 	disablenpc "poringwarper";
 	disablenpc "poringrewarder";
 	mapwarp "guild_vs5","prontera",155,220;
 	killmonsterall "guild_vs5";
 	end;
-	
-OnTouch:	//make sure no one reequips
-	nude;
-    end;
 	
 OnMinute00:
 	disablenpc "poringwarper";
@@ -250,3 +246,4 @@ guild_vs5	mapflag	nodrop	//disables dropping items?
 guild_vs5	mapflag	noloot	//disables loot
 guild_vs5	mapflag	noitemconsumption	//disables item consumption?
 guild_vs5	mapflag	nocommand	5	//disables atcommands for GM level < 5
+guild_vs5	mapflag	noitem	0,2,3,4,5,6,7,8,10,11,18 //disables use of all items within guild_vs5
