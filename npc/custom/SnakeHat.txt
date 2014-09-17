@@ -54,7 +54,7 @@ L_Make:
 	mes "Alright let's see if this works...";
 	next;
 
-	if(countitem(926) < 1000 || countitem(1048) < 300 ||	countitem(938) < 100 || countitem(4117) < 1 ) goto L_NOITEMS;
+	if(countitem(926) < 1000 || countitem(1048) < 300 || countitem(938) < 100 || countitem(4117) < 1 ) goto L_NOITEMS;
 	
 	delitem 926,1000;
 	delitem 1048,300;
