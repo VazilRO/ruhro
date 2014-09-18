@@ -193,7 +193,7 @@
 40079,C_MERCURYRISER,Mercury Riser,4,0,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,759,{},{},{}
 40080,C_HORNOFANCIENT,Horn of Ancient,4,0,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,757,{},{},{}
 40081,C_RISINGBLACKDRAGON,Rising Black Dragon,4,0,,0,,,,0,0xFFFFFFFF,63,2,1024,,1,0,863,{},{},{}
-40082,C_AJIMBOOFACE,Ajimboo's Face,4,0,,0,,,,0,0xFFFFFFFF,63,2,3072,,1,0,65,{},{},{}
+40082,C_AJIMBOOFACE,Ajimboo's Face,4,0,,0,,,,0,0xFFFFFFFF,63,2,6144,,1,0,65,{},{},{}
 //End Costume
 
 
