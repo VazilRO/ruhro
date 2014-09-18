@@ -969,8 +969,8 @@ int npc_touch_areanpc(struct map_session_data* sd, int16 m, int16 x, int16 y)
 		case NPCTYPE_WARP:
 			if (pc_ishiding(sd) || (sd->sc.count && sd->sc.data[SC_CAMOUFLAGE]) || pc_isdead(sd))
 				break; // hidden or dead chars cannot use warps
-			if(sd->count_rewarp > 3){
-				ShowWarning("Prevent infinite warping loop, please fix script\n");
+			if(sd->count_rewarp > 10){
+				ShowWarning("Prevent infinite warping loop for player (%d:%d), please fix script npc:'%s', path:'%s' \n",sd->status.account_id, sd->status.char_id,map[m].npc[i]->exname,map[m].npc[i]->path);
 				sd->count_rewarp=0;
 				break;
 			}
@@ -3466,8 +3466,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		// check if target map has players
 		// (usually shouldn't occur when map server is just starting,
 		// but not the case when we do @reloadscript
-		// Parse maps with MVPs on them [Poutine]
-		if (map[data->m].users > 0 || mob.state.boss)
+		if( map[data->m].users > 0 )
 			npc_parse_mob2(data);
 	}
 	else
@@ -3794,31 +3793,6 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 #else
 		ShowInfo("npc_parse_mapflag: skill_damage: ADJUST_SKILL_DAMAGE is inactive (core.h). Skipping this mapflag..\n");
 #endif
-	}
-	else if (!strcmpi(w3,"noitem")) {
-		int id = 0, i = 0, j = 0, k = 0, l = strlen(w4);
-		char *temp = (char*)aMalloc( strlen(w4) +1 );
-		if ( l ) {
-			while ( i <= l && k < MAX_RESTRICTED_LIST ) {
-				if ( w4[i] != ' ' && w4[i] != '	' && w4[i] != ',' && w4[i] != '\0' ) {
-					temp[j++] = w4[i];
-				}
-				else if ( w4[i-1] != ' ' && w4[i-1] != '	' && w4[i-1] != ',' ) {
-					temp[j] = '\0';
-					id = atoi( temp );
-					if ( ( id >= IT_HEALING && id < IT_MAX ) || itemdb_exists( id ) )
-						map[m].noitemlist[k] = id;
-					else
-						ShowWarning("npc_parse_mapflag: Item ID \"%s\" does not exist.\n           Mapflag noitem: At %s (file '%s', line '%d').\n", temp, map[m].name, filepath, strline(buffer,start-buffer));
-					k++;
-					j = 0;
-				}
-				i++;
-			}
-			map[m].flag.noitem = state;
-		}
-		else
-			ShowWarning("npc_parse_mapflag: no Item ID/type input.\n           Mapflag noitem: At %s (file '%s', line '%d').\n", map[m].name, filepath, strline(buffer,start-buffer));
 	}
 	else
 		ShowError("npc_parse_mapflag: unrecognized mapflag '%s' (file '%s', line '%d').\n", w3, filepath, strline(buffer,start-buffer));
