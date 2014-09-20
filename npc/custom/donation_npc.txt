@@ -3,7 +3,7 @@ prontera,154,212,4	script	Redemption NPC::donationDude	406,{
 	// --- SET THESE BEFORE LOADING THE SCRIPT! ---
 
 	// Server Name
-	set serverName$,"RedditRO";
+	set serverName$,"RuhRO";
 
 	// NPC Name to display during chat.
 	// Default: "[Donor Rewards Redeemer]"

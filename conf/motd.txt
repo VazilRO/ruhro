@@ -1,9 +1,7 @@
 // Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.c
-Welcome to RedditRO! Have fun! 
+Welcome to RuhRO! Have fun! 
 
-No real update for you today, we'll probably be doing a second round of hiring to fill the spot of our beloved and ancient GM Baskura soonish. Details to follow.
-
-Yesterday I accidentally swallowed some food coloring. The doctor says I'm OK, but I feel like I've dyed a little inside.
+My friend's bakery burned down last night. Now his business is toast.
 
 Remember to be nice to your fellow players, and report bugs you find!
 .

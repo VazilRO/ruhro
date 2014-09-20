@@ -44,7 +44,7 @@ prontera,147,195,5	script	Stylist#custom_stylist	122,{
 	mes "[^FF8000Stylist^000000]";
 	mes "I could squeeze you in for a fee?";
 	mes "My standard fee is ^FF0000100,000 zeny.^000000";
-	mes "But I could be persuaded for 2 RedditRO Coins";
+	mes "But I could be persuaded for 2 RuhRO Coins";
 	next;
 	menu "Chump Change!",LzenyCharge,"These shiny coins?",Lplatinum,"Oh, um... Not today...",Lnope;
 	

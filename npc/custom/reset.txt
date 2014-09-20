@@ -21,11 +21,11 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 	mes "Reset Stats: "+.@stzeny+"z";
 	mes "Reset Skills: "+.@skzeny+"z";
 	mes "Reset Both: "+.@bzeny+"z";
-	mes "RedditRO Coins: 5 per reset, 10 for both";
+	mes "RuhRO Coins: 5 per reset, 10 for both";
 	mes "Please select the service you want:";
 	next;
 
-	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:RedditRO Coins:GM Free Reset Ticket:Quit")) {
+	switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Free Reset?:RuhRO Coins:GM Free Reset Ticket:Quit")) {
 		case 1:
 			mes "[Reset Girl]";
 			if (Zeny < .@skzeny) {
@@ -114,7 +114,7 @@ prontera,166,200,5	script	Reset Girl::resetGirl	124,{
 		
 		case 5:
 		 	mes "[Reset Girl]";
-		 	mes "RedditRO Coins are shiny!";
+		 	mes "RuhRO Coins are shiny!";
 		 	mes "Reset Stats: 5 coins";
 			mes "Reset Skills: 5 coins";
 			mes "Reset Both: 10 coins";

@@ -8,7 +8,7 @@
 //= rAthena Project
 //===== Description: =========================================
 //= Custom Exchanger to exchange Courtesy Tickets for EXP and
-//= goods for RedditRO
+//= goods for RuhRO
 //===== Additional Comments: =================================
 //= 1.0 First Version. [Poutine]
 //============================================================

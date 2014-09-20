@@ -7,7 +7,7 @@
 //===== Compatible With: =====================================
 //= rAthena Project
 //===== Description: =========================================
-//= GM Event for RedditRO
+//= GM Event for RuhRO
 //===== Additional Comments: =================================
 //= 1.0 First Version. [Poutine]
 //============================================================

@@ -135,7 +135,7 @@
 //3014,Halloween Whisper@NPC_EMOTION,chase,197,1,200,0,5000,yes,self,always,0,19,0x81,,,,,
 
 // Here you can place your custom mob skills
-// RedditRO
+// RuhRO
 
 //MVP GM Alkarl
 3501,GM Alkarl@MG_SAFETYWALL,any,12,10,5000,0,10000,no,self,closedattacked,,,,,,,,
@@ -183,5 +183,5 @@
 3504,GM Kyo@AL_HEAL,idle,28,12,10000,0,5000,yes,self,myhpltmaxrate,50,,,,,,,
 3504,GM Kyo@AL_HEAL,idle,28,6,10000,0,10000,yes,self,myhpltmaxrate,99,,,,,,,
 
-//RedditRO Racing
+//RuhRO Racing
 3550,Bomb@NPC_SELFDESTRUCTION,attack,173,1,10000,0,0,no,self,always,0,,,,,,,

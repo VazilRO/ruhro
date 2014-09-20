@@ -7,13 +7,13 @@
 //===== Compatible With: =====================================
 //= rAthena Project
 //===== Description: =========================================
-//= Custom PvP Warper for RedditRO
+//= Custom PvP Warper for RuhRO
 //===== Additional Comments: =================================
 //= 1.0 First Version. [Poutine]
 //============================================================
 
 
-// RedditRO PvP
+// RuhRO PvP
 06guild_01	mapflag	pvp
 06guild_02	mapflag	pvp
 06guild_01	mapflag	pvp_noparty

@@ -7,7 +7,7 @@
 //Description: This is a npc script for FluxCP Vote for points in order for the players
 //to claim their vote points
 //====================================================================================
-//2.0 Reworked to give 5 RedditRO Coins (677) for 10 Vote Points.
+//2.0 Reworked to give 5 RuhRO Coins (677) for 10 Vote Points.
 //====================================================================================
 
 prontera,187,209,3	script	Points Redeemer	72,{
