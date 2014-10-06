@@ -127,7 +127,7 @@
 mal_in01,170,21,3	duplicate(malanginvest)	Nyanta::malanginvest1	560
 
 // Investment Board NPC
--	script	Investment Board::malinvestboard	-1,{
+-	script	Investment Board::maboard	-1,{
 	mes "[Culvert Entrance Investment]";
 	if($MalangdoEvent == 0) mes "This weeks event is: ^DF0101OFF^000000";
 	else mes "This weeks event is: ^04B404ON^000000";
@@ -137,7 +137,7 @@ mal_in01,170,21,3	duplicate(malanginvest)	Nyanta::malanginvest1	560
 	mes callfunc("F_InsertComma",$CulvertInvestment) + " Zeny^000000";
 	close;
 }
-mal_in01,170,19,3	duplicate(malinvestboard)	Investment Board#malinvestboard	857
+mal_in01,170,19,3	duplicate(maboard)	Investment Board#maboard	857
 
 // Weekly Investment Check Handler
 -	script	MalangdoEventHandler	-1,{
