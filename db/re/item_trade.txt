@@ -2570,4 +2570,3 @@
 20139,475,100	//C_Horse_Hairpin
 20140,475,100	//C_Horse_Hairpin
 6907,475,100		//Piece_Of_Soul_Horse
->>>>>>> upstream/master

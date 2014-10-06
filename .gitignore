@@ -122,3 +122,7 @@ Thumbs.db
 /vcproj-9/map-server
 /vcproj-9/mapcache
 /conf/.tmp-desd_conf.yml
+*.obj
+*.pdb
+*.log
+*.tlog
