@@ -19,6 +19,167 @@
 //= 1.1 Instance system rewrite. [Euphy]
 //============================================================ 
 
+// Investment
+-	script	Nyanta::malanginvest	-1,{	
+	mes .NPCName$;
+	mes "Hi! We're gathering resources to clean the culvert!";
+	mes "It's our duty to ensure that the Culvert is clean every week!";
+	next;
+	mes .NPCName$;
+	mes "For this operation, we need the follow: ";
+	mes "^4d4dff" + .RROCoinInvestment + "x RedditRO Coins^000000";
+	mes "^4d4dff" + .fishInvest + "x Fish Tail^000000";
+	mes "^4d4dff" + callfunc("F_InsertComma",.InstanceInvest) + "z^000000";
+	next;
+	mes .NPCName$;
+	mes "Would you like to donate to our cause?";
+	next;
+	switch(select("Donate Coins:Donate Fish:Donate Zeny:Cancel")) {
+		case 1:
+			mes .NPCName$;
+			mes "Please enter the amount of ^4d4dffRedditRO Coins^000000 you want to invest.";
+			mes "Please enter a number between 1-100";
+			mes "Please enter 0 to cancel.";
+			next;
+			input .@units;
+			if (.@units <= 0 || countitem(677) < .@units) {
+				mes .NPCName$;
+				mes "With or without your help, it's still a cats duty!";
+				close;
+			} else if (.@units > 100) {
+				mes .NPCName$;
+				mes "Please try again.";
+				close;
+			}
+			
+			mes .NPCName$;
+			delitem 677, .@units;
+			set $CulvertCoinInvestment, $CulvertCoinInvestment + .@units;
+			mes "You've donated " +.@units+" RedditRO Coins.";
+			break;
+		case 2:
+			mes .NPCName$;	
+			mes "Please enter the amount of ^4d4dffFish^000000 you want to invest.";
+			mes "Please enter a number between 1-1000";
+			mes "Please enter 0 to cancel.";
+			next;
+			input .@units;
+			if (.@units <= 0 || countitem(1023) < .@units) {
+				mes .NPCName$;
+				mes "With or without your help, it's still a cats duty!";
+				close;
+			} else if (.@units > 1000) {
+				mes .NPCName$;
+				mes "Please try again.";
+				close;
+			}
+			
+			mes .NPCName$;
+			delitem 1023, .@units;
+			set $CulvertFishInvestment, $CulvertFishInvestment + .@units;
+			mes "You've donated " +.@units+" Fishes.";
+			break;
+		case 3:
+			mes .NPCName$;
+			mes "Donations of Zeny are in units of ^4d4dff"+callfunc("F_InsertComma",.unitInvest)+"z^000000.";
+			mes "Please enter the amount of ^4d4dffZeny^000000 you want to invest.";
+			mes "Please enter a number between 1-1000";
+			mes "Please enter 0 to cancel.";
+			next;
+			input .@units;
+			if (.@units <= 0) {
+				mes .NPCName$;
+				mes "With or without your help, it's still a cats duty!";
+				close;
+			} else if (.@units > 1000) {
+				mes .NPCName$;
+				mes "Please try again.";
+				close;
+			}		
+			if (Zeny < .@units*.unitInvest) {
+				mes .NPCName$;
+				mes "You do not have enough money.";
+				close;
+			}
+			
+			mes .NPCName$;
+			set Zeny, Zeny-.@units*.unitInvest;
+			set $CulvertInvestment, $CulvertInvestment + .@units*.unitInvest;
+			mes "You've donated " +callfunc("F_InsertComma",.@units*.unitInvest)+" Zeny.";
+			break;
+		case 4:
+			mes .NPCName$;
+			mes "With or without your help, it's still a cats duty!";
+			close;
+	}
+	
+	mes "Thank you for your patronage!";
+	close;
+	
+	OnInit:
+		set .NPCName$, "[Nyanta]"; // Name of the NPC
+		set .InstanceInvest, 50000000; // Amount required to gain access to the dungeon
+		set .fishInvest, 1000;
+		set .RROCoinInvestment, 100;
+		set .unitInvest, 10000;
+		end;	
+}
+mal_in01,170,21,3	duplicate(malanginvest)	Nyanta::malanginvest1	560
+
+// Investment Board NPC
+-	script	Investment Board::malinvestboard	-1,{
+	mes "[Culvert Entrance Investment]";
+	if($MalangdoEvent == 0) mes "This weeks event is: ^DF0101OFF^000000";
+	else mes "This weeks event is: ^04B404ON^000000";
+	mes "Current investment total is:";
+	mes "^4d4dff"+$CulvertCoinInvestment + "x RedditRO Coins";
+	mes $CulvertFishInvestment + "x Fishes ";
+	mes callfunc("F_InsertComma",$CulvertInvestment) + " Zeny^000000";
+	close;
+}
+mal_in01,170,19,3	duplicate(malinvestboard)	Investment Board#malinvestboard	857
+
+// Weekly Investment Check Handler
+-	script	MalangdoEventHandler	-1,{
+	OnInit:
+		set .InstanceInvest, 50000000; // Amount required to gain access to the dungeon
+		set .fishInvest, 1000;
+		set .RROCoinInvestment, 100;
+		set .EventName$, "[Malangdo Culvert]";
+		bindatcmd("malangdoculvert","MalangdoEventHandler::OnGMAdmin",11,11);	
+		end;
+	OnGMAdmin:
+		if ( compare( .@atcmd_parameters$, "on" ) ) goto L_start;
+		else if ( compare( .@atcmd_parameters$, "off" ) ) goto L_end;
+		else {
+			dispbottom "type - '@checkmalangdo on' to start the event";
+			dispbottom "type - '@checkmalangdo off' to end the event";
+		}
+	OnSun0000:
+		if($CulvertCoinInvestment >= .RROCoinInvestment && 
+		$CulvertFishInvestment >= .fishInvest && 
+		$CulvertInvestment >= .InstanceInvest) {
+			goto L_start;
+		} else {
+			announce .EventName$ + " Insufficient donations to proceed.",bc_all,0x01A9DB;
+			set $MalangdoEvent, 0; // set the Malangdo event to OFF
+		}
+		end;
+	L_start:
+		announce .EventName$ + " Donations have reached the required amount. Event is now activated for one week. Investment has now reset.",bc_all,0x01A9DB;
+		set $MalangdoEvent, 1; // set the Malangdo event to ON
+		set $CulvertCoinInvestment, 0; // Reset the Investment for next round
+		set $CulvertFishInvestment, 0;
+		set $CulvertInvestment, 0;
+		end;
+	L_end:
+		announce .EventName$ + " Event has been cancelled.",bc_all,0x01A9DB;
+		set $MalangdoEvent, 0; // set the Malangdo event to ON
+		end;
+		
+}
+
+
 // Quest NPCs :: mal_yong
 //============================================================
 mal_in01,172,28,2	script	Albo#mal	561,{
@@ -33,7 +194,7 @@ mal_in01,172,28,2	script	Albo#mal	561,{
 	if (BaseLevel < 90) {
 		mes "[Albo]";
 		mes "Who are you?";
-		mes "We don't need a weaking!!";
+		mes "We don't need a weakling!!";
 		close;
 	}
 	setarray .@quests[0],12271,12272,12273,12274;
@@ -377,9 +538,10 @@ mal_in01,160,34,4	script	Missing, the Cleaner	545,{
 		set in_canal_n,1;
 		close;
 	}
-	if (countitem(6436) == 0) {
+	if (countitem(6436) == 0 && $MalangdoEvent == 0) {
 		mes "[Missing, the Cleaner]";
-		mes "You don't look like you have Seagod Protection. I can't open door at the moment!";
+		mes "You don't look like you have ^4d4dffSeagod's Protection^000000 and we don't seem to have enough donations!";
+		mes "I can't open door!";
 		close;
 	}
 	set .@party_id,getcharid(1);
