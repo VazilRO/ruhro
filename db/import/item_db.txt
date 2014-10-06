@@ -101,7 +101,7 @@
 7170,Tuxedo,Tuxedo,4,43000,,10,,0,,0,0xFFFFFFFF,7,1,16,,0,1,0,{},{ setoption Option_Wedding,1; },{ setoption Option_Wedding,0; }
 
 
-// RuhRO Custom Items
+// RedditRO Custom Items
 // Starting from id 40000 to be safe, 65535 is apparently the highest
 //=====================================================================
 40000,Convex_Mirror_3Days,Convex Mirror 3Day Box,18,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ rentitem 12214,259200; },{},{}

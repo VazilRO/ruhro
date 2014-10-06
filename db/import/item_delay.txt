@@ -6,7 +6,7 @@
 // NOTE:
 // There is a max concurrent number of entries set in src/map/itemdb.h as MAX_ITEMDELAYS.
 
-//RuhRO Custom Delays!
+//RedditRO Custom Delays!
 12214,1800000	//Convex Mirror - 30 minutes
 41028,3600000	//Nidhoggur Guild Warp Scroll - 1 hour
 41029,3600000	//Valfreyja Guild Warp Scroll - 1 hour

@@ -1,5 +1,5 @@
 //===== rAthena Script =======================================
-//= Custom Mapflags for RuhRO
+//= Custom Mapflags for RedditRO
 //===== By: ==================================================
 //= Alkarl
 //===== Current Version: =====================================

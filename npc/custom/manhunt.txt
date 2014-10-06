@@ -69,11 +69,11 @@
 			if (getmapusers($@MHMap$) < .MHPlayer) goto MHPlayerLack;
 			mapannounce $@MHMap$,"The goal of this event is to kill the target within 30 seconds.",0;
 			sleep2 4000;
-			mapannounce $@MHMap$,"The one who manages to kill the target will gain 1 RuhRO Coin.",0;
+			mapannounce $@MHMap$,"The one who manages to kill the target will gain 1 RedditRO Coin.",0;
 			sleep2 4000;
-			mapannounce $@MHMap$,"But if the target survives, the target will gain 3 RuhRO Coins.",0;
+			mapannounce $@MHMap$,"But if the target survives, the target will gain 3 RedditRO Coins.",0;
 			sleep2 4000;
-			mapannounce $@MHMap$,"Points can be exchanged for RuhRO Coins at the Event NPC.",0;
+			mapannounce $@MHMap$,"Points can be exchanged for RedditRO Coins at the Event NPC.",0;
 			sleep2 4000;
 			mapannounce $@MHMap$,"Enough explaining, let's go on with the Man-Hunt Event!",0;
 			atcommand "@doommap";
@@ -97,7 +97,7 @@
 			}
 			if(attachrid($@ManHunt[.Target])) {
 				if(strcharinfo(3) == $@MHMap$) {
-					getitem .MHReward, .MSurvive; // Reward RuhRO Coins directly
+					getitem .MHReward, .MSurvive; // Reward RedditRO Coins directly
 				} else {
 					dispbottom "Shame on you for leaving Manhunt!";
 				}
@@ -162,7 +162,7 @@
 						}
 						atcommand "#size \""+$@ManHuntN$[.@i]+"\" 0";			
 					}
-					getitem .MHReward, .MKill; // Reward the RuhRO Coins directly
+					getitem .MHReward, .MKill; // Reward the RedditRO Coins directly
 					stopnpctimer;
 					detachrid;
 					sleep2 3000;

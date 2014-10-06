@@ -81,7 +81,7 @@ bat_a02	mapflag	nowarp
 poring_w01	mapflag	nowarp
 poring_w02	mapflag	nowarp
 
-// RuhRO =====================
+// RedditRO =====================
 guild_vs1	mapflag	nowarp
 guild_vs3	mapflag	nowarp
 guild_vs5	mapflag	nowarp

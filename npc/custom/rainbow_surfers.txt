@@ -12,7 +12,7 @@
 //= 
 //===== Additional Comments: ================================= 
 //= 1.0 - Initial Version 
-//= 1.1 - Reworked for RuhRO [Poutine]
+//= 1.1 - Reworked for RedditRO [Poutine]
 //============================================================
 
 // mapflags
