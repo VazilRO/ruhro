@@ -235,3 +235,9 @@
 //WoE 2.0 Dungeon Warp Scrolls
 41028,NidhoggurGuildWarpScroll,Nidhoggur Guild Warp Scroll,2,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "F_Gdungeon_Nid"; },{},{}
 41029,ValfreyjaGuildWarpScroll,Valfreyja Guild Warp Scroll,2,10,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ callfunc "F_Gdungeon_Val"; },{},{}
+
+
+//Fixes for rAthena's crap
+19599,C_Imp_Hat,Costume Imp Hat,4,20,,400,,1,,0,0xFFFFFFFF,63,2,1024,,1,1,589,{},{},{}
+19600,C_Drooping_Kiehl,Costume Drooping Kiehl,12,0,,40,,,,,0xFFFFFFFF,63,2,1024,,30,,909,{},{},{}
+19601,C_Drooping_Aliot,Costume Drooping Aliot,12,0,,10,,,,,0xFFFFFFFF,63,2,1024,,1,,910,{},{},{}
