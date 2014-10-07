@@ -570,6 +570,7 @@ extern struct Battle_Config
 	int arrow_shower_knockback;
 	int devotion_rdamage_skill_only;
 	int max_extended_aspd;
+	int mob_chase_refresh; //How often a monster should refresh its chase [Playtester]
 } battle_config;
 
 void do_init_battle(void);
