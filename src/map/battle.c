@@ -4216,6 +4216,10 @@ struct Damage battle_attack_sc_bonus(struct Damage wd, struct block_list *src, u
 				case RA_WUGBITE:
 				case RA_ARROWSTORM:
 					break;
+				case RA_AIMEDBOLT:
+					ATK_ADDRATE(wd.damage, wd.damage2, sc->data[SC_UNLIMIT]->val2/3);
+					RE_ALLATK_ADDRATE(wd, sc->data[SC_UNLIMIT]->val2/3);
+					break;
 				default:
 					ATK_ADDRATE(wd.damage, wd.damage2, sc->data[SC_UNLIMIT]->val2);
 					RE_ALLATK_ADDRATE(wd, sc->data[SC_UNLIMIT]->val2);
