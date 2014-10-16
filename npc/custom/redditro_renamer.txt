@@ -1,0 +1,101 @@
+//===== rAthena Script =======================================
+//= Rename NPC
+//===== By: ==================================================
+//= Poutine
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= An NPC that takes RedditRO coins to pay for a rename.
+//= Rename is done by setting the rename flag.
+//===== Additional Comments: =================================
+//= Players can only use this NPC once every 30 days
+//============================================================
+
+prontera,190,208,4	script	Professor::renamer	620,{
+
+function getRenameStatus; // Return the current status of rename
+function updateRenameStatus; // Update the current status of rename
+
+	mes .npcName$;
+	mes "Oi! There comes a time in one's life where they feel the need for a new identity.";
+	next;
+	set .@playtime, checkquest(.questID,PLAYTIME);
+	if(.@playtime ==  0 || .@playtime ==  1) {
+		if(getgmlevel() > 10 && .enableGMbypass == 1) {
+			erasequest .questID;
+		} else {
+			mes .npcName$;
+			mes "Oi! My magic only works once every 30 days.";
+			close;
+		}
+	} else if (.@playtime == 2) {
+		erasequest .questID;
+	}
+	mes .npcName$;
+	mes "Who am I?? I'm the one that can grant your wish!";
+	emotion e_heh;
+	next;
+	mes .npcName$;
+	mes "For a price of ^FF0000" + .renamePrice + " RedditRO Coins^000000, I can perform this miracle for you!";
+	mes "Whaddya say?";
+	next;
+	if(select("I need a new identity.:Nevermind.") == 2) {
+		mes .npcName$;
+		mes "I guess that time isn't now...";
+		close;
+	}
+	mes .npcName$;
+	if(getRenameStatus(getcharid(0)) == 1) {
+		mes "I still sense my magic on you...";
+		close;
+	}
+	if(countitem(.renameCurrency) < .renamePrice) {
+		mes "You ain't got the goods!";
+		close;
+	}
+	mes "Okay, here goes nothing!";
+	next;
+	mes .npcName$;
+	mes "OQWNCQOCQPMYNQOMOMQOWCQO!";
+	next;
+	mes .npcName$;
+	mes "QQQOJOUWEOQOQOWDNECVZXWE!";
+	next;
+	mes .npcName$;
+	mes "HAH!";
+	next;
+	mes .npcName$;
+	if(countitem(.renameCurrency) < .renamePrice) {
+		mes "Something went wrong...";
+		close;
+	}
+
+	updateRenameStatus(getcharid(0));
+	setquest .questID;
+	delitem 677,20;
+	mes "DONE! Please log out. On the character selection screen, right-click this character and select rename to complete the process.";
+	close;
+	
+	function getRenameStatus {
+		set .@char_id,getarg(0);
+		query_sql("SELECT `rename` FROM `char` WHERE char_id="+.@char_id+" LIMIT 1",.@points);
+		if(getarraysize(.@points)==0)
+			return 0;		
+		return .@points[0];
+	}
+	
+	function updateRenameStatus {
+		set .@char_id,getarg(0);
+		query_sql("UPDATE `char` SET `rename` = '1' WHERE `char_id` = '" + getcharid(0) + "' LIMIT 1");
+		return;
+	}
+	
+OnInit:
+	set .npcName$, "[Professor]";	// NPC name
+	set .renamePrice, 20; 			// Cost of rename
+	set .renameCurrency, 677; 		// Item ID to use as currency
+	set .questID, 55600; 			// Quest ID for the cooldown
+	set .enableGMbypass, 0;			// Allow GMs to bypass the cooldown. 0 = No, 1 = Yes
+}
