@@ -27,7 +27,7 @@ function updateRenameStatus; // Update the current status of rename
 			erasequest .questID;
 		} else {
 			mes .npcName$;
-			mes "Oi! My magic only works once every 15 days.";
+			mes "Oi! My magic only works once every 30 days.";
 			close;
 		}
 	} else if (.@playtime == 2) {

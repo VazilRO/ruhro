@@ -153,5 +153,5 @@
 55457,3600,0,0,0,0,0,0,"141-150 Mission Board Timer"
 55458,3600,0,0,0,0,0,0,"141-150 Mission Board Timer"
 
-// RedditRO Rename cooldown (15 days)
-55600,1296000,0,0,0,0,0,0,"Rename Cooldown"
+// RedditRO Rename cooldown (30 days)
+55600,2592000,0,0,0,0,0,0,"Rename Cooldown"
