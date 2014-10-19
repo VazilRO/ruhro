@@ -75,7 +75,7 @@ prt_in,28,73,4	script	Wise Old Woman#eAcustom	78,{
 			mes "You do not have all the items I require to work my magic, child. Come again when you do.";
 			close;
 		}
-		if(countitem(677) > 5) {
+		if(countitem(677) > 4) {
 			mes "[Wise Old Woman]";
 			mes "Oh! It looks like you have some ^0000FFRedditRO Coins^000000. I can guarantee removal of cards for an addition of ^0000FF5 RedditRO Coins^000000.";
 			next;
