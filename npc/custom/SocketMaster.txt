@@ -184,9 +184,9 @@ prt_in,22,70,5	script	Melbayies	498,{
 		} else goto S_FAIL;
 			
 	M_BLUSH:
-		if(countitem(1040)<100 || countitem(5040)<1 || Zeny < 1000000)
+		if(countitem(7047)<100 || countitem(5040)<1 || Zeny < 1000000)
 			goto M_insufficient;
-		delitem 1040,100;
+		delitem 7047,100;
 		delitem 5040,1;
 		set Zeny,Zeny-1000000;
 			
