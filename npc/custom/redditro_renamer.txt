@@ -33,6 +33,10 @@ function updateRenameStatus; // Update the current status of rename
 	} else if (.@playtime == 2) {
 		erasequest .questID;
 	}
+	
+	if(getgmlevel() > 10) {
+		goto OnAdmin;
+	} 
 	mes .npcName$;
 	mes "Who am I?? I'm the one that can grant your wish!";
 	emotion e_heh;
@@ -92,6 +96,21 @@ function updateRenameStatus; // Update the current status of rename
 		return;
 	}
 	
+OnAdmin:
+	mes "[Name Resetter]";
+	mes "Please enter name of player to reset.";
+	next;
+	input .@reset_name$;
+	mes "[Name Resetter]";
+	mes "The name is " + .@reset_name$ + ". Correct?";
+	next;
+	if(select("Yes:No") == 2) {
+		close;
+	}
+	updateRenameStatus(getcharid(0,.@reset_name$));
+	mes "[Name Resetter]";
+	mes "Done.";	
+	end;	
 OnInit:
 	set .npcName$, "[Professor]";	// NPC name
 	set .renamePrice, 20; 			// Cost of rename
