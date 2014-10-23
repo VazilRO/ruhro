@@ -29,7 +29,7 @@ OnMinute00:
 	mapwarp "guild_vs5","prontera",155,220;
 	killmonsterall "guild_vs5";
 	
-	$@randevent = rand(0,1);
+	$@randevent = rand(0,4); // if it lands on 2 or 3, don't do an event
 	setnpctimer 0;
 	initnpctimer;
 	if ($@randevent == 0) {
