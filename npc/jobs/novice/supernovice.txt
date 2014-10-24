@@ -335,7 +335,7 @@ aldeba_in,216,169,5	script	Esseray#sn	86,{
 		mes "I knew you could pass the test~";
 		close;
 	}
-	if (BaseJob == Job_SuperNovice) {
+	if (eaclass()&EAJL_SUPER_NOVICE) {
 		if (checkre(0))
 			callfunc "Esseray_Ex";
 		mes "[Esseray]";
