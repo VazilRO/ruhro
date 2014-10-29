@@ -9,7 +9,7 @@
 //===== Description: =========================================
 //= Repeatable Quests for Players between Base level 131 - 140.
 //===== Additional Comments: =================================
-//= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [100-110]" v1.3 [Poutine]
+//= 1.0 First Version. Built upon Chilly's "Eden Group Quests - Mission [100-110]" v1.3 [Poutine] v1.4 [VazilRO]
 //============================================================
 
 moc_para01,37,184,5	script	131-140 Mission Board	857,{
@@ -61,16 +61,18 @@ moc_para01,37,184,5	script	131-140 Mission Board	857,{
 		}
 	}
 	if (BaseLevel < 131 || BaseLevel > 140) {
-		// Quest IDs: 55300-55306
-		// Quest cooldown IDs: 55307-55313
+		// Quest IDs: 55300-55312
+		// Quest cooldown IDs: 55313-55325
 		setarray .@names$[0],
 			"Incarnation of Morroc - Shadow","Incarnation of Morroc - Angel","Incarnation of Morroc - Ghost",
-			"One-Horned Scaraba","Two-Horned Scaraba","Antler Scaraba","Rake Scaraba";
+			"One-Horned Scaraba","Two-Horned Scaraba","Antler Scaraba","Rake Scaraba",
+			"Wickebine Tres", "Errende Ebecee", "Laurell Weinder", "Armeyer Dinze", "Kavach Icarus", "Egnigem Cenia";
 		setarray .@exp[0],
 			800000,800000,800000,
-			800000,800000,800000,800000;
+			800000,800000,800000,800000,
+			800000,800000,800000,800000,800000,800000;
 		mes "You must be within level 131-140 to accept these missions.";
-		for(set .@quest,55300; .@quest<=55313; set .@quest,.@quest+1) {
+		for(set .@quest,55300; .@quest<=55325; set .@quest,.@quest+1) {
 			set .@hunting, checkquest(.@quest,HUNTING);
 			if (.@hunting == 0 || .@hunting == 1) {
 				next;
@@ -98,7 +100,7 @@ moc_para01,37,184,5	script	131-140 Mission Board	857,{
 	mes "[131-140 Mission Board]";
 	mes "There are several requests on this board.";
 	next;
-	switch(select("^8B4513Dimensional Gorge^000000:^8B4513Skaraba Hall^000000")) {
+	switch(select("^8B4513Dimensional Gorge^000000:^8B4513Skaraba Hall^000000:^8B4513Bio Labs^000000")) {
 	case 1:
 		mes "^8B4513Thanatos Tower^000000.";
 		mes "Which monster will you hunt or have you finished hunting?";
@@ -117,7 +119,19 @@ moc_para01,37,184,5	script	131-140 Mission Board	857,{
 			case 2: callsub L_Quest,55304,"Two-Horned Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
 			case 3: callsub L_Quest,55305,"Antler Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
 			case 4: callsub L_Quest,55306,"Rake Scaraba",800000,200000,"There is a monster that can be found on ^8B4513Skaraba Hall^000000.";
-		}			
+		}
+	case 3:
+		mes "8B4513Bio Labs^000000.";
+		mes "Which monster will you hunt or have you finished hunting?";
+		next;
+		switch(select("^0000FFWickebine Tres^000000:^0000FFErrende Ebecee^000000:^0000FFLaurell Weinder^000000:^0000FFArmeyer Dinze^000000:^0000FFKavach Icarus^000000:^0000FFEgnigem Cenia^000000")) {
+			case 1: callsub L_Quest,55307,"Wickebine Tres",800000,200000, "There is a monster that can be found in ^8B4513Bio Labs^000000.";
+			case 2: callsub L_Quest,55308,"Errende Ebecee",800000,200000, "There is a monster that can be found in ^8B4513Bio Labs^000000.";
+			case 3: callsub L_Quest,55309,"Laurell Weinder",800000,200000, "There is a monster that can be found in ^8B4513Bio Labs^000000.";
+			case 4: callsub L_Quest,55310,"Armeyer Dinze",800000,200000, "There is a monster that can be found in ^8B4513Bio Labs^000000.";
+			case 5: callsub L_Quest,55311,"Kavach Icarus",800000,200000, "There is a monster that can be found in ^8B4513Bio Labs^000000.";
+			case 6: callsub L_Quest,55312,"Egnigem Cenia",800000,200000, "There is a monster that can be found in ^8B4513Bio Labs^000000.";
+		}
 	}
 	end;
 
