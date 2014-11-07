@@ -42,19 +42,26 @@ function Job_Menu;
 			close;
 		}
 		if (Class > 21) {
-			mes "Switch to third class?";
+			mes "Switch to third class for ^FF0000" + .ThirdCost + "Zeny^000000?";
 			next;
+			set Zeny,zeny-.ThirdCost;
 			Job_Menu(roclass(.@eac|EAJL_THIRD));
 			close;
 		}
 		while(1) {
-			mes "Select an option.";
+			mes "Would you like to Rebirth for ^FF0000" + .RebirthCost + "Zeny^000000,";
+			mes "or change to your Third Job for ^FF0000" + .ThirdCost + "Zeny^000000?";
 			next;
 			set .@i, select(" ~ ^0055FFRebirth^000000:"+((.ThirdClass)?" ~ ^FF0000Third Class^000000":"")+": ~ ^777777Cancel^000000");
 			if (.@i==3) close;
 			mes "[Job Master]";
+			if (Zeny < .RebirthCost) {
+				mes "Sorry, you don't have enough Zeny.";
+				close;
+				}
 			mes "Are you sure?";
 			next;
+			set Zeny,zeny-.RebirthCost;
 			Job_Menu(((.@i==1)?4001:roclass(.@eac|EAJL_THIRD)));
 			mes "[Job Master]";
 		}
@@ -68,8 +75,13 @@ function Job_Menu;
 			mes "You need "+((.@blvl>0)?.@blvl+" more base levels "+((.@jlvl>0)?"/ ":""):"")+((.@jlvl>0)?.@jlvl+" more job levels ":"")+"to continue.";
 			close;
 		}
-		mes "Switch to "+jobname(.@exp[0])+"?";
+		if (Zeny < .RebirthCost) {
+			mes "Sorry, you don't have ^FF0000" + .RebirthCost + "Zeny^000000 for changing class";
+			close;
+			}
+		mes "Switch to "+jobname(.@exp[0])+" for ^FF0000" + .RebirthCost + "Zeny^000000?""?";
 		next;
+		set Zeny,zeny-.RebirthCost;
 		Job_Menu(.@exp[0]);
 		close;
 	}
@@ -98,8 +110,13 @@ function Job_Menu;
 	else if (!(.@eac&EAJL_2) && JobLevel < .JobReq[1])
 		mes "A job level of "+.JobReq[1]+" is required to change into the 2nd Class.";
 	else if (.LastJob && lastJob && (.@eac&EAJL_UPPER)) {
-		mes "Switch classes now?";
+		if (Zeny < .SecondCost) {
+			mes "Sorry, you don't have ^FF0000" + .SecondCost + "Zeny^000000 for changing class"";
+			close;
+			}
+		mes "Switch classes now for ^FF0000" + .SecondCost + "Zeny^000000?"?";
 		next;
+		set Zeny,zeny-.SecondCost;
 		Job_Menu(lastJob+4001);
 	} else
 		Job_Menu(.@j1,.@j2);
@@ -181,5 +198,8 @@ OnInit:
 	set .LastJob,1;			// Enforce linear class changes? (1: yes / 0: no)
 	set .SkillPointCheck,1;		// Force player to use up all skill points? (1: yes / 0: no)
 	set .Platinum,1;		// Get platinum skills automatically? (1: yes / 0: no)
+	set .SecondCost,1000;		// How much zeny it costs for Second Job class change
+	set .RebirthCost,1000;		// How much zeny it costs to Rebirth/change to Expanded 2nd class
+	set .ThirdCost,1000;		// How much zeny it costs for Third Job class change
 	end;
 }
